@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brenda Flores — Frontend Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c1: #FF6B6B;
+    --c2: #FFD93D;
+    --c3: #6BCB77;
+    --c4: #4D96FF;
+    --c5: #C77DFF;
+    --dark: #0E0E0E;
+    --dark2: #1A1A1A;
+    --dark3: #252525;
+    --light: #F5F0E8;
+    --text: #0E0E0E;
+    --muted: #666;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--light);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--c1);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, background 0.2s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 2px solid var(--c1);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.12s ease;
+    opacity: 0.5;
+  }
+
+  /* Lang toggle */
+  .lang-toggle {
+    position: fixed;
+    top: 24px; right: 24px;
+    z-index: 100;
+    display: flex;
+    gap: 0;
+    background: var(--dark);
+    border-radius: 999px;
+    padding: 4px;
+    box-shadow: 4px 4px 0 var(--c4);
+  }
+  .lang-btn {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 999px;
+    cursor: none;
+    transition: all 0.2s;
+    background: transparent;
+    color: #888;
+    letter-spacing: 0.05em;
+  }
+  .lang-btn.active {
+    background: var(--c1);
+    color: white;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    left: 24px; top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--dark);
+    opacity: 0.2;
+    cursor: none;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .nav-dot::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    letter-spacing: 0.08em;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+  .nav-dot:hover::after, .nav-dot.active::after { opacity: 1; }
+  .nav-dot.active { opacity: 1; width: 10px; height: 10px; }
+  .nav-dot[data-section="hero"] { background: var(--c1); }
+  .nav-dot[data-section="about"] { background: #5C4A8A; }
+  .nav-dot[data-section="experience"] { background: var(--c3); }
+  .nav-dot[data-section="projects"] { background: #2A5C8A; }
+  .nav-dot[data-section="skills"] { background: var(--dark); }
+  .nav-dot[data-section="community"] { background: #A84040; }
+  .nav-dot[data-section="contact"] { background: var(--dark); }
+
+  /* Sections */
+  section {
+    min-height: 100vh;
+    padding: 80px 80px 80px 80px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* HERO */
+  #hero {
+    background: var(--dark);
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 160px;
+  }
+  .hero-tag {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--c1);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 800;
+    line-height: 0.95;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero-name span { color: var(--c1); }
+  .hero-desc {
+    font-size: 18px;
+    font-weight: 300;
+    color: #aaa;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.6s forwards;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.8s forwards;
+  }
+  .btn {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: none;
+    cursor: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn:hover { transform: translateY(-3px); }
+  .btn-primary { background: var(--c1); color: white; box-shadow: 4px 4px 0 #ff3333; }
+  .btn-primary:hover { box-shadow: 6px 6px 0 #ff3333; }
+  .btn-outline { background: transparent; color: white; border: 2px solid #444; }
+  .btn-outline:hover { border-color: var(--c1); color: var(--c1); }
+
+  .hero-bg-text {
+    position: absolute;
+    right: -20px; bottom: -40px;
+    font-family: var(--font-display);
+    font-size: clamp(120px, 18vw, 240px);
+    font-weight: 800;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none;
+    line-height: 1;
+    user-select: none;
+  }
+  .hero-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s 1s forwards;
+  }
+  .chip {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1.5px solid #333;
+    color: #888;
+  }
+
+  /* ABOUT */
+  #about {
+    background: #5C4A8A;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 160px;
+  }
+  .section-label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 20px;
+    opacity: 0.6;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 40px;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .about-text {
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 36px;
+  }
+  .stat-card {
+    background: var(--dark);
+    color: white;
+    padding: 24px 28px;
+    border-radius: 16px;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--c2);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 4px;
+  }
+
+  /* EXPERIENCE */
+  #experience {
+    background: var(--dark2);
+    color: white;
+    flex-direction: column;
+    padding-left: 160px;
+    align-items: flex-start;
+  }
+  #experience .section-label { color: var(--c3); }
+  #experience .section-title { color: white; }
+  .exp-list { display: flex; flex-direction: column; gap: 24px; max-width: 860px; width: 100%; }
+  .exp-card {
+    background: var(--dark3);
+    color: white;
+    border-radius: 16px;
+    padding: 28px 32px;
+    border-left: 4px solid var(--c3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-card:hover { transform: translateX(6px); box-shadow: -6px 0 0 var(--c3); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+  .exp-role { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: white; }
+  .exp-company { color: var(--c3); font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+  .exp-date { font-size: 12px; color: #666; font-family: var(--font-display); letter-spacing: 0.05em; background: #333; padding: 4px 10px; border-radius: 999px; }
+  .exp-bullets { list-style: none; margin-top: 12px; }
+  .exp-bullets li { font-size: 14px; color: #bbb; line-height: 1.7; padding-left: 16px; position: relative; margin-bottom: 4px; }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--c3); font-size: 12px; top: 3px; }
+
+  /* PROJECTS */
+  #projects {
+    background: #2A5C8A;
+    flex-direction: column;
+    padding-left: 160px;
+    padding-right: 160px;
+    align-items: flex-start;
+  }
+  #projects .section-label { color: rgba(255,255,255,0.6); }
+  #projects .section-title { color: white; }
+  .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; margin-top: 20px; }
+  .proj-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .proj-card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(0,0,0,0.15); }
+  .proj-icon { font-size: 32px; margin-bottom: 16px; }
+  .proj-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .proj-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .proj-tag { font-size: 11px; font-weight: 600; font-family: var(--font-display); padding: 4px 10px; border-radius: 999px; background: #f0f0f0; color: #555; letter-spacing: 0.05em; }
+  .proj-confidential { font-size: 11px; color: #bbb; margin-top: 12px; font-style: italic; }
+  .proj-link { display: inline-block; margin-top: auto; padding-top: 16px; font-size: 12px; font-family: var(--font-display); font-weight: 700; color: #555; text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+  .proj-link:hover { color: #111; }
+
+  /* SKILLS */
+  #skills {
+    background: var(--dark);
+    flex-direction: column;
+    padding-left: 160px;
+    align-items: flex-start;
+  }
+  #skills .section-label { color: rgba(255,255,255,0.6); }
+  #skills .section-title { color: white; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 860px; width: 100%; }
+  .skill-group { background: white; border-radius: 16px; padding: 24px; border-top: 4px solid var(--c5); }
+  .skill-group-title { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: var(--c5); margin-bottom: 14px; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-pill { font-size: 12px; padding: 5px 12px; background: #f5f5f5; border-radius: 999px; font-weight: 500; color: #333; }
+
+  /* COMMUNITY */
+  #community {
+    background: #A84040;
+    color: white;
+    flex-direction: column;
+    padding-left: 160px;
+    align-items: flex-start;
+  }
+  #community .section-label { color: rgba(255,255,255,0.6); }
+  #community .section-title { color: white; }
+  .comm-cards { display: flex; gap: 24px; flex-wrap: wrap; max-width: 860px; }
+  .comm-card {
+    background: var(--dark3);
+    color: white;
+    border-radius: 20px;
+    padding: 32px;
+    flex: 1;
+    min-width: 260px;
+    position: relative;
+    overflow: hidden;
+    border: 1.5px solid #333;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .comm-card:hover { border-color: var(--c1); transform: translateY(-4px); }
+  .comm-year { font-family: var(--font-display); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; margin-bottom: 10px; display: block; }
+  .comm-event { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 8px; color: white; }
+  .comm-org { font-size: 13px; color: var(--c1); font-weight: 600; margin-bottom: 12px; }
+  .comm-talk { font-size: 14px; color: #aaa; line-height: 1.6; }
+  .comm-badge { display: inline-block; margin-top: 16px; font-size: 11px; font-family: var(--font-display); font-weight: 700; letter-spacing: 0.1em; padding: 5px 12px; background: rgba(255,107,107,0.15); color: var(--c1); border-radius: 999px; }
+
+  /* CONTACT */
+  #contact {
+    background: var(--dark);
+    flex-direction: column;
+    padding-left: 160px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  #contact .section-title { color: white; font-size: clamp(40px, 6vw, 80px); }
+  .contact-links { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: white;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    transition: transform 0.2s;
+  }
+  .contact-link:hover { transform: translateX(8px); }
+  .contact-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .contact-bg { position: absolute; right: 0; bottom: 0; font-family: var(--font-display); font-size: clamp(100px, 16vw, 200px); font-weight: 800; color: rgba(255,255,255,0.08); line-height: 1; pointer-events: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    section { padding: 60px 24px 60px 24px; }
+    #hero, #about, #experience, #projects, #skills, #community, #contact { padding-left: 24px; }
+    #projects { padding-right: 24px; }
+    nav { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .lang-toggle { top: 16px; right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+  <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+</div>
+
+<nav id="sidenav">
+  <div class="nav-dot active" data-section="hero" data-label="HOME" onclick="scrollToSection('hero')"></div>
+  <div class="nav-dot" data-section="about" data-label="ABOUT" onclick="scrollToSection('about')"></div>
+  <div class="nav-dot" data-section="experience" data-label="EXP" onclick="scrollToSection('experience')"></div>
+  <div class="nav-dot" data-section="projects" data-label="PROJECTS" onclick="scrollToSection('projects')"></div>
+  <div class="nav-dot" data-section="skills" data-label="SKILLS" onclick="scrollToSection('skills')"></div>
+  <div class="nav-dot" data-section="community" data-label="COMMUNITY" onclick="scrollToSection('community')"></div>
+  <div class="nav-dot" data-section="contact" data-label="CONTACT" onclick="scrollToSection('contact')"></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag" data-en="FRONTEND ENGINEER · QUERÉTARO, MX · OPEN TO REMOTE" data-es="INGENIERÍA FRONTEND · QUERÉTARO, MX · DISPONIBLE REMOTO">FRONTEND ENGINEER · QUERÉTARO, MX · OPEN TO REMOTE</div>
+  <div class="hero-name">Brenda<br><span>Flores.</span></div>
+  <div class="hero-desc" data-en="I build scalable, intuitive interfaces for enterprise products. 5+ years delivering high-impact features across VoIP, AI, B2C and B2B platforms." data-es="Construyo interfaces escalables e intuitivas para productos de las empresas. 5+ años entregando componentes de alto impacto en plataformas VoIP, IA, B2C y B2B.">I build scalable, intuitive interfaces for enterprise products. 5+ years delivering high-impact features across VoIP, AI, B2C and B2B platforms.</div>
+  <div class="hero-btns">
+    <a href="#contact" class="btn btn-primary" data-en="Get in touch" data-es="Contáctame">Get in touch ↓</a>
+    <a href="#experience" class="btn btn-outline" data-en="See my work" data-es="Ver mi trabajo">See my work →</a>
+  </div>
+  <div class="hero-chips">
+    <div class="chip">React</div>
+    <div class="chip">TypeScript</div>
+    <div class="chip">Angular</div>
+    <div class="chip">Redux</div>
+    <div class="chip">GraphQL</div>
+    <div class="chip">Node.js</div>
+  </div>
+  <div class="hero-bg-text">BF</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid reveal" style="width:100%; max-width:960px">
+    <div>
+      <div class="section-label" data-en="WHO I AM" data-es="SOBRE MÍ">WHO I AM</div>
+      <div class="section-title" data-en="Engineer.<br>Speaker.<br>Builder." data-es="Ingeniera.<br>Speaker.<br>Creadora.">Engineer.<br>Speaker.<br>Builder.</div>
+      <div class="about-text" data-en="I'm a Frontend Software Engineer with a B.S. in Computer Systems Engineering from Tecnológico de Monterrey (GPA 92/100, Academic Honors). I've built enterprise applications across multinational teams in the US, Europe, Asia and Latin America. I care deeply about clean code, great UX, and sharing knowledge with the tech community." data-es="Soy Ingeniera de Software Frontend con Ingeniería en Sistemas Computacionales del Tecnológico de Monterrey (promedio 92/100, mención honorífica). He construido aplicaciones en equipos multinacionales en EE.UU., Europa, Asia y Latinoamérica. Me apasiona el código limpio, la buena experiencia de usuario y compartir conocimiento con la comunidad tech.">I'm a Frontend Software Engineer with a B.S. in Computer Systems Engineering from Tecnológico de Monterrey (GPA 92/100, Academic Honors). I've built enterprise applications across multinational teams in the US, Europe, Asia and Latin America. I care deeply about clean code, great UX, and sharing knowledge with the tech community.</div>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-num">5+</div>
+        <div class="stat-label" data-en="Years of professional experience" data-es="Años de experiencia profesional">Years of professional experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">9+</div>
+        <div class="stat-label" data-en="Countries where my code runs" data-es="Países donde corre mi código">Countries where my code runs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1</div>
+        <div class="stat-label" data-en="Conference talk on Redux (2024)" data-es="Conferencia sobre Redux (2024)">Conference talk on Redux (2024)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div style="width:100%; max-width:900px">
+    <div class="section-label reveal" data-en="WHERE I'VE WORKED" data-es="EXPERIENCIA">WHERE I'VE WORKED</div>
+    <div class="section-title reveal" data-en="Experience" data-es="Experiencia">Experience</div>
+    <div class="exp-list">
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-en="Software Engineer — Frontend" data-es="Ingeniera de Software — Frontend">Software Engineer — Frontend</div>
+            <div class="exp-company">Nextiva</div>
+          </div>
+          <div class="exp-date">May 2022 – Apr 2026</div>
+        </div>
+        <ul class="exp-bullets">
+          <li data-en="Built React + TypeScript features for NextivaOne, a unified VoIP platform managing calls, SMS and voicemails across product views." data-es="Construí features React + TypeScript para NextivaOne, plataforma VoIP unificada que gestiona llamadas, SMS y buzón de voz.">Built React + TypeScript features for NextivaOne, a unified VoIP platform managing calls, SMS and voicemails across product views.</li>
+          <li data-en="Spearheaded Angular-to-React migration of critical modules, reducing technical debt and accelerating feature delivery." data-es="Lideré la migración Angular→React de módulos críticos, reduciendo deuda técnica y acelerando la entrega de features.">Spearheaded Angular-to-React migration of critical modules, reducing technical debt and accelerating feature delivery.</li>
+          <li data-en="Developed AI-powered agent interfaces and admin dashboards in the NCX platform supporting Nextiva's AI roadmap." data-es="Desarrollé interfaces de agentes con IA y dashboards admin en la plataforma NCX, apoyando el roadmap de IA de Nextiva.">Developed AI-powered agent interfaces and admin dashboards in the NCX platform supporting Nextiva's AI roadmap.</li>
+          <li data-en="Built role-based dashboards and consent-based tenant impersonation flows across Angular and React codebases." data-es="Construí dashboards basados en roles y flujos de impersonación de tenants con consentimiento en Angular y React.">Built role-based dashboards and consent-based tenant impersonation flows across Angular and React codebases.</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-en="Software Engineer" data-es="Ingeniera de Software">Software Engineer</div>
+            <div class="exp-company">Wizeline</div>
+          </div>
+          <div class="exp-date">Nov 2021 – Apr 2022</div>
+        </div>
+        <ul class="exp-bullets">
+          <li data-en="Built enterprise-level web UIs using React.js and TypeScript, consuming RESTful APIs in Agile environments." data-es="Construí interfaces web enterprise con React.js y TypeScript, consumiendo APIs RESTful en entornos Agile.">Built enterprise-level web UIs using React.js and TypeScript, consuming RESTful APIs in Agile environments.</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-en="Software Engineer" data-es="Ingeniera de Software">Software Engineer</div>
+            <div class="exp-company">NATGAS</div>
+          </div>
+          <div class="exp-date">Jul 2020 – Oct 2021</div>
+        </div>
+        <ul class="exp-bullets">
+          <li data-en="Designed and developed a CRM and credit management web app using Angular.js, GraphQL and PostgreSQL." data-es="Diseñé y desarrollé un CRM y app de gestión de crédito con Angular.js, GraphQL y PostgreSQL.">Designed and developed a CRM and credit management web app using Angular.js, GraphQL and PostgreSQL.</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-en="Freelance Full-Stack Developer" data-es="Desarrolladora Full-Stack Freelance">Freelance Full-Stack Developer</div>
+            <div class="exp-company">Independent · SMB Clients</div>
+          </div>
+          <div class="exp-date">Dec 2018 – Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li data-en="Built an automotive management platform that secured partnerships with 2 insurance companies, featuring repair tracking, WhatsApp/SMS notifications, automated Excel/PDF reporting and real-time KPI dashboard." data-es="Construí una plataforma de gestión automotriz que aseguró alianzas con 2 aseguradoras, con seguimiento de reparaciones, notificaciones WhatsApp/SMS, reportes automatizados y dashboard de KPIs en tiempo real.">Built an automotive management platform that secured partnerships with 2 insurance companies, featuring repair tracking, WhatsApp/SMS notifications, automated Excel/PDF reporting and real-time KPI dashboard.</li>
+          <li data-en="Delivered 4+ role-based web applications including a Stripe-integrated marketplace, with separate admin and client permission-controlled views." data-es="Entregué 4+ aplicaciones web con roles incluyendo un marketplace con Stripe, con vistas separadas para admin y clientes con permisos.">Delivered 4+ role-based web applications including a Stripe-integrated marketplace, with separate admin and client permission-controlled views.</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-en="Frontend Developer Intern" data-es="Desarrolladora Frontend (Internship)">Frontend Developer Intern</div>
+            <div class="exp-company">FireServiceRota</div>
+          </div>
+          <div class="exp-date">Feb 2018 – Aug 2018</div>
+        </div>
+        <ul class="exp-bullets">
+          <li data-en="Developed Ruby on Rails modules for a fire station management SaaS used across Netherlands, England and Denmark." data-es="Desarrollé módulos Ruby on Rails para un SaaS de gestión de estaciones de bomberos usado en Países Bajos, Inglaterra y Dinamarca.">Developed Ruby on Rails modules for a fire station management SaaS used across Netherlands, England and Denmark.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div style="width:100%">
+    <div class="section-label reveal" data-en="WHAT I'VE BUILT" data-es="PROYECTOS">WHAT I'VE BUILT</div>
+    <div class="section-title reveal" data-en="Projects" data-es="Proyectos">Projects</div>
+    <div class="projects-grid">
+      <div class="proj-card reveal">
+        <div class="proj-icon">🚗</div>
+        <div class="proj-title" data-en="Automotive Management Platform" data-es="Plataforma de Gestión Automotriz">Automotive Management Platform</div>
+        <div class="proj-desc" data-en="Secured partnerships with 2 insurance companies. Features include repair tracking, WhatsApp/SMS notifications, satisfaction surveys, automated Excel/PDF reporting and real-time sales KPI dashboard." data-es="Aseguró alianzas con 2 aseguradoras. Incluye seguimiento de reparaciones, notificaciones WhatsApp/SMS, encuestas de satisfacción, reportes automatizados y dashboard de KPIs en tiempo real.">Secured partnerships with 2 insurance companies. Features include repair tracking, WhatsApp/SMS notifications, satisfaction surveys, automated Excel/PDF reporting and real-time sales KPI dashboard.</div>
+        <div class="proj-tags">
+          <div class="proj-tag">React</div>
+          <div class="proj-tag">Laravel</div>
+          <div class="proj-tag">PostgreSQL</div>
+        </div>
+        <div class="proj-confidential" data-en="🔒 Client project — code private" data-es="🔒 Proyecto de cliente — código privado">🔒 Client project — code private</div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-icon">🛍️</div>
+        <div class="proj-title" data-en="Stripe-integrated Marketplace" data-es="Marketplace con Stripe">Stripe-integrated Marketplace</div>
+        <div class="proj-desc" data-en="Role-based marketplace with separate admin and client views, Stripe payment integration, and permission-controlled access. Delivered with a 3-person team." data-es="Marketplace con roles separados para admin y clientes, integración de pagos con Stripe y acceso por permisos. Entregado con equipo de 3 personas.">Role-based marketplace with separate admin and client views, Stripe payment integration, and permission-controlled access. Delivered with a 3-person team.</div>
+        <div class="proj-tags">
+          <div class="proj-tag">React</div>
+          <div class="proj-tag">Stripe</div>
+          <div class="proj-tag">PostgreSQL</div>
+        </div>
+        <div class="proj-confidential" data-en="🔒 Client project — code private" data-es="🔒 Proyecto de cliente — código privado">🔒 Client project — code private</div>
+        <a href="https://www.fastenerqro.com/refacciones/" target="_blank" rel="noopener noreferrer" class="proj-link" data-en="View site →" data-es="Ver sitio →">View site →</a>
+      </div>
+      <div class="proj-card reveal">
+  <div class="proj-icon">📡</div>
+  <div class="proj-title" data-en="NextivaOne VoIP Platform" data-es="Plataforma VoIP NextivaOne">NextivaOne VoIP Platform</div>
+  <div class="proj-desc" data-en="Enterprise communication platform with unified calls, SMS and voicemails. Built with React + TypeScript ensuring consistency across Mini, Compact and Standard views." data-es="Plataforma de comunicación enterprise con llamadas, SMS y buzón de voz unificados. Construida con React + TypeScript con consistencia en vistas Mini, Compact y Standard.">Enterprise communication platform with unified calls, SMS and voicemails. Built with React + TypeScript ensuring consistency across Mini, Compact and Standard views.</div>
+  <div class="proj-tags">
+    <div class="proj-tag">React</div>
+    <div class="proj-tag">TypeScript</div>
+    <div class="proj-tag">VoIP</div>
+  </div>
+  <div class="proj-confidential" data-en="🔒 Corporate repo — code private" data-es="🔒 Repo corporativo — código privado">🔒 Corporate repo — code private</div>
+  <a href="https://www.nextiva.com/support/nextivaone?wchannelid=ffgufkplw3&wmediaid=wmo2z9eaqk" target="_blank" rel="noopener noreferrer" class="proj-link" data-en="View product →" data-es="Ver producto →">View product →</a>
+</div>
+
+<div class="proj-card reveal">
+  <div class="proj-icon">🤖</div>
+  <div class="proj-title" data-en="NCX — Contact Center Platform" data-es="NCX — Plataforma de Contact Center">NCX — Contact Center Platform</div>
+  <div class="proj-desc" data-en="Nextiva's customer experience platform built on the NCX SDK, delivering voice, messaging and supervisory features for contact center agents. Includes role-based access, SSO integrations and real-time service monitoring." data-es="Plataforma de experiencia de cliente de Nextiva construida sobre el NCX SDK, con features de voz, mensajería y supervisión para agentes de contact center. Incluye acceso por roles, integraciones SSO y monitoreo en tiempo real.">Nextiva's customer experience platform built on the NCX SDK, delivering voice, messaging and supervisory features for contact center agents. Includes role-based access, SSO integrations and real-time service monitoring.</div>
+  <div class="proj-tags">
+    <div class="proj-tag">React</div>
+    <div class="proj-tag">TypeScript</div>
+    <div class="proj-tag">Angular</div>
+    <div class="proj-tag">SSO</div>
+  </div>
+  <div class="proj-confidential" data-en="🔒 Corporate repo — code private" data-es="🔒 Repo corporativo — código privado">🔒 Corporate repo — code private</div>
+  <a href="https://www.nextiva.cx/" target="_blank" rel="noopener noreferrer" class="proj-link" data-en="View product →" data-es="Ver producto →">View product →</a>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div style="width:100%; max-width:860px">
+    <div class="section-label reveal" data-en="WHAT I WORK WITH" data-es="TECNOLOGÍAS">WHAT I WORK WITH</div>
+    <div class="section-title reveal" data-en="Skills" data-es="Habilidades">Skills</div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-title" data-en="FRONTEND" data-es="FRONTEND">FRONTEND</div>
+        <div class="skill-pills">
+          <div class="skill-pill">React</div><div class="skill-pill">TypeScript</div><div class="skill-pill">Angular</div><div class="skill-pill">Redux</div><div class="skill-pill">Next.js</div><div class="skill-pill">JavaScript ES6+</div><div class="skill-pill">HTML5</div><div class="skill-pill">CSS3</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title" data-en="BACKEND & DATA" data-es="BACKEND Y DATOS">BACKEND & DATA</div>
+        <div class="skill-pills">
+          <div class="skill-pill">Node.js</div><div class="skill-pill">GraphQL</div><div class="skill-pill">REST APIs</div><div class="skill-pill">PostgreSQL</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title" data-en="TOOLS & PRACTICES" data-es="HERRAMIENTAS">TOOLS & PRACTICES</div>
+        <div class="skill-pills">
+          <div class="skill-pill">Git</div><div class="skill-pill">CI/CD</div><div class="skill-pill">Agile/Scrum</div><div class="skill-pill">Jira</div><div class="skill-pill">Figma</div><div class="skill-pill">i18next</div><div class="skill-pill">Vitest</div><div class="skill-pill">Jest</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title" data-en="AUTH & CLOUD" data-es="AUTH Y CLOUD">AUTH & CLOUD</div>
+        <div class="skill-pills">
+          <div class="skill-pill">OAuth / SSO</div><div class="skill-pill">AWS (CCP)</div><div class="skill-pill">Okta</div><div class="skill-pill">Amplify</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div style="width:100%; max-width:860px">
+    <div class="section-label reveal" data-en="GIVING BACK" data-es="COMUNIDAD">GIVING BACK</div>
+    <div class="section-title reveal" data-en="Community &<br>Speaking" data-es="Comunidad y<br>Conferencias">Community &<br>Speaking</div>
+    <div class="comm-cards reveal">
+      <div class="comm-card">
+        <div class="comm-year">2024</div>
+        <div class="comm-event">DevDay4Women</div>
+        <div class="comm-org">Software Guru</div>
+        <div class="comm-talk" data-en="Delivered a hands-on conference talk: «Intro to Redux» — a practical demo covering state management fundamentals for React applications." data-es="Impartí una conferencia práctica: «Intro a Redux» — demo aplicada sobre fundamentos de gestión de estado para aplicaciones React.">Delivered a hands-on conference talk: «Intro to Redux» — a practical demo covering state management fundamentals for React applications.</div>
+        <div class="comm-badge" data-en="SPEAKER" data-es="SPEAKER">SPEAKER</div>
+      </div>
+      <div class="comm-card">
+        <div class="comm-year">2022</div>
+        <div class="comm-event">AWS Certified</div>
+        <div class="comm-org">Amazon Web Services</div>
+        <div class="comm-talk" data-en="Obtained the AWS Certified Cloud Practitioner certification, strengthening cloud infrastructure knowledge applied to frontend development." data-es="Obtuve la certificación AWS Certified Cloud Practitioner, reforzando conocimientos de infraestructura cloud aplicados al desarrollo frontend.">Obtained the AWS Certified Cloud Practitioner certification, strengthening cloud infrastructure knowledge applied to frontend development.</div>
+        <div class="comm-badge" data-en="CERTIFIED" data-es="CERTIFICADA">CERTIFIED</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="width:100%; max-width:700px; position:relative; z-index:1">
+    <div class="section-label reveal" style="color:rgba(255,255,255,0.6)" data-en="LET'S WORK TOGETHER" data-es="TRABAJEMOS JUNTOS">LET'S WORK TOGETHER</div>
+    <div class="section-title reveal" data-en="Say hello." data-es="Escríbeme.">Say hello.</div>
+    <div class="contact-links reveal">
+      <a href="mailto:brenda.gfp@gmail.com" class="contact-link">
+        <div class="contact-icon">✉</div>
+        brenda.gfp@gmail.com
+      </a>
+      <a href="tel:+524422820627" class="contact-link">
+        <div class="contact-icon">📱</div>
+        +52 442 282 0627
+      </a>
+      <a href="https://github.com" class="contact-link" target="_blank">
+        <div class="contact-icon" style="font-size:16px">GH</div>
+        <span data-en="GitHub (most repos are private — corporate work)" data-es="GitHub (mayoría de repos son privados — trabajo corporativo)">GitHub (most repos are private — corporate work)</span>
+      </a>
+    </div>
+  </div>
+  <div class="contact-bg">BF</div>
+</section>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  function animateRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animateRing); }
+  animateRing();
+
+  // Lang toggle
+  function setLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.innerHTML = el.getAttribute('data-'+lang);
+    });
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+    document.getElementById('btn-es').classList.toggle('active', lang==='es');
+  }
+
+  // Scroll nav
+  function scrollToSection(id) { document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+  // Active nav dot
+  const sections = ['hero','about','experience','projects','skills','community','contact'];
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+        const dot = document.querySelector(`.nav-dot[data-section="${e.target.id}"]`);
+        if(dot) dot.classList.add('active');
+      }
+    });
+  }, {threshold: 0.5});
+  sections.forEach(id => { const el = document.getElementById(id); if(el) observer.observe(el); });
+
+  // Reveal on scroll
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: 0.15});
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+</body>
+</html>
