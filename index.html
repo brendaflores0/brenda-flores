@@ -1,770 +1,848 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brenda Flores | Frontend Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --c1: #FF6B6B;
-    --c2: #FFD93D;
-    --c3: #6BCB77;
-    --c4: #4D96FF;
-    --c5: #C77DFF;
-    --dark: #0E0E0E;
-    --dark2: #1A1A1A;
-    --dark3: #252525;
-    --light: #F5F0E8;
-    --text: #0E0E0E;
-    --muted: #666;
-    --font-display: 'Syne', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brenda Flores | Software Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            ink:    '#0F0F1A',
+            accent: '#4F46E5',
+            'accent-light': '#EEF2FF',
+            'accent-mid':   '#C7D2FE',
+            muted:  '#6B7280',
+            border: '#E5E7EB',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    /*  cursor  */
+    * { cursor: none !important; }
+    #cursor-dot  { position:fixed; width:6px;  height:6px;  border-radius:50%; background:#4F46E5; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform .1s; }
+    #cursor-ring { position:fixed; width:32px; height:32px; border-radius:50%; border:2px solid #4F46E5; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:left .12s ease,top .12s ease,transform .2s; opacity:.6; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    /*  base  */
+    html { background:#fff; }
+    body { font-family:'DM Sans',sans-serif; color:#0F0F1A; overflow-x:hidden; }
+    h1,h2,h3,h4,h5 { font-family:'Syne',sans-serif; }
 
-  html { scroll-behavior: smooth; }
+    /*  sidebar  */
+    #sidebar {
+      position:fixed; top:0; left:0; height:100vh; width:280px;
+      background:#fff; border-right:1px solid #E5E7EB;
+      display:flex; flex-direction:column; align-items:center;
+      padding:2.5rem 1.5rem; z-index:100;
+      transition:transform .3s;
+    }
 
-  body {
-    font-family: var(--font-body);
-    background: var(--light);
-    color: var(--text);
-    overflow-x: hidden;
-    cursor: none;
-  }
+    /*  nav links  */
+    .nav-link {
+      display:flex; align-items:center; gap:12px;
+      width:100%; padding:.55rem 1rem; border-radius:10px;
+      font-family:'Syne',sans-serif; font-size:.85rem; font-weight:600;
+      letter-spacing:.04em; text-transform:uppercase;
+      color:#6B7280; transition:all .2s; text-decoration:none;
+    }
+    .nav-link:hover { color:#4F46E5; background:#EEF2FF; }
+    .nav-link.active { color:#4F46E5; background:#EEF2FF; border-left:3px solid #4F46E5; padding-left:calc(1rem - 3px); }
+    .nav-link svg { width:18px; height:18px; flex-shrink:0; }
 
-  /* Custom cursor */
-  .cursor {
-    width: 12px; height: 12px;
-    background: var(--c1);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease, background 0.2s;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 2px solid var(--c1);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.12s ease;
-    opacity: 0.5;
-  }
+    /*  lang toggle  */
+    .lang-btn { font-family:'Syne',sans-serif; font-size:.78rem; font-weight:700; padding:.3rem .65rem; border-radius:6px; transition:all .2s; }
+    .lang-btn.active { background:#0F0F1A; color:#fff; }
+    .lang-btn:not(.active) { color:#6B7280; }
+    .lang-btn:not(.active):hover { background:#EEF2FF; color:#4F46E5; }
 
-  /* Lang toggle */
-  .lang-toggle {
-    position: fixed;
-    top: 24px; right: 24px;
-    z-index: 100;
-    display: flex;
-    gap: 0;
-    background: var(--dark);
-    border-radius: 999px;
-    padding: 4px;
-    box-shadow: 4px 4px 0 var(--c4);
-  }
-  .lang-btn {
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 700;
-    padding: 6px 14px;
-    border: none;
-    border-radius: 999px;
-    cursor: none;
-    transition: all 0.2s;
-    background: transparent;
-    color: #888;
-    letter-spacing: 0.05em;
-  }
-  .lang-btn.active {
-    background: var(--c1);
-    color: white;
-  }
+    /*  social icons  */
+    .social-icon { width:36px; height:36px; border-radius:50%; background:#0F0F1A; display:flex; align-items:center; justify-content:center; transition:transform .2s,background .2s; }
+    .social-icon:hover { transform:scale(1.1); background:#4F46E5; }
+    .social-icon svg { width:16px; height:16px; fill:#fff; }
 
-  /* Nav */
-  nav {
-    position: fixed;
-    left: 24px; top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .nav-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--dark);
-    opacity: 0.2;
-    cursor: none;
-    transition: all 0.2s;
-    position: relative;
-  }
-  .nav-dot::after {
-    content: attr(data-label);
-    position: absolute;
-    left: 20px; top: 50%;
-    transform: translateY(-50%);
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.2s;
-    letter-spacing: 0.08em;
-    color: white;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  }
-  .nav-dot:hover::after, .nav-dot.active::after { opacity: 1; }
-  .nav-dot.active { opacity: 1; width: 10px; height: 10px; }
-  .nav-dot[data-section="hero"] { background: var(--c1); }
-  .nav-dot[data-section="about"] { background: #5C4A8A; }
-  .nav-dot[data-section="experience"] { background: var(--c3); }
-  .nav-dot[data-section="projects"] { background: #2A5C8A; }
-  .nav-dot[data-section="skills"] { background: var(--dark); }
-  .nav-dot[data-section="community"] { background: #A84040; }
-  .nav-dot[data-section="contact"] { background: var(--dark); }
+    /*  main layout  */
+    main { margin-left:280px; min-height:100vh; }
+    @media(max-width:768px) {
+      #sidebar { transform:translateX(-100%); }
+      #sidebar.open { transform:translateX(0); }
+      main { margin-left:0; }
+      #hamburger { display:flex; }
+    }
+    #hamburger { display:none; position:fixed; top:1.2rem; left:1.2rem; z-index:200; background:#0F0F1A; width:40px; height:40px; border-radius:8px; align-items:center; justify-content:center; flex-direction:column; gap:5px; padding:10px; }
+    #hamburger span { display:block; width:18px; height:2px; background:#fff; border-radius:2px; transition:all .3s; }
 
-  /* Sections */
-  section {
-    min-height: 100vh;
-    padding: 80px 80px 80px 80px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
+    /*  get in touch btn  */
+    #contact-btn { position:fixed; top:1.2rem; right:1.5rem; z-index:200; background:#0F0F1A; color:#fff; font-family:'Syne',sans-serif; font-size:.82rem; font-weight:700; padding:.55rem 1.2rem; border-radius:999px; letter-spacing:.04em; text-decoration:none; transition:background .2s,transform .2s; }
+    #contact-btn:hover { background:#4F46E5; transform:translateY(-1px); }
 
-  /* HERO */
-  #hero {
-    background: var(--dark);
-    color: white;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 160px;
-  }
-  .hero-tag {
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    color: var(--c1);
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.2s forwards;
-  }
-  .hero-name {
-    font-family: var(--font-display);
-    font-size: clamp(52px, 8vw, 110px);
-    font-weight: 800;
-    line-height: 0.95;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.4s forwards;
-  }
-  .hero-name span { color: var(--c1); }
-  .hero-desc {
-    font-size: 18px;
-    font-weight: 300;
-    color: #aaa;
-    max-width: 520px;
-    line-height: 1.7;
-    margin-bottom: 48px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.6s forwards;
-  }
-  .hero-btns {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.8s forwards;
-  }
-  .btn {
-    font-family: var(--font-display);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 14px 28px;
-    border-radius: 999px;
-    border: none;
-    cursor: none;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .btn:hover { transform: translateY(-3px); }
-  .btn-primary { background: var(--c1); color: white; box-shadow: 4px 4px 0 #ff3333; }
-  .btn-primary:hover { box-shadow: 6px 6px 0 #ff3333; }
-  .btn-outline { background: transparent; color: white; border: 2px solid #444; }
-  .btn-outline:hover { border-color: var(--c1); color: var(--c1); }
+    /*  sections  */
+    section { padding:5rem 4rem; }
+    @media(max-width:1024px){ section { padding:4rem 2rem; } }
+    @media(max-width:640px) { section { padding:3rem 1.25rem; } }
 
-  .hero-bg-text {
-    position: absolute;
-    right: -20px; bottom: -40px;
-    font-family: var(--font-display);
-    font-size: clamp(120px, 18vw, 240px);
-    font-weight: 800;
-    color: rgba(255,255,255,0.03);
-    pointer-events: none;
-    line-height: 1;
-    user-select: none;
-  }
-  .hero-chips {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 48px;
-    opacity: 0;
-    animation: fadeUp 0.7s 1s forwards;
-  }
-  .chip {
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 6px 14px;
-    border-radius: 999px;
-    border: 1.5px solid #333;
-    color: #888;
-  }
+    /*  section number  */
+    .sec-num { font-family:'Syne',sans-serif; font-size:.78rem; font-weight:700; color:#C7D2FE; letter-spacing:.15em; text-transform:uppercase; margin-bottom:.5rem; }
 
-  /* ABOUT */
-  #about {
-    background: #5C4A8A;
-    color: white;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 160px;
-  }
-  .section-label {
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    margin-bottom: 20px;
-    opacity: 0.6;
-  }
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 800;
-    line-height: 1.05;
-    margin-bottom: 40px;
-  }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-  }
-  .about-text {
-    font-size: 16px;
-    line-height: 1.8;
-    font-weight: 300;
-  }
-  .about-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 36px;
-  }
-  .stat-card {
-    background: var(--dark);
-    color: white;
-    padding: 24px 28px;
-    border-radius: 16px;
-  }
-  .stat-num {
-    font-family: var(--font-display);
-    font-size: 42px;
-    font-weight: 800;
-    color: var(--c2);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 13px;
-    color: #aaa;
-    margin-top: 4px;
-  }
+    /*  bracket / code text  */
+    .bracket { color:#C7D2FE; }
+    .hero-line { font-family:'Syne',sans-serif; font-weight:800; line-height:1.1; display:block; }
 
-  /* EXPERIENCE */
-  #experience {
-    background: var(--dark2);
-    color: white;
-    flex-direction: column;
-    padding-left: 160px;
-    align-items: flex-start;
-  }
-  #experience .section-label { color: var(--c3); }
-  #experience .section-title { color: white; }
-  .exp-list { display: flex; flex-direction: column; gap: 24px; max-width: 860px; width: 100%; }
-  .exp-card {
-    background: var(--dark3);
-    color: white;
-    border-radius: 16px;
-    padding: 28px 32px;
-    border-left: 4px solid var(--c3);
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .exp-card:hover { transform: translateX(6px); box-shadow: -6px 0 0 var(--c3); }
-  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
-  .exp-role { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: white; }
-  .exp-company { color: var(--c3); font-weight: 600; font-size: 15px; margin-bottom: 4px; }
-  .exp-date { font-size: 12px; color: #666; font-family: var(--font-display); letter-spacing: 0.05em; background: #333; padding: 4px 10px; border-radius: 999px; }
-  .exp-bullets { list-style: none; margin-top: 12px; }
-  .exp-bullets li { font-size: 14px; color: #bbb; line-height: 1.7; padding-left: 16px; position: relative; margin-bottom: 4px; }
-  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--c3); font-size: 12px; top: 3px; }
+    /*  pill tags  */
+    .pill { display:inline-block; font-size:.72rem; font-weight:600; font-family:'Syne',sans-serif; letter-spacing:.05em; padding:.3rem .8rem; border-radius:999px; background:#EEF2FF; color:#4F46E5; }
 
-  /* PROJECTS */
-  #projects {
-    background: #2A5C8A;
-    flex-direction: column;
-    padding-left: 160px;
-    padding-right: 160px;
-    align-items: flex-start;
-  }
-  #projects .section-label { color: rgba(255,255,255,0.6); }
-  #projects .section-title { color: white; }
-  .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; margin-top: 20px; }
-  .proj-card {
-    background: white;
-    border-radius: 16px;
-    padding: 28px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  .proj-card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(0,0,0,0.15); }
-  .proj-icon { font-size: 32px; margin-bottom: 16px; }
-  .proj-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 10px; }
-  .proj-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
-  .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-  .proj-tag { font-size: 11px; font-weight: 600; font-family: var(--font-display); padding: 4px 10px; border-radius: 999px; background: #f0f0f0; color: #555; letter-spacing: 0.05em; }
-  .proj-confidential { font-size: 11px; color: #bbb; margin-top: 12px; font-style: italic; }
-  .proj-link { display: inline-block; margin-top: auto; padding-top: 16px; font-size: 12px; font-family: var(--font-display); font-weight: 700; color: #555; text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
-  .proj-link:hover { color: #111; }
+    /*  browser frame  */
+    .browser-frame { border-radius:12px; overflow:hidden; border:1px solid #E5E7EB; box-shadow:0 4px 24px rgba(0,0,0,.08); }
+    .browser-bar { background:#F3F4F6; padding:.6rem 1rem; display:flex; align-items:center; gap:.5rem; flex-shrink:0; }
+    .browser-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+    .browser-url { flex:1; background:#E5E7EB; border-radius:4px; height:20px; margin-left:.75rem; }
+    .browser-frame img { width:100%; height:340px; object-fit:cover; object-position:top; display:block; }
 
-  /* SKILLS */
-  #skills {
-    background: var(--dark);
-    flex-direction: column;
-    padding-left: 160px;
-    align-items: flex-start;
-  }
-  #skills .section-label { color: rgba(255,255,255,0.6); }
-  #skills .section-title { color: white; }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 860px; width: 100%; }
-  .skill-group { background: white; border-radius: 16px; padding: 24px; border-top: 4px solid var(--c5); }
-  .skill-group-title { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: var(--c5); margin-bottom: 14px; }
-  .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-  .skill-pill { font-size: 12px; padding: 5px 12px; background: #f5f5f5; border-radius: 999px; font-weight: 500; color: #333; }
+    /* carousel */
+    .carousel { position:relative; }
+    .carousel-track-wrap { overflow:hidden; }
+    .carousel-track { display:flex; transition:transform .4s cubic-bezier(.4,0,.2,1); }
+    .carousel-slide { min-width:100%; }
+    .carousel-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.92); border:1px solid #E5E7EB; border-radius:50%; width:38px; height:38px; display:flex; align-items:center; justify-content:center; z-index:10; box-shadow:0 2px 10px rgba(0,0,0,.12); transition:all .2s; }
+    .carousel-btn:hover { background:#4F46E5; border-color:#4F46E5; }
+    .carousel-btn:hover svg { stroke:#fff; }
+    .carousel-btn.prev { left:12px; }
+    .carousel-btn.next { right:12px; }
+    .carousel-dots { display:flex; justify-content:center; gap:6px; margin-top:10px; }
+    .carousel-dot { width:6px; height:6px; border-radius:50%; background:#C7D2FE; transition:all .25s; }
+    .carousel-dot.active { background:#4F46E5; width:20px; border-radius:3px; }
 
-  /* COMMUNITY */
-  #community {
-    background: #A84040;
-    color: white;
-    flex-direction: column;
-    padding-left: 160px;
-    align-items: flex-start;
-  }
-  #community .section-label { color: rgba(255,255,255,0.6); }
-  #community .section-title { color: white; }
-  .comm-cards { display: flex; gap: 24px; flex-wrap: wrap; max-width: 860px; }
-  .comm-card {
-    background: var(--dark3);
-    color: white;
-    border-radius: 20px;
-    padding: 32px;
-    flex: 1;
-    min-width: 260px;
-    position: relative;
-    overflow: hidden;
-    border: 1.5px solid #333;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .comm-card:hover { border-color: var(--c1); transform: translateY(-4px); }
-  .comm-year { font-family: var(--font-display); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; margin-bottom: 10px; display: block; }
-  .comm-event { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 8px; color: white; }
-  .comm-org { font-size: 13px; color: var(--c1); font-weight: 600; margin-bottom: 12px; }
-  .comm-talk { font-size: 14px; color: #aaa; line-height: 1.6; }
-  .comm-badge { display: inline-block; margin-top: 16px; font-size: 11px; font-family: var(--font-display); font-weight: 700; letter-spacing: 0.1em; padding: 5px 12px; background: rgba(255,107,107,0.15); color: var(--c1); border-radius: 999px; }
+    /* project tabs */
+    .proj-tab { display:flex; align-items:center; gap:10px; width:100%; padding:.65rem 1rem; border-radius:10px; text-align:left; transition:all .2s; border-left:3px solid transparent; color:#6B7280; }
+    .proj-tab:hover { background:#EEF2FF; color:#4F46E5; border-left-color:#C7D2FE; }
+    .proj-tab.active { background:#EEF2FF; border-left-color:#4F46E5; color:#4F46E5; }
+    .proj-tab .tab-num { font-family:'Syne',sans-serif; font-size:.68rem; font-weight:700; color:#C7D2FE; flex-shrink:0; }
+    .proj-tab.active .tab-num { color:#818CF8; }
+    .proj-tab .tab-name { font-family:'Syne',sans-serif; font-size:.82rem; font-weight:600; }
+    .proj-panel { display:none; }
+    .proj-panel.active { display:block; animation:projFade .35s ease; }
+    @keyframes projFade { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
 
-  /* CONTACT */
-  #contact {
-    background: var(--dark);
-    flex-direction: column;
-    padding-left: 160px;
-    align-items: flex-start;
-    justify-content: center;
-  }
-  #contact .section-title { color: white; font-size: clamp(40px, 6vw, 80px); }
-  .contact-links { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    text-decoration: none;
-    color: white;
-    font-family: var(--font-display);
-    font-size: 18px;
-    font-weight: 600;
-    transition: transform 0.2s;
-  }
-  .contact-link:hover { transform: translateX(8px); }
-  .contact-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-  .contact-bg { position: absolute; right: 0; bottom: 0; font-family: var(--font-display); font-size: clamp(100px, 16vw, 200px); font-weight: 800; color: rgba(255,255,255,0.08); line-height: 1; pointer-events: none; }
+    /*  timeline  */
+    .tl-dot { width:14px; height:14px; border-radius:50%; background:#EEF2FF; border:2px solid #C7D2FE; flex-shrink:0; margin-top:6px; position:relative; z-index:1; transition:all .25s; }
+    .tl-item:hover .tl-dot { background:#4F46E5; border-color:#4F46E5; transform:scale(1.25); box-shadow:0 0 0 4px rgba(79,70,229,.15); }
+    .tl-card { transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .tl-item:hover .tl-card { transform:translateY(-4px); box-shadow:0 12px 36px rgba(79,70,229,.12); border-color:#C7D2FE; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    /*  skill card  */
+    .skill-card { display:flex; flex-direction:column; align-items:center; gap:10px; background:#fff; border:1px solid #E5E7EB; border-radius:16px; padding:1.25rem 1.5rem; min-width:110px; transition:all .25s; }
+    .skill-card:hover { border-color:#C7D2FE; box-shadow:0 12px 36px rgba(79,70,229,.1); transform:translateY(-4px); }
+    .skill-icon { width:36px; height:36px; color:#4F46E5; }
+    .skill-label { font-family:'Syne',sans-serif; font-weight:700; font-size:.95rem; color:#0F0F1A; }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s, transform 0.6s;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+    /*  reveal animation  */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .6s ease,transform .6s ease; }
+    .reveal.visible { opacity:1; transform:none; }
 
-  @media (max-width: 900px) {
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+    /*  dark contact section  */
+    #contact { background:#0F0F1A; color:#fff; }
+    #contact .sec-num { color:#4F46E5; }
 
-  @media (max-width: 768px) {
-    section { padding: 60px 24px 60px 24px; }
-    #hero, #about, #experience, #projects, #skills, #community, #contact { padding-left: 24px; }
-    #projects { padding-right: 24px; }
-    nav { display: none; }
-    .about-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .lang-toggle { top: 16px; right: 16px; }
-  }
-</style>
+    /*  gradient blob  */
+    .blob { position:absolute; border-radius:50%; filter:blur(60px); opacity:.35; pointer-events:none; }
+  </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- custom cursor -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 
-<div class="lang-toggle">
-  <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
-  <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
-</div>
+<!-- mobile hamburger -->
+<button id="hamburger" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
 
-<nav id="sidenav">
-  <div class="nav-dot active" data-section="hero" data-label="HOME" onclick="scrollToSection('hero')"></div>
-  <div class="nav-dot" data-section="about" data-label="ABOUT" onclick="scrollToSection('about')"></div>
-  <div class="nav-dot" data-section="experience" data-label="EXP" onclick="scrollToSection('experience')"></div>
-  <div class="nav-dot" data-section="projects" data-label="PROJECTS" onclick="scrollToSection('projects')"></div>
-  <div class="nav-dot" data-section="skills" data-label="SKILLS" onclick="scrollToSection('skills')"></div>
-  <div class="nav-dot" data-section="community" data-label="COMMUNITY" onclick="scrollToSection('community')"></div>
-  <div class="nav-dot" data-section="contact" data-label="CONTACT" onclick="scrollToSection('contact')"></div>
-</nav>
+<!-- get in touch -->
+<a href="#contact" id="contact-btn">
+  <span data-en="Get in touch &rarr;" data-es="Contacto &rarr;">Get in touch &rarr;</span>
+</a>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-tag" data-en="FRONTEND ENGINEER · QUERÉTARO, MX · OPEN TO REMOTE" data-es="INGENIERÍA FRONTEND · QUERÉTARO, MX · DISPONIBLE REMOTO">FRONTEND ENGINEER · QUERÉTARO, MX · OPEN TO REMOTE</div>
-  <div class="hero-name">Brenda<br><span>Flores.</span></div>
-  <div class="hero-desc" data-en="I build scalable React + TypeScript architectures for enterprise-grade web applications. 7+ years shipping production-ready features across multi-tenant platforms, Angular-to-React migrations, and SaaS products at scale." data-es="Construyo arquitecturas React + TypeScript escalables para aplicaciones web enterprise. 7+ años entregando features en producción en plataformas multi-tenant, migraciones Angular a React y SaaS de escala.">I build scalable React + TypeScript architectures for enterprise-grade web applications. 7+ years shipping production-ready features across multi-tenant platforms, Angular-to-React migrations, and SaaS products at scale.</div>
-  <div class="hero-btns">
-    <a href="#contact" class="btn btn-primary" data-en="Get in touch" data-es="Contáctame">Get in touch ↓</a>
-    <a href="#experience" class="btn btn-outline" data-en="See my work" data-es="Ver mi trabajo">See my work →</a>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SIDEBAR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<aside id="sidebar">
+  <!-- avatar -->
+  <div class="w-20 h-20 rounded-full overflow-hidden mb-6 flex-shrink-0 border-2 border-accent-mid">
+    <img src="images/digitalPhoto-BrendaFlores.jpg" alt="Brenda Flores" class="w-full h-full object-cover" />
   </div>
-  <div class="hero-chips">
-    <div class="chip">React</div>
-    <div class="chip">TypeScript</div>
-    <div class="chip">Angular</div>
-    <div class="chip">Redux</div>
-    <div class="chip">GraphQL</div>
-    <div class="chip">Node.js</div>
-  </div>
-  <div class="hero-bg-text">BF</div>
-</section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid reveal" style="width:100%; max-width:960px">
-    <div>
-      <div class="section-label" data-en="WHO I AM" data-es="SOBRE MÍ">WHO I AM</div>
-      <div class="section-title" data-en="Engineer.<br>Speaker.<br>Builder." data-es="Ingeniera.<br>Speaker.<br>Creadora.">Engineer.<br>Speaker.<br>Builder.</div>
-      <div class="about-text" data-en="Frontend-focused Full Stack Engineer specializing in React + TypeScript for enterprise-grade web applications. I design and implement scalable frontend architectures, from modular monorepos and multi-tenant platforms to legacy-to-React migrations. My work has reached platforms serving 100,000+ businesses and 1B+ annual interactions. I hold a B.S. in Computer Systems Engineering from Tecnológico de Monterrey (GPA 92/100, Academic Honors)." data-es="Ingeniera de Software Frontend especializada en React + TypeScript para aplicaciones web enterprise. Diseño e implemento arquitecturas frontend escalables, desde monorepos modulares y plataformas multi-tenant hasta migraciones Angular-React. Mi trabajo ha impactado plataformas con 100,000+ clientes y 1B+ interacciones anuales. Licenciada en Ingeniería en Sistemas Computacionales por el Tecnológico de Monterrey (promedio 92/100, mención honorífica).">Frontend-focused Full Stack Engineer specializing in React + TypeScript for enterprise-grade web applications. I design and implement scalable frontend architectures, from modular monorepos and multi-tenant platforms to legacy-to-React migrations. My work has reached platforms serving 100,000+ businesses and 1B+ annual interactions. I hold a B.S. in Computer Systems Engineering from Tecnológico de Monterrey (GPA 92/100, Academic Honors).</div>
+  <!-- name -->
+  <p class="font-display font-bold text-sm text-ink text-center leading-tight mb-1">Brenda Flores</p>
+  <p class="text-xs text-muted text-center mb-6" data-en="Software Engineer" data-es="Ingeniera de Software">Software Engineer</p>
+
+  <!-- nav -->
+  <nav class="w-full flex flex-col gap-1 mb-auto">
+    <a href="#home" class="nav-link active" data-section="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span data-en="Home" data-es="Inicio">Home</span>
+    </a>
+    <a href="#about" class="nav-link" data-section="about">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span data-en="About" data-es="Sobre mi">About</span>
+    </a>
+    <a href="#projects" class="nav-link" data-section="projects">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      <span data-en="Projects" data-es="Proyectos">Projects</span>
+    </a>
+    <a href="#experience" class="nav-link" data-section="experience">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      <span data-en="Experience" data-es="Experiencia">Experience</span>
+    </a>
+    <a href="#skills" class="nav-link" data-section="skills">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <span data-en="Skills" data-es="Habilidades">Skills</span>
+    </a>
+    <a href="#community" class="nav-link" data-section="community">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <span data-en="Community" data-es="Comunidad">Community</span>
+    </a>
+    <a href="#contact" class="nav-link" data-section="contact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span data-en="Contact" data-es="Contacto">Contact</span>
+    </a>
+  </nav>
+
+  <!-- lang toggle -->
+  <div class="flex items-center gap-1 mt-6 mb-4 bg-gray-100 rounded-lg p-1">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+  </div>
+
+  <!-- social -->
+  <div class="flex gap-3">
+    <a href="https://www.linkedin.com/in/brenda-guadalupe-flores-parada-09a52b126/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://github.com/brendaflores0" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+      <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+    </a>
+  </div>
+</aside>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MAIN â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<main>
+
+  <!--  HERO  -->
+  <section id="home" class="relative min-h-screen flex flex-col justify-center overflow-hidden">
+    <!-- decorative blobs -->
+    <div class="blob w-80 h-80 bg-indigo-200" style="top:-4rem;right:-4rem;"></div>
+    <div class="blob w-56 h-56 bg-purple-200" style="bottom:6rem;left:-4rem;"></div>
+
+    <div class="relative z-10 max-w-3xl">
+      <p class="sec-num mb-4">01</p>
+
+      <div class="space-y-1">
+        <span class="hero-line text-5xl lg:text-6xl xl:text-7xl text-ink">
+          <span class="bracket">&lt;</span><span data-en="Hello, I'm" data-es="Hola, soy">Hello, I'm</span>
+        </span>
+        <span class="hero-line text-5xl lg:text-6xl xl:text-7xl text-accent">Brenda Flores!<span class="bracket">&gt;</span></span>
+      </div>
+
+      <div class="mt-6 space-y-1">
+        <span class="hero-line text-3xl lg:text-4xl text-ink">
+          <span class="bracket">&lt;</span><span data-en="I turn complex" data-es="Convierto problemas complejos">I turn complex</span>
+        </span>
+        <span class="hero-line text-3xl lg:text-4xl text-accent" data-en="products into" data-es="en productos">products into</span>
+        <span class="hero-line text-3xl lg:text-4xl text-ink"><span data-en="clean code." data-es="con codigo limpio.">clean code.</span><span class="bracket">&gt;</span></span>
+      </div>
+
+      <p class="mt-8 text-lg text-muted max-w-xl leading-relaxed"
+         data-en="Frontend-focused Full Stack Engineer specializing in React + TypeScript for enterprise-grade web applications. I've contributed to platforms serving 100,000+ businesses and processing 1B+ annual interactions."
+         data-es="Ingeniera Full Stack especializada en React + TypeScript para aplicaciones web empresariales. He contribuido a plataformas que sirven a mas de 100,000 empresas y procesan mas de 1B de interacciones anuales.">
+        Frontend-focused Full Stack Engineer specializing in React + TypeScript for enterprise-grade web applications. I've contributed to platforms serving 100,000+ businesses and processing 1B+ annual interactions.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="#projects" class="inline-flex items-center gap-2 bg-accent text-white font-display font-bold text-sm px-6 py-3 rounded-full hover:bg-indigo-700 transition-all hover:-translate-y-0.5">
+          <span data-en="View my work" data-es="Ver mi trabajo">View my work</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#contact" class="inline-flex items-center gap-2 border border-border text-ink font-display font-bold text-sm px-6 py-3 rounded-full hover:border-accent hover:text-accent transition-all hover:-translate-y-0.5">
+          <span data-en="Contact me" data-es="ContÃ¡ctame">Contact me</span>
+        </a>
+      </div>
     </div>
-    <div class="about-stats">
-      <div class="stat-card">
-        <div class="stat-num">7+</div>
-        <div class="stat-label" data-en="Years of professional experience" data-es="Años de experiencia profesional">Years of professional experience</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">9+</div>
-        <div class="stat-label" data-en="Countries where my code runs" data-es="Países donde corre mi código">Countries where my code runs</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">1</div>
-        <div class="stat-label" data-en="Conference talk on Redux (2024)" data-es="Conferencia sobre Redux (2024)">Conference talk on Redux (2024)</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div style="width:100%; max-width:900px">
-    <div class="section-label reveal" data-en="WHERE I'VE WORKED" data-es="EXPERIENCIA">WHERE I'VE WORKED</div>
-    <div class="section-title reveal" data-en="Experience" data-es="Experiencia">Experience</div>
-    <div class="exp-list">
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role" data-en="Software Engineer - Frontend" data-es="Ingeniera de Software - Frontend">Software Engineer - Frontend</div>
-            <div class="exp-company">Nextiva</div>
+  </section>
+
+  <!--  ABOUT  -->
+  <section id="about" class="bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <p class="sec-num reveal">02</p>
+      <h2 class="font-display text-4xl font-bold text-ink mb-10 reveal" data-en="About me" data-es="Sobre mi">About me</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <div class="reveal">
+          <p class="text-ink leading-relaxed mb-4"
+             data-en="I help companies design and implement scalable frontend architectures: from modular monorepos and multi-tenant platforms to legacy-to-React migrations. I ship production-ready features with strong test coverage and i18n support, capable of owning projects end-to-end."
+             data-es="Ayudo a empresas a disenar e implementar arquitecturas frontend escalables: desde monorepos modulares y plataformas multi-tenant hasta migraciones legacy a React. Entrego funcionalidades listas para produccion con buena cobertura de tests y soporte i18n.">
+            I help companies design and implement scalable frontend architectures: from modular monorepos and multi-tenant platforms to legacy-to-React migrations. I ship production-ready features with strong test coverage and i18n support, capable of owning projects end-to-end.
+          </p>
+          <p class="text-ink leading-relaxed"
+             data-en="My backend integrations span AWS (Cognito, DynamoDB), Stripe, OAuth, and REST/GraphQL APIs. I'm based in Mexico and collaborate with distributed teams across North America."
+             data-es="Mis integraciones backend abarcan AWS (Cognito, DynamoDB), Stripe, OAuth y APIs REST/GraphQL. Estoy en Mexico y colaboro con equipos distribuidos en Norteamerica.">
+            My backend integrations span AWS (Cognito, DynamoDB), Stripe, OAuth, and REST/GraphQL APIs. I'm based in Mexico and collaborate with distributed teams across North America.
+          </p>
+        </div>
+        <div class="reveal grid grid-cols-2 gap-4">
+          <div class="bg-white border border-border rounded-2xl p-5">
+            <p class="font-display font-extrabold text-3xl text-accent">6+</p>
+            <p class="text-sm text-muted mt-1" data-en="years of experience" data-es="años de experiencia">years of experience</p>
           </div>
-          <div class="exp-date">Apr 2022 – Apr 2026</div>
-        </div>
-        <ul class="exp-bullets">
-          <li data-en="Architected and scaled React + TypeScript features across multiple product surfaces in a high-availability, multi-tenant enterprise platform serving 100,000+ businesses globally." data-es="Arquitecté y escalé features con React + TypeScript en múltiples superficies de producto en una plataforma enterprise multi-tenant de alta disponibilidad con 100,000+ clientes a nivel global.">Architected and scaled React + TypeScript features across multiple product surfaces in a high-availability, multi-tenant enterprise platform serving 100,000+ businesses globally.</li>
-          <li data-en="Led a phased Angular to React migration within a modular monorepo with independently versioned packages consumed by both Angular and React surfaces." data-es="Lideré una migración Angular a React por fases dentro de un monorepo modular con paquetes versionados de forma independiente, consumidos por superficies Angular y React.">Led a phased Angular to React migration within a modular monorepo with independently versioned packages consumed by both Angular and React surfaces.</li>
-          <li data-en="Integrated REST APIs across authentication, user management, RBAC, and admin configuration modules in a multi-tenant enterprise platform." data-es="Integré REST APIs en módulos de autenticación, gestión de usuarios, RBAC y configuración de administración en una plataforma enterprise multi-tenant.">Integrated REST APIs across authentication, user management, RBAC, and admin configuration modules in a multi-tenant enterprise platform.</li>
-          <li data-en="Enforced code quality through ESLint, Prettier, and CI/CD pipelines; contributed to test coverage and collaborative PR reviews aligned with enterprise SLA standards." data-es="Apliqué estándares de calidad con ESLint, Prettier y pipelines de CI/CD; contribuí a la cobertura de pruebas y revisiones de PR bajo estándares de SLA enterprise.">Enforced code quality through ESLint, Prettier, and CI/CD pipelines; contributed to test coverage and collaborative PR reviews aligned with enterprise SLA standards.</li>
-        </ul>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role" data-en="Independent Software Consultant" data-es="Consultora de Software Independiente">Independent Software Consultant</div>
-            <div class="exp-company">Multi-client · SMBs</div>
+          <div class="bg-white border border-border rounded-2xl p-5">
+            <p class="font-display font-extrabold text-3xl text-accent">1B+</p>
+            <p class="text-sm text-muted mt-1" data-en="annual interactions" data-es="interacciones anuales">annual interactions</p>
           </div>
-          <div class="exp-date">Dec 2018 – Present</div>
-        </div>
-        <ul class="exp-bullets">
-          <li data-en="Managed full client relationships from scoping and proposals through delivery and post-launch support across all engagements." data-es="Gestioné relaciones completas con clientes desde el alcance y propuestas hasta la entrega y soporte post-lanzamiento en todos los proyectos.">Managed full client relationships from scoping and proposals through delivery and post-launch support across all engagements.</li>
-          <li data-en="Built a React-based admin platform and storefront for Fastener, an auto parts e-commerce, including Stripe payments integration and product catalog management." data-es="Construí una plataforma admin React y tienda para Fastener, e-commerce de refacciones automotrices, incluyendo integración de pagos con Stripe y gestión de catálogo de productos.">Built a React-based admin platform and storefront for Fastener, an auto parts e-commerce, including Stripe payments integration and product catalog management.</li>
-          <li data-en="Integrated third-party APIs including external vehicle listing services and WhatsApp Business API for automated repair status notifications to end customers." data-es="Integré APIs de terceros incluyendo servicios externos de listado vehicular y WhatsApp Business API para notificaciones automáticas de estado de reparación a clientes finales.">Integrated third-party APIs including external vehicle listing services and WhatsApp Business API for automated repair status notifications to end customers.</li>
-          <li data-en="Automated PDF/Excel reporting workflows, reducing manual administrative workload by 30-40%." data-es="Automaticé flujos de reportes PDF/Excel, reduciendo la carga administrativa manual en un 30-40%.">Automated PDF/Excel reporting workflows, reducing manual administrative workload by 30-40%.</li>
-        </ul>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role" data-en="Software Engineer" data-es="Ingeniera de Software">Software Engineer</div>
-            <div class="exp-company">Wizeline</div>
+          <div class="bg-white border border-border rounded-2xl p-5">
+            <p class="font-display font-extrabold text-3xl text-accent">100K+</p>
+            <p class="text-sm text-muted mt-1" data-en="businesses served" data-es="empresas atendidas">businesses served</p>
           </div>
-          <div class="exp-date">Nov 2021 – Apr 2022</div>
-        </div>
-        <ul class="exp-bullets">
-          <li data-en="Built internal frontend systems using React + TypeScript within distributed Agile teams." data-es="Construí sistemas frontend internos con React + TypeScript en equipos Agile distribuidos.">Built internal frontend systems using React + TypeScript within distributed Agile teams.</li>
-          <li data-en="Promoted scalable component architecture and accessibility best practices across the codebase." data-es="Promoví arquitectura de componentes escalable y buenas prácticas de accesibilidad en toda la base de código.">Promoted scalable component architecture and accessibility best practices across the codebase.</li>
-        </ul>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role" data-en="Software Engineer / Product Owner" data-es="Ingeniera de Software / Product Owner">Software Engineer / Product Owner</div>
-            <div class="exp-company">NATGAS</div>
+          <div class="bg-white border border-border rounded-2xl p-5">
+            <p class="font-display font-extrabold text-3xl text-accent">9+</p>
+            <p class="text-sm text-muted mt-1" data-en="countries served" data-es="países atendidos">countries where my code runs</p>
           </div>
-          <div class="exp-date">Jul 2020 – Oct 2021</div>
-        </div>
-        <ul class="exp-bullets">
-          <li data-en="Built full-stack features using Node.js and GraphQL, including resolver logic, PostgreSQL schema design, and direct production database access." data-es="Construí features full-stack con Node.js y GraphQL, incluyendo lógica de resolvers, diseño de esquema PostgreSQL y acceso directo a base de datos en producción.">Built full-stack features using Node.js and GraphQL, including resolver logic, PostgreSQL schema design, and direct production database access.</li>
-          <li data-en="Developed the Impulsate admin platform and CRM for managing credit prospects, loan workflows, and FICO API integration for credit bureau consultation." data-es="Desarrollé la plataforma admin Impulsate y CRM para gestión de prospectos de crédito, flujos de préstamos e integración con API FICO para consulta de buró de crédito.">Developed the Impulsate admin platform and CRM for managing credit prospects, loan workflows, and FICO API integration for credit bureau consultation.</li>
-          <li data-en="Contributed to a federated GraphQL architecture where multiple independent modules integrated with a central data system as the shared source of truth." data-es="Contribuí a una arquitectura GraphQL federada donde múltiples módulos independientes integraban con un sistema central de datos como fuente única de verdad.">Contributed to a federated GraphQL architecture where multiple independent modules integrated with a central data system as the shared source of truth.</li>
-          <li data-en="Served as Product Owner across both products, translating business and compliance requirements into scalable frontend and backend features." data-es="Fungí como Product Owner en ambos productos, traduciendo requisitos de negocio y cumplimiento en features escalables de frontend y backend.">Served as Product Owner across both products, translating business and compliance requirements into scalable frontend and backend features.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div style="width:100%">
-    <div class="section-label reveal" data-en="WHAT I'VE BUILT" data-es="PROYECTOS">WHAT I'VE BUILT</div>
-    <div class="section-title reveal" data-en="Projects" data-es="Proyectos">Projects</div>
-    <div class="projects-grid">
-      <div class="proj-card reveal">
-        <div class="proj-icon">🚗</div>
-        <div class="proj-title" data-en="Automotive Management Platform" data-es="Plataforma de Gestión Automotriz">Automotive Management Platform</div>
-        <div class="proj-desc" data-en="Secured partnerships with 2 insurance companies. Features include repair tracking, WhatsApp/SMS notifications, satisfaction surveys, automated Excel/PDF reporting and real-time sales KPI dashboard." data-es="Aseguró alianzas con 2 aseguradoras. Incluye seguimiento de reparaciones, notificaciones WhatsApp/SMS, encuestas de satisfacción, reportes automatizados y dashboard de KPIs en tiempo real.">Secured partnerships with 2 insurance companies. Features include repair tracking, WhatsApp/SMS notifications, satisfaction surveys, automated Excel/PDF reporting and real-time sales KPI dashboard.</div>
-        <div class="proj-tags">
-          <div class="proj-tag">React</div>
-          <div class="proj-tag">Laravel</div>
-          <div class="proj-tag">PostgreSQL</div>
-        </div>
-        <div class="proj-confidential" data-en="🔒 Client project (code private)" data-es="🔒 Proyecto de cliente (código privado)">🔒 Client project (code private)</div>
-      </div>
-      <div class="proj-card reveal">
-        <div class="proj-icon">🛍️</div>
-        <div class="proj-title" data-en="Stripe-integrated Marketplace" data-es="Marketplace con Stripe">Stripe-integrated Marketplace</div>
-        <div class="proj-desc" data-en="Role-based marketplace with separate admin and client views, Stripe payment integration, and permission-controlled access. Delivered with a 3-person team." data-es="Marketplace con roles separados para admin y clientes, integración de pagos con Stripe y acceso por permisos. Entregado con equipo de 3 personas.">Role-based marketplace with separate admin and client views, Stripe payment integration, and permission-controlled access. Delivered with a 3-person team.</div>
-        <div class="proj-tags">
-          <div class="proj-tag">React</div>
-          <div class="proj-tag">Stripe</div>
-          <div class="proj-tag">PostgreSQL</div>
-        </div>
-        <div class="proj-confidential" data-en="🔒 Client project (code private)" data-es="🔒 Proyecto de cliente (código privado)">🔒 Client project (code private)</div>
-        <a href="https://www.fastenerqro.com/refacciones/" target="_blank" rel="noopener noreferrer" class="proj-link" data-en="View site →" data-es="Ver sitio →">View site →</a>
-      </div>
-      <div class="proj-card reveal">
-  <div class="proj-icon">📡</div>
-  <div class="proj-title" data-en="NextivaOne VoIP Platform" data-es="Plataforma VoIP NextivaOne">NextivaOne VoIP Platform</div>
-  <div class="proj-desc" data-en="Enterprise communication platform with unified calls, SMS and voicemails. Built with React + TypeScript ensuring consistency across Mini, Compact and Standard views." data-es="Plataforma de comunicación enterprise con llamadas, SMS y buzón de voz unificados. Construida con React + TypeScript con consistencia en vistas Mini, Compact y Standard.">Enterprise communication platform with unified calls, SMS and voicemails. Built with React + TypeScript ensuring consistency across Mini, Compact and Standard views.</div>
-  <div class="proj-tags">
-    <div class="proj-tag">React</div>
-    <div class="proj-tag">TypeScript</div>
-    <div class="proj-tag">VoIP</div>
-  </div>
-  <div class="proj-confidential" data-en="🔒 Corporate repo (code private)" data-es="🔒 Repo corporativo (código privado)">🔒 Corporate repo (code private)</div>
-  <a href="https://www.nextiva.com/support/nextivaone?wchannelid=ffgufkplw3&wmediaid=wmo2z9eaqk" target="_blank" rel="noopener noreferrer" class="proj-link" data-en="View product →" data-es="Ver producto →">View product →</a>
-</div>
-
-<div class="proj-card reveal">
-  <div class="proj-icon">🤖</div>
-  <div class="proj-title" data-en="NCX: Contact Center Platform" data-es="NCX: Plataforma de Contact Center">NCX: Contact Center Platform</div>
-  <div class="proj-desc" data-en="Nextiva's customer experience platform built on the NCX SDK, delivering voice, messaging and supervisory features for contact center agents. Includes role-based access, SSO integrations and real-time service monitoring." data-es="Plataforma de experiencia de cliente de Nextiva construida sobre el NCX SDK, con features de voz, mensajería y supervisión para agentes de contact center. Incluye acceso por roles, integraciones SSO y monitoreo en tiempo real.">Nextiva's customer experience platform built on the NCX SDK, delivering voice, messaging and supervisory features for contact center agents. Includes role-based access, SSO integrations and real-time service monitoring.</div>
-  <div class="proj-tags">
-    <div class="proj-tag">React</div>
-    <div class="proj-tag">TypeScript</div>
-    <div class="proj-tag">Angular</div>
-    <div class="proj-tag">SSO</div>
-  </div>
-  <div class="proj-confidential" data-en="🔒 Corporate repo (code private)" data-es="🔒 Repo corporativo (código privado)">🔒 Corporate repo (code private)</div>
-  <a href="https://www.nextiva.cx/" target="_blank" rel="noopener noreferrer" class="proj-link" data-en="View product →" data-es="Ver producto →">View product →</a>
-</div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div style="width:100%; max-width:860px">
-    <div class="section-label reveal" data-en="WHAT I WORK WITH" data-es="TECNOLOGÍAS">WHAT I WORK WITH</div>
-    <div class="section-title reveal" data-en="Skills" data-es="Habilidades">Skills</div>
-    <div class="skills-grid reveal">
-      <div class="skill-group">
-        <div class="skill-group-title" data-en="FRONTEND" data-es="FRONTEND">FRONTEND</div>
-        <div class="skill-pills">
-          <div class="skill-pill">React</div><div class="skill-pill">TypeScript</div><div class="skill-pill">JavaScript</div><div class="skill-pill">Angular</div><div class="skill-pill">React Query</div><div class="skill-pill">Storybook</div><div class="skill-pill">Vite</div>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title" data-en="BACKEND & DATA" data-es="BACKEND Y DATOS">BACKEND & DATA</div>
-        <div class="skill-pills">
-          <div class="skill-pill">Node.js</div><div class="skill-pill">GraphQL</div><div class="skill-pill">REST APIs</div><div class="skill-pill">PostgreSQL</div>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title" data-en="TOOLS & PRACTICES" data-es="HERRAMIENTAS">TOOLS & PRACTICES</div>
-        <div class="skill-pills">
-          <div class="skill-pill">i18next</div><div class="skill-pill">Jest</div><div class="skill-pill">Vitest</div><div class="skill-pill">ESLint</div><div class="skill-pill">Prettier</div><div class="skill-pill">CI/CD</div><div class="skill-pill">Figma</div><div class="skill-pill">Agile/Scrum</div>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title" data-en="AUTH & CLOUD" data-es="AUTH Y CLOUD">AUTH & CLOUD</div>
-        <div class="skill-pills">
-          <div class="skill-pill">OAuth</div><div class="skill-pill">AWS Cognito</div><div class="skill-pill">AWS DynamoDB</div><div class="skill-pill">Stripe</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- COMMUNITY -->
-<section id="community">
-  <div style="width:100%; max-width:860px">
-    <div class="section-label reveal" data-en="GIVING BACK" data-es="COMUNIDAD">GIVING BACK</div>
-    <div class="section-title reveal" data-en="Community &<br>Speaking" data-es="Comunidad y<br>Conferencias">Community &<br>Speaking</div>
-    <div class="comm-cards reveal">
-      <div class="comm-card">
-        <div class="comm-year">2024</div>
-        <div class="comm-event">DevDay4Women</div>
-        <div class="comm-org">Software Guru</div>
-        <div class="comm-talk" data-en="Delivered a hands-on conference talk: «Intro to Redux», a practical demo covering state management fundamentals for React applications." data-es="Impartí una conferencia práctica: «Intro a Redux», demo aplicada sobre fundamentos de gestión de estado para aplicaciones React.">Delivered a hands-on conference talk: «Intro to Redux», a practical demo covering state management fundamentals for React applications.</div>
-        <div class="comm-badge" data-en="SPEAKER" data-es="SPEAKER">SPEAKER</div>
-      </div>
-      <div class="comm-card">
-        <div class="comm-year">2022</div>
-        <div class="comm-event">AWS Certified</div>
-        <div class="comm-org">Amazon Web Services</div>
-        <div class="comm-talk" data-en="Obtained the AWS Certified Cloud Practitioner certification, strengthening cloud infrastructure knowledge applied to frontend development." data-es="Obtuve la certificación AWS Certified Cloud Practitioner, reforzando conocimientos de infraestructura cloud aplicados al desarrollo frontend.">Obtained the AWS Certified Cloud Practitioner certification, strengthening cloud infrastructure knowledge applied to frontend development.</div>
-        <div class="comm-badge" data-en="CERTIFIED" data-es="CERTIFICADA">CERTIFIED</div>
+  <!--  PROJECTS  -->
+  <section id="projects">
+    <div class="max-w-5xl mx-auto">
+      <p class="sec-num reveal">03</p>
+      <h2 class="font-display text-4xl font-bold text-ink mb-2 reveal" data-en="Projects" data-es="Proyectos">Projects</h2>
+      <p class="text-muted mb-10 reveal" data-en="Work I've shipped that I'm proud of." data-es="Trabajo que he entregado y del que me siento orgullosa.">Work I've shipped that I'm proud of.</p>
+
+      <div class="reveal flex flex-col md:flex-row gap-8">
+
+        <!-- left: tab list -->
+        <div class="md:w-44 flex-shrink-0 flex flex-row md:flex-col gap-1 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
+          <button class="proj-tab active" data-proj="nextiva">
+            <span class="tab-num">01</span>
+            <span class="tab-name">NextivaOne</span>
+          </button>
+          <button class="proj-tab" data-proj="ncx">
+            <span class="tab-num">02</span>
+            <span class="tab-name">NCX</span>
+          </button>
+          <button class="proj-tab" data-proj="fastener">
+            <span class="tab-num">03</span>
+            <span class="tab-name">Fastener</span>
+          </button>
+          <button class="proj-tab" data-proj="ctiasp">
+            <span class="tab-num">04</span>
+            <span class="tab-name whitespace-nowrap">CTIASP</span>
+          </button>
+        </div>
+
+        <!-- right: project panels -->
+        <div class="flex-1 min-w-0">
+
+          <!-- NextivaOne -->
+          <div class="proj-panel active" id="proj-nextiva">
+            <div class="carousel mb-6" data-carousel>
+              <div class="browser-frame">
+                <div class="browser-bar"><div class="browser-dot bg-red-400"></div><div class="browser-dot bg-yellow-400"></div><div class="browser-dot bg-green-400"></div><div class="browser-url"></div></div>
+                <div class="carousel-track-wrap">
+                  <div class="carousel-track">
+                    <div class="carousel-slide"><img src="images/NextivaOne.1.png" alt="NextivaOne 1" loading="lazy" /></div>
+                    <div class="carousel-slide"><img src="images/NextivaOne.2.png" alt="NextivaOne 2" loading="lazy" /></div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-btn prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="carousel-btn next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+              <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-ink leading-relaxed text-sm"
+                 data-en="Built React + TypeScript features for NextivaOne, a unified enterprise communication platform managing calls, SMS and voicemails for 100,000+ businesses globally. Work included building consistent UI across Mini, Compact and Standard views, reusable component architecture, and REST API integrations."
+                 data-es="Desarrollé funcionalidades en React + TypeScript para NextivaOne, una plataforma unificada de comunicación empresarial que gestiona llamadas, SMS y buzones de voz para más de 100,000 empresas a nivel global. El trabajo incluyó la construcción de una UI consistente en vistas Mini, Compact y Standard, arquitectura de componentes reutilizables e integraciones con APIs REST.">
+                Built React + TypeScript features for NextivaOne, a unified enterprise communication platform managing calls, SMS and voicemails for 100,000+ businesses globally. Work included building consistent UI across Mini, Compact and Standard views, reusable component architecture, and REST API integrations.
+              </p>
+              <div>
+                <div class="flex flex-wrap gap-2 mb-4"><span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">SPA</span><span class="pill">REST APIs</span><span class="pill">Figma</span><span class="pill">CI/CD</span></div>
+                <a href="https://www.nextiva.com" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-accent font-display font-bold text-sm hover:underline">nextiva.com <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- NCX -->
+          <div class="proj-panel" id="proj-ncx">
+            <div class="carousel mb-6" data-carousel>
+              <div class="browser-frame">
+                <div class="browser-bar"><div class="browser-dot bg-red-400"></div><div class="browser-dot bg-yellow-400"></div><div class="browser-dot bg-green-400"></div><div class="browser-url"></div></div>
+                <div class="carousel-track-wrap">
+                  <div class="carousel-track">
+                    <div class="carousel-slide"><img src="images/NCX.1.png" alt="NCX 1" loading="lazy" /></div>
+                    <div class="carousel-slide"><img src="images/NCX.2.png" alt="NCX 2" loading="lazy" /></div>
+                    <div class="carousel-slide"><img src="images/NCX.3.png" alt="NCX 3" loading="lazy" /></div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-btn prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="carousel-btn next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+              <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-ink leading-relaxed text-sm"
+                 data-en="Built and maintained features for NCX, Nextiva's enterprise contact center platform serving 100,000+ businesses globally. Work included React + TypeScript component development, Angular to React migration, role-based access control, SSO integrations, and real-time service monitoring across agent and supervisor interfaces."
+                 data-es="Desarrollé y mantuve funcionalidades para NCX, la plataforma de contact center empresarial de Nextiva que sirve a más de 100,000 empresas globalmente. El trabajo incluyó desarrollo de componentes en React + TypeScript, migración de Angular a React, control de acceso basado en roles, integraciones SSO y monitoreo de servicios en tiempo real en interfaces de agente y supervisor.">
+                Built and maintained features for NCX, Nextiva's enterprise contact center platform serving 100,000+ businesses globally. Work included React + TypeScript component development, Angular to React migration, role-based access control, SSO integrations, and real-time service monitoring across agent and supervisor interfaces.
+              </p>
+              <div>
+                <div class="flex flex-wrap gap-2 mb-4"><span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">Angular</span><span class="pill">REST API</span><span class="pill">Figma</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fastener -->
+          <div class="proj-panel" id="proj-fastener">
+            <div class="carousel mb-6" data-carousel>
+              <div class="browser-frame">
+                <div class="browser-bar"><div class="browser-dot bg-red-400"></div><div class="browser-dot bg-yellow-400"></div><div class="browser-dot bg-green-400"></div><div class="browser-url"></div></div>
+                <div class="carousel-track-wrap">
+                  <div class="carousel-track">
+                    <div class="carousel-slide"><img src="images/Fastener.1.png" alt="Fastener 1" loading="lazy" /></div>
+                    <div class="carousel-slide"><img src="images/Fastener.2.png" alt="Fastener 2" loading="lazy" /></div>
+                    <div class="carousel-slide"><img src="images/Fastener.3.png" alt="Fastener 3" loading="lazy" /></div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-btn prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="carousel-btn next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+              <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-ink leading-relaxed text-sm"
+                 data-en="Built end-to-end a React-based storefront and admin platform for Fastener, an auto parts e-commerce in Mexico. Included Stripe payments integration, product catalog management, order tracking, customer management, and a role-based admin system with AWS Cognito authentication."
+                 data-es="Desarrollé de principio a fin una tienda y plataforma de administración basada en React para Fastener, un e-commerce de autopartes en México. Incluyó integración de pagos con Stripe, gestión de catálogo de productos, seguimiento de pedidos, gestión de clientes y un sistema de administración con roles usando AWS Cognito.">
+                Built end-to-end a React-based storefront and admin platform for Fastener, an auto parts e-commerce in Mexico. Included Stripe payments integration, product catalog management, order tracking, customer management, and a role-based admin system with AWS Cognito authentication.
+              </p>
+              <div class="flex flex-wrap gap-2 self-start"><span class="pill">React</span><span class="pill">Stripe</span><span class="pill">AWS Amplify</span><span class="pill">Amazon DynamoDB</span><span class="pill">REST API</span></div>
+            </div>
+          </div>
+
+          <!-- CTIASP -->
+          <div class="proj-panel" id="proj-ctiasp">
+            <div class="carousel mb-6" data-carousel>
+              <div class="browser-frame">
+                <div class="browser-bar"><div class="browser-dot bg-red-400"></div><div class="browser-dot bg-yellow-400"></div><div class="browser-dot bg-green-400"></div><div class="browser-url"></div></div>
+                <div class="carousel-track-wrap">
+                  <div class="carousel-track">
+                    <div class="carousel-slide"><img src="images/CTIASP.1.png" alt="CTI 1" loading="lazy" /></div>
+                    <div class="carousel-slide"><img src="images/CTIASP.2.png" alt="CTI 2" loading="lazy" /></div>
+                    <div class="carousel-slide"><img src="images/CTIASP.3.png" alt="CTI 3" loading="lazy" /></div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-btn prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="carousel-btn next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+              <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p class="text-ink leading-relaxed text-sm"
+                 data-en="Built end-to-end an automotive workshop management platform including vehicle repair tracking, customer file management, valuations, WhatsApp Business API integration for automated status notifications, and automated PDF and Excel report generation. The platform secured partnerships with 7+ insurance companies and reduced manual administrative workload by 30-40%."
+                 data-es="Desarrollé de principio a fin una plataforma de gestión de talleres automotrices que incluye seguimiento de reparaciones, gestión de expedientes de clientes, valuaciones, integración con WhatsApp Business API para notificaciones automáticas y generación automatizada de reportes en PDF y Excel. La plataforma permitió firmar convenios con más de 7 aseguradoras y redujo la carga administrativa manual en un 30-40%.">
+                Built end-to-end an automotive workshop management platform including vehicle repair tracking, customer file management, valuations, WhatsApp Business API integration for automated status notifications, and automated PDF and Excel report generation. The platform secured partnerships with 7+ insurance companies and reduced manual administrative workload by 30-40%.
+              </p>
+              <div class="flex flex-wrap gap-2 self-start">
+                <span class="pill">Laravel</span><span class="pill">PostgreSQL</span><span class="pill">REST API</span><span class="pill">HTML</span><span class="pill">JavaScript</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div style="width:100%; max-width:700px; position:relative; z-index:1">
-    <div class="section-label reveal" style="color:rgba(255,255,255,0.6)" data-en="LET'S WORK TOGETHER" data-es="TRABAJEMOS JUNTOS">LET'S WORK TOGETHER</div>
-    <div class="section-title reveal" data-en="Say hello." data-es="Escríbeme.">Say hello.</div>
-    <div class="contact-links reveal">
-      <a href="mailto:brenda.gfp@gmail.com" class="contact-link">
-        <div class="contact-icon">✉</div>
+  <!--  EXPERIENCE  -->
+  <section id="experience" class="bg-gray-50">
+    <div class="max-w-3xl mx-auto">
+      <p class="sec-num reveal">04</p>
+      <h2 class="font-display text-4xl font-bold text-ink mb-2 reveal" data-en="Experience" data-es="Experiencia">Experience</h2>
+      <p class="text-muted mb-12 reveal" data-en="Roles and responsibilities across my career." data-es="Roles y responsabilidades a lo largo de mi carrera.">Roles and responsibilities across my career.</p>
+
+      <!-- timeline -->
+      <div class="relative pl-7">
+        <!-- vertical line -->
+        <div class="absolute left-[5px] top-2 bottom-2 w-px bg-gradient-to-b from-transparent via-accent-mid to-transparent"></div>
+
+        <!-- Nextiva -->
+        <div class="tl-item reveal flex gap-6 mb-8">
+          <div class="tl-dot mt-1.5"></div>
+          <div class="tl-card flex-1 border border-border rounded-2xl p-6">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <p class="font-display font-bold text-ink text-lg">Nextiva</p>
+                <p class="text-sm text-muted" data-en="Software Engineer - Frontend" data-es="Ingeniera de Software - Frontend">Software Engineer - Frontend</p>
+              </div>
+              <span class="text-xs text-muted font-display flex-shrink-0 mt-1">Apr 2022 - Apr 2026</span>
+            </div>
+            <p class="text-xs text-muted italic mb-3" data-en="Enterprise communications SaaS platform trusted by 100,000+ businesses globally, supporting 1B+ annual interactions." data-es="Plataforma SaaS de comunicaciones empresariales usada por mas de 100,000 empresas, con mas de 1B de interacciones anuales.">Enterprise communications SaaS platform trusted by 100,000+ businesses globally, supporting 1B+ annual interactions.</p>
+            <ul class="space-y-2 text-ink text-sm leading-relaxed mb-4">
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Architected and scaled React + TypeScript features across multiple product surfaces in a high-availability, multi-tenant enterprise platform." data-es="Disenee y escalÃ© funcionalidades React + TypeScript en multiples superficies de producto en una plataforma multi-tenant de alta disponibilidad.">Architected and scaled React + TypeScript features across multiple product surfaces in a high-availability, multi-tenant enterprise platform.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Built scalable React SPA architectures with modular component design, optimized rendering patterns, and reusable hooks across multiple product surfaces." data-es="Construi arquitecturas React SPA escalables con diseno modular de componentes, patrones de renderizado optimizados y hooks reutilizables.">Built scalable React SPA architectures with modular component design, optimized rendering patterns, and reusable hooks across multiple product surfaces.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Led a phased Angular to React migration within a modular monorepo with independently versioned packages consumed by both Angular and React surfaces." data-es="Lidere una migracion Angular a React por fases dentro de un monorepo modular con paquetes versionados de forma independiente.">Led a phased Angular to React migration within a modular monorepo with independently versioned packages consumed by both Angular and React surfaces.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Integrated REST APIs across authentication, user management, RBAC, and admin configuration modules in a multi-tenant enterprise platform." data-es="Integre APIs REST en modulos de autenticacion, gestion de usuarios, RBAC y configuracion admin en una plataforma multi-tenant.">Integrated REST APIs across authentication, user management, RBAC, and admin configuration modules in a multi-tenant enterprise platform.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Enforced code quality through ESLint, Prettier, and CI/CD pipelines; contributed to test coverage and PR reviews aligned with enterprise SLA standards." data-es="Aplique estandares de calidad con ESLint, Prettier y pipelines CI/CD; contribui a la cobertura de tests y revisiones de PR alineadas con SLA empresarial.">Enforced code quality through ESLint, Prettier, and CI/CD pipelines; contributed to test coverage and PR reviews aligned with enterprise SLA standards.</span></li>
+            </ul>
+            <div class="flex flex-wrap gap-2">
+              <span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">Next.js</span><span class="pill">Angular</span><span class="pill">Monorepo</span><span class="pill">REST APIs</span><span class="pill">RBAC</span><span class="pill">ESLint</span><span class="pill">CI/CD</span><span class="pill">Jest</span><span class="pill">Vitest</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Independent Consultant -->
+        <div class="tl-item reveal flex gap-6 mb-8">
+          <div class="tl-dot mt-1.5"></div>
+          <div class="tl-card flex-1 border border-border rounded-2xl p-6">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <p class="font-display font-bold text-ink text-lg" data-en="Independent Software Consultant" data-es="Consultora de Software Independiente">Independent Software Consultant</p>
+                <p class="text-sm text-muted" data-en="Multi-client projects for SMBs" data-es="Proyectos para PYMEs">Multi-client projects for SMBs</p>
+              </div>
+              <span class="text-xs text-muted font-display flex-shrink-0 mt-1">Dec 2018 - Present</span>
+            </div>
+            <ul class="space-y-2 text-ink text-sm leading-relaxed mb-4">
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Managed full client relationships from scoping and proposals through delivery and post-launch support across all engagements." data-es="Gestione relaciones completas con clientes desde el alcance y propuestas hasta la entrega y soporte post-lanzamiento.">Managed full client relationships from scoping and proposals through delivery and post-launch support across all engagements.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Built a React-based admin platform and storefront for Fastener, an auto parts e-commerce, including Stripe payments integration and product catalog management." data-es="Construi una plataforma admin en React y tienda para Fastener, un e-commerce de refacciones, con integracion de Stripe y gestion de catalogo.">Built a React-based admin platform and storefront for Fastener, an auto parts e-commerce, including Stripe payments integration and product catalog management.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Integrated third-party APIs including external vehicle listing services and WhatsApp Business API for automated repair status notifications to end customers." data-es="Integre APIs de terceros incluyendo servicios de listado de vehiculos y WhatsApp Business API para notificaciones automatizadas de estado de reparacion.">Integrated third-party APIs including external vehicle listing services and WhatsApp Business API for automated repair status notifications to end customers.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Automated reporting workflows (PDF/Excel generation), reducing manual administrative workload by 30-40%." data-es="Automatice flujos de reportes (generacion PDF/Excel), reduciendo la carga administrativa manual entre un 30-40%.">Automated reporting workflows (PDF/Excel generation), reducing manual administrative workload by 30-40%.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Owned end-to-end architecture, versioning strategy, and deployments across all client projects." data-es="Fui responsable de la arquitectura, estrategia de versionado y despliegues de todos los proyectos de clientes.">Owned end-to-end architecture, versioning strategy, and deployments across all client projects.</span></li>
+            </ul>
+            <div class="flex flex-wrap gap-2">
+              <span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">Laravel</span><span class="pill">Stripe</span><span class="pill">WhatsApp API</span><span class="pill">Node.js</span><span class="pill">REST APIs</span><span class="pill">RBAC</span><span class="pill">AWS Amplify</span><span class="pill">AWS S3</span><span class="pill">AWS DynamoDB</span><span class="pill">AWS Cognito</span><span class="pill">PDF/Excel Generation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wizeline -->
+        <div class="tl-item reveal flex gap-6 mb-8">
+          <div class="tl-dot mt-1.5"></div>
+          <div class="tl-card flex-1 border border-border rounded-2xl p-6">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <p class="font-display font-bold text-ink text-lg">Wizeline</p>
+                <p class="text-sm text-muted" data-en="Software Engineer" data-es="Ingeniera de Software">Software Engineer</p>
+              </div>
+              <span class="text-xs text-muted font-display flex-shrink-0 mt-1">Nov 2021 - Apr 2022</span>
+            </div>
+            <ul class="space-y-2 text-ink text-sm leading-relaxed mb-4">
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Built internal frontend systems using React + TypeScript within distributed Agile teams." data-es="Construi sistemas frontend internos con React + TypeScript en equipos Agile distribuidos.">Built internal frontend systems using React + TypeScript within distributed Agile teams.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Promoted scalable component architecture and accessibility best practices." data-es="Promovi la arquitectura de componentes escalable y buenas practicas de accesibilidad.">Promoted scalable component architecture and accessibility best practices.</span></li>
+            </ul>
+            <div class="flex flex-wrap gap-2">
+              <span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">Agile</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- NATGAS -->
+        <div class="tl-item reveal flex gap-6">
+          <div class="tl-dot mt-1.5"></div>
+          <div class="tl-card flex-1 border border-border rounded-2xl p-6">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <p class="font-display font-bold text-ink text-lg">NATGAS</p>
+                <p class="text-sm text-muted" data-en="Software Engineer / Product Owner" data-es="Ingeniera de Software / Product Owner">Software Engineer / Product Owner</p>
+              </div>
+              <span class="text-xs text-muted font-display flex-shrink-0 mt-1">Jul 2020 - Oct 2021</span>
+            </div>
+            <p class="text-xs text-muted italic mb-3" data-en="Leading natural gas vehicle company in Mexico, operating across multiple cities with an integrated credit and conversion program for drivers." data-es="Empresa lider de vehiculos de gas natural en Mexico, con un programa integrado de credito y conversion para conductores.">Leading natural gas vehicle company in Mexico, operating across multiple cities with an integrated credit and conversion program for drivers.</p>
+            <ul class="space-y-2 text-ink text-sm leading-relaxed mb-4">
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Built full-stack features using Node.js and GraphQL, including resolver logic, PostgreSQL schema design, and direct production database access." data-es="Construi funcionalidades full-stack con Node.js y GraphQL, incluyendo logica de resolvers, diseno de esquema PostgreSQL y acceso directo a base de datos de produccion.">Built full-stack features using Node.js and GraphQL, including resolver logic, PostgreSQL schema design, and direct production database access.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Developed the Impulsate admin platform and CRM for managing credit prospects, loan workflows, and FICO API integration for credit bureau consultation." data-es="Desarrolle la plataforma admin Impulsate y CRM para gestion de prospectos de credito, flujos de prestamo e integracion con API FICO para consulta buros de credito.">Developed the Impulsate admin platform and CRM for managing credit prospects, loan workflows, and FICO API integration for credit bureau consultation.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Contributed to a federated module architecture using GraphQL, where multiple independent modules integrated with a central data system as the shared source of truth." data-es="Contribui a una arquitectura de modulos federados con GraphQL, donde multiples modulos independientes se integraban con un sistema central de datos.">Contributed to a federated module architecture using GraphQL, where multiple independent modules integrated with a central data system as the shared source of truth.</span></li>
+              <li class="flex gap-2"><span class="text-accent-mid mt-1 flex-shrink-0">&#9642;</span><span data-en="Served as Product Owner across both products, translating business and compliance requirements into scalable frontend and backend features." data-es="Actue como Product Owner en ambos productos, traduciendo requisitos de negocio y cumplimiento en funcionalidades escalables de frontend y backend.">Served as Product Owner across both products, translating business and compliance requirements into scalable frontend and backend features.</span></li>
+            </ul>
+            <div class="flex flex-wrap gap-2">
+              <span class="pill">Node.js</span><span class="pill">GraphQL</span><span class="pill">Federated Graphs</span><span class="pill">PostgreSQL</span><span class="pill">Cypress</span><span class="pill">Product Owner</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Education -->
+      <div class="mt-14">
+        <h3 class="font-display font-bold text-sm tracking-widest uppercase text-accent mb-6 reveal" data-en="Education" data-es="Educacion">Education</h3>
+        <div class="flex flex-col gap-4">
+          <div class="reveal border border-border rounded-2xl p-6">
+            <div class="flex items-start justify-between gap-4">
+              <div class="acc-bar pl-4">
+                <p class="font-display font-bold text-ink" data-en="B.S. Computer Systems Engineering" data-es="Ing. en Sistemas Computacionales">B.S. Computer Systems Engineering</p>
+                <p class="text-sm text-muted mt-0.5">Tecnologico de Monterrey (ITESM), Queretaro</p>
+                <p class="text-xs text-accent mt-1.5 font-display font-semibold">GPA 92/100 &middot; Academic Honors 2016 &amp; 2020</p>
+              </div>
+              <span class="text-xs text-muted font-display flex-shrink-0">Aug 2015 - Jun 2020</span>
+            </div>
+          </div>
+          <div class="reveal border border-border rounded-2xl p-6">
+            <div class="flex items-start justify-between gap-4">
+              <div class="acc-bar pl-4">
+                <p class="font-display font-bold text-ink" data-en="International Studies Program" data-es="Programa de Estudios Internacionales">International Studies Program</p>
+                <p class="text-sm text-muted mt-0.5">EPITA Graduate School of Computer Science, France</p>
+              </div>
+              <span class="text-xs text-muted font-display flex-shrink-0">Sep 2019 - Feb 2020</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!--  SKILLS  -->
+  <section id="skills">
+    <div class="max-w-4xl mx-auto">
+      <p class="sec-num reveal">05</p>
+      <h2 class="font-display text-4xl font-bold text-ink mb-10 reveal" data-en="Skills" data-es="Habilidades">Skills</h2>
+
+      <div class="reveal flex flex-wrap gap-3 justify-center">
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1C6.5 1 2.5 6.5 2.5 12S6.5 23 12 23s9.5-5.5 9.5-11S17.5 1 12 1z"/><ellipse cx="12" cy="12" rx="9.5" ry="3.5"/></svg>
+          <span class="skill-label">React</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span class="skill-label">TypeScript</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span class="skill-label">JavaScript</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <span class="skill-label">Angular</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8M12 8v8"/></svg>
+          <span class="skill-label">Laravel</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><path d="M4 8h16"/><path d="M8 4v4"/></svg>
+          <span class="skill-label">HTML</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M2 20h20M6 20V10l6-6 6 6v10"/></svg>
+          <span class="skill-label">CSS</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.24 12.24a6 6 0 00-8.49-8.49L5 10.5V19h8.5l6.74-6.76z"/><line x1="16" y1="8" x2="2" y2="22"/></svg>
+          <span class="skill-label">Tailwind CSS</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span class="skill-label">PostgreSQL</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+          <span class="skill-label">AWS Amplify</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="skill-label">AWS Cognito</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span class="skill-label">DynamoDB</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span class="skill-label">CI/CD</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+          <span class="skill-label">Jest</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+          <span class="skill-label">Cypress</span>
+        </div>
+        <div class="skill-card">
+          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5.5A3.5 3.5 0 018.5 2H12v7H8.5A3.5 3.5 0 015 5.5z"/><path d="M12 2h3.5a3.5 3.5 0 110 7H12V2z"/><path d="M12 12.5a3.5 3.5 0 117 0 3.5 3.5 0 01-7 0z"/><path d="M5 19.5A3.5 3.5 0 018.5 16H12v3.5a3.5 3.5 0 11-7 0z"/><path d="M5 12.5A3.5 3.5 0 018.5 9H12v7H8.5A3.5 3.5 0 015 12.5z"/></svg>
+          <span class="skill-label">Figma</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  COMMUNITY  -->
+  <section id="community" class="bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <p class="sec-num reveal">06</p>
+      <h2 class="font-display text-4xl font-bold text-ink mb-10 reveal" data-en="Community" data-es="Comunidad">Community</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="reveal bg-white border border-border rounded-2xl p-6 hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 bg-accent-light rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-ink mb-2" data-en="Speaker at DevDay4W" data-es="Speaker en DevDay4W">Speaker at DevDay4W</h3>
+          <p class="text-sm text-muted leading-relaxed" data-en="Gave a live demo talk on Redux to an audience of ~80 developers, covering what Redux is, when to use it, its core architecture, and how to boost productivity with Redux DevTools." data-es="Di una charla demo en vivo sobre Redux a una audiencia de ~80 desarrolladores, cubriendo qué es Redux, cuándo usarlo, su arquitectura esencial y cómo potenciar el trabajo con Redux DevTools.">Gave a live demo talk on Redux to an audience of ~80 developers, covering what Redux is, when to use it, its core architecture, and how to boost productivity with Redux DevTools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  CONTACT -->
+  <section id="contact">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="sec-num reveal">07</p>
+      <h2 class="font-display text-4xl font-bold text-white mb-4 reveal" data-en="Let's work together" data-es="Trabajemos juntos">Let's work together</h2>
+      <p class="text-gray-400 mb-10 reveal"
+         data-en="I'm open to senior engineering roles, consulting engagements, and interesting collaborations."
+         data-es="Estoy abierta a roles de ingenieria senior, proyectos de consultoria y colaboraciones interesantes.">
+        I'm open to senior engineering roles, consulting engagements, and interesting collaborations.
+      </p>
+      <a href="mailto:brenda.gfp@gmail.com"
+         class="reveal inline-flex items-center gap-3 bg-accent text-white font-display font-bold text-base px-8 py-4 rounded-full hover:bg-indigo-400 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/30">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         brenda.gfp@gmail.com
       </a>
-      <a href="tel:+524422820627" class="contact-link">
-        <div class="contact-icon">📱</div>
-        +52 442 282 0627
-      </a>
-      <a href="https://github.com" class="contact-link" target="_blank">
-        <div class="contact-icon" style="font-size:16px">GH</div>
-        <span data-en="GitHub (most repos are private (corporate work))" data-es="GitHub (mayoría de repos son privados (trabajo corporativo))">GitHub (most repos are private (corporate work))</span>
-      </a>
+      <div class="flex justify-center gap-4 mt-8 reveal">
+        <a href="https://www.linkedin.com/in/brenda-guadalupe-flores-parada-09a52b126/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://github.com/brendaflores0" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        </a>
+      </div>
+      <p class="text-gray-600 text-xs mt-12 font-display tracking-widest uppercase">
+        &copy; <span id="year"></span> Brenda Flores
+      </p>
     </div>
-  </div>
-  <div class="contact-bg">BF</div>
-</section>
+  </section>
+
+</main>
 
 <script>
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
-  function animateRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animateRing); }
-  animateRing();
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Lang toggle
+  // custom cursor
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  document.addEventListener('mousemove', e => {
+    dot.style.left  = e.clientX + 'px';
+    dot.style.top   = e.clientY + 'px';
+    ring.style.left = e.clientX + 'px';
+    ring.style.top  = e.clientY + 'px';
+  });
+  document.querySelectorAll('a,button,summary').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.transform = 'translate(-50%,-50%) scale(1.6)';
+      ring.style.opacity   = '1';
+      dot.style.transform  = 'translate(-50%,-50%) scale(0.4)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.opacity   = '.6';
+      dot.style.transform  = 'translate(-50%,-50%) scale(1)';
+    });
+  });
+
+  // language toggle
   function setLang(lang) {
     document.querySelectorAll('[data-en]').forEach(el => {
-      el.innerHTML = el.getAttribute('data-'+lang);
+      el.innerHTML = el.dataset[lang] || el.dataset.en;
     });
-    document.getElementById('btn-en').classList.toggle('active', lang==='en');
-    document.getElementById('btn-es').classList.toggle('active', lang==='es');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    document.documentElement.lang = lang;
+    localStorage.setItem('lang', lang);
   }
+  const savedLang = localStorage.getItem('lang');
+  if (savedLang && savedLang !== 'en') setLang(savedLang);
 
-  // Scroll nav
-  function scrollToSection(id) { document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+  // mobile sidebar
+  const sidebar   = document.getElementById('sidebar');
+  const hamburger = document.getElementById('hamburger');
+  hamburger.addEventListener('click', () => sidebar.classList.toggle('open'));
+  sidebar.addEventListener('click', e => {
+    if (e.target.closest('a')) sidebar.classList.remove('open');
+  });
 
-  // Active nav dot
-  const sections = ['hero','about','experience','projects','skills','community','contact'];
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if(e.isIntersecting) {
-        document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
-        const dot = document.querySelector(`.nav-dot[data-section="${e.target.id}"]`);
-        if(dot) dot.classList.add('active');
+  // active nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link[data-section]');
+
+  function updateActiveNav() {
+    let current = '';
+    sections.forEach(section => {
+      if (section.getBoundingClientRect().top <= window.innerHeight * 0.45) {
+        current = section.id;
       }
     });
-  }, {threshold: 0.5});
-  sections.forEach(id => { const el = document.getElementById(id); if(el) observer.observe(el); });
+    navLinks.forEach(l => l.classList.toggle('active', l.dataset.section === current));
+  }
 
-  // Reveal on scroll
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+
+  // project tabs
+  document.querySelectorAll('.proj-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.proj-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.proj-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('proj-' + tab.dataset.proj).classList.add('active');
+    });
+  });
+
+  // carousels
+  document.querySelectorAll('[data-carousel]').forEach(carousel => {
+    const track   = carousel.querySelector('.carousel-track');
+    const slides  = carousel.querySelectorAll('.carousel-slide');
+    const dots    = carousel.querySelectorAll('.carousel-dot');
+    const prevBtn = carousel.querySelector('.carousel-btn.prev');
+    const nextBtn = carousel.querySelector('.carousel-btn.next');
+    let current   = 0;
+
+    function goTo(idx) {
+      current = (idx + slides.length) % slides.length;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    let timer = setInterval(() => goTo(current + 1), 2000);
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 2000);
+    }
+
+    prevBtn.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+    dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetTimer(); }));
+
+    carousel.addEventListener('mouseenter', () => clearInterval(timer));
+    carousel.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), 2000); });
+  });
+
+  // scroll reveal
   const revealObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, {threshold: 0.15});
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 </script>
 </body>
