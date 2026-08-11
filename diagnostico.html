@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Diagnóstico de Operaciones para distribuidores | Brenda Flores</title>
+    <meta
+      name="description"
+      content="Cinco días. Mapeo tu operación paso a paso y te entrego el plan de qué automatizar primero, con números. Para mayoristas y distribuidores que cotizan por WhatsApp y operan en Excel."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0f0f1a;
+        --ink-2: #3c3c4e;
+        --ink-3: #6b7280;
+        --paper: #ffffff;
+        --paper-2: #f7f7fb;
+        --border: #e5e7eb;
+        --accent: #4f46e5;
+        --accent-light: #eef2ff;
+        --wa: #1f8f5f;
+        --display: "Syne", sans-serif;
+        --body: "DM Sans", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 17px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: var(--display);
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        text-wrap: balance;
+        margin: 0;
+      }
+
+      p {
+        margin: 0 0 18px;
+      }
+
+      /* ---------- hero ---------- */
+
+      .hero {
+        padding: 80px 0 64px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .kicker {
+        font-family: var(--display);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0 0 22px;
+      }
+
+      h1 {
+        font-size: clamp(2.1rem, 5.6vw, 3.3rem);
+        font-weight: 800;
+        margin-bottom: 22px;
+      }
+
+      .sub {
+        font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+        color: var(--ink-2);
+        max-width: 60ch;
+        margin-bottom: 34px;
+      }
+
+      /* ---------- cta ---------- */
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 15px 30px;
+        border-radius: 999px;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition:
+          background 0.2s,
+          transform 0.2s,
+          border-color 0.2s;
+      }
+
+      .btn-primary {
+        background: var(--ink);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      .btn-wa {
+        background: var(--wa);
+        color: #fff;
+      }
+      .btn-wa:hover {
+        background: #167a4f;
+        transform: translateY(-2px);
+      }
+
+      .btn svg {
+        width: 1.05rem;
+        height: 1.05rem;
+        flex-shrink: 0;
+      }
+
+      .cta-note {
+        font-size: 0.88rem;
+        color: var(--ink-3);
+        margin: 16px 0 0;
+      }
+
+      /* ---------- sections ---------- */
+
+      section.block {
+        padding: 62px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h2 {
+        font-size: clamp(1.5rem, 3.6vw, 2rem);
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .lede {
+        color: var(--ink-2);
+        max-width: 62ch;
+        margin-bottom: 30px;
+      }
+
+      /* ---------- pains ---------- */
+
+      .pains {
+        display: grid;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+      @media (min-width: 640px) {
+        .pains {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .pain {
+        background: var(--paper);
+        padding: 24px 22px;
+      }
+      .pain h3 {
+        font-size: 1.02rem;
+        font-weight: 700;
+        margin-bottom: 7px;
+      }
+      .pain p {
+        font-size: 0.93rem;
+        color: var(--ink-3);
+        margin: 0;
+      }
+
+      /* ---------- offer ---------- */
+
+      .offer {
+        background: var(--paper-2);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 34px 32px;
+      }
+
+      .price-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 8px 18px;
+        padding-bottom: 22px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .price {
+        font-family: var(--display);
+        font-size: 2.6rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+      .price-meta {
+        font-size: 0.9rem;
+        color: var(--ink-3);
+      }
+      .price-meta b {
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      .deliverables {
+        list-style: none;
+        margin: 0 0 26px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+      }
+      .deliverables li {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 12px;
+        align-items: start;
+        font-size: 0.96rem;
+      }
+      .deliverables li::before {
+        content: "";
+        width: 16px;
+        height: 16px;
+        margin-top: 5px;
+        border-radius: 50%;
+        background: var(--accent);
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
+          center / 12px no-repeat;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
+          center / 12px no-repeat;
+      }
+
+      .guarantee {
+        background: var(--accent-light);
+        border-left: 3px solid var(--accent);
+        padding: 20px 22px;
+        margin-bottom: 26px;
+      }
+      .guarantee p {
+        margin: 0;
+        font-size: 0.95rem;
+      }
+      .guarantee strong {
+        font-family: var(--display);
+        font-weight: 700;
+      }
+
+      /* ---------- proof ---------- */
+
+      .cases {
+        display: grid;
+        gap: 16px;
+      }
+      @media (min-width: 700px) {
+        .cases {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .case {
+        border: 1px solid var(--border);
+        padding: 24px 22px;
+      }
+      .case .tag {
+        font-family: var(--display);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        display: block;
+        margin-bottom: 12px;
+      }
+      .case p {
+        font-size: 0.93rem;
+        color: var(--ink-2);
+        margin-bottom: 16px;
+      }
+      .metrics {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        border-top: 1px solid var(--border);
+        padding-top: 15px;
+      }
+      .metric {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+      .metric b {
+        font-family: var(--display);
+        font-size: 1.35rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .metric span {
+        font-size: 0.85rem;
+        color: var(--ink-3);
+      }
+
+      /* ---------- faq ---------- */
+
+      .faq {
+        border-top: 1px solid var(--border);
+      }
+      .faq details {
+        border-bottom: 1px solid var(--border);
+      }
+      .faq summary {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 18px 32px 18px 0;
+        cursor: pointer;
+        list-style: none;
+        position: relative;
+      }
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq summary::after {
+        content: "+";
+        position: absolute;
+        right: 4px;
+        top: 15px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .faq details[open] summary::after {
+        content: "–";
+      }
+      .faq .answer {
+        padding: 0 0 20px;
+        color: var(--ink-2);
+        font-size: 0.95rem;
+        max-width: 62ch;
+      }
+      .faq .answer p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ---------- about ---------- */
+
+      .about p {
+        max-width: 62ch;
+        color: var(--ink-2);
+      }
+      .about a {
+        color: var(--accent);
+      }
+
+      /* ---------- final ---------- */
+
+      .final {
+        background: var(--ink);
+        color: #fff;
+        padding: 68px 0;
+      }
+      .final h2 {
+        color: #fff;
+        margin-bottom: 14px;
+      }
+      .final p {
+        color: #a5a5b8;
+        max-width: 56ch;
+        margin-bottom: 30px;
+      }
+      .final .btn-primary {
+        background: var(--accent);
+      }
+      .final .btn-primary:hover {
+        background: #6366f1;
+      }
+      .final .cta-note {
+        color: #71718a;
+      }
+
+      footer {
+        padding: 26px 0 44px;
+        font-size: 0.83rem;
+        color: var(--ink-3);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 22px;
+      }
+      footer a {
+        color: var(--ink-3);
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 3px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          transition: none !important;
+        }
+        .btn:hover {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ═══════════ HERO ═══════════ -->
+    <header class="hero">
+      <div class="wrap">
+        <p class="kicker">Para mayoristas y distribuidores B2B</p>
+        <h1>
+          Si tu gente todavía cotiza a mano por WhatsApp, sé exactamente cuánto
+          te está costando.
+        </h1>
+        <p class="sub">
+          En cinco días recorro tu operación paso a paso y te entrego el plan de
+          qué automatizar primero, con los números de tu negocio. Sin
+          compromiso de contratar nada después.
+        </p>
+        <div class="cta-row">
+          <a href="#contacto" data-booking class="btn btn-primary"
+            >Agendar 20 minutos</a
+          >
+          <a
+            href="#contacto"
+            data-whatsapp
+            target="_blank"
+            rel="noopener"
+            class="btn btn-wa"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"
+              />
+            </svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+        <p class="cta-note">
+          Ingeniera de software · 7+ años · Trabajo en español, en horario de
+          Estados Unidos
+        </p>
+      </div>
+    </header>
+
+    <!-- ═══════════ DOLOR ═══════════ -->
+    <section class="block">
+      <div class="wrap">
+        <h2>¿Algo de esto pasa en tu bodega?</h2>
+        <p class="lede">
+          Ninguno de estos problemas es falta de esfuerzo. Son falta de sistema,
+          y por eso el esfuerzo se va en trabajo que debería hacer una
+          computadora.
+        </p>
+        <div class="pains">
+          <div class="pain">
+            <h3>El mostrador es el cuello de botella</h3>
+            <p>
+              Una o dos personas contestan el mismo tipo de mensaje todo el día:
+              precio, existencia, tiempo de entrega. Si esa persona falta, el
+              negocio se frena.
+            </p>
+          </div>
+          <div class="pain">
+            <h3>Cada cliente tiene su precio, y vive en la cabeza de alguien</h3>
+            <p>
+              Las listas por cliente están en un Excel que solo una persona
+              entiende, y cuando cotiza alguien más, se equivoca o pregunta.
+            </p>
+          </div>
+          <div class="pain">
+            <h3>Los pedidos llegan por cinco lados distintos</h3>
+            <p>
+              WhatsApp, llamada, correo, el vendedor en ruta y el que llega en
+              persona. Alguien los captura a mano y a veces se pierde uno.
+            </p>
+          </div>
+          <div class="pain">
+            <h3>Crecer significa contratar a otro capturista</h3>
+            <p>
+              Cada cliente nuevo suma trabajo administrativo sobre el anterior,
+              así que vender más te cuesta más de lo que debería.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ OFERTA ═══════════ -->
+    <section class="block">
+      <div class="wrap">
+        <h2>Diagnóstico de Operaciones</h2>
+        <p class="lede">
+          Antes de que nadie construya nada. Cinco días, dos sesiones contigo, y
+          un documento que puedes usar aunque no vuelvas a hablar conmigo.
+        </p>
+
+        <div class="offer">
+          <div class="price-row">
+            <span class="price">$1,500</span>
+            <span class="price-meta">
+              USD · <b>5 días hábiles</b> · Se acredita completo si contratas el
+              proyecto dentro de 60 días
+            </span>
+          </div>
+
+          <ul class="deliverables">
+            <li>
+              El mapa real de un pedido, del primer mensaje hasta la factura
+              pagada, con quién toca qué y cuánto tarda cada paso.
+            </li>
+            <li>
+              Las horas que se van a la semana en trabajo manual, y lo que eso
+              cuesta al año en nómina. Con tus números, no con promedios de
+              internet.
+            </li>
+            <li>
+              Una calificación por área de tu operación, para que veas de un
+              vistazo qué está crítico y qué puede esperar.
+            </li>
+            <li>
+              La lista de arreglos priorizada por impacto contra esfuerzo, para
+              saber qué hacer primero.
+            </li>
+            <li>
+              Lo que puedes cambiar esta misma semana sin contratar a nadie ni
+              comprar software.
+            </li>
+          </ul>
+
+          <div class="guarantee">
+            <p>
+              <strong>Garantía:</strong> si al terminar no ves un plan que le
+              quite al menos 15 horas por semana a tu equipo, no me pagas. Sin
+              discusión y sin trámite.
+            </p>
+          </div>
+
+          <div class="cta-row">
+            <a href="#contacto" data-booking class="btn btn-primary"
+              >Agendar 20 minutos</a
+            >
+          </div>
+          <p class="cta-note">
+            La llamada es para ver si aplica. Si no te puedo ayudar, te lo digo
+            ahí mismo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PRUEBA ═══════════ -->
+    <section class="block">
+      <div class="wrap">
+        <h2>Esto ya lo construí</h2>
+        <p class="lede">
+          Dos negocios que pasé de operación manual a software funcionando. No
+          son maquetas ni pruebas de concepto: están en producción y su gente
+          los usa todos los días.
+        </p>
+
+        <div class="cases">
+          <div class="case">
+            <span class="tag">Distribuidor mayorista</span>
+            <p>
+              Catálogo de más de 300 SKUs, sin canal de pedidos en línea y con
+              precios e inventario fuera de cualquier sistema. Cada cotización
+              pasaba por una persona. Le construí la tienda para sus clientes
+              más el sistema interno: catálogo, precios, pedidos, cobro con
+              Stripe y permisos por usuario.
+            </p>
+            <div class="metrics">
+              <div class="metric">
+                <b>300+</b><span>productos vendiéndose en línea</span>
+              </div>
+              <div class="metric">
+                <b>24/7</b><span>pedidos y pagos sin intervención humana</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="case">
+            <span class="tag">Operación de servicio</span>
+            <p>
+              Todo en hojas de cálculo: estatus de cada trabajo, expedientes,
+              valuaciones y papeleo con terceros. Los clientes llamaban a cada
+              rato a preguntar cómo iba lo suyo. Automaticé los avisos por
+              WhatsApp y los reportes, que ahora se generan solos.
+            </p>
+            <div class="metrics">
+              <div class="metric">
+                <b>30-40%</b><span>menos trabajo administrativo manual</span>
+              </div>
+              <div class="metric">
+                <b>7+</b><span>convenios con terceros habilitados</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ FAQ ═══════════ -->
+    <section class="block">
+      <div class="wrap">
+        <h2>Lo que me preguntan siempre</h2>
+        <div class="faq">
+          <details>
+            <summary>Ya tenemos un sistema. ¿Igual aplica?</summary>
+            <div class="answer">
+              <p>
+                Casi siempre sí, y suele ser más barato. La pregunta correcta no
+                es qué sistema tienen, sino qué siguen haciendo fuera de él: en
+                Excel, en WhatsApp o a mano. Ese hueco es donde está el
+                problema, y ahí entro integrando en vez de reemplazar lo que ya
+                pagas.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>¿Por qué cobras el diagnóstico?</summary>
+            <div class="answer">
+              <p>
+                Porque son cinco días de trabajo real y porque el documento te
+                sirve contrates o no: puedes llevártelo con otro proveedor si
+                quieres. Lo que sí hago es acreditarlo completo si decides
+                seguir conmigo, así que si vamos a trabajar juntos, en la
+                práctica sale gratis.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>¿Cuánto cuesta el proyecto después?</summary>
+            <div class="answer">
+              <p>
+                Depende de qué salga en el diagnóstico, pero para que tengas
+                referencia: un módulo específico funcionando —catálogo con
+                precios por cliente, pedidos y cobro— arranca en $6,500 y toma
+                unas cuatro semanas. Una plataforma de operaciones completa va
+                de $14,000 a $22,000. Nunca te doy un número sin haber visto tu
+                operación.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>Estás en México. ¿Cómo funciona eso?</summary>
+            <div class="answer">
+              <p>
+                Trabajo en horario de Estados Unidos y todos mis clientes me
+                tienen en WhatsApp. Contesto el mismo día. Desde 2018 he dado
+                soporte a cada proyecto que he entregado, también después del
+                lanzamiento.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>¿Qué necesitas de nosotros durante esos cinco días?</summary>
+            <div class="answer">
+              <p>
+                Dos sesiones de hora y media contigo o con quien lleve la
+                operación, y un rato con la persona del mostrador para verla
+                trabajar. Nada de preparar reportes ni juntar información: yo
+                voy a donde está el trabajo.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ QUIÉN ═══════════ -->
+    <section class="block about">
+      <div class="wrap">
+        <h2>Con quién estarías trabajando</h2>
+        <p>
+          Soy Brenda Flores, ingeniera de software con más de siete años
+          construyendo sistemas de los que depende un negocio para operar. Desde
+          2018 llevo mi práctica de consultoría por mi cuenta, de la propuesta a
+          la entrega y al soporte.
+        </p>
+        <p>
+          Antes fui Product Owner traduciendo requerimientos de negocio a
+          software, y también trabajé cuatro años en plataformas empresariales
+          usadas por más de 100,000 empresas. Por eso empiezo por cómo opera tu
+          negocio y no por una lista de funciones.
+        </p>
+        <p>
+          Puedes ver el detalle técnico y los demás proyectos en
+          <a href="./">mi portafolio</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════ CIERRE ═══════════ -->
+    <section class="final" id="contacto">
+      <div class="wrap">
+        <h2>Veinte minutos y sabes si aplica</h2>
+        <p>
+          Cuéntame en qué está perdiendo tiempo tu equipo. Si te puedo ayudar,
+          te digo cómo y qué implicaría. Si no, también te lo digo.
+        </p>
+        <div class="cta-row">
+          <a href="mailto:brenda.gfp@gmail.com" data-booking class="btn btn-primary"
+            >Agendar 20 minutos</a
+          >
+          <a
+            href="mailto:brenda.gfp@gmail.com"
+            data-whatsapp
+            target="_blank"
+            rel="noopener"
+            class="btn btn-wa"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"
+              />
+            </svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+        <p class="cta-note">O escríbeme a brenda.gfp@gmail.com</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap" style="display: flex; flex-wrap: wrap; gap: 6px 22px">
+        <span>&copy; <span id="year"></span> Brenda Flores</span>
+        <a href="./">Portafolio</a>
+        <a
+          href="https://www.linkedin.com/in/brenda-guadalupe-flores-parada-09a52b126/"
+          target="_blank"
+          rel="noopener"
+          >LinkedIn</a
+        >
+      </div>
+    </footer>
+
+    <script>
+      /* ════════════════════════════════════════════════════════════════
+         CONFIG — cambia solo estas dos lineas
+         Deben quedar iguales a las de index.html
+         ════════════════════════════════════════════════════════════════ */
+      const BOOKING_URL = "";
+      const WHATSAPP = "";
+      const WA_TEXT =
+        "Hola Brenda, vi la pagina del diagnostico y quiero saber mas.";
+
+      (function wireCTAs() {
+        if (BOOKING_URL) {
+          document.querySelectorAll("[data-booking]").forEach((el) => {
+            el.href = BOOKING_URL;
+            el.target = "_blank";
+            el.rel = "noopener";
+          });
+        }
+        if (WHATSAPP) {
+          const href =
+            "https://wa.me/" +
+            WHATSAPP.replace(/\D/g, "") +
+            "?text=" +
+            encodeURIComponent(WA_TEXT);
+          document
+            .querySelectorAll("[data-whatsapp]")
+            .forEach((el) => (el.href = href));
+        } else {
+          document
+            .querySelectorAll("[data-whatsapp]")
+            .forEach((el) => el.remove());
+        }
+      })();
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

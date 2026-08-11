@@ -247,6 +247,58 @@
         transform: translateY(-1px);
       }
 
+      /*  floating whatsapp  */
+      #wa-float {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 200;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        background: #1f8f5f;
+        color: #fff;
+        font-family: "Syne", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 0.7rem 1.15rem;
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: 0 6px 22px -6px rgba(15, 15, 26, 0.45);
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      #wa-float:hover {
+        background: #167a4f;
+        transform: translateY(-2px);
+      }
+      #wa-float svg {
+        width: 1.15rem;
+        height: 1.15rem;
+        flex-shrink: 0;
+      }
+      @media (max-width: 640px) {
+        #wa-float .wa-label {
+          display: none;
+        }
+        #wa-float {
+          padding: 0.85rem;
+          bottom: 1rem;
+          right: 1rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #wa-float,
+        #contact-btn {
+          transition: none;
+        }
+        #wa-float:hover,
+        #contact-btn:hover {
+          transform: none;
+        }
+      }
+
       /*  sections  */
       section {
         padding: 5rem 4rem;
@@ -790,7 +842,7 @@
     </button>
 
     <!-- book a call -->
-    <a href="#contact" id="contact-btn">
+    <a href="#contact" id="contact-btn" data-booking>
       <span data-en="Book a call &rarr;" data-es="Agendar llamada &rarr;"
         >Book a call &rarr;</span
       >
@@ -1067,6 +1119,7 @@
             </a>
             <a
               href="#contact"
+              data-booking
               class="inline-flex items-center gap-2 border border-border text-ink font-display font-bold text-sm px-6 py-3 rounded-full hover:border-accent hover:text-accent transition-all hover:-translate-y-0.5"
             >
               <span data-en="Book a call" data-es="Agendar llamada"
@@ -1365,10 +1418,11 @@
               </p>
               <p
                 class="svc-proof"
-                data-en="Done for an automotive service business. See CTIASP below."
-                data-es="Hecho para un negocio de servicio automotriz. Ver CTIASP abajo."
+                data-en="Done for a distributor and a multi-branch service operation. See the case studies below."
+                data-es="Hecho para un distribuidor y para una operaci&oacute;n de servicio con varias sucursales. Ver los casos abajo."
               >
-                Done for an automotive service business. See CTIASP below.
+                Done for a distributor and a multi-branch service operation. See
+                the case studies below.
               </p>
             </div>
 
@@ -1445,11 +1499,11 @@
               </p>
               <p
                 class="svc-proof"
-                data-en="WhatsApp Business API, Stripe, credit bureau and vehicle data APIs."
-                data-es="WhatsApp Business API, Stripe, bur&oacute; de cr&eacute;dito y APIs de datos vehiculares."
+                data-en="WhatsApp Business API, Stripe, accounting and supplier APIs, credit bureau integrations."
+                data-es="WhatsApp Business API, Stripe, APIs de contabilidad y proveedores, integraciones con bur&oacute; de cr&eacute;dito."
               >
-                WhatsApp Business API, Stripe, credit bureau and vehicle data
-                APIs.
+                WhatsApp Business API, Stripe, accounting and supplier APIs,
+                credit bureau integrations.
               </p>
             </div>
 
@@ -1528,13 +1582,13 @@
               >
                 Client work
               </p>
-              <button class="proj-tab active" data-proj="ctiasp">
+              <button class="proj-tab active" data-proj="fastener">
                 <span class="tab-num">01</span>
-                <span class="tab-name whitespace-nowrap">CTIASP</span>
-              </button>
-              <button class="proj-tab" data-proj="fastener">
-                <span class="tab-num">02</span>
                 <span class="tab-name">Fastener</span>
+              </button>
+              <button class="proj-tab" data-proj="ctiasp">
+                <span class="tab-num">02</span>
+                <span class="tab-name whitespace-nowrap">CTIASP</span>
               </button>
               <p
                 class="tab-group-label"
@@ -1556,7 +1610,7 @@
             <!-- right: project panels -->
             <div class="flex-1 min-w-0">
               <!-- CTIASP -->
-              <div class="proj-panel active" id="proj-ctiasp">
+              <div class="proj-panel" id="proj-ctiasp">
                 <div class="carousel mb-6" data-carousel>
                   <div class="browser-frame" data-zoom>
                     <div class="browser-bar">
@@ -1632,12 +1686,14 @@
                     >
                     <p
                       class="text-ink leading-relaxed text-sm mb-5"
-                      data-en="An automotive service business running on spreadsheets and manual tracking. Repair status, customer files, valuations and insurance paperwork were all handled by hand."
-                      data-es="Un negocio de servicio automotriz operando con hojas de c&aacute;lculo y seguimiento manual. El estatus de reparaciones, los expedientes de clientes, las valuaciones y el papeleo de aseguradoras se llevaban a mano."
+                      data-en="A service operation running on spreadsheets and manual tracking. Job status, customer files, valuations and third-party paperwork were all handled by hand, and customers called in constantly to ask where their order stood."
+                      data-es="Una operaci&oacute;n de servicio funcionando con hojas de c&aacute;lculo y seguimiento manual. El estatus de cada trabajo, los expedientes de clientes, las valuaciones y el papeleo con terceros se llevaban a mano, y los clientes llamaban a cada rato para preguntar c&oacute;mo iba su orden."
                     >
-                      An automotive service business running on spreadsheets and
-                      manual tracking. Repair status, customer files, valuations
-                      and insurance paperwork were all handled by hand.
+                      A service operation running on spreadsheets and manual
+                      tracking. Job status, customer files, valuations and
+                      third-party paperwork were all handled by hand, and
+                      customers called in constantly to ask where their order
+                      stood.
                     </p>
 
                     <span
@@ -1648,14 +1704,15 @@
                     >
                     <p
                       class="text-ink leading-relaxed text-sm"
-                      data-en="A complete platform covering vehicle repair tracking, customer files, valuations and insurance claim workflows. WhatsApp Business API sends status updates to customers automatically, and PDF and Excel reports generate themselves instead of being assembled by hand."
-                      data-es="Una plataforma completa que cubre seguimiento de reparaciones, expedientes de clientes, valuaciones y flujos de siniestros con aseguradoras. WhatsApp Business API env&iacute;a las actualizaciones de estatus a los clientes de forma autom&aacute;tica, y los reportes en PDF y Excel se generan solos en vez de armarse a mano."
+                      data-en="A complete platform covering order tracking, customer files, valuations and third-party claim workflows. WhatsApp Business API sends status updates to customers automatically, so the &quot;where is my order?&quot; calls stopped, and PDF and Excel reports generate themselves instead of being assembled by hand."
+                      data-es="Una plataforma completa que cubre seguimiento de &oacute;rdenes, expedientes de clientes, valuaciones y flujos de reclamaciones con terceros. WhatsApp Business API env&iacute;a las actualizaciones de estatus de forma autom&aacute;tica, con lo que se acabaron las llamadas de &laquo;&iquest;c&oacute;mo va lo m&iacute;o?&raquo;, y los reportes en PDF y Excel se generan solos en vez de armarse a mano."
                     >
-                      A complete platform covering vehicle repair tracking,
-                      customer files, valuations and insurance claim workflows.
-                      WhatsApp Business API sends status updates to customers
-                      automatically, and PDF and Excel reports generate
-                      themselves instead of being assembled by hand.
+                      A complete platform covering order tracking, customer
+                      files, valuations and third-party claim workflows. WhatsApp
+                      Business API sends status updates to customers
+                      automatically, so the "where is my order?" calls stopped,
+                      and PDF and Excel reports generate themselves instead of
+                      being assembled by hand.
                     </p>
                   </div>
 
@@ -1696,7 +1753,7 @@
               </div>
 
               <!-- Fastener -->
-              <div class="proj-panel" id="proj-fastener">
+              <div class="proj-panel active" id="proj-fastener">
                 <div class="carousel mb-6" data-carousel>
                   <div class="browser-frame" data-zoom>
                     <div class="browser-bar">
@@ -1772,12 +1829,12 @@
                     >
                     <p
                       class="text-ink leading-relaxed text-sm mb-5"
-                      data-en="An auto parts retailer in Mexico with no online sales channel, and a product catalog managed outside of any real system."
-                      data-es="Una comercializadora de autopartes en M&eacute;xico sin canal de venta en l&iacute;nea, y con un cat&aacute;logo de productos gestionado fuera de cualquier sistema real."
+                      data-en="A wholesale distributor with a 300+ SKU catalog, no online ordering channel, and pricing and stock tracked outside of any real system. Every quote went through a person."
+                      data-es="Un distribuidor mayorista con un cat&aacute;logo de m&aacute;s de 300 SKUs, sin canal de pedidos en l&iacute;nea, y con precios e inventario controlados fuera de cualquier sistema real. Cada cotizaci&oacute;n pasaba por una persona."
                     >
-                      An auto parts retailer in Mexico with no online sales
-                      channel, and a product catalog managed outside of any real
-                      system.
+                      A wholesale distributor with a 300+ SKU catalog, no online
+                      ordering channel, and pricing and stock tracked outside of
+                      any real system. Every quote went through a person.
                     </p>
 
                     <span
@@ -2379,6 +2436,39 @@
             </svg>
             brenda.gfp@gmail.com
           </a>
+
+          <div
+            class="reveal flex flex-wrap justify-center gap-3 mt-5 text-sm"
+          >
+            <a
+              href="#contact"
+              data-booking
+              class="inline-flex items-center gap-2 border border-white/25 text-white font-display font-bold px-6 py-3 rounded-full hover:border-white hover:bg-white/10 transition-all"
+            >
+              <span
+                data-en="Book a 20-minute call"
+                data-es="Agendar 20 minutos"
+                >Book a 20-minute call</span
+              >
+            </a>
+            <a
+              href="#contact"
+              data-whatsapp
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 border border-white/25 text-white font-display font-bold px-6 py-3 rounded-full hover:border-white hover:bg-white/10 transition-all"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"
+                />
+              </svg>
+              <span data-en="Message on WhatsApp" data-es="Escribir por WhatsApp"
+                >Message on WhatsApp</span
+              >
+            </a>
+          </div>
+
           <div class="flex justify-center gap-4 mt-8 reveal">
             <a
               href="https://www.linkedin.com/in/brenda-guadalupe-flores-parada-09a52b126/"
@@ -2417,7 +2507,50 @@
       </section>
     </main>
 
+    <!-- floating whatsapp -->
+    <a id="wa-float" data-whatsapp href="#contact" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path
+          d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"
+        />
+      </svg>
+      <span class="wa-label" data-en="WhatsApp" data-es="WhatsApp">WhatsApp</span>
+    </a>
+
     <script>
+      /* ════════════════════════════════════════════════════════════════
+         CONFIG — cambia solo estas dos lineas
+         BOOKING_URL : tu liga de Calendly o Cal.com
+         WHATSAPP    : tu numero en formato internacional, solo digitos
+         Mientras BOOKING_URL siga vacia, los botones de "Agendar
+         llamada" siguen bajando a la seccion de contacto como hoy.
+         ════════════════════════════════════════════════════════════════ */
+      const BOOKING_URL = "";
+      const WHATSAPP = "";
+      const WA_TEXT =
+        "Hola Brenda, vi tu sitio y quiero saber mas del diagnostico de operaciones.";
+
+      (function wireCTAs() {
+        if (BOOKING_URL) {
+          document.querySelectorAll("[data-booking]").forEach((el) => {
+            el.href = BOOKING_URL;
+            el.target = "_blank";
+            el.rel = "noopener";
+          });
+        }
+        const wa = document.querySelectorAll("[data-whatsapp]");
+        if (WHATSAPP) {
+          const href =
+            "https://wa.me/" +
+            WHATSAPP.replace(/\D/g, "") +
+            "?text=" +
+            encodeURIComponent(WA_TEXT);
+          wa.forEach((el) => (el.href = href));
+        } else {
+          wa.forEach((el) => el.remove());
+        }
+      })();
+
       // year
       document.getElementById("year").textContent = new Date().getFullYear();
 
