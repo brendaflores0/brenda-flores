@@ -319,6 +319,61 @@
         transform: translateY(-4px);
       }
 
+      /*  entry offer band  */
+      .entry-offer {
+        position: relative;
+        overflow: hidden;
+        background: #0f0f1a;
+        color: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+      }
+      .entry-offer::after {
+        content: "";
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: #4f46e5;
+        filter: blur(70px);
+        opacity: 0.35;
+        top: -140px;
+        right: -100px;
+        pointer-events: none;
+      }
+      .entry-offer > * {
+        position: relative;
+        z-index: 1;
+      }
+      .entry-tag {
+        display: inline-block;
+        font-family: "Syne", sans-serif;
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        background: #4f46e5;
+        color: #fff;
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        margin-bottom: 1rem;
+      }
+      .deliverable-item {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        font-size: 0.86rem;
+        color: #d1d5db;
+        line-height: 1.5;
+      }
+      .deliverable-item svg {
+        width: 16px;
+        height: 16px;
+        color: #818cf8;
+        flex-shrink: 0;
+        margin-top: 3px;
+      }
+
       /*  service cards  */
       .svc-card {
         background: #fff;
@@ -1132,12 +1187,149 @@
           </h2>
           <p
             class="text-muted mb-10 reveal max-w-2xl"
-            data-en="Four ways I take manual work off your team. Every one of them is something I've already built and put into production."
-            data-es="Cuatro formas de quitarle trabajo manual a tu equipo. Cada una es algo que ya he construido y puesto en producci&oacute;n."
+            data-en="Most engagements start with a diagnostic. From there, four ways I take manual work off your team &ndash; every one of them something I've already built and put into production."
+            data-es="La mayor&iacute;a de los proyectos empiezan con un diagn&oacute;stico. De ah&iacute; en adelante, cuatro formas de quitarle trabajo manual a tu equipo, y cada una es algo que ya he construido y puesto en producci&oacute;n."
           >
-            Four ways I take manual work off your team. Every one of them is
-            something I've already built and put into production.
+            Most engagements start with a diagnostic. From there, four ways I
+            take manual work off your team, every one of them something I've
+            already built and put into production.
           </p>
+
+          <!-- entry offer: diagnostic -->
+          <div class="entry-offer reveal-zoom mb-6">
+            <span
+              class="entry-tag"
+              data-en="Start here"
+              data-es="Empieza aqu&iacute;"
+              >Start here</span
+            >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+              <div>
+                <h3
+                  class="font-display font-bold text-2xl mb-3"
+                  data-en="Operations diagnostic"
+                  data-es="Diagn&oacute;stico de operaci&oacute;n"
+                >
+                  Operations diagnostic
+                </h3>
+                <p
+                  class="text-sm text-gray-400 leading-relaxed mb-4"
+                  data-en="Before anyone builds anything, I go through your operation step by step and write down exactly where you're losing money, customers or hours. You get a written report you can act on, whether you hire me for the build or not."
+                  data-es="Antes de que nadie construya nada, recorro tu operaci&oacute;n paso a paso y dejo por escrito exactamente d&oacute;nde est&aacute;s perdiendo dinero, clientes u horas. Recibes un informe accionable, me contrates despu&eacute;s para construirlo o no."
+                >
+                  Before anyone builds anything, I go through your operation
+                  step by step and write down exactly where you're losing money,
+                  customers or hours. You get a written report you can act on,
+                  whether you hire me for the build or not.
+                </p>
+                <p
+                  class="text-xs text-gray-500 leading-relaxed"
+                  data-en="I don't invent numbers. If your business doesn't have the data yet, the report says so and prioritizes by impact and effort instead of quoting a made-up figure."
+                  data-es="No invento cifras. Si tu negocio todav&iacute;a no tiene los datos, el informe lo dice y prioriza por impacto y esfuerzo en vez de citar un n&uacute;mero inventado."
+                >
+                  I don't invent numbers. If your business doesn't have the data
+                  yet, the report says so and prioritizes by impact and effort
+                  instead of quoting a made-up figure.
+                </p>
+              </div>
+
+              <div>
+                <p
+                  class="font-display font-bold text-xs tracking-widest uppercase text-gray-500 mb-3"
+                  data-en="What you get"
+                  data-es="Qu&eacute; recibes"
+                >
+                  What you get
+                </p>
+                <div class="space-y-2.5">
+                  <div class="deliverable-item">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span
+                      data-en="A score for every area of your operation, so you see what's critical and what can wait"
+                      data-es="Una calificaci&oacute;n por cada &aacute;rea de tu operaci&oacute;n, para ver qu&eacute; es cr&iacute;tico y qu&eacute; puede esperar"
+                      >A score for every area of your operation, so you see
+                      what's critical and what can wait</span
+                    >
+                  </div>
+                  <div class="deliverable-item">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span
+                      data-en="A step-by-step map of what your customer actually goes through, and where they drop off"
+                      data-es="Un mapa paso a paso de lo que vive tu cliente en realidad, y d&oacute;nde se cae"
+                      >A step-by-step map of what your customer actually goes
+                      through, and where they drop off</span
+                    >
+                  </div>
+                  <div class="deliverable-item">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span
+                      data-en="Every fix ranked by impact and effort, so you know what to do first"
+                      data-es="Cada arreglo ordenado por impacto y esfuerzo, para saber qu&eacute; hacer primero"
+                      >Every fix ranked by impact and effort, so you know what
+                      to do first</span
+                    >
+                  </div>
+                  <div class="deliverable-item">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span
+                      data-en="A short list of what to change this week, without hiring anyone"
+                      data-es="Una lista corta de qu&eacute; cambiar esta semana, sin contratar a nadie"
+                      >A short list of what to change this week, without hiring
+                      anyone</span
+                    >
+                  </div>
+                </div>
+                <a
+                  href="#contact"
+                  class="inline-flex items-center gap-2 bg-white text-ink font-display font-bold text-sm px-5 py-2.5 rounded-full mt-6 hover:bg-accent hover:text-white transition-all hover:-translate-y-0.5"
+                >
+                  <span
+                    data-en="Request a diagnostic"
+                    data-es="Solicitar un diagn&oacute;stico"
+                    >Request a diagnostic</span
+                  >
+                  <svg
+                    class="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="svc-card reveal-zoom">
@@ -1609,26 +1801,27 @@
                   <div>
                     <span
                       class="case-label"
-                      data-en="The result"
-                      data-es="El resultado"
-                      >The result</span
+                      data-en="What was delivered"
+                      data-es="Lo entregado"
+                      >What was delivered</span
                     >
                     <div class="result-stat">
                       <span class="rs-num">300+</span>
                       <span
                         class="rs-label"
-                        data-en="products selling online"
-                        data-es="productos vendi&eacute;ndose en l&iacute;nea"
-                        >products selling online</span
+                        data-en="products live in the online catalog"
+                        data-es="productos publicados en el cat&aacute;logo en l&iacute;nea"
+                        >products live in the online catalog</span
                       >
                     </div>
                     <div class="result-stat">
-                      <span class="rs-num">24/7</span>
+                      <span class="rs-num">2</span>
                       <span
                         class="rs-label"
-                        data-en="payments and order tracking handled by the system"
-                        data-es="pagos y seguimiento de pedidos a cargo del sistema"
-                        >payments and order tracking handled by the system</span
+                        data-en="systems shipped: public storefront and internal admin"
+                        data-es="sistemas entregados: tienda p&uacute;blica y administrador interno"
+                        >systems shipped: public storefront and internal
+                        admin</span
                       >
                     </div>
                     <div class="flex flex-wrap gap-2 mt-5">
