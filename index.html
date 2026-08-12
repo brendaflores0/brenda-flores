@@ -2777,32 +2777,51 @@
           dots.forEach((d, i) => d.classList.toggle("active", i === current));
         }
 
-        let timer = setInterval(() => goTo(current + 1), 2000);
+        // Estas capturas se leen, no se hojean: tablas de inventario,
+        // filtros, menus. Avanza despacio para que se noten las tres,
+        // y en cuanto alguien toma el control deja de avanzar solo.
+        const AUTO_MS = 7000;
+        const sinMovimiento = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
 
-        function resetTimer() {
+        let timer = null;
+        let tomoControl = sinMovimiento;
+
+        function play() {
+          if (tomoControl || timer) return;
+          timer = setInterval(() => goTo(current + 1), AUTO_MS);
+        }
+        function pause() {
           clearInterval(timer);
-          timer = setInterval(() => goTo(current + 1), 2000);
+          timer = null;
+        }
+        function stopAuto() {
+          tomoControl = true;
+          pause();
         }
 
         prevBtn.addEventListener("click", () => {
           goTo(current - 1);
-          resetTimer();
+          stopAuto();
         });
         nextBtn.addEventListener("click", () => {
           goTo(current + 1);
-          resetTimer();
+          stopAuto();
         });
         dots.forEach((dot, i) =>
           dot.addEventListener("click", () => {
             goTo(i);
-            resetTimer();
+            stopAuto();
           }),
         );
 
-        carousel.addEventListener("mouseenter", () => clearInterval(timer));
-        carousel.addEventListener("mouseleave", () => {
-          timer = setInterval(() => goTo(current + 1), 2000);
-        });
+        carousel.addEventListener("mouseenter", pause);
+        carousel.addEventListener("mouseleave", play);
+        // en celular no hay mouse, asi que un toque cuenta como control
+        carousel.addEventListener("touchstart", stopAuto, { passive: true });
+
+        play();
       });
 
       // motion preference
