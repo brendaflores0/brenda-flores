@@ -69,6 +69,50 @@
 
       /* ---------- selector de idioma ---------- */
 
+      /* regreso al portafolio: una landing sin salida se siente
+         a callejon, y quien llega de un mensaje frio quiere
+         confirmar quien eres antes de agendar nada */
+      #back {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 50;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--display);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        color: var(--ink-2);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(6px);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 8px 15px 8px 12px;
+        text-decoration: none;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      #back:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      #back svg {
+        width: 0.85rem;
+        height: 0.85rem;
+        flex-shrink: 0;
+      }
+      @media (max-width: 520px) {
+        #back .label {
+          display: none;
+        }
+        #back {
+          padding: 9px 11px;
+        }
+      }
+
       #lang {
         position: fixed;
         top: 18px;
@@ -476,6 +520,27 @@
   </head>
 
   <body>
+    <a id="back" href="./">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <line x1="19" y1="12" x2="5" y2="12" />
+        <polyline points="12 19 5 12 12 5" />
+      </svg>
+      <span
+        class="label"
+        data-es="Brenda Flores"
+        data-en="Brenda Flores"
+        >Brenda Flores</span
+      >
+    </a>
+
     <div id="lang" role="group" aria-label="Idioma / Language">
       <button type="button" data-lang="es" onclick="setLang('es')">ES</button>
       <button type="button" data-lang="en" onclick="setLang('en')">EN</button>
@@ -492,11 +557,11 @@
           Para mayoristas y distribuidores B2B
         </p>
         <h1
-          data-es="Si tu gente todavía cotiza a mano por WhatsApp, sé exactamente cuánto te está costando."
-          data-en="If your team still quotes by hand over WhatsApp, I know exactly what that is costing you."
+          data-es="Si tu gente todavía cotiza y captura pedidos a mano, sé exactamente cuánto te está costando."
+          data-en="If your team still quotes and keys in orders by hand, I know exactly what that is costing you."
         >
-          Si tu gente todavía cotiza a mano por WhatsApp, sé exactamente cuánto
-          te está costando.
+          Si tu gente todavía cotiza y captura pedidos a mano, sé exactamente
+          cuánto te está costando.
         </h1>
         <p
           class="sub"
@@ -1038,7 +1103,7 @@
          Deben quedar iguales a las de index.html
          ════════════════════════════════════════════════════════════════ */
       const BOOKING_URL = "https://brendaflores.co/agenda";
-      const WHATSAPP = "";
+      const WHATSAPP = "+52 442 285 0248";
       const WA_TEXT =
         "Hola Brenda, vi la pagina del diagnostico y quiero saber mas.";
 

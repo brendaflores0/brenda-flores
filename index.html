@@ -223,6 +223,19 @@
         transition: all 0.3s;
       }
 
+      /*  el diagnostico es otra pagina, no una seccion de esta.
+          la flechita avisa que el clic te lleva a otro lado  */
+      .nav-external .ext {
+        width: 0.72rem;
+        height: 0.72rem;
+        margin-left: auto;
+        opacity: 0.45;
+        flex-shrink: 0;
+      }
+      .nav-external:hover .ext {
+        opacity: 0.9;
+      }
+
       /*  selector de idioma para movil  */
       /*  el del sidebar queda detras del hamburguesa, asi que en
           pantallas chicas hace falta uno siempre visible  */
@@ -974,7 +987,7 @@
           </svg>
           <span data-en="Services" data-es="Servicios">Services</span>
         </a>
-        <a href="diagnostico.html" class="nav-link">
+        <a href="diagnostico.html" class="nav-link nav-external">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -988,6 +1001,19 @@
             <path d="M21 7h-6v14h6V7z" />
           </svg>
           <span data-en="Diagnostic" data-es="Diagn&oacute;stico">Diagnostic</span>
+          <svg
+            class="ext"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
         </a>
         <a href="#results" class="nav-link" data-section="results">
           <svg
@@ -2497,7 +2523,7 @@
             how and what it would take. If I can't, I'll tell you that too.
           </p>
           <a
-            href="mailto:brenda.gfp@gmail.com"
+            href="mailto:brenda@brendaflores.co"
             class="reveal inline-flex items-center gap-3 bg-accent text-white font-display font-bold text-base px-8 py-4 rounded-full hover:bg-indigo-400 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/30"
           >
             <svg
@@ -2514,7 +2540,7 @@
               />
               <polyline points="22,6 12,13 2,6" />
             </svg>
-            brenda.gfp@gmail.com
+            brenda@brendaflores.co
           </a>
 
           <div
@@ -2606,7 +2632,7 @@
          llamada" siguen bajando a la seccion de contacto como hoy.
          ════════════════════════════════════════════════════════════════ */
       const BOOKING_URL = "https://brendaflores.co/agenda";
-      const WHATSAPP = "";
+      const WHATSAPP = "+52 442 285 0248";
       const WA_TEXT =
         "Hola Brenda, vi tu sitio y quiero saber mas del diagnostico de operaciones.";
 
