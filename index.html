@@ -223,6 +223,53 @@
         transition: all 0.3s;
       }
 
+      /*  selector de idioma para movil  */
+      /*  el del sidebar queda detras del hamburguesa, asi que en
+          pantallas chicas hace falta uno siempre visible  */
+      #lang-mobile {
+        display: none;
+        position: fixed;
+        top: 1.2rem;
+        left: 4.4rem;
+        z-index: 200;
+        height: 40px;
+        align-items: center;
+        gap: 2px;
+        background: #0f0f1a;
+        border-radius: 8px;
+        padding: 4px;
+      }
+      #lang-mobile button {
+        font-family: "Syne", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        color: rgba(255, 255, 255, 0.55);
+        background: transparent;
+        border: 0;
+        border-radius: 5px;
+        padding: 0.3rem 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      #lang-mobile button.active {
+        background: #fff;
+        color: #0f0f1a;
+      }
+      @media (max-width: 768px) {
+        #lang-mobile {
+          display: flex;
+        }
+      }
+      @media (max-width: 380px) {
+        #lang-mobile {
+          left: 4rem;
+        }
+        #lang-mobile button {
+          padding: 0.3rem 0.38rem;
+        }
+      }
+
       /*  book a call btn  */
       #contact-btn {
         position: fixed;
@@ -841,6 +888,12 @@
       <span></span><span></span><span></span>
     </button>
 
+    <!-- selector de idioma visible en movil -->
+    <div id="lang-mobile" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="en" onclick="setLang('en')">EN</button>
+      <button type="button" data-lang="es" onclick="setLang('es')">ES</button>
+    </div>
+
     <!-- book a call -->
     <a href="#contact" id="contact-btn" data-booking>
       <span data-en="Book a call &rarr;" data-es="Agendar llamada &rarr;"
@@ -921,6 +974,21 @@
           </svg>
           <span data-en="Services" data-es="Servicios">Services</span>
         </a>
+        <a href="diagnostico.html" class="nav-link">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 11H3v10h6V11z" />
+            <path d="M15 3H9v18h6V3z" />
+            <path d="M21 7h-6v14h6V7z" />
+          </svg>
+          <span data-en="Diagnostic" data-es="Diagn&oacute;stico">Diagnostic</span>
+        </a>
         <a href="#results" class="nav-link" data-section="results">
           <svg
             viewBox="0 0 24 24"
@@ -987,10 +1055,22 @@
 
       <!-- lang toggle -->
       <div class="flex items-center gap-1 mt-6 mb-4 bg-gray-100 rounded-lg p-1">
-        <button class="lang-btn active" onclick="setLang('en')" id="btn-en">
+        <button
+          class="lang-btn active"
+          data-lang="en"
+          onclick="setLang('en')"
+          id="btn-en"
+        >
           EN
         </button>
-        <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+        <button
+          class="lang-btn"
+          data-lang="es"
+          onclick="setLang('es')"
+          id="btn-es"
+        >
+          ES
+        </button>
       </div>
 
       <!-- social -->
@@ -1361,13 +1441,13 @@
                   </div>
                 </div>
                 <a
-                  href="#contact"
+                  href="diagnostico.html"
                   class="inline-flex items-center gap-2 bg-white text-ink font-display font-bold text-sm px-5 py-2.5 rounded-full mt-6 hover:bg-accent hover:text-white transition-all hover:-translate-y-0.5"
                 >
                   <span
-                    data-en="Request a diagnostic"
-                    data-es="Solicitar un diagn&oacute;stico"
-                    >Request a diagnostic</span
+                    data-en="See how the diagnostic works"
+                    data-es="Ver c&oacute;mo funciona el diagn&oacute;stico"
+                    >See how the diagnostic works</span
                   >
                   <svg
                     class="w-4 h-4"
@@ -2577,21 +2657,34 @@
       });
 
       // language toggle
-      function setLang(lang) {
+      function setLang(lang, remember) {
         document.querySelectorAll("[data-en]").forEach((el) => {
           el.innerHTML = el.dataset[lang] || el.dataset.en;
         });
-        document
-          .getElementById("btn-en")
-          .classList.toggle("active", lang === "en");
-        document
-          .getElementById("btn-es")
-          .classList.toggle("active", lang === "es");
+        // sincroniza todos los selectores, el del sidebar y el de movil
+        document.querySelectorAll("[data-lang]").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === lang);
+        });
         document.documentElement.lang = lang;
-        localStorage.setItem("lang", lang);
+        if (remember !== false) localStorage.setItem("lang", lang);
       }
-      const savedLang = localStorage.getItem("lang");
-      if (savedLang && savedLang !== "en") setLang(savedLang);
+
+      // Si ya eligio antes, se respeta. Si no, se usa el idioma del
+      // navegador: la mayoria de los prospectos trae el telefono en
+      // espanol y llegaba a un sitio en ingles sin forma de cambiarlo.
+      (function initLang() {
+        const saved = localStorage.getItem("lang");
+        if (saved === "en" || saved === "es") {
+          setLang(saved);
+          return;
+        }
+        const nav = (
+          navigator.languages && navigator.languages.length
+            ? navigator.languages[0]
+            : navigator.language || ""
+        ).toLowerCase();
+        setLang(nav.startsWith("es") ? "es" : "en", false);
+      })();
 
       // mobile sidebar
       const sidebar = document.getElementById("sidebar");
