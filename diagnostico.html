@@ -24,7 +24,6 @@
         --paper-2: #f7f7fb;
         --border: #e5e7eb;
         --accent: #4f46e5;
-        --accent-light: #eef2ff;
         --wa: #1f8f5f;
         --display: "Syne", sans-serif;
         --body: "DM Sans", sans-serif;
@@ -66,6 +65,38 @@
 
       p {
         margin: 0 0 18px;
+      }
+
+      /* ---------- selector de idioma ---------- */
+
+      #lang {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 50;
+        display: flex;
+        gap: 2px;
+        background: var(--ink);
+        border-radius: 8px;
+        padding: 4px;
+        box-shadow: 0 2px 10px rgba(15, 15, 26, 0.18);
+      }
+      #lang button {
+        font-family: var(--display);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        color: rgba(255, 255, 255, 0.55);
+        background: transparent;
+        border: 0;
+        border-radius: 5px;
+        padding: 0.3rem 0.55rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      #lang button.active {
+        background: #fff;
+        color: var(--ink);
       }
 
       /* ---------- hero ---------- */
@@ -264,7 +295,7 @@
       }
 
       .guarantee {
-        background: var(--accent-light);
+        background: #eef2ff;
         border-left: 3px solid var(--accent);
         padding: 20px 22px;
         margin-bottom: 26px;
@@ -445,23 +476,43 @@
   </head>
 
   <body>
+    <div id="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" onclick="setLang('es')">ES</button>
+      <button type="button" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+
     <!-- ═══════════ HERO ═══════════ -->
     <header class="hero">
       <div class="wrap">
-        <p class="kicker">Para mayoristas y distribuidores B2B</p>
-        <h1>
+        <p
+          class="kicker"
+          data-es="Para mayoristas y distribuidores B2B"
+          data-en="For B2B wholesalers and distributors"
+        >
+          Para mayoristas y distribuidores B2B
+        </p>
+        <h1
+          data-es="Si tu gente todavía cotiza a mano por WhatsApp, sé exactamente cuánto te está costando."
+          data-en="If your team still quotes by hand over WhatsApp, I know exactly what that is costing you."
+        >
           Si tu gente todavía cotiza a mano por WhatsApp, sé exactamente cuánto
           te está costando.
         </h1>
-        <p class="sub">
+        <p
+          class="sub"
+          data-es="En cinco días recorro tu operación paso a paso y te entrego el plan de qué automatizar primero, con los números de tu negocio. Sin compromiso de contratar nada después."
+          data-en="In five days I walk your operation step by step and hand you the plan for what to automate first, using your own numbers. No obligation to hire anything afterward."
+        >
           En cinco días recorro tu operación paso a paso y te entrego el plan de
-          qué automatizar primero, con los números de tu negocio. Sin
-          compromiso de contratar nada después.
+          qué automatizar primero, con los números de tu negocio. Sin compromiso
+          de contratar nada después.
         </p>
         <div class="cta-row">
-          <a href="#contacto" data-booking class="btn btn-primary"
-            >Agendar 20 minutos</a
-          >
+          <a href="#contacto" data-booking class="btn btn-primary">
+            <span data-es="Agendar 20 minutos" data-en="Book 20 minutes"
+              >Agendar 20 minutos</span
+            >
+          </a>
           <a
             href="#contacto"
             data-whatsapp
@@ -474,12 +525,17 @@
                 d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"
               />
             </svg>
-            Escribir por WhatsApp
+            <span data-es="Escribir por WhatsApp" data-en="Message on WhatsApp"
+              >Escribir por WhatsApp</span
+            >
           </a>
         </div>
-        <p class="cta-note">
-          Ingeniera de software · 7+ años · Trabajo en español, en horario de
-          Estados Unidos
+        <p
+          class="cta-note"
+          data-es="Ingeniera de software · 7+ años · Trabajo en horario de Estados Unidos"
+          data-en="Software engineer · 7+ years · I work US hours, in English and Spanish"
+        >
+          Ingeniera de software · 7+ años · Trabajo en horario de Estados Unidos
         </p>
       </div>
     </header>
@@ -487,38 +543,79 @@
     <!-- ═══════════ DOLOR ═══════════ -->
     <section class="block">
       <div class="wrap">
-        <h2>¿Algo de esto pasa en tu bodega?</h2>
-        <p class="lede">
+        <h2
+          data-es="¿Algo de esto pasa en tu bodega?"
+          data-en="Does any of this happen in your warehouse?"
+        >
+          ¿Algo de esto pasa en tu bodega?
+        </h2>
+        <p
+          class="lede"
+          data-es="Ninguno de estos problemas es falta de esfuerzo. Son falta de sistema, y por eso el esfuerzo se va en trabajo que debería hacer una computadora."
+          data-en="None of these problems come from a lack of effort. They come from a lack of systems, which is why the effort goes into work a computer should be doing."
+        >
           Ninguno de estos problemas es falta de esfuerzo. Son falta de sistema,
           y por eso el esfuerzo se va en trabajo que debería hacer una
           computadora.
         </p>
         <div class="pains">
           <div class="pain">
-            <h3>El mostrador es el cuello de botella</h3>
-            <p>
+            <h3
+              data-es="El mostrador es el cuello de botella"
+              data-en="The counter is the bottleneck"
+            >
+              El mostrador es el cuello de botella
+            </h3>
+            <p
+              data-es="Una o dos personas contestan el mismo tipo de mensaje todo el día: precio, existencia, tiempo de entrega. Si esa persona falta, el negocio se frena."
+              data-en="One or two people answer the same kind of message all day: price, stock, delivery time. If that person is out, the business slows to a crawl."
+            >
               Una o dos personas contestan el mismo tipo de mensaje todo el día:
               precio, existencia, tiempo de entrega. Si esa persona falta, el
               negocio se frena.
             </p>
           </div>
           <div class="pain">
-            <h3>Cada cliente tiene su precio, y vive en la cabeza de alguien</h3>
-            <p>
+            <h3
+              data-es="Cada cliente tiene su precio, y vive en la cabeza de alguien"
+              data-en="Every customer has their own price, and it lives in someone's head"
+            >
+              Cada cliente tiene su precio, y vive en la cabeza de alguien
+            </h3>
+            <p
+              data-es="Las listas por cliente están en un Excel que solo una persona entiende, y cuando cotiza alguien más, se equivoca o pregunta."
+              data-en="Per-customer price lists sit in a spreadsheet only one person understands, so when anybody else quotes, they either guess wrong or have to ask."
+            >
               Las listas por cliente están en un Excel que solo una persona
               entiende, y cuando cotiza alguien más, se equivoca o pregunta.
             </p>
           </div>
           <div class="pain">
-            <h3>Los pedidos llegan por cinco lados distintos</h3>
-            <p>
+            <h3
+              data-es="Los pedidos llegan por cinco lados distintos"
+              data-en="Orders arrive through five different channels"
+            >
+              Los pedidos llegan por cinco lados distintos
+            </h3>
+            <p
+              data-es="WhatsApp, llamada, correo, el vendedor en ruta y el que llega en persona. Alguien los captura a mano y a veces se pierde uno."
+              data-en="WhatsApp, phone, email, the rep out on route, and whoever walks in. Someone keys them in by hand, and every so often one goes missing."
+            >
               WhatsApp, llamada, correo, el vendedor en ruta y el que llega en
               persona. Alguien los captura a mano y a veces se pierde uno.
             </p>
           </div>
           <div class="pain">
-            <h3>Crecer significa contratar a otro capturista</h3>
-            <p>
+            <h3
+              data-es="Crecer significa contratar a otro capturista"
+              data-en="Growing means hiring another data entry clerk"
+            >
+              Crecer significa contratar a otro capturista
+            </h3>
+            <p
+              data-es="Cada cliente nuevo suma trabajo administrativo sobre el anterior, así que vender más te cuesta más de lo que debería."
+              data-en="Every new customer piles admin work on top of the last one, so selling more costs you more than it should."
+            >
               Cada cliente nuevo suma trabajo administrativo sobre el anterior,
               así que vender más te cuesta más de lo que debería.
             </p>
@@ -530,8 +627,17 @@
     <!-- ═══════════ OFERTA ═══════════ -->
     <section class="block">
       <div class="wrap">
-        <h2>Diagnóstico de Operaciones</h2>
-        <p class="lede">
+        <h2
+          data-es="Diagnóstico de Operaciones"
+          data-en="Operations Diagnostic"
+        >
+          Diagnóstico de Operaciones
+        </h2>
+        <p
+          class="lede"
+          data-es="Antes de que nadie construya nada. Cinco días, dos sesiones contigo, y un documento que puedes usar aunque no vuelvas a hablar conmigo."
+          data-en="Before anyone builds anything. Five days, two sessions with you, and a document you can act on even if we never speak again."
+        >
           Antes de que nadie construya nada. Cinco días, dos sesiones contigo, y
           un documento que puedes usar aunque no vuelvas a hablar conmigo.
         </p>
@@ -539,38 +645,60 @@
         <div class="offer">
           <div class="price-row">
             <span class="price">$1,500</span>
-            <span class="price-meta">
+            <span
+              class="price-meta"
+              data-es="USD · <b>5 días hábiles</b> · Se acredita completo si contratas el proyecto dentro de 60 días"
+              data-en="USD · <b>5 business days</b> · Credited in full if you hire the project within 60 days"
+            >
               USD · <b>5 días hábiles</b> · Se acredita completo si contratas el
               proyecto dentro de 60 días
             </span>
           </div>
 
           <ul class="deliverables">
-            <li>
+            <li
+              data-es="El mapa real de un pedido, del primer mensaje hasta la factura pagada, con quién toca qué y cuánto tarda cada paso."
+              data-en="The real map of one order, from first message to paid invoice, showing who touches what and how long each step takes."
+            >
               El mapa real de un pedido, del primer mensaje hasta la factura
               pagada, con quién toca qué y cuánto tarda cada paso.
             </li>
-            <li>
+            <li
+              data-es="Las horas que se van a la semana en trabajo manual, y lo que eso cuesta al año en nómina. Con tus números, no con promedios de internet."
+              data-en="The hours lost each week to manual work, and what that costs per year in payroll. Your numbers, not industry averages."
+            >
               Las horas que se van a la semana en trabajo manual, y lo que eso
               cuesta al año en nómina. Con tus números, no con promedios de
               internet.
             </li>
-            <li>
+            <li
+              data-es="Una calificación por área de tu operación, para que veas de un vistazo qué está crítico y qué puede esperar."
+              data-en="A score for every area of your operation, so you can see at a glance what is critical and what can wait."
+            >
               Una calificación por área de tu operación, para que veas de un
               vistazo qué está crítico y qué puede esperar.
             </li>
-            <li>
+            <li
+              data-es="La lista de arreglos priorizada por impacto contra esfuerzo, para saber qué hacer primero."
+              data-en="Every fix ranked by impact against effort, so you know what to do first."
+            >
               La lista de arreglos priorizada por impacto contra esfuerzo, para
               saber qué hacer primero.
             </li>
-            <li>
+            <li
+              data-es="Lo que puedes cambiar esta misma semana sin contratar a nadie ni comprar software."
+              data-en="What you can change this week without hiring anyone or buying software."
+            >
               Lo que puedes cambiar esta misma semana sin contratar a nadie ni
               comprar software.
             </li>
           </ul>
 
           <div class="guarantee">
-            <p>
+            <p
+              data-es="<strong>Garantía:</strong> si al terminar no ves un plan que le quite al menos 15 horas por semana a tu equipo, no me pagas. Sin discusión y sin trámite."
+              data-en="<strong>Guarantee:</strong> if by the end you do not see a plan that takes at least 15 hours a week off your team, you do not pay me. No argument, no paperwork."
+            >
               <strong>Garantía:</strong> si al terminar no ves un plan que le
               quite al menos 15 horas por semana a tu equipo, no me pagas. Sin
               discusión y sin trámite.
@@ -578,11 +706,17 @@
           </div>
 
           <div class="cta-row">
-            <a href="#contacto" data-booking class="btn btn-primary"
-              >Agendar 20 minutos</a
-            >
+            <a href="#contacto" data-booking class="btn btn-primary">
+              <span data-es="Agendar 20 minutos" data-en="Book 20 minutes"
+                >Agendar 20 minutos</span
+              >
+            </a>
           </div>
-          <p class="cta-note">
+          <p
+            class="cta-note"
+            data-es="La llamada es para ver si aplica. Si no te puedo ayudar, te lo digo ahí mismo."
+            data-en="The call is to see whether this applies to you. If I cannot help, I will tell you right there."
+          >
             La llamada es para ver si aplica. Si no te puedo ayudar, te lo digo
             ahí mismo.
           </p>
@@ -593,36 +727,68 @@
     <!-- ═══════════ PRUEBA ═══════════ -->
     <section class="block">
       <div class="wrap">
-        <h2>Esto ya lo construí</h2>
-        <p class="lede">
+        <h2 data-es="Esto ya lo construí" data-en="I have already built this">
+          Esto ya lo construí
+        </h2>
+        <p
+          class="lede"
+          data-es="Dos negocios que pasé de operación manual a software funcionando. No son maquetas ni pruebas de concepto: están en producción y su gente los usa todos los días."
+          data-en="Two businesses I took from manual operations to working software. Not mockups or proofs of concept: they are in production and their teams use them every day."
+        >
           Dos negocios que pasé de operación manual a software funcionando. No
-          son maquetas ni pruebas de concepto: están en producción y su gente
-          los usa todos los días.
+          son maquetas ni pruebas de concepto: están en producción y su gente los
+          usa todos los días.
         </p>
 
         <div class="cases">
           <div class="case">
-            <span class="tag">Distribuidor mayorista</span>
-            <p>
+            <span
+              class="tag"
+              data-es="Distribuidor mayorista"
+              data-en="Wholesale distributor"
+              >Distribuidor mayorista</span
+            >
+            <p
+              data-es="Catálogo de más de 300 SKUs, sin canal de pedidos en línea y con precios e inventario fuera de cualquier sistema. Cada cotización pasaba por una persona. Le construí la tienda para sus clientes más el sistema interno: catálogo, precios, pedidos, cobro con Stripe y permisos por usuario."
+              data-en="A 300+ SKU catalog, no online ordering channel, and pricing and stock tracked outside any real system. Every quote went through a person. I built the customer storefront plus the internal system: catalog, pricing, orders, Stripe payments and per-user permissions."
+            >
               Catálogo de más de 300 SKUs, sin canal de pedidos en línea y con
               precios e inventario fuera de cualquier sistema. Cada cotización
-              pasaba por una persona. Le construí la tienda para sus clientes
-              más el sistema interno: catálogo, precios, pedidos, cobro con
-              Stripe y permisos por usuario.
+              pasaba por una persona. Le construí la tienda para sus clientes más
+              el sistema interno: catálogo, precios, pedidos, cobro con Stripe y
+              permisos por usuario.
             </p>
             <div class="metrics">
               <div class="metric">
-                <b>300+</b><span>productos vendiéndose en línea</span>
+                <b>300+</b
+                ><span
+                  data-es="productos vendiéndose en línea"
+                  data-en="products selling online"
+                  >productos vendiéndose en línea</span
+                >
               </div>
               <div class="metric">
-                <b>24/7</b><span>pedidos y pagos sin intervención humana</span>
+                <b>24/7</b
+                ><span
+                  data-es="pedidos y pagos sin intervención humana"
+                  data-en="orders and payments with no human in the loop"
+                  >pedidos y pagos sin intervención humana</span
+                >
               </div>
             </div>
           </div>
 
           <div class="case">
-            <span class="tag">Operación de servicio</span>
-            <p>
+            <span
+              class="tag"
+              data-es="Operación de servicio"
+              data-en="Service operation"
+              >Operación de servicio</span
+            >
+            <p
+              data-es="Todo en hojas de cálculo: estatus de cada trabajo, expedientes, valuaciones y papeleo con terceros. Los clientes llamaban a cada rato a preguntar cómo iba lo suyo. Automaticé los avisos por WhatsApp y los reportes, que ahora se generan solos."
+              data-en="Everything in spreadsheets: job status, customer files, valuations and third-party paperwork. Customers called constantly to ask where their order stood. I automated the WhatsApp status updates and the reports, which now generate themselves."
+            >
               Todo en hojas de cálculo: estatus de cada trabajo, expedientes,
               valuaciones y papeleo con terceros. Los clientes llamaban a cada
               rato a preguntar cómo iba lo suyo. Automaticé los avisos por
@@ -630,10 +796,20 @@
             </p>
             <div class="metrics">
               <div class="metric">
-                <b>30-40%</b><span>menos trabajo administrativo manual</span>
+                <b>30-40%</b
+                ><span
+                  data-es="menos trabajo administrativo manual"
+                  data-en="less manual admin work"
+                  >menos trabajo administrativo manual</span
+                >
               </div>
               <div class="metric">
-                <b>7+</b><span>convenios con terceros habilitados</span>
+                <b>7+</b
+                ><span
+                  data-es="convenios con terceros habilitados"
+                  data-en="third-party partnerships enabled"
+                  >convenios con terceros habilitados</span
+                >
               </div>
             </div>
           </div>
@@ -644,49 +820,85 @@
     <!-- ═══════════ FAQ ═══════════ -->
     <section class="block">
       <div class="wrap">
-        <h2>Lo que me preguntan siempre</h2>
+        <h2
+          data-es="Lo que me preguntan siempre"
+          data-en="What people always ask"
+        >
+          Lo que me preguntan siempre
+        </h2>
         <div class="faq">
           <details>
-            <summary>Ya tenemos un sistema. ¿Igual aplica?</summary>
+            <summary
+              data-es="Ya tenemos un sistema. ¿Igual aplica?"
+              data-en="We already have a system. Does this still apply?"
+            >
+              Ya tenemos un sistema. ¿Igual aplica?
+            </summary>
             <div class="answer">
-              <p>
+              <p
+                data-es="Casi siempre sí, y suele ser más barato. La pregunta correcta no es qué sistema tienen, sino qué siguen haciendo fuera de él: en Excel, en WhatsApp o a mano. Ese hueco es donde está el problema, y ahí entro integrando en vez de reemplazar lo que ya pagas."
+                data-en="Almost always yes, and it usually costs less. The right question is not which system you have, but what you still do outside of it: in spreadsheets, over WhatsApp, or by hand. That gap is where the problem lives, and that is where I come in, integrating rather than replacing what you already pay for."
+              >
                 Casi siempre sí, y suele ser más barato. La pregunta correcta no
                 es qué sistema tienen, sino qué siguen haciendo fuera de él: en
-                Excel, en WhatsApp o a mano. Ese hueco es donde está el
-                problema, y ahí entro integrando en vez de reemplazar lo que ya
-                pagas.
+                Excel, en WhatsApp o a mano. Ese hueco es donde está el problema,
+                y ahí entro integrando en vez de reemplazar lo que ya pagas.
               </p>
             </div>
           </details>
           <details>
-            <summary>¿Por qué cobras el diagnóstico?</summary>
+            <summary
+              data-es="¿Por qué cobras el diagnóstico?"
+              data-en="Why do you charge for the diagnostic?"
+            >
+              ¿Por qué cobras el diagnóstico?
+            </summary>
             <div class="answer">
-              <p>
+              <p
+                data-es="Porque son cinco días de trabajo real y porque el documento te sirve contrates o no: puedes llevártelo con otro proveedor si quieres. Lo que sí hago es acreditarlo completo si decides seguir conmigo, así que si vamos a trabajar juntos, en la práctica sale gratis."
+                data-en="Because it is five days of real work, and because the document is useful whether you hire me or not: you can take it to another vendor if you want. What I do is credit it in full if you decide to continue with me, so if we end up working together it effectively costs nothing."
+              >
                 Porque son cinco días de trabajo real y porque el documento te
                 sirve contrates o no: puedes llevártelo con otro proveedor si
-                quieres. Lo que sí hago es acreditarlo completo si decides
-                seguir conmigo, así que si vamos a trabajar juntos, en la
-                práctica sale gratis.
+                quieres. Lo que sí hago es acreditarlo completo si decides seguir
+                conmigo, así que si vamos a trabajar juntos, en la práctica sale
+                gratis.
               </p>
             </div>
           </details>
           <details>
-            <summary>¿Cuánto cuesta el proyecto después?</summary>
+            <summary
+              data-es="¿Cuánto cuesta el proyecto después?"
+              data-en="What does the project cost afterward?"
+            >
+              ¿Cuánto cuesta el proyecto después?
+            </summary>
             <div class="answer">
-              <p>
+              <p
+                data-es="Depende de qué salga en el diagnóstico, pero para que tengas referencia: un módulo específico funcionando (catálogo con precios por cliente, pedidos y cobro) arranca en $6,500 y toma unas cuatro semanas. Una plataforma de operaciones completa va de $14,000 a $22,000. Nunca te doy un número sin haber visto tu operación."
+                data-en="It depends on what the diagnostic turns up, but for reference: one specific module in production (catalog with per-customer pricing, orders and payments) starts at $6,500 and takes about four weeks. A full operations platform runs $14,000 to $22,000. I never quote a number without having seen your operation."
+              >
                 Depende de qué salga en el diagnóstico, pero para que tengas
                 referencia: un módulo específico funcionando (catálogo con
                 precios por cliente, pedidos y cobro) arranca en $6,500 y toma
-                unas cuatro semanas. Una plataforma de operaciones completa va
-                de $14,000 a $22,000. Nunca te doy un número sin haber visto tu
+                unas cuatro semanas. Una plataforma de operaciones completa va de
+                $14,000 a $22,000. Nunca te doy un número sin haber visto tu
                 operación.
               </p>
             </div>
           </details>
           <details>
-            <summary>Estás en México. ¿Cómo funciona eso?</summary>
+            <summary
+              data-es="Estás en México. ¿Cómo funciona eso?"
+              data-en="You are in Mexico. How does that work?"
+            >
+              Estás en México. ¿Cómo funciona eso?
+            </summary>
             <div class="answer">
-              <p>
+              <p
+                data-es="Trabajo en horario de Estados Unidos y todos mis clientes me tienen en WhatsApp. Contesto el mismo día. Desde 2018 he dado soporte a cada proyecto que he entregado, también después del lanzamiento."
+                data-en="I work US hours and every client has me on WhatsApp. I reply the same day. Since 2018 I have supported every project I have delivered, including after launch."
+              >
                 Trabajo en horario de Estados Unidos y todos mis clientes me
                 tienen en WhatsApp. Contesto el mismo día. Desde 2018 he dado
                 soporte a cada proyecto que he entregado, también después del
@@ -695,13 +907,21 @@
             </div>
           </details>
           <details>
-            <summary>¿Qué necesitas de nosotros durante esos cinco días?</summary>
+            <summary
+              data-es="¿Qué necesitas de nosotros durante esos cinco días?"
+              data-en="What do you need from us during those five days?"
+            >
+              ¿Qué necesitas de nosotros durante esos cinco días?
+            </summary>
             <div class="answer">
-              <p>
+              <p
+                data-es="Dos sesiones de hora y media contigo o con quien lleve la operación, y un rato con la persona del mostrador para verla trabajar. Nada de preparar reportes ni juntar información: yo voy a donde está el trabajo."
+                data-en="Two ninety-minute sessions with you or whoever runs the operation, plus some time with the person at the counter to watch them work. No reports to prepare, nothing to gather: I come to where the work happens."
+              >
                 Dos sesiones de hora y media contigo o con quien lleve la
                 operación, y un rato con la persona del mostrador para verla
-                trabajar. Nada de preparar reportes ni juntar información: yo
-                voy a donde está el trabajo.
+                trabajar. Nada de preparar reportes ni juntar información: yo voy
+                a donde está el trabajo.
               </p>
             </div>
           </details>
@@ -712,20 +932,34 @@
     <!-- ═══════════ QUIÉN ═══════════ -->
     <section class="block about">
       <div class="wrap">
-        <h2>Con quién estarías trabajando</h2>
-        <p>
+        <h2
+          data-es="Con quién estarías trabajando"
+          data-en="Who you would be working with"
+        >
+          Con quién estarías trabajando
+        </h2>
+        <p
+          data-es="Soy Brenda Flores, ingeniera de software con más de siete años construyendo sistemas de los que depende un negocio para operar. Desde 2018 llevo mi práctica de consultoría por mi cuenta, de la propuesta a la entrega y al soporte."
+          data-en="I am Brenda Flores, a software engineer with more than seven years building the systems businesses depend on to operate. Since 2018 I have run my own consulting practice, from proposal through delivery and support."
+        >
           Soy Brenda Flores, ingeniera de software con más de siete años
           construyendo sistemas de los que depende un negocio para operar. Desde
           2018 llevo mi práctica de consultoría por mi cuenta, de la propuesta a
           la entrega y al soporte.
         </p>
-        <p>
+        <p
+          data-es="Antes fui Product Owner traduciendo requerimientos de negocio a software, y también trabajé cuatro años en plataformas empresariales usadas por más de 100,000 empresas. Por eso empiezo por cómo opera tu negocio y no por una lista de funciones."
+          data-en="Before that I worked as a Product Owner translating business requirements into software, and spent four years on enterprise platforms used by more than 100,000 businesses. That is why I start from how your business actually runs, not from a feature list."
+        >
           Antes fui Product Owner traduciendo requerimientos de negocio a
           software, y también trabajé cuatro años en plataformas empresariales
           usadas por más de 100,000 empresas. Por eso empiezo por cómo opera tu
           negocio y no por una lista de funciones.
         </p>
-        <p>
+        <p
+          data-es="Puedes ver el detalle técnico y los demás proyectos en <a href=&quot;./&quot;>mi portafolio</a>."
+          data-en="You can see the technical detail and my other projects in <a href=&quot;./&quot;>my portfolio</a>."
+        >
           Puedes ver el detalle técnico y los demás proyectos en
           <a href="./">mi portafolio</a>.
         </p>
@@ -735,17 +969,31 @@
     <!-- ═══════════ CIERRE ═══════════ -->
     <section class="final" id="contacto">
       <div class="wrap">
-        <h2>Veinte minutos y sabes si aplica</h2>
-        <p>
+        <h2
+          data-es="Veinte minutos y sabes si aplica"
+          data-en="Twenty minutes and you will know if this applies"
+        >
+          Veinte minutos y sabes si aplica
+        </h2>
+        <p
+          data-es="Cuéntame en qué está perdiendo tiempo tu equipo. Si te puedo ayudar, te digo cómo y qué implicaría. Si no, también te lo digo."
+          data-en="Tell me where your team is losing time. If I can help, I will tell you how and what it would take. If I cannot, I will tell you that too."
+        >
           Cuéntame en qué está perdiendo tiempo tu equipo. Si te puedo ayudar,
           te digo cómo y qué implicaría. Si no, también te lo digo.
         </p>
         <div class="cta-row">
-          <a href="mailto:brenda.gfp@gmail.com" data-booking class="btn btn-primary"
-            >Agendar 20 minutos</a
-          >
           <a
-            href="mailto:brenda.gfp@gmail.com"
+            href="mailto:brenda@brendaflores.co"
+            data-booking
+            class="btn btn-primary"
+          >
+            <span data-es="Agendar 20 minutos" data-en="Book 20 minutes"
+              >Agendar 20 minutos</span
+            >
+          </a>
+          <a
+            href="mailto:brenda@brendaflores.co"
             data-whatsapp
             target="_blank"
             rel="noopener"
@@ -756,17 +1004,25 @@
                 d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"
               />
             </svg>
-            Escribir por WhatsApp
+            <span data-es="Escribir por WhatsApp" data-en="Message on WhatsApp"
+              >Escribir por WhatsApp</span
+            >
           </a>
         </div>
-        <p class="cta-note">O escríbeme a brenda.gfp@gmail.com</p>
+        <p
+          class="cta-note"
+          data-es="O escríbeme a brenda@brendaflores.co"
+          data-en="Or email me at brenda@brendaflores.co"
+        >
+          O escríbeme a brenda@brendaflores.co
+        </p>
       </div>
     </section>
 
     <footer>
       <div class="wrap" style="display: flex; flex-wrap: wrap; gap: 6px 22px">
         <span>&copy; <span id="year"></span> Brenda Flores</span>
-        <a href="./">Portafolio</a>
+        <a href="./" data-es="Portafolio" data-en="Portfolio">Portafolio</a>
         <a
           href="https://www.linkedin.com/in/brenda-guadalupe-flores-parada-09a52b126/"
           target="_blank"
@@ -808,6 +1064,39 @@
             .querySelectorAll("[data-whatsapp]")
             .forEach((el) => el.remove());
         }
+      })();
+
+      // Esta pagina nace en espanol porque es la que recibe el outbound,
+      // pero muchos duenos hispanos en EE.UU. traen el equipo en ingles.
+      const TITLES = {
+        es: "Diagnóstico de Operaciones para distribuidores | Brenda Flores",
+        en: "Operations Diagnostic for distributors | Brenda Flores",
+      };
+
+      function setLang(lang, remember) {
+        document.querySelectorAll("[data-es]").forEach((el) => {
+          el.innerHTML = el.dataset[lang] || el.dataset.es;
+        });
+        document.title = TITLES[lang] || TITLES.es;
+        document.querySelectorAll("[data-lang]").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === lang);
+        });
+        document.documentElement.lang = lang;
+        if (remember !== false) localStorage.setItem("lang", lang);
+      }
+
+      (function initLang() {
+        const saved = localStorage.getItem("lang");
+        if (saved === "en" || saved === "es") {
+          setLang(saved);
+          return;
+        }
+        const nav = (
+          navigator.languages && navigator.languages.length
+            ? navigator.languages[0]
+            : navigator.language || ""
+        ).toLowerCase();
+        setLang(nav.startsWith("es") ? "es" : "en", false);
       })();
 
       document.getElementById("year").textContent = new Date().getFullYear();
