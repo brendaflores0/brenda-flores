@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Diagnóstico de Operaciones para distribuidores | Brenda Flores</title>
+    <title>
+      Diagnóstico de Operaciones para distribuidores | Brenda Flores
+    </title>
     <meta
       name="description"
       content="Cinco días. Mapeo tu operación paso a paso y te entrego el plan de qué automatizar primero, con números. Para mayoristas y distribuidores que cotizan por WhatsApp y operan en Excel."
@@ -369,6 +371,11 @@
       .case {
         border: 1px solid var(--border);
         padding: 24px 22px;
+        /* Columna para poder anclar los numeros abajo. Las tarjetas ya miden
+           lo mismo de alto porque son celdas del grid; lo que las descuadraba
+           era que el divisor flotaba donde acabara cada parrafo. */
+        display: flex;
+        flex-direction: column;
       }
       .case .tag {
         font-family: var(--display);
@@ -391,6 +398,9 @@
         gap: 9px;
         border-top: 1px solid var(--border);
         padding-top: 15px;
+        /* Empuja el bloque al pie de la tarjeta: asi el divisor cae a la
+           misma altura en las dos, sin importar cuanto mida el parrafo. */
+        margin-top: auto;
       }
       .metric {
         display: flex;
@@ -404,10 +414,42 @@
         letter-spacing: -0.02em;
         color: var(--accent);
         line-height: 1;
+        /* La cifra no se encoge: si se estrecha por debajo de su ancho se
+           parte en dos renglones y, al alinearse por la primera linea base,
+           abre un hueco debajo. Que envuelva el texto de al lado, no ella. */
+        flex: none;
       }
       .metric span {
         font-size: 0.85rem;
         color: var(--ink-3);
+      }
+
+      /* Alinea las tres filas de la tarjeta (rotulo, parrafo, numeros) entre
+         las dos columnas, para que el divisor caiga a la misma altura aunque
+         los textos midan distinto. Anclar el bloque abajo no basta: eso solo
+         iguala el pie, y en ingles una etiqueta envuelve un renglon mas y
+         corre el divisor 22px. Va despues de .case y .metrics a proposito:
+         con la misma especificidad gana la ultima regla, y puesto antes el
+         display:grid lo pisaba el display:flex de arriba. Sin subgrid se cae
+         a ese flex, que al menos deja los pies parejos. */
+      @supports (grid-template-rows: subgrid) {
+        @media (min-width: 700px) {
+          .cases {
+            grid-template-rows: auto 1fr auto;
+            row-gap: 0;
+          }
+          .case {
+            display: grid;
+            grid-row: span 3;
+            grid-template-rows: subgrid;
+          }
+          /* La fila ya esta alineada: el margin-top:auto del fallback
+             empujaria el bloque mas corto al fondo de esa fila compartida,
+             que es exactamente el desfase que queremos quitar. */
+          .case .metrics {
+            margin-top: 0;
+          }
+        }
       }
 
       /* ---------- faq ---------- */
@@ -535,10 +577,7 @@
         <line x1="19" y1="12" x2="5" y2="12" />
         <polyline points="12 19 5 12 12 5" />
       </svg>
-      <span
-        class="label"
-        data-es="Brenda Flores"
-        data-en="Brenda Flores"
+      <span class="label" data-es="Brenda Flores" data-en="Brenda Flores"
         >Brenda Flores</span
       >
     </a>
@@ -597,13 +636,6 @@
             >
           </a>
         </div>
-        <p
-          class="cta-note"
-          data-es="Ingeniera de software · 7+ años · Trabajo en horario de Estados Unidos"
-          data-en="Software engineer · 7+ years · I work US hours, in English and Spanish"
-        >
-          Ingeniera de software · 7+ años · Trabajo en horario de Estados Unidos
-        </p>
       </div>
     </header>
 
@@ -711,13 +743,18 @@
 
         <div class="offer">
           <div class="price-row">
-            <span class="price">$1,500</span>
+            <!-- El plazo ocupa el lugar que tenia el precio: sigue siendo un
+                 dato duro y comprobable, pero no cierra la puerta a operaciones
+                 de tamaños distintos ni a los dos mercados. -->
+            <span class="price" data-es="5 días" data-en="5 days">5 días</span>
             <span
               class="price-meta"
-              data-es="USD · <b>5 días hábiles</b> · Se acredita completo si contratas el proyecto dentro de 60 días"
-              data-en="USD · <b>5 business days</b> · Credited in full if you hire the project within 60 days"
+              data-es="hábiles, de arranque a presentación · <b>El precio depende del tamaño de tu operación</b> y queda cerrado antes de empezar · Se acredita completo si contratas el proyecto dentro de 60 días"
+              data-en="business days, from kickoff to readout · <b>Pricing follows the size of your operation</b> and is agreed before we start · Credited in full if you hire the project within 60 days"
             >
-              USD · <b>5 días hábiles</b> · Se acredita completo si contratas el
+              hábiles, de arranque a presentación ·
+              <b>El precio depende del tamaño de tu operación</b> y queda
+              cerrado antes de empezar · Se acredita completo si contratas el
               proyecto dentro de 60 días
             </span>
           </div>
@@ -803,8 +840,8 @@
           data-en="Two businesses I took from manual operations to working software. Not mockups or proofs of concept: they are in production and their teams use them every day."
         >
           Dos negocios que pasé de operación manual a software funcionando. No
-          son maquetas ni pruebas de concepto: están en producción y su gente los
-          usa todos los días.
+          son maquetas ni pruebas de concepto: están en producción y su gente
+          los usa todos los días.
         </p>
 
         <div class="cases">
@@ -821,9 +858,9 @@
             >
               Catálogo de más de 300 SKUs, sin canal de pedidos en línea y con
               precios e inventario fuera de cualquier sistema. Cada cotización
-              pasaba por una persona. Le construí la tienda para sus clientes más
-              el sistema interno: catálogo, precios, pedidos, cobro con Stripe y
-              permisos por usuario.
+              pasaba por una persona. Le construí la tienda para sus clientes
+              más el sistema interno: catálogo, precios, pedidos, cobro con
+              Stripe y permisos por usuario.
             </p>
             <div class="metrics">
               <div class="metric">
@@ -863,7 +900,7 @@
             </p>
             <div class="metrics">
               <div class="metric">
-                <b>30-40%</b
+                <b>40%</b
                 ><span
                   data-es="menos trabajo administrativo manual"
                   data-en="less manual admin work"
@@ -908,8 +945,9 @@
               >
                 Casi siempre sí, y suele ser más barato. La pregunta correcta no
                 es qué sistema tienen, sino qué siguen haciendo fuera de él: en
-                Excel, en WhatsApp o a mano. Ese hueco es donde está el problema,
-                y ahí entro integrando en vez de reemplazar lo que ya pagas.
+                Excel, en WhatsApp o a mano. Ese hueco es donde está el
+                problema, y ahí entro integrando en vez de reemplazar lo que ya
+                pagas.
               </p>
             </div>
           </details>
@@ -927,9 +965,9 @@
               >
                 Porque son cinco días de trabajo real y porque el documento te
                 sirve contrates o no: puedes llevártelo con otro proveedor si
-                quieres. Lo que sí hago es acreditarlo completo si decides seguir
-                conmigo, así que si vamos a trabajar juntos, en la práctica sale
-                gratis.
+                quieres. Lo que sí hago es acreditarlo completo si decides
+                seguir conmigo, así que si vamos a trabajar juntos, en la
+                práctica sale gratis.
               </p>
             </div>
           </details>
@@ -942,34 +980,39 @@
             </summary>
             <div class="answer">
               <p
-                data-es="Depende de qué salga en el diagnóstico, pero para que tengas referencia: un módulo específico funcionando (catálogo con precios por cliente, pedidos y cobro) arranca en $6,500 y toma unas cuatro semanas. Una plataforma de operaciones completa va de $14,000 a $22,000. Nunca te doy un número sin haber visto tu operación."
-                data-en="It depends on what the diagnostic turns up, but for reference: one specific module in production (catalog with per-customer pricing, orders and payments) starts at $6,500 and takes about four weeks. A full operations platform runs $14,000 to $22,000. I never quote a number without having seen your operation."
+                data-es="Depende de qué salga en el diagnóstico. Para que tengas referencia de tamaños: un módulo específico funcionando (catálogo con precios por cliente, pedidos y cobro) toma unas cuatro semanas. Una plataforma de operaciones completa es un proyecto de varios meses. El precio sale del alcance que definimos al cerrar el diagnóstico, y nunca te doy un número sin haber visto tu operación."
+                data-en="It depends on what the diagnostic turns up. To give you a sense of scale: one specific module in production (catalog with per-customer pricing, orders and payments) takes about four weeks. A full operations platform is a project of several months. The price comes out of the scope we agree on at the readout, and I never quote a number without having seen your operation."
               >
-                Depende de qué salga en el diagnóstico, pero para que tengas
-                referencia: un módulo específico funcionando (catálogo con
-                precios por cliente, pedidos y cobro) arranca en $6,500 y toma
-                unas cuatro semanas. Una plataforma de operaciones completa va de
-                $14,000 a $22,000. Nunca te doy un número sin haber visto tu
-                operación.
+                Depende de qué salga en el diagnóstico. Para que tengas
+                referencia de tamaños: un módulo específico funcionando
+                (catálogo con precios por cliente, pedidos y cobro) toma unas
+                cuatro semanas. Una plataforma de operaciones completa es un
+                proyecto de varios meses. El precio sale del alcance que
+                definimos al cerrar el diagnóstico, y nunca te doy un número sin
+                haber visto tu operación.
               </p>
             </div>
           </details>
           <details>
             <summary
-              data-es="Estás en México. ¿Cómo funciona eso?"
-              data-en="You are in Mexico. How does that work?"
+              data-es="¿Cómo mides mi operación sin estar aquí?"
+              data-en="How do you measure my operation without being here?"
             >
-              Estás en México. ¿Cómo funciona eso?
+              ¿Cómo mides mi operación sin estar aquí?
             </summary>
             <div class="answer">
               <p
-                data-es="Trabajo en horario de Estados Unidos y todos mis clientes me tienen en WhatsApp. Contesto el mismo día. Desde 2018 he dado soporte a cada proyecto que he entregado, también después del lanzamiento."
-                data-en="I work US hours and every client has me on WhatsApp. I reply the same day. Since 2018 I have supported every project I have delivered, including after launch."
+                data-es="El diagnóstico es remoto y lo que hay que medir lo mide tu gente. Durante tres días, quien más pedidos toma llena una hoja de papel: a qué hora entró cada uno, por dónde y a qué hora quedó. Eso es mejor muestra que yo parada media tarde viendo diez pedidos. El resto lo veo por pantalla compartida mientras levantan un pedido real, y con un video de cinco minutos del mostrador en hora pico. Trabajo en tu horario y me tienes en WhatsApp; si en algún punto conviene que vaya, lo hablamos."
+                data-en="The diagnostic runs remotely, and the measuring is done by your own people. For three days, whoever takes the most orders fills in a paper sheet: when each one came in, through which channel, and when it was done. That is a better sample than me standing there one afternoon watching ten orders. The rest I see over screen share while they enter a real order, plus a five-minute phone video of the counter at peak. I work your hours and you have me on WhatsApp; if at some point it makes sense for me to travel, we talk about it."
               >
-                Trabajo en horario de Estados Unidos y todos mis clientes me
-                tienen en WhatsApp. Contesto el mismo día. Desde 2018 he dado
-                soporte a cada proyecto que he entregado, también después del
-                lanzamiento.
+                El diagnóstico es remoto y lo que hay que medir lo mide tu
+                gente. Durante tres días, quien más pedidos toma llena una hoja
+                de papel: a qué hora entró cada uno, por dónde y a qué hora
+                quedó. Eso es mejor muestra que yo parada media tarde viendo
+                diez pedidos. El resto lo veo por pantalla compartida mientras
+                levantan un pedido real, y con un video de cinco minutos del
+                mostrador en hora pico. Trabajo en tu horario y me tienes en
+                WhatsApp; si en algún punto conviene que vaya, lo hablamos.
               </p>
             </div>
           </details>
@@ -982,13 +1025,14 @@
             </summary>
             <div class="answer">
               <p
-                data-es="Dos sesiones de hora y media contigo o con quien lleve la operación, y un rato con la persona del mostrador para verla trabajar. Nada de preparar reportes ni juntar información: yo voy a donde está el trabajo."
-                data-en="Two ninety-minute sessions with you or whoever runs the operation, plus some time with the person at the counter to watch them work. No reports to prepare, nothing to gather: I come to where the work happens."
+                data-es="Dos sesiones de hora y media contigo o con quien lleve la operación, y un rato por pantalla compartida con la persona del mostrador para verla levantar un pedido real. Nada de preparar reportes ni juntar información: prefiero ver el trabajo tal como pasa."
+                data-en="Two ninety-minute sessions with you or whoever runs the operation, plus some time on a screen share with the person at the counter, watching them enter a real order. No reports to prepare, nothing to gather: I would rather see the work exactly as it happens."
               >
                 Dos sesiones de hora y media contigo o con quien lleve la
-                operación, y un rato con la persona del mostrador para verla
-                trabajar. Nada de preparar reportes ni juntar información: yo voy
-                a donde está el trabajo.
+                operación, y un rato por pantalla compartida con la persona del
+                mostrador para verla levantar un pedido real. Nada de preparar
+                reportes ni juntar información: prefiero ver el trabajo tal como
+                pasa.
               </p>
             </div>
           </details>
@@ -1024,8 +1068,8 @@
           negocio y no por una lista de funciones.
         </p>
         <p
-          data-es="Puedes ver el detalle técnico y los demás proyectos en <a href=&quot;./&quot;>mi portafolio</a>."
-          data-en="You can see the technical detail and my other projects in <a href=&quot;./&quot;>my portfolio</a>."
+          data-es='Puedes ver el detalle técnico y los demás proyectos en <a href="./">mi portafolio</a>.'
+          data-en='You can see the technical detail and my other projects in <a href="./">my portfolio</a>.'
         >
           Puedes ver el detalle técnico y los demás proyectos en
           <a href="./">mi portafolio</a>.
