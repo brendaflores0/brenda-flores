@@ -19,9 +19,12 @@
 const GA4_ID = "G-JVWNHGYB4X";
 const CLARITY_ID = "y2c10lyinw";
 
-/* Barra de aviso de cookies. Ponla en false si prefieres quitarla:
-   el resto de la analitica sigue funcionando igual. */
-const COOKIE_NOTICE = true;
+/* Barra de aviso de cookies. Apagada: no la pide Mexico, que lo que quiere
+   es un aviso de privacidad enlazado, ni Estados Unidos. La UE si exige
+   banner, pero uno que BLOQUEE los scripts hasta que acepten, y este no lo
+   hacia. O sea que estorbaba sin cubrir nada. Ponla en true para recuperarla
+   tal cual; si algun dia vendes a Europa hace falta rehacerla bloqueante. */
+const COOKIE_NOTICE = false;
 
 (function analytics() {
   "use strict";
