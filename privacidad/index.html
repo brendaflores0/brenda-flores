@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aviso de privacidad | Brenda Flores</title>
+    <meta
+      name="description"
+      content="Qué datos recojo en brendaflores.co, para qué los uso y cómo pedirme que los borre."
+    />
+    <!-- Se indexa: un aviso que no se encuentra no sirve de aviso. -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js -->
+    <script src="/analytics.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --ink: #0f0f1a;
+        --ink-2: #3c3c4e;
+        --ink-3: #6b7280;
+        --paper: #ffffff;
+        --paper-2: #f7f7fb;
+        --border: #e5e7eb;
+        --accent: #4f46e5;
+        --display: "Syne", sans-serif;
+        --body: "DM Sans", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 17px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      h1,
+      h2 {
+        font-family: var(--display);
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        text-wrap: balance;
+        margin: 0;
+      }
+
+      /* ---------- navegacion ---------- */
+
+      #back {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 50;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--display);
+        font-size: 0.76rem;
+        font-weight: 700;
+        color: var(--ink-2);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(6px);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 8px 15px 8px 12px;
+        text-decoration: none;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      #back:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      #back svg {
+        width: 0.85rem;
+        height: 0.85rem;
+        flex-shrink: 0;
+      }
+      @media (max-width: 520px) {
+        #back .label {
+          display: none;
+        }
+        #back {
+          padding: 9px 11px;
+        }
+      }
+
+      #lang {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 50;
+        display: flex;
+        gap: 2px;
+        background: var(--ink);
+        border-radius: 8px;
+        padding: 4px;
+        box-shadow: 0 2px 10px rgba(15, 15, 26, 0.18);
+      }
+      #lang button {
+        font-family: var(--display);
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.55);
+        background: transparent;
+        border: 0;
+        border-radius: 5px;
+        padding: 0.3rem 0.55rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      #lang button.active {
+        background: #fff;
+        color: var(--ink);
+      }
+
+      /* ---------- documento ---------- */
+
+      header.head {
+        padding: 92px 0 34px;
+        border-bottom: 1px solid var(--border);
+      }
+      .kicker {
+        font-family: var(--display);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0 0 18px;
+      }
+      h1 {
+        font-size: clamp(1.9rem, 4.6vw, 2.6rem);
+        font-weight: 800;
+        margin-bottom: 16px;
+      }
+      .lede {
+        color: var(--ink-2);
+        margin: 0;
+        max-width: 60ch;
+      }
+      .updated {
+        font-size: 0.85rem;
+        color: var(--ink-3);
+        margin: 18px 0 0;
+      }
+
+      section {
+        padding: 34px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      h2 {
+        font-size: 1.18rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      p {
+        margin: 0 0 14px;
+        color: var(--ink-2);
+      }
+      p:last-child,
+      ul:last-child {
+        margin-bottom: 0;
+      }
+      ul {
+        margin: 0 0 14px;
+        padding-left: 20px;
+        color: var(--ink-2);
+      }
+      li {
+        margin-bottom: 7px;
+      }
+      li:last-child {
+        margin-bottom: 0;
+      }
+      strong {
+        color: var(--ink);
+        font-weight: 500;
+      }
+      a {
+        color: var(--accent);
+      }
+
+      .box {
+        background: var(--paper-2);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 20px 22px;
+        margin-top: 18px;
+      }
+      .box p {
+        margin-bottom: 0;
+        font-size: 0.94rem;
+      }
+
+      footer {
+        padding: 30px 0 60px;
+        font-size: 0.86rem;
+        color: var(--ink-3);
+      }
+      footer .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 22px;
+      }
+      footer a {
+        color: var(--ink-3);
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a id="back" href="/">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <line x1="19" y1="12" x2="5" y2="12" />
+        <polyline points="12 19 5 12 12 5" />
+      </svg>
+      <span class="label">Brenda Flores</span>
+    </a>
+
+    <div id="lang">
+      <button data-lang="es" class="active">ES</button>
+      <button data-lang="en">EN</button>
+    </div>
+
+    <header class="head">
+      <div class="wrap">
+        <p class="kicker" data-es="brendaflores.co" data-en="brendaflores.co">
+          brendaflores.co
+        </p>
+        <h1 data-es="Aviso de privacidad" data-en="Privacy notice">
+          Aviso de privacidad
+        </h1>
+        <p
+          class="lede"
+          data-es="Qué datos recojo cuando entras a este sitio, para qué los uso y cómo pedirme que los borre. Escrito para que se entienda, no para cubrirme."
+          data-en="What data I collect when you visit this site, what I use it for, and how to ask me to delete it. Written to be understood, not to cover myself."
+        >
+          Qué datos recojo cuando entras a este sitio, para qué los uso y cómo
+          pedirme que los borre. Escrito para que se entienda, no para cubrirme.
+        </p>
+        <p
+          class="updated"
+          data-es="Última actualización: 14 de agosto de 2026"
+          data-en="Last updated: August 14, 2026"
+        >
+          Última actualización: 14 de agosto de 2026
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="wrap">
+          <h2 data-es="Quién soy" data-en="Who I am">Quién soy</h2>
+          <p
+            data-es="Soy Brenda Flores, ingeniera de software independiente, y soy la responsable de los datos que se recogen en brendaflores.co. Puedes escribirme a <a href=&quot;mailto:brenda@brendaflores.co&quot;>brenda@brendaflores.co</a> para cualquier cosa de esta página."
+            data-en="I am Brenda Flores, an independent software engineer, and I am responsible for the data collected on brendaflores.co. You can write to me at <a href=&quot;mailto:brenda@brendaflores.co&quot;>brenda@brendaflores.co</a> about anything on this page."
+          >
+            Soy Brenda Flores, ingeniera de software independiente, y soy la
+            responsable de los datos que se recogen en brendaflores.co. Puedes
+            escribirme a
+            <a href="mailto:brenda@brendaflores.co">brenda@brendaflores.co</a>
+            para cualquier cosa de esta página.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <h2 data-es="Qué datos recojo" data-en="What data I collect">
+            Qué datos recojo
+          </h2>
+          <p
+            data-es="Hay dos tipos, y conviene no mezclarlos."
+            data-en="There are two kinds, and it helps not to mix them up."
+          >
+            Hay dos tipos, y conviene no mezclarlos.
+          </p>
+          <p
+            data-es="<strong>Lo que se recoge solo, por el hecho de entrar:</strong> qué páginas ves y cuánto tiempo, desde dónde llegaste (LinkedIn, Google, un mensaje), tu país y ciudad aproximados, el tipo de dispositivo y navegador, el idioma, y en qué botones haces clic. También se graban sesiones anónimas: el recorrido del cursor y el desplazamiento por la página, sin nada que te identifique. Tu dirección IP se recorta antes de guardarse, así que no queda completa."
+            data-en="<strong>What is collected automatically, just by visiting:</strong> which pages you view and for how long, where you arrived from (LinkedIn, Google, a message), your approximate country and city, your device and browser type, your language, and which buttons you click. Anonymous sessions are also recorded: cursor movement and scrolling, with nothing that identifies you. Your IP address is truncated before it is stored, so it is never kept in full."
+          >
+            <strong>Lo que se recoge solo, por el hecho de entrar:</strong> qué
+            páginas ves y cuánto tiempo, desde dónde llegaste (LinkedIn, Google,
+            un mensaje), tu país y ciudad aproximados, el tipo de dispositivo y
+            navegador, el idioma, y en qué botones haces clic. También se graban
+            sesiones anónimas: el recorrido del cursor y el desplazamiento por la
+            página, sin nada que te identifique. Tu dirección IP se recorta antes
+            de guardarse, así que no queda completa.
+          </p>
+          <p
+            data-es="<strong>Lo que me das tú:</strong> si me escribes por WhatsApp, por correo o agendas una llamada, me llega tu nombre, tu teléfono o correo y lo que me cuentes de tu negocio. Eso lo compartes a propósito y solo lo tengo porque decidiste dármelo."
+            data-en="<strong>What you give me:</strong> if you message me on WhatsApp, email me, or book a call, I receive your name, your phone or email, and whatever you tell me about your business. You share that on purpose, and I only have it because you decided to give it to me."
+          >
+            <strong>Lo que me das tú:</strong> si me escribes por WhatsApp, por
+            correo o agendas una llamada, me llega tu nombre, tu teléfono o
+            correo y lo que me cuentes de tu negocio. Eso lo compartes a
+            propósito y solo lo tengo porque decidiste dármelo.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <h2 data-es="Para qué los uso" data-en="What I use it for">
+            Para qué los uso
+          </h2>
+          <ul>
+            <li
+              data-es="Saber qué partes del sitio sirven y cuáles no, para arreglar las que no."
+              data-en="To know which parts of the site work and which do not, so I can fix the ones that do not."
+            >
+              Saber qué partes del sitio sirven y cuáles no, para arreglar las
+              que no.
+            </li>
+            <li
+              data-es="Entender por dónde llega la gente, para saber dónde vale la pena estar."
+              data-en="To understand where people arrive from, so I know where it is worth being."
+            >
+              Entender por dónde llega la gente, para saber dónde vale la pena
+              estar.
+            </li>
+            <li
+              data-es="Responderte, si me escribiste."
+              data-en="To reply to you, if you wrote to me."
+            >
+              Responderte, si me escribiste.
+            </li>
+          </ul>
+          <div class="box">
+            <p
+              data-es="<strong>Y lo que no hago:</strong> no vendo ni intercambio tus datos, no hago publicidad ni te sigo por otros sitios, no armo perfiles tuyos y no mando correos que no me hayas pedido. Si me escribes y no cerramos nada, ahí queda."
+              data-en="<strong>And what I do not do:</strong> I do not sell or trade your data, I do not run ads or track you across other sites, I do not build profiles of you, and I do not send emails you did not ask for. If you write to me and nothing comes of it, that is where it ends."
+            >
+              <strong>Y lo que no hago:</strong> no vendo ni intercambio tus
+              datos, no hago publicidad ni te sigo por otros sitios, no armo
+              perfiles tuyos y no mando correos que no me hayas pedido. Si me
+              escribes y no cerramos nada, ahí queda.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <h2 data-es="Quién más los ve" data-en="Who else sees it">
+            Quién más los ve
+          </h2>
+          <p
+            data-es="No trabajo sola con esto. Estas empresas procesan parte de los datos por mí, cada una con sus propias políticas:"
+            data-en="I do not handle this alone. These companies process some of the data on my behalf, each under their own policies:"
+          >
+            No trabajo sola con esto. Estas empresas procesan parte de los datos
+            por mí, cada una con sus propias políticas:
+          </p>
+          <ul>
+            <li
+              data-es="<strong>Google Analytics</strong>, para las métricas del sitio."
+              data-en="<strong>Google Analytics</strong>, for site metrics."
+            >
+              <strong>Google Analytics</strong>, para las métricas del sitio.
+            </li>
+            <li
+              data-es="<strong>Microsoft Clarity</strong>, para las grabaciones anónimas y los mapas de calor."
+              data-en="<strong>Microsoft Clarity</strong>, for anonymous recordings and heatmaps."
+            >
+              <strong>Microsoft Clarity</strong>, para las grabaciones anónimas y
+              los mapas de calor.
+            </li>
+            <li
+              data-es="<strong>Calendly</strong>, si agendas una llamada."
+              data-en="<strong>Calendly</strong>, if you book a call."
+            >
+              <strong>Calendly</strong>, si agendas una llamada.
+            </li>
+            <li
+              data-es="<strong>WhatsApp</strong>, si me escribes por ahí."
+              data-en="<strong>WhatsApp</strong>, if you message me there."
+            >
+              <strong>WhatsApp</strong>, si me escribes por ahí.
+            </li>
+            <li
+              data-es="<strong>GitHub Pages</strong>, que es donde vive este sitio."
+              data-en="<strong>GitHub Pages</strong>, which is where this site lives."
+            >
+              <strong>GitHub Pages</strong>, que es donde vive este sitio.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <h2 data-es="Cookies" data-en="Cookies">Cookies</h2>
+          <p
+            data-es="Este sitio usa cookies solo para las métricas de arriba. Ninguna es de publicidad. Puedes bloquearlas desde la configuración de tu navegador, o instalar el <a href=&quot;https://tools.google.com/dlpage/gaoptout&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>complemento de Google para desactivar Analytics</a>. El sitio funciona igual sin ellas: no se rompe nada ni te pide nada a cambio."
+            data-en="This site uses cookies only for the metrics above. None of them are advertising cookies. You can block them in your browser settings, or install <a href=&quot;https://tools.google.com/dlpage/gaoptout&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Google's opt-out add-on for Analytics</a>. The site works the same without them: nothing breaks and nothing is asked of you in return."
+          >
+            Este sitio usa cookies solo para las métricas de arriba. Ninguna es
+            de publicidad. Puedes bloquearlas desde la configuración de tu
+            navegador, o instalar el
+            <a
+              href="https://tools.google.com/dlpage/gaoptout"
+              target="_blank"
+              rel="noopener"
+              >complemento de Google para desactivar Analytics</a
+            >. El sitio funciona igual sin ellas: no se rompe nada ni te pide
+            nada a cambio.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <h2 data-es="Tus derechos" data-en="Your rights">Tus derechos</h2>
+          <p
+            data-es="Puedes pedirme que te diga qué tengo tuyo, que lo corrija si está mal, que lo borre, o que deje de usarlo. En México a esto se le llaman derechos ARCO: acceso, rectificación, cancelación y oposición."
+            data-en="You can ask me what I hold about you, ask me to correct it if it is wrong, ask me to delete it, or ask me to stop using it. In Mexico these are called ARCO rights: access, rectification, cancellation and objection."
+          >
+            Puedes pedirme que te diga qué tengo tuyo, que lo corrija si está
+            mal, que lo borre, o que deje de usarlo. En México a esto se le
+            llaman derechos ARCO: acceso, rectificación, cancelación y
+            oposición.
+          </p>
+          <p
+            data-es="No hay formulario ni trámite. Escríbeme a <a href=&quot;mailto:brenda@brendaflores.co&quot;>brenda@brendaflores.co</a> diciéndome qué quieres y te contesto en un plazo máximo de 20 días hábiles. Normalmente el mismo día."
+            data-en="There is no form and no process. Write to me at <a href=&quot;mailto:brenda@brendaflores.co&quot;>brenda@brendaflores.co</a> telling me what you want, and I will reply within 20 business days at most. Usually the same day."
+          >
+            No hay formulario ni trámite. Escríbeme a
+            <a href="mailto:brenda@brendaflores.co">brenda@brendaflores.co</a>
+            diciéndome qué quieres y te contesto en un plazo máximo de 20 días
+            hábiles. Normalmente el mismo día.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <h2
+            data-es="Si cambio este aviso"
+            data-en="If I change this notice"
+          >
+            Si cambio este aviso
+          </h2>
+          <p
+            data-es="Lo actualizo en esta misma página y cambio la fecha de arriba. Si el cambio es de fondo y ya habíamos hablado, te aviso por el mismo medio por el que me escribiste."
+            data-en="I update it on this same page and change the date above. If the change is substantial and we had already been in touch, I will tell you through the same channel you used to reach me."
+          >
+            Lo actualizo en esta misma página y cambio la fecha de arriba. Si el
+            cambio es de fondo y ya habíamos hablado, te aviso por el mismo medio
+            por el que me escribiste.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>&copy; <span id="year"></span> Brenda Flores</span>
+        <a href="/" data-es="Portafolio" data-en="Portfolio">Portafolio</a>
+        <a
+          href="/diagnostico.html"
+          data-es="Diagnóstico"
+          data-en="Diagnostic"
+          >Diagnóstico</a
+        >
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const TITLES = {
+        es: "Aviso de privacidad | Brenda Flores",
+        en: "Privacy notice | Brenda Flores",
+      };
+
+      function setLang(lang, remember) {
+        document.querySelectorAll("[data-es]").forEach((el) => {
+          el.innerHTML = el.dataset[lang] || el.dataset.es;
+        });
+        document.title = TITLES[lang] || TITLES.es;
+        document.querySelectorAll("[data-lang]").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === lang);
+        });
+        document.documentElement.lang = lang;
+        if (remember !== false) localStorage.setItem("lang", lang);
+      }
+
+      (function initLang() {
+        const saved = localStorage.getItem("lang");
+        if (saved === "en" || saved === "es") {
+          setLang(saved);
+          return;
+        }
+        const nav = (
+          navigator.languages && navigator.languages.length
+            ? navigator.languages[0]
+            : navigator.language || ""
+        ).toLowerCase();
+        setLang(nav.startsWith("es") ? "es" : "en", false);
+      })();
+
+      document.querySelectorAll("[data-lang]").forEach((btn) => {
+        btn.addEventListener("click", () => setLang(btn.dataset.lang));
+      });
+    </script>
+  </body>
+</html>
