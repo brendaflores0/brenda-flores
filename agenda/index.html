@@ -14,11 +14,20 @@
          ════════════════════════════════════════════════════════════ -->
 
     <!-- destino 1 de 3 -->
+    <!-- El "1" en vez de "0" es a proposito: le da a la analitica el
+         instante que necesita para registrar la visita antes de que el
+         navegador se vaya a Calendly. Es el fallback si el JS no corre. -->
     <meta
       http-equiv="refresh"
-      content="0; url=https://calendly.com/brenda-brendaflores/20min"
+      content="1; url=https://calendly.com/brenda-brendaflores/20min"
     />
     <meta name="robots" content="noindex, follow" />
+
+    <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js.
+         Aqui importa mas que en las otras paginas, porque esta es la liga
+         que repartes en la firma y en LinkedIn: es el unico sitio donde se
+         ve a la gente que agenda sin haber pasado por el portafolio. -->
+    <script src="/analytics.js"></script>
 
     <style>
       :root {
@@ -101,8 +110,23 @@
     </div>
 
     <script>
+      // Se manda antes del salto para poder contar las visitas que
+      // llegan directo a /agenda sin pasar por el sitio.
+      if (typeof gtag === "function") {
+        gtag("event", "click_agenda", {
+          seccion: "redirect-directo",
+          texto: "visita directa a /agenda",
+          pagina: "/agenda",
+        });
+      }
       // destino 3 de 3
-      window.location.replace("https://calendly.com/brenda-brendaflores/20min");
+      // Los 700ms son para que el evento salga. Ni se notan, y la pagina
+      // ya dice "te estoy llevando al calendario" mientras tanto.
+      setTimeout(function () {
+        window.location.replace(
+          "https://calendly.com/brenda-brendaflores/20min"
+        );
+      }, 700);
     </script>
   </body>
 </html>
