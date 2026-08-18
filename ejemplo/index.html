@@ -9,6 +9,26 @@
       content="El documento completo que recibes al quinto día del diagnóstico, llenado con un caso de ejemplo: los cuatro pilares calificados, dónde se van las horas, qué se detiene si alguien falta, y el roadmap por fases."
     />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://brendaflores.co/ejemplo/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ejemplo de una Radiografía de Operación | Brenda Flores" />
+    <meta
+      property="og:description"
+      content="El documento completo que recibes al quinto día del diagnóstico, llenado con un caso de ejemplo: los cuatro pilares calificados, dónde se van las horas, qué se detiene si alguien falta, y el roadmap por fases."
+    />
+    <meta property="og:url" content="https://brendaflores.co/ejemplo/" />
+    <meta property="og:image" content="https://brendaflores.co/images/og-image.jpg" />
+    <meta property="og:locale" content="es_MX" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ejemplo de una Radiografía de Operación | Brenda Flores" />
+    <meta
+      name="twitter:description"
+      content="El documento completo que recibes al quinto día del diagnóstico, llenado con un caso de ejemplo: los cuatro pilares calificados, dónde se van las horas, qué se detiene si alguien falta, y el roadmap por fases."
+    />
+    <meta name="twitter:image" content="https://brendaflores.co/images/og-image.jpg" />
+
     <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js.
          Aqui importa: quien abre el ejemplo y lo lee completo es el
          prospecto mas caliente que vas a tener sin haber hablado. -->
@@ -581,8 +601,151 @@
         border-color: var(--accent);
         color: var(--accent);
       }
+      .btn-wa {
+        background: #1f8f5f;
+        color: #fff;
+      }
+      .btn-wa:hover {
+        background: #167a4f;
+      }
+      .btn-wa svg {
+        width: 1.05rem;
+        height: 1.05rem;
+        flex-shrink: 0;
+      }
       footer .legal {
         font-size: 0.82rem;
+        color: var(--ink-3);
+      }
+
+      /*  El resto de la pagina es documento: papel, tablas, texto angosto,
+          todo dentro de .sheet (max-width 60rem). Este bloque es a proposito
+          lo contrario: mismo fondo oscuro y mismo ancho completo que el CTA
+          final de diagnostico.html, para que no se lea como una nota al pie
+          del documento sino como la parte del sitio que pide una accion.
+          Por eso vive fuera de .sheet, como seccion propia. */
+      .contact-block {
+        background: var(--ink);
+        color: #fff;
+        padding: 3.5rem 0;
+      }
+      /* Mismo motivo que .sheet[hidden] arriba: "section" ya trae
+         display:flex propio, y sin esto [hidden] pierde contra esa regla
+         y se ven los dos idiomas a la vez. */
+      .contact-block[hidden] {
+        display: none;
+      }
+      .contact-block .wrap {
+        max-width: 60rem;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .contact-block .lead-form-wrap {
+        padding-top: 0;
+        margin-top: 1.2rem;
+      }
+      .contact-block .lead-form-wrap .lede {
+        color: #a5a5b8;
+      }
+      .contact-block .lead-form input,
+      .contact-block .lead-form textarea {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.18);
+        color: #fff;
+      }
+      .contact-block .lead-form input::placeholder,
+      .contact-block .lead-form textarea::placeholder {
+        color: #71718a;
+      }
+      .contact-block .lead-form input.invalid {
+        border-color: #e0625a;
+      }
+      .contact-block .lead-form .field-error {
+        color: #f0a39d;
+      }
+      .contact-block .lead-form-msg {
+        color: #a5a5b8;
+      }
+      .contact-block .btn-primary {
+        background: var(--accent);
+      }
+      .contact-block .btn-primary:hover {
+        background: #6366f1;
+      }
+      .contact-block .btn-ghost {
+        border-color: rgba(255, 255, 255, 0.25);
+        color: #fff;
+      }
+      .contact-block .btn-ghost:hover {
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      /* ---------- lead form ---------- */
+
+      .lead-form-wrap {
+        padding-top: 0.2rem;
+      }
+      .lead-form-wrap .lede {
+        font-size: 0.92rem;
+        color: var(--ink-3);
+        margin: 0 0 0.7rem;
+      }
+      .lead-form {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .lead-form[hidden] {
+        display: none;
+      }
+      .lead-form .field {
+        flex: 1 1 200px;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .lead-form input,
+      .lead-form textarea {
+        width: 100%;
+        background: var(--paper-2);
+        border: 1px solid var(--border);
+        color: var(--ink);
+        border-radius: 10px;
+        padding: 12px 15px;
+        font-family: var(--body);
+        font-size: 0.92rem;
+        resize: vertical;
+      }
+      .lead-form textarea {
+        flex-basis: 100%;
+        min-height: 3rem;
+      }
+      .lead-form input::placeholder,
+      .lead-form textarea::placeholder {
+        color: var(--ink-3);
+      }
+      .lead-form input:focus-visible,
+      .lead-form textarea:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .lead-form input.invalid {
+        border-color: #d1483f;
+      }
+      .lead-form .field-error {
+        font-size: 0.8rem;
+        color: #c2453c;
+        display: none;
+      }
+      .lead-form .field-error.show {
+        display: block;
+      }
+      .lead-form-msg {
+        margin-top: 12px;
+        font-size: 0.88rem;
         color: var(--ink-3);
       }
     </style>
@@ -1141,10 +1304,6 @@
       Este es el formato. Lo que va adentro sale de tu operación, medido en cinco
       días, y te lo entrego aunque no vuelvas a hablar conmigo.
     </p>
-    <div class="cta-row">
-      <a href="https://brendaflores.co/agenda" class="btn btn-primary" target="_blank" rel="noopener">Agendar 20 minutos</a>
-      <a href="/diagnostico.html" class="btn btn-ghost">Ver cómo funciona</a>
-    </div>
     <p class="legal">
       Distribuidora El Norte es un negocio ficticio y sirve solo para mostrar el
       documento terminado. © <span class="year"></span> Brenda Flores
@@ -1684,10 +1843,6 @@
           This is the format. What goes inside comes out of your operation, measured over
           five days, and I hand it to you whether or not we speak again.
         </p>
-        <div class="cta-row">
-          <a href="https://brendaflores.co/agenda" class="btn btn-primary" target="_blank" rel="noopener">Book 20 minutes</a>
-          <a href="/diagnostico.html" class="btn btn-ghost">See how it works</a>
-        </div>
         <p class="legal">
           Distribuidora El Norte is a fictional business and exists only to show the
           finished document. &copy; <span class="year"></span> Brenda Flores
@@ -1695,6 +1850,82 @@
       </footer>
     </div>
 
+    <!--  El contacto va fuera del documento, a todo el ancho, mismo trato
+          que el CTA final de diagnostico.html: para que se sienta parte
+          del sitio y no una nota al pie del PDF.  -->
+    <section class="contact-block" data-sheet="es">
+      <div class="wrap">
+        <div class="cta-row">
+          <a href="#" data-whatsapp class="btn btn-wa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z" />
+            </svg>
+            Escribir por WhatsApp
+          </a>
+          <a href="/diagnostico.html" class="btn btn-ghost">Ver cómo funciona</a>
+        </div>
+
+        <div class="lead-form-wrap">
+          <p class="lede">¿Prefieres que te contacte yo? Déjame tus datos.</p>
+          <form class="lead-form" id="lead-form-es" novalidate>
+            <div class="field">
+              <input type="text" name="nombre" autocomplete="name" placeholder="Tu nombre (opcional)" pattern="[^0-9]*" />
+              <span class="field-error">No puede contener números.</span>
+            </div>
+            <div class="field">
+              <input type="email" name="email" required autocomplete="email" placeholder="Tu correo" />
+              <span class="field-error"></span>
+            </div>
+            <div class="field">
+              <input type="tel" name="telefono" autocomplete="tel" placeholder="Tu WhatsApp o teléfono (opcional)" pattern="[0-9+\-\s\(\)]{7,20}" />
+              <span class="field-error">Ingresa un teléfono válido: solo números, espacios, + o -.</span>
+            </div>
+            <textarea name="nota" rows="2" placeholder="Cuéntame brevemente de tu negocio (opcional)"></textarea>
+            <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="_subject" value="Lead: ejemplo (caso leido completo)" />
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+          <p class="lead-form-msg" id="lead-form-msg-es" hidden></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-block" data-sheet="en" hidden>
+      <div class="wrap">
+        <div class="cta-row">
+          <a href="#" data-whatsapp class="btn btn-wa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z" />
+            </svg>
+            Message on WhatsApp
+          </a>
+          <a href="/diagnostico.html" class="btn btn-ghost">See how it works</a>
+        </div>
+
+        <div class="lead-form-wrap">
+          <p class="lede">Prefer that I reach out to you? Leave your details.</p>
+          <form class="lead-form" id="lead-form-en" novalidate>
+            <div class="field">
+              <input type="text" name="nombre" autocomplete="name" placeholder="Your name (optional)" pattern="[^0-9]*" />
+              <span class="field-error">It cannot contain numbers.</span>
+            </div>
+            <div class="field">
+              <input type="email" name="email" required autocomplete="email" placeholder="Your email" />
+              <span class="field-error"></span>
+            </div>
+            <div class="field">
+              <input type="tel" name="telefono" autocomplete="tel" placeholder="Your WhatsApp or phone (optional)" pattern="[0-9+\-\s\(\)]{7,20}" />
+              <span class="field-error">Enter a valid phone number: numbers, spaces, + or - only.</span>
+            </div>
+            <textarea name="nota" rows="2" placeholder="Briefly tell me about your business (optional)"></textarea>
+            <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="_subject" value="Lead: ejemplo/en (full case read)" />
+            <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+          <p class="lead-form-msg" id="lead-form-msg-en" hidden></p>
+        </div>
+      </div>
+    </section>
 
     <script>
       /*  Este documento es largo, asi que en vez de partir cada frase en
@@ -1738,6 +1969,113 @@
       document.querySelectorAll(".year").forEach((el) => {
         el.textContent = new Date().getFullYear();
       });
+
+      /* Mismo numero que diagnostico.html/index.html. */
+      const WHATSAPP = "+52 442 285 0248";
+      const WA_TEXT =
+        "Hola Brenda, vi el ejemplo completo del diagnóstico. Quiero saber si aplica a mi negocio.";
+      if (WHATSAPP) {
+        const waHref =
+          "https://wa.me/" +
+          WHATSAPP.replace(/\D/g, "") +
+          "?text=" +
+          encodeURIComponent(WA_TEXT);
+        document
+          .querySelectorAll("[data-whatsapp]")
+          .forEach((el) => (el.href = waHref));
+      }
+
+      /* Mismo Google Form que diagnostico.html: crea uno solo y reusa aqui
+         el mismo GOOGLE_FORM_ID y los mismos entry.NUMERO. Instrucciones
+         completas de como sacarlos: ver diagnostico.html. Mientras
+         GOOGLE_FORM_ID diga PEGA_AQUI no se manda nada. */
+      const GOOGLE_FORM_ID = "1FAIpQLSeygio4SpVaBjWO8PQGakqrBsSv2ix5JEw7QPZq3Kpj7VCutw";
+      const GOOGLE_FORM_ENTRY = {
+        nombre: "entry.951490312",
+        email: "entry.901115146",
+        telefono: "entry.2092672062",
+        nota: "entry.646749001",
+      };
+
+      /* Validacion inline: cada campo tiene su propio mensaje en
+         .field-error, ya escrito en el idioma de este formulario (aqui no
+         hace falta swap de idioma: cada bloque ES/EN es su propia copia). */
+      function validarLeadForm(form, lang) {
+        let valido = true;
+        form.querySelectorAll(".field").forEach((campo) => {
+          const input = campo.querySelector("input");
+          const error = campo.querySelector(".field-error");
+          if (!input || !error) return;
+          if (input.name === "email") {
+            if (input.validity.valueMissing) {
+              error.textContent =
+                lang === "es" ? "Este campo es obligatorio." : "This field is required.";
+            } else if (input.validity.typeMismatch) {
+              error.textContent =
+                lang === "es"
+                  ? "Escribe un correo válido, ej. tu@correo.com"
+                  : "Enter a valid email, e.g. you@email.com";
+            }
+          }
+          const ok = input.validity.valid;
+          input.classList.toggle("invalid", !ok);
+          error.classList.toggle("show", !ok);
+          if (!ok) valido = false;
+        });
+        return valido;
+      }
+
+      function wireLeadForm(formId, msgId, lang) {
+        const form = document.getElementById(formId);
+        const msg = document.getElementById(msgId);
+        if (!form || /PEGA_AQUI/.test(GOOGLE_FORM_ID)) return;
+        const action =
+          "https://docs.google.com/forms/d/e/" + GOOGLE_FORM_ID + "/formResponse";
+        form.querySelectorAll(".field input").forEach((input) => {
+          input.addEventListener("input", () => {
+            input.classList.remove("invalid");
+            const error = input.closest(".field").querySelector(".field-error");
+            if (error) error.classList.remove("show");
+          });
+        });
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!validarLeadForm(form, lang)) {
+            const primerInvalido = form.querySelector(".field input.invalid");
+            if (primerInvalido) primerInvalido.focus();
+            return;
+          }
+          const bot = form.elements["_gotcha"] && form.elements["_gotcha"].value;
+          const boton = form.querySelector("button[type=submit]");
+          const data = new URLSearchParams();
+          data.append(GOOGLE_FORM_ENTRY.nombre, form.elements["nombre"].value);
+          data.append(GOOGLE_FORM_ENTRY.email, form.elements["email"].value);
+          data.append(GOOGLE_FORM_ENTRY.telefono, form.elements["telefono"].value);
+          data.append(GOOGLE_FORM_ENTRY.nota, form.elements["nota"].value);
+          try {
+            if (!bot) {
+              await fetch(action, { method: "POST", mode: "no-cors", body: data });
+            }
+            form.hidden = true;
+            msg.hidden = false;
+            msg.textContent =
+              lang === "es"
+                ? "Listo, ya lo tengo. Te escribo pronto."
+                : "Got it. I will write to you soon.";
+            if (!bot && typeof window.trackEvento === "function") {
+              window.trackEvento("lead_form_submit", boton);
+            }
+          } catch (err) {
+            msg.hidden = false;
+            msg.textContent =
+              lang === "es"
+                ? "No se pudo enviar. Escríbeme directo a brenda@brendaflores.co"
+                : "Could not send. Email me directly at brenda@brendaflores.co";
+          }
+        });
+      }
+      wireLeadForm("lead-form-es", "lead-form-msg-es", "es");
+      wireLeadForm("lead-form-en", "lead-form-msg-en", "en");
     </script>
   </body>
 </html>

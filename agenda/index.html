@@ -3,30 +3,39 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Agendar una llamada | Brenda Flores</title>
-
-    <!-- ════════════════════════════════════════════════════════════
-         AQUI SE CAMBIA EL DESTINO
-         Esta pagina existe para que brendaflores.co/agenda sea la
-         unica liga que repartas. Si algun dia dejas Calendly, cambia
-         la URL en las TRES lineas marcadas abajo y todo lo que ya
-         entregaste (firma, WhatsApp, LinkedIn, sitio) sigue sirviendo.
-         ════════════════════════════════════════════════════════════ -->
-
-    <!-- destino 1 de 3 -->
-    <!-- El "1" en vez de "0" es a proposito: le da a la analitica el
-         instante que necesita para registrar la visita antes de que el
-         navegador se vaya a Calendly. Es el fallback si el JS no corre. -->
+    <title>Hablemos | Brenda Flores</title>
     <meta
-      http-equiv="refresh"
-      content="1; url=https://calendly.com/brenda-brendaflores/20min"
+      name="description"
+      content="Escríbeme por WhatsApp o déjame tus datos y te contacto yo."
     />
     <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://brendaflores.co/agenda" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- noindex no afecta esto: cuando alguien pega esta liga en WhatsApp
+         o LinkedIn, la vista previa la genera el og: de ESTA pagina, no
+         un buscador. Por eso lleva Open Graph aunque no se indexe. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hablemos | Brenda Flores" />
+    <meta
+      property="og:description"
+      content="Escríbeme por WhatsApp o déjame tus datos y te contacto yo."
+    />
+    <meta property="og:url" content="https://brendaflores.co/agenda" />
+    <meta property="og:image" content="https://brendaflores.co/images/og-image.jpg" />
+    <meta property="og:locale" content="es_MX" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hablemos | Brenda Flores" />
+    <meta
+      name="twitter:description"
+      content="Escríbeme por WhatsApp o déjame tus datos y te contacto yo."
+    />
+    <meta name="twitter:image" content="https://brendaflores.co/images/og-image.jpg" />
 
     <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js.
          Aqui importa mas que en las otras paginas, porque esta es la liga
          que repartes en la firma y en LinkedIn: es el unico sitio donde se
-         ve a la gente que agenda sin haber pasado por el portafolio. -->
+         ve a la gente que llega sin haber pasado por el portafolio. -->
     <script src="/analytics.js"></script>
 
     <style>
@@ -34,7 +43,10 @@
         --ink: #0f0f1a;
         --muted: #6b7280;
         --accent: #4f46e5;
+        --wa: #1f8f5f;
         --paper: #ffffff;
+        --paper-2: #f7f7fb;
+        --border: #e5e7eb;
       }
       * {
         box-sizing: border-box;
@@ -53,10 +65,10 @@
         line-height: 1.6;
       }
       .box {
-        max-width: 34rem;
+        max-width: 26rem;
       }
       h1 {
-        font-size: 1.35rem;
+        font-size: 1.5rem;
         font-weight: 700;
         letter-spacing: -0.01em;
         margin: 0 0 10px;
@@ -67,8 +79,10 @@
         font-size: 0.97rem;
       }
       a.btn {
-        display: inline-block;
-        background: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: var(--wa);
         color: #fff;
         text-decoration: none;
         font-weight: 600;
@@ -79,7 +93,12 @@
       }
       a.btn:hover,
       a.btn:focus-visible {
-        background: var(--accent);
+        background: #167a4f;
+      }
+      a.btn svg {
+        width: 1.1rem;
+        height: 1.1rem;
+        flex-shrink: 0;
       }
       .back {
         display: block;
@@ -92,41 +111,223 @@
         outline-offset: 3px;
         border-radius: 3px;
       }
+
+      /* ---------- lead form ---------- */
+      .lead-form-wrap {
+        margin-top: 30px;
+        padding-top: 26px;
+        border-top: 1px solid var(--border);
+        text-align: left;
+      }
+      .lead-form-wrap .lede {
+        font-size: 0.9rem;
+        text-align: center;
+        margin-bottom: 14px;
+      }
+      .lead-form {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .lead-form[hidden] {
+        display: none;
+      }
+      .lead-form .field {
+        flex: 1 1 180px;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .lead-form input,
+      .lead-form textarea {
+        width: 100%;
+        background: var(--paper-2);
+        border: 1px solid var(--border);
+        color: var(--ink);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-family: inherit;
+        font-size: 0.92rem;
+        resize: vertical;
+      }
+      .lead-form textarea {
+        flex-basis: 100%;
+        min-height: 3rem;
+      }
+      .lead-form input:focus-visible,
+      .lead-form textarea:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .lead-form input.invalid {
+        border-color: #d1483f;
+      }
+      .lead-form .field-error {
+        font-size: 0.8rem;
+        color: #c2453c;
+        display: none;
+      }
+      .lead-form .field-error.show {
+        display: block;
+      }
+      .lead-form button[type="submit"] {
+        flex: none;
+        background: var(--ink);
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .lead-form button[type="submit"]:hover {
+        background: var(--accent);
+      }
+      .lead-form-msg {
+        margin-top: 12px;
+        font-size: 0.88rem;
+        text-align: center;
+      }
     </style>
   </head>
 
   <body>
     <div class="box">
-      <h1>Te estoy llevando al calendario</h1>
+      <h1>Hablemos</h1>
       <p>
-        Si no pasa nada en un segundo, usa el botón. Son veinte minutos y te
-        llamo yo al número que dejes.
+        Escríbeme por WhatsApp y te contesto yo. Son veinte minutos y sabes
+        si aplica a tu negocio.
       </p>
-      <!-- destino 2 de 3 -->
-      <a class="btn" href="https://calendly.com/brenda-brendaflores/20min"
-        >Abrir el calendario</a
-      >
+      <a class="btn" id="wa-link" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z" />
+        </svg>
+        Escribir por WhatsApp
+      </a>
       <a class="back" href="/">Volver a brendaflores.co</a>
+
+      <div class="lead-form-wrap">
+        <p class="lede">¿Prefieres que te contacte yo? Déjame tus datos.</p>
+        <form class="lead-form" id="lead-form" novalidate>
+          <div class="field">
+            <input type="text" name="nombre" autocomplete="name" placeholder="Tu nombre (opcional)" pattern="[^0-9]*" />
+            <span class="field-error">No puede contener números.</span>
+          </div>
+          <div class="field">
+            <input type="email" name="email" required autocomplete="email" placeholder="Tu correo" />
+            <span class="field-error"></span>
+          </div>
+          <div class="field">
+            <input type="tel" name="telefono" autocomplete="tel" placeholder="Tu WhatsApp o teléfono (opcional)" pattern="[0-9+\-\s\(\)]{7,20}" />
+            <span class="field-error">Ingresa un teléfono válido: solo números, espacios, + o -.</span>
+          </div>
+          <textarea name="nota" rows="2" placeholder="Cuéntame brevemente de tu negocio (opcional)"></textarea>
+          <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_subject" value="Lead: /agenda" />
+          <button type="submit">Enviar</button>
+        </form>
+        <p class="lead-form-msg" id="lead-form-msg" hidden></p>
+      </div>
     </div>
 
     <script>
-      // Se manda antes del salto para poder contar las visitas que
-      // llegan directo a /agenda sin pasar por el sitio.
-      if (typeof gtag === "function") {
-        gtag("event", "click_agenda", {
-          seccion: "redirect-directo",
-          texto: "visita directa a /agenda",
-          pagina: "/agenda",
-        });
+      /* ════════════════════════════════════════════════════════════════
+         CONFIG: cambia solo estas lineas
+         WHATSAPP y GOOGLE_FORM_* deben quedar iguales a las de
+         index.html/diagnostico.html (mismo numero, mismo Google Form).
+         Instrucciones completas de como sacar el ID y los entry.NUMERO:
+         ver diagnostico.html. Mientras GOOGLE_FORM_ID diga PEGA_AQUI el
+         formulario no manda nada.
+         ════════════════════════════════════════════════════════════════ */
+      const WHATSAPP = "+52 442 285 0248";
+      const WA_TEXT = "Hola Brenda, quiero hablar contigo.";
+      const GOOGLE_FORM_ID = "1FAIpQLSeygio4SpVaBjWO8PQGakqrBsSv2ix5JEw7QPZq3Kpj7VCutw";
+      const GOOGLE_FORM_ENTRY = {
+        nombre: "entry.951490312",
+        email: "entry.901115146",
+        telefono: "entry.2092672062",
+        nota: "entry.646749001",
+      };
+
+      if (WHATSAPP) {
+        document.getElementById("wa-link").href =
+          "https://wa.me/" +
+          WHATSAPP.replace(/\D/g, "") +
+          "?text=" +
+          encodeURIComponent(WA_TEXT);
       }
-      // destino 3 de 3
-      // Los 700ms son para que el evento salga. Ni se notan, y la pagina
-      // ya dice "te estoy llevando al calendario" mientras tanto.
-      setTimeout(function () {
-        window.location.replace(
-          "https://calendly.com/brenda-brendaflores/20min"
-        );
-      }, 700);
+
+      /* Validacion inline: mismo patron que index.html/diagnostico.html,
+         pero esta pagina es solo espanol, sin swap de idioma. */
+      function validarLeadForm(form) {
+        let valido = true;
+        form.querySelectorAll(".field").forEach((campo) => {
+          const input = campo.querySelector("input");
+          const error = campo.querySelector(".field-error");
+          if (!input || !error) return;
+          if (input.name === "email") {
+            if (input.validity.valueMissing) {
+              error.textContent = "Este campo es obligatorio.";
+            } else if (input.validity.typeMismatch) {
+              error.textContent = "Escribe un correo válido, ej. tu@correo.com";
+            }
+          }
+          const ok = input.validity.valid;
+          input.classList.toggle("invalid", !ok);
+          error.classList.toggle("show", !ok);
+          if (!ok) valido = false;
+        });
+        return valido;
+      }
+
+      (function wireLeadForm() {
+        const form = document.getElementById("lead-form");
+        const msg = document.getElementById("lead-form-msg");
+        if (!form || /PEGA_AQUI/.test(GOOGLE_FORM_ID)) return;
+        const action =
+          "https://docs.google.com/forms/d/e/" + GOOGLE_FORM_ID + "/formResponse";
+        form.querySelectorAll(".field input").forEach((input) => {
+          input.addEventListener("input", () => {
+            input.classList.remove("invalid");
+            const error = input.closest(".field").querySelector(".field-error");
+            if (error) error.classList.remove("show");
+          });
+        });
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!validarLeadForm(form)) {
+            const primerInvalido = form.querySelector(".field input.invalid");
+            if (primerInvalido) primerInvalido.focus();
+            return;
+          }
+          const bot = form.elements["_gotcha"] && form.elements["_gotcha"].value;
+          const boton = form.querySelector("button[type=submit]");
+          const data = new URLSearchParams();
+          data.append(GOOGLE_FORM_ENTRY.nombre, form.elements["nombre"].value);
+          data.append(GOOGLE_FORM_ENTRY.email, form.elements["email"].value);
+          data.append(GOOGLE_FORM_ENTRY.telefono, form.elements["telefono"].value);
+          data.append(GOOGLE_FORM_ENTRY.nota, form.elements["nota"].value);
+          try {
+            if (!bot) {
+              await fetch(action, { method: "POST", mode: "no-cors", body: data });
+            }
+            form.hidden = true;
+            msg.hidden = false;
+            msg.textContent = "Listo, ya lo tengo. Te escribo pronto.";
+            if (!bot && typeof window.trackEvento === "function") {
+              window.trackEvento("lead_form_submit", boton);
+            }
+          } catch (err) {
+            msg.hidden = false;
+            msg.textContent =
+              "No se pudo enviar. Escríbeme directo a brenda@brendaflores.co";
+          }
+        });
+      })();
     </script>
   </body>
 </html>

@@ -9,6 +9,26 @@
       content="Cinco días. Reviso los cuatro pilares de tu negocio, mido dónde se te van las horas y te entrego el roadmap de qué arreglar primero, con tus números. No construyo nada hasta que el diagnóstico diga que hace falta. Desde $8,500 MXN. Para PyMEs en México que operan en Excel y WhatsApp."
     />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://brendaflores.co/diagnostico.html" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Radiografía de Operación para PyMEs | Brenda Flores" />
+    <meta
+      property="og:description"
+      content="Cinco días. Reviso los cuatro pilares de tu negocio, mido dónde se te van las horas y te entrego el roadmap de qué arreglar primero, con tus números. No construyo nada hasta que el diagnóstico diga que hace falta. Desde $8,500 MXN. Para PyMEs en México que operan en Excel y WhatsApp."
+    />
+    <meta property="og:url" content="https://brendaflores.co/diagnostico.html" />
+    <meta property="og:image" content="https://brendaflores.co/images/og-image.jpg" />
+    <meta property="og:locale" content="es_MX" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Radiografía de Operación para PyMEs | Brenda Flores" />
+    <meta
+      name="twitter:description"
+      content="Cinco días. Reviso los cuatro pilares de tu negocio, mido dónde se te van las horas y te entrego el roadmap de qué arreglar primero, con tus números. No construyo nada hasta que el diagnóstico diga que hace falta. Desde $8,500 MXN. Para PyMEs en México que operan en Excel y WhatsApp."
+    />
+    <meta name="twitter:image" content="https://brendaflores.co/images/og-image.jpg" />
+
     <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js -->
     <script src="/analytics.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -229,6 +249,85 @@
         font-size: 0.88rem;
         color: var(--ink-3);
         margin: 16px 0 0;
+      }
+
+      .link-quiet {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .link-quiet:hover {
+        color: var(--accent);
+      }
+
+      /* ---------- lead form ---------- */
+
+      .lead-form-wrap {
+        margin-top: 34px;
+        padding-top: 28px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .lead-form {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .lead-form[hidden] {
+        display: none;
+      }
+
+      .lead-form .field {
+        flex: 1 1 200px;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .lead-form input,
+      .lead-form textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #fff;
+        border-radius: 10px;
+        padding: 13px 16px;
+        font-family: var(--body);
+        font-size: 0.95rem;
+        resize: vertical;
+      }
+      .lead-form textarea {
+        flex-basis: 100%;
+        min-height: 3rem;
+      }
+      .lead-form input::placeholder,
+      .lead-form textarea::placeholder {
+        color: #71718a;
+      }
+      .lead-form input:focus-visible,
+      .lead-form textarea:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .lead-form input.invalid {
+        border-color: #e0625a;
+      }
+      .lead-form .field-error {
+        font-size: 0.8rem;
+        color: #f0a39d;
+        display: none;
+      }
+      .lead-form .field-error.show {
+        display: block;
+      }
+
+      .lead-form-msg {
+        margin-top: 14px;
+        font-size: 0.88rem;
+        color: #a5a5b8;
       }
 
       /* ---------- sections ---------- */
@@ -757,15 +856,19 @@
       }
 
       footer {
+        background: var(--ink);
         padding: 26px 0 44px;
         font-size: 0.83rem;
-        color: var(--ink-3);
+        color: #71718a;
         display: flex;
         flex-wrap: wrap;
         gap: 6px 22px;
       }
       footer a {
-        color: var(--ink-3);
+        color: #a5a5b8;
+      }
+      footer a:hover {
+        color: #fff;
       }
 
       :focus-visible {
@@ -839,11 +942,6 @@
           nada hasta que el diagnóstico diga que hace falta.
         </p>
         <div class="cta-row">
-          <a href="#contacto" data-booking class="btn btn-primary">
-            <span data-es="Agendar 20 minutos" data-en="Book 20 minutes"
-              >Agendar 20 minutos</span
-            >
-          </a>
           <a
             href="#contacto"
             data-whatsapp
@@ -861,6 +959,14 @@
             >
           </a>
         </div>
+        <p
+          class="cta-note"
+          data-es='O si prefieres, <a href="#contacto" class="link-quiet">déjame tus datos y te escribo yo</a>.'
+          data-en='Or if you prefer, <a href="#contacto" class="link-quiet">leave your details and I will write to you</a>.'
+        >
+          O si prefieres,
+          <a href="#contacto" class="link-quiet">déjame tus datos y te escribo yo</a>.
+        </p>
       </div>
     </header>
 
@@ -1120,19 +1226,32 @@
           </div>
 
           <div class="cta-row">
-            <a href="#contacto" data-booking class="btn btn-primary">
-              <span data-es="Agendar 20 minutos" data-en="Book 20 minutes"
-                >Agendar 20 minutos</span
+            <a
+              href="#contacto"
+              data-whatsapp
+              target="_blank"
+              rel="noopener"
+              class="btn btn-wa"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.41-.56-.42h-.47c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"
+                />
+              </svg>
+              <span data-es="Escribir por WhatsApp" data-en="Message on WhatsApp"
+                >Escribir por WhatsApp</span
               >
             </a>
           </div>
           <p
             class="cta-note"
-            data-es="La llamada es para ver si aplica. Si no tienes suficiente trabajo manual como para que medirlo valga la pena, te lo digo ahí mismo."
-            data-en="The call is to see whether this applies to you. If you do not have enough manual work for measuring it to be worth anything, I tell you right there."
+            data-es='Es para ver si aplica. Si no tienes suficiente trabajo manual como para que medirlo valga la pena, te lo digo ahí mismo. También puedes <a href="#contacto" class="link-quiet">dejar tus datos</a> si prefieres.'
+            data-en='It is to see whether this applies to you. If you do not have enough manual work for measuring it to be worth anything, I tell you right there. You can also <a href="#contacto" class="link-quiet">leave your details</a> if you prefer.'
           >
-            La llamada es para ver si aplica. Si no tienes suficiente trabajo
-            manual como para que medirlo valga la pena, te lo digo ahí mismo.
+            Es para ver si aplica. Si no tienes suficiente trabajo manual como
+            para que medirlo valga la pena, te lo digo ahí mismo. También puedes
+            <a href="#contacto" class="link-quiet">dejar tus datos</a> si
+            prefieres.
           </p>
         </div>
       </div>
@@ -1566,10 +1685,10 @@
     <section class="final" id="contacto">
       <div class="wrap">
         <h2
-          data-es="Veinte minutos y sabes si aplica"
-          data-en="Twenty minutes and you will know if this applies"
+          data-es="Cuéntame y sabemos si aplica"
+          data-en="Tell me and we will know if this applies"
         >
-          Veinte minutos y sabes si aplica
+          Cuéntame y sabemos si aplica
         </h2>
         <p
           data-es="Cuéntame cómo entra el trabajo y quién lo toca. Con eso sabemos si tienes suficiente trabajo manual como para que medirlo valga la pena. Si no lo tienes, te lo digo ahí mismo y no seguimos."
@@ -1580,15 +1699,6 @@
           Si no lo tienes, te lo digo ahí mismo y no seguimos.
         </p>
         <div class="cta-row">
-          <a
-            href="mailto:brenda@brendaflores.co"
-            data-booking
-            class="btn btn-primary"
-          >
-            <span data-es="Agendar 20 minutos" data-en="Book 20 minutes"
-              >Agendar 20 minutos</span
-            >
-          </a>
           <a
             href="mailto:brenda@brendaflores.co"
             data-whatsapp
@@ -1613,6 +1723,75 @@
         >
           O escríbeme a brenda@brendaflores.co
         </p>
+
+        <div class="lead-form-wrap">
+          <p
+            class="cta-note"
+            data-es="¿Prefieres que te contacte yo? Déjame tus datos."
+            data-en="Prefer that I reach out to you? Leave your details."
+          >
+            ¿Prefieres que te contacte yo? Déjame tus datos.
+          </p>
+          <form class="lead-form" id="lead-form" novalidate>
+            <div class="field">
+              <input
+                type="text"
+                name="nombre"
+                autocomplete="name"
+                placeholder="Tu nombre (opcional)"
+                data-ph-es="Tu nombre (opcional)"
+                data-ph-en="Your name (optional)"
+                pattern="[^0-9]*"
+              />
+              <span
+                class="field-error"
+                data-es="No puede contener números."
+                data-en="It cannot contain numbers."
+              ></span>
+            </div>
+            <div class="field">
+              <input
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="Tu correo"
+                data-ph-es="Tu correo"
+                data-ph-en="Your email"
+              />
+              <span class="field-error"></span>
+            </div>
+            <div class="field">
+              <input
+                type="tel"
+                name="telefono"
+                autocomplete="tel"
+                placeholder="Tu WhatsApp o teléfono (opcional)"
+                data-ph-es="Tu WhatsApp o teléfono (opcional)"
+                data-ph-en="Your WhatsApp or phone (optional)"
+                pattern="[0-9+\-\s\(\)]{7,20}"
+              />
+              <span
+                class="field-error"
+                data-es="Ingresa un teléfono válido: solo números, espacios, + o -."
+                data-en="Enter a valid phone number: numbers, spaces, + or - only."
+              ></span>
+            </div>
+            <textarea
+              name="nota"
+              rows="2"
+              placeholder="Cuéntame brevemente de tu negocio (opcional)"
+              data-ph-es="Cuéntame brevemente de tu negocio (opcional)"
+              data-ph-en="Briefly tell me about your business (optional)"
+            ></textarea>
+            <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="_subject" value="Lead: diagnostico.html" />
+            <button type="submit" class="btn btn-primary" data-es="Enviar" data-en="Send">
+              Enviar
+            </button>
+          </form>
+          <p class="lead-form-msg" id="lead-form-msg" hidden></p>
+        </div>
       </div>
     </section>
 
@@ -1634,24 +1813,41 @@
 
     <script>
       /* ════════════════════════════════════════════════════════════════
-         CONFIG: cambia solo estas dos lineas
-         Deben quedar iguales a las de index.html
+         CONFIG: cambia solo estas lineas
+         WHATSAPP debe quedar igual a la de index.html.
+
+         El formulario manda los datos a un Google Form tuyo (gratis, sin
+         limite, las respuestas caen en una Hoja de Google). Para activarlo:
+
+         1. Crea un formulario en forms.google.com con estos 4 campos, en
+            este orden, NINGUNO marcado como obligatorio: Nombre, Correo,
+            Telefono, Nota (respuesta corta los tres primeros, parrafo el
+            ultimo).
+         2. Menu de los tres puntos (arriba a la derecha) > "Obtener enlace
+            para completar automaticamente". Llena cada campo con algo que
+            reconozcas (ej. "NOMBRE-AQUI") y da "Obtener enlace".
+         3. Copia ese enlace largo. Trae algo como:
+            https://docs.google.com/forms/d/e/1FAIpQLS.../viewform?usp=pp_url&entry.111=NOMBRE-AQUI&entry.222=...
+         4. De esa URL saca:
+            - El ID largo entre /d/e/ y /viewform  -> GOOGLE_FORM_ID
+            - El "entry.NUMERO" que quedo pegado a cada campo que llenaste,
+              segun cual pusiste en cual -> las 4 lineas de abajo
+         Mientras GOOGLE_FORM_ID diga PEGA_AQUI el formulario no manda nada.
          ════════════════════════════════════════════════════════════════ */
-      const BOOKING_URL = "https://brendaflores.co/agenda";
       const WHATSAPP = "+52 442 285 0248";
+      const GOOGLE_FORM_ID = "1FAIpQLSeygio4SpVaBjWO8PQGakqrBsSv2ix5JEw7QPZq3Kpj7VCutw";
+      const GOOGLE_FORM_ENTRY = {
+        nombre: "entry.951490312",
+        email: "entry.901115146",
+        telefono: "entry.2092672062",
+        nota: "entry.646749001",
+      };
       // El texto cambia entre paginas a proposito: es la unica forma
       // de saber si el prospecto llego por el portafolio o por la landing.
       const WA_TEXT =
         "Hola Brenda, vi la página del diagnóstico. Quiero saber si aplica a mi negocio.";
 
       (function wireCTAs() {
-        if (BOOKING_URL) {
-          document.querySelectorAll("[data-booking]").forEach((el) => {
-            el.href = BOOKING_URL;
-            el.target = "_blank";
-            el.rel = "noopener";
-          });
-        }
         if (WHATSAPP) {
           const href =
             "https://wa.me/" +
@@ -1668,6 +1864,93 @@
         }
       })();
 
+      /* Validacion inline: en vez del globo nativo del navegador, cada
+         campo tiene su propio mensaje en .field-error, que ya vive en el
+         HTML (con data-es/data-en) o se llena aqui para los mensajes que
+         cambian segun el error (el correo puede estar vacio o mal
+         escrito). Se usa en todos los formularios del sitio. */
+      function mensajeErrorEmail(input, es) {
+        if (input.validity.valueMissing) {
+          return es ? "Este campo es obligatorio." : "This field is required.";
+        }
+        if (input.validity.typeMismatch) {
+          return es
+            ? "Escribe un correo válido, ej. tu@correo.com"
+            : "Enter a valid email, e.g. you@email.com";
+        }
+        return "";
+      }
+      function validarLeadForm(form, es) {
+        let valido = true;
+        form.querySelectorAll(".field").forEach((campo) => {
+          const input = campo.querySelector("input");
+          const error = campo.querySelector(".field-error");
+          if (!input || !error) return;
+          if (input.name === "email") {
+            error.textContent = mensajeErrorEmail(input, es);
+          }
+          const ok = input.validity.valid;
+          input.classList.toggle("invalid", !ok);
+          error.classList.toggle("show", !ok);
+          if (!ok) valido = false;
+        });
+        return valido;
+      }
+
+      (function wireLeadForm() {
+        const form = document.getElementById("lead-form");
+        const msg = document.getElementById("lead-form-msg");
+        if (!form || /PEGA_AQUI/.test(GOOGLE_FORM_ID)) return;
+        const action =
+          "https://docs.google.com/forms/d/e/" + GOOGLE_FORM_ID + "/formResponse";
+        form.querySelectorAll(".field input").forEach((input) => {
+          input.addEventListener("input", () => {
+            input.classList.remove("invalid");
+            const error = input.closest(".field").querySelector(".field-error");
+            if (error) error.classList.remove("show");
+          });
+        });
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const es = (document.documentElement.lang || "es").startsWith("es");
+          if (!validarLeadForm(form, es)) {
+            const primerInvalido = form.querySelector(".field input.invalid");
+            if (primerInvalido) primerInvalido.focus();
+            return;
+          }
+          // honeypot: si un bot lo lleno, no se manda nada pero se ve como
+          // exito para no delatar el filtro.
+          const bot = form.elements["_gotcha"] && form.elements["_gotcha"].value;
+          const boton = form.querySelector("button[type=submit]");
+          const data = new URLSearchParams();
+          data.append(GOOGLE_FORM_ENTRY.nombre, form.elements["nombre"].value);
+          data.append(GOOGLE_FORM_ENTRY.email, form.elements["email"].value);
+          data.append(GOOGLE_FORM_ENTRY.telefono, form.elements["telefono"].value);
+          data.append(GOOGLE_FORM_ENTRY.nota, form.elements["nota"].value);
+          try {
+            // no-cors: Google Forms no deja leer la respuesta, asi que el
+            // fetch siempre "resuelve" aunque haya ido bien. Solo un error
+            // real de red (sin internet, DNS caido) cae en el catch.
+            if (!bot) {
+              await fetch(action, { method: "POST", mode: "no-cors", body: data });
+            }
+            form.hidden = true;
+            msg.hidden = false;
+            msg.textContent = es
+              ? "Listo, ya lo tengo. Te escribo pronto."
+              : "Got it. I will write to you soon.";
+            if (!bot && typeof window.trackEvento === "function") {
+              window.trackEvento("lead_form_submit", boton);
+            }
+          } catch (err) {
+            msg.hidden = false;
+            msg.textContent = es
+              ? "No se pudo enviar. Escríbeme directo a brenda@brendaflores.co"
+              : "Could not send. Email me directly at brenda@brendaflores.co";
+          }
+        });
+      })();
+
       // Esta pagina nace en espanol porque es la que recibe el outbound,
       // pero muchos duenos hispanos en EE.UU. traen el equipo en ingles.
       const TITLES = {
@@ -1679,12 +1962,27 @@
         document.querySelectorAll("[data-es]").forEach((el) => {
           el.innerHTML = el.dataset[lang] || el.dataset.es;
         });
+        document.querySelectorAll("[data-ph-es]").forEach((el) => {
+          el.placeholder =
+            (lang === "en" ? el.dataset.phEn : el.dataset.phEs) ||
+            el.dataset.phEs;
+        });
         document.title = TITLES[lang] || TITLES.es;
         document.querySelectorAll("[data-lang]").forEach((btn) => {
           btn.classList.toggle("active", btn.dataset.lang === lang);
         });
         document.documentElement.lang = lang;
         if (remember !== false) localStorage.setItem("lang", lang);
+        // El error del correo tiene dos textos posibles (vacio o mal
+        // escrito) y se decide en JS, no con data-es/data-en: si ya esta
+        // mostrado, hay que refrescarlo al cambiar de idioma.
+        const emailInput = document.querySelector('.lead-form [name="email"]');
+        if (emailInput) {
+          const span = emailInput.closest(".field").querySelector(".field-error");
+          if (span && span.classList.contains("show")) {
+            span.textContent = mensajeErrorEmail(emailInput, lang.startsWith("es"));
+          }
+        }
       }
 
       (function initLang() {

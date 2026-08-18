@@ -8,6 +8,27 @@
       name="description"
       content="Antes de construirte nada, mido tu operación y te digo dónde se te va el día. Reviso los cuatro pilares de tu negocio y te entrego el roadmap de qué arreglar primero, con tus números. Diagnóstico desde $8,500 MXN."
     />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://brendaflores.co/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Brenda Flores | Diagnóstico y automatización para PyMEs" />
+    <meta
+      property="og:description"
+      content="Antes de construirte nada, mido tu operación y te digo dónde se te va el día. Reviso los cuatro pilares de tu negocio y te entrego el roadmap de qué arreglar primero, con tus números. Diagnóstico desde $8,500 MXN."
+    />
+    <meta property="og:url" content="https://brendaflores.co/" />
+    <meta property="og:image" content="https://brendaflores.co/images/og-image.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Brenda Flores | Diagnóstico y automatización para PyMEs" />
+    <meta
+      name="twitter:description"
+      content="Antes de construirte nada, mido tu operación y te digo dónde se te va el día. Reviso los cuatro pilares de tu negocio y te entrego el roadmap de qué arreglar primero, con tus números. Diagnóstico desde $8,500 MXN."
+    />
+    <meta name="twitter:image" content="https://brendaflores.co/images/og-image.jpg" />
+
     <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js -->
     <script src="/analytics.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1228,6 +1249,92 @@
         color: #4f46e5;
       }
 
+      /*  lead form (deja tus datos)  */
+      .lead-form-wrap {
+        max-width: 30rem;
+        margin: 2rem auto 0;
+        padding-top: 1.75rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .lead-form-wrap .lede {
+        font-size: 0.9rem;
+        color: #a5a5b8;
+        margin-bottom: 0.9rem;
+      }
+      .lead-form {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .lead-form[hidden] {
+        display: none;
+      }
+      .lead-form .field {
+        flex: 1 1 200px;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .lead-form input,
+      .lead-form textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #fff;
+        border-radius: 10px;
+        padding: 13px 16px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.92rem;
+        resize: vertical;
+      }
+      .lead-form textarea {
+        flex-basis: 100%;
+        min-height: 3rem;
+      }
+      .lead-form input::placeholder,
+      .lead-form textarea::placeholder {
+        color: #71718a;
+      }
+      .lead-form input:focus-visible,
+      .lead-form textarea:focus-visible {
+        outline: 2px solid #4f46e5;
+        outline-offset: 2px;
+      }
+      .lead-form input.invalid {
+        border-color: #e0625a;
+      }
+      .lead-form .field-error {
+        font-size: 0.8rem;
+        color: #f0a39d;
+        display: none;
+      }
+      .lead-form .field-error.show {
+        display: block;
+      }
+      .lead-form button[type="submit"] {
+        flex: none;
+        background: #4f46e5;
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        padding: 13px 26px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .lead-form button[type="submit"]:hover {
+        background: #6366f1;
+      }
+      .lead-form-msg {
+        margin-top: 12px;
+        font-size: 0.88rem;
+        color: #a5a5b8;
+      }
+
       /*  gradient blob  */
       .blob {
         position: absolute;
@@ -1347,10 +1454,10 @@
       <button type="button" data-lang="es" onclick="setLang('es')">ES</button>
     </div>
 
-    <!-- book a call -->
-    <a href="#contact" id="contact-btn" data-booking>
-      <span data-en="Book a call &rarr;" data-es="Agendar llamada &rarr;"
-        >Book a call &rarr;</span
+    <!-- contact -->
+    <a href="#contact" id="contact-btn">
+      <span data-en="Contact me &rarr;" data-es="Contáctame &rarr;"
+        >Contact me &rarr;</span
       >
     </a>
 
@@ -1671,11 +1778,10 @@
             </a>
             <a
               href="#contact"
-              data-booking
               class="inline-flex items-center gap-2 border border-border text-ink font-display font-bold text-sm px-6 py-3 rounded-full hover:border-accent hover:text-accent transition-all hover:-translate-y-0.5"
             >
-              <span data-en="Book a call" data-es="Agendar llamada"
-                >Book a call</span
+              <span data-en="Contact me" data-es="Contáctame"
+                >Contact me</span
               >
             </a>
           </div>
@@ -2918,12 +3024,12 @@
           </h2>
           <p
             class="text-gray-400 mb-10 reveal"
-            data-en="Tell me how work comes in and who touches it. Twenty minutes is enough to know whether you have enough manual work for measuring it to be worth anything. If you do not, I tell you right there and we stop."
-            data-es="Cu&eacute;ntame c&oacute;mo entra el trabajo y qui&eacute;n lo toca. Veinte minutos bastan para saber si tienes suficiente trabajo manual como para que medirlo valga la pena. Si no lo tienes, te lo digo ah&iacute; mismo y no seguimos."
+            data-en="Tell me how work comes in and who touches it. That is enough to know whether you have enough manual work for measuring it to be worth anything. If you do not, I tell you right there and we stop."
+            data-es="Cu&eacute;ntame c&oacute;mo entra el trabajo y qui&eacute;n lo toca. Con eso s&eacute; si tienes suficiente trabajo manual como para que medirlo valga la pena. Si no lo tienes, te lo digo ah&iacute; mismo y no seguimos."
           >
-            Tell me how work comes in and who touches it. Twenty minutes is
-            enough to know whether you have enough manual work for measuring it
-            to be worth anything. If you do not, I tell you right there and we
+            Tell me how work comes in and who touches it. That is enough to
+            know whether you have enough manual work for measuring it to be
+            worth anything. If you do not, I tell you right there and we
             stop.
           </p>
           <a
@@ -2950,15 +3056,6 @@
           <div class="reveal flex flex-wrap justify-center gap-3 mt-5 text-sm">
             <a
               href="#contact"
-              data-booking
-              class="inline-flex items-center gap-2 border border-white/25 text-white font-display font-bold px-6 py-3 rounded-full hover:border-white hover:bg-white/10 transition-all"
-            >
-              <span data-en="Book a 20-minute call" data-es="Agendar 20 minutos"
-                >Book a 20-minute call</span
-              >
-            </a>
-            <a
-              href="#contact"
               data-whatsapp
               target="_blank"
               rel="noopener"
@@ -2975,6 +3072,75 @@
                 >Message on WhatsApp</span
               >
             </a>
+          </div>
+
+          <div class="lead-form-wrap reveal">
+            <p
+              class="lede"
+              data-en="Prefer that I reach out to you? Leave your details."
+              data-es="&iquest;Prefieres que te contacte yo? D&eacute;jame tus datos."
+            >
+              Prefer that I reach out to you? Leave your details.
+            </p>
+            <form class="lead-form" id="lead-form" novalidate>
+              <div class="field">
+                <input
+                  type="text"
+                  name="nombre"
+                  autocomplete="name"
+                  placeholder="Your name (optional)"
+                  data-ph-en="Your name (optional)"
+                  data-ph-es="Tu nombre (opcional)"
+                  pattern="[^0-9]*"
+                />
+                <span
+                  class="field-error"
+                  data-en="It cannot contain numbers."
+                  data-es="No puede contener n&uacute;meros."
+                ></span>
+              </div>
+              <div class="field">
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  placeholder="Your email"
+                  data-ph-en="Your email"
+                  data-ph-es="Tu correo"
+                />
+                <span class="field-error"></span>
+              </div>
+              <div class="field">
+                <input
+                  type="tel"
+                  name="telefono"
+                  autocomplete="tel"
+                  placeholder="Your WhatsApp or phone (optional)"
+                  data-ph-en="Your WhatsApp or phone (optional)"
+                  data-ph-es="Tu WhatsApp o tel&eacute;fono (opcional)"
+                  pattern="[0-9+\-\s\(\)]{7,20}"
+                />
+                <span
+                  class="field-error"
+                  data-en="Enter a valid phone number: numbers, spaces, + or - only."
+                  data-es="Ingresa un tel&eacute;fono v&aacute;lido: solo n&uacute;meros, espacios, + o -."
+                ></span>
+              </div>
+              <textarea
+                name="nota"
+                rows="2"
+                placeholder="Briefly tell me about your business (optional)"
+                data-ph-en="Briefly tell me about your business (optional)"
+                data-ph-es="Cu&eacute;ntame brevemente de tu negocio (opcional)"
+              ></textarea>
+              <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
+              <input type="hidden" name="_subject" value="Lead: index.html" />
+              <button type="submit" data-en="Send" data-es="Enviar">
+                Send
+              </button>
+            </form>
+            <p class="lead-form-msg" id="lead-form-msg" hidden></p>
           </div>
 
           <div class="flex justify-center gap-4 mt-8 reveal">
@@ -3043,27 +3209,30 @@
 
     <script>
       /* ════════════════════════════════════════════════════════════════
-         CONFIG: cambia solo estas dos lineas
-         BOOKING_URL : tu liga de Calendly o Cal.com
-         WHATSAPP    : tu numero en formato internacional, solo digitos
-         Mientras BOOKING_URL siga vacia, los botones de "Agendar
-         llamada" siguen bajando a la seccion de contacto como hoy.
+         CONFIG: cambia solo estas lineas
+         WHATSAPP: tu numero en formato internacional, solo digitos
+
+         El formulario manda los datos a un Google Form tuyo (gratis, sin
+         limite, las respuestas caen en una Hoja de Google). Debe ser el
+         MISMO Google Form que uses en diagnostico.html: crea uno solo y
+         reusa aqui el mismo GOOGLE_FORM_ID y los mismos entry.NUMERO.
+         Instrucciones completas de como sacarlos: ver diagnostico.html.
+         Mientras GOOGLE_FORM_ID diga PEGA_AQUI el formulario no manda nada.
          ════════════════════════════════════════════════════════════════ */
-      const BOOKING_URL = "https://brendaflores.co/agenda";
       const WHATSAPP = "+52 442 285 0248";
+      const GOOGLE_FORM_ID = "1FAIpQLSeygio4SpVaBjWO8PQGakqrBsSv2ix5JEw7QPZq3Kpj7VCutw";
+      const GOOGLE_FORM_ENTRY = {
+        nombre: "entry.951490312",
+        email: "entry.901115146",
+        telefono: "entry.2092672062",
+        nota: "entry.646749001",
+      };
       // El texto cambia entre paginas a proposito: es la unica forma
       // de saber si el prospecto llego por el portafolio o por la landing.
       const WA_TEXT =
         "Hola Brenda, vi tu sitio. Quiero saber si aplica a mi negocio.";
 
       (function wireCTAs() {
-        if (BOOKING_URL) {
-          document.querySelectorAll("[data-booking]").forEach((el) => {
-            el.href = BOOKING_URL;
-            el.target = "_blank";
-            el.rel = "noopener";
-          });
-        }
         const wa = document.querySelectorAll("[data-whatsapp]");
         if (WHATSAPP) {
           const href =
@@ -3077,6 +3246,88 @@
         }
       })();
 
+      /* Validacion inline: en vez del globo nativo del navegador, cada
+         campo tiene su propio mensaje en .field-error, que ya vive en el
+         HTML (con data-es/data-en) o se llena aqui para los mensajes que
+         cambian segun el error (el correo puede estar vacio o mal
+         escrito). */
+      function mensajeErrorEmail(input, es) {
+        if (input.validity.valueMissing) {
+          return es ? "Este campo es obligatorio." : "This field is required.";
+        }
+        if (input.validity.typeMismatch) {
+          return es
+            ? "Escribe un correo válido, ej. tu@correo.com"
+            : "Enter a valid email, e.g. you@email.com";
+        }
+        return "";
+      }
+      function validarLeadForm(form, es) {
+        let valido = true;
+        form.querySelectorAll(".field").forEach((campo) => {
+          const input = campo.querySelector("input");
+          const error = campo.querySelector(".field-error");
+          if (!input || !error) return;
+          if (input.name === "email") {
+            error.textContent = mensajeErrorEmail(input, es);
+          }
+          const ok = input.validity.valid;
+          input.classList.toggle("invalid", !ok);
+          error.classList.toggle("show", !ok);
+          if (!ok) valido = false;
+        });
+        return valido;
+      }
+
+      (function wireLeadForm() {
+        const form = document.getElementById("lead-form");
+        const msg = document.getElementById("lead-form-msg");
+        if (!form || /PEGA_AQUI/.test(GOOGLE_FORM_ID)) return;
+        const action =
+          "https://docs.google.com/forms/d/e/" + GOOGLE_FORM_ID + "/formResponse";
+        form.querySelectorAll(".field input").forEach((input) => {
+          input.addEventListener("input", () => {
+            input.classList.remove("invalid");
+            const error = input.closest(".field").querySelector(".field-error");
+            if (error) error.classList.remove("show");
+          });
+        });
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const es = (document.documentElement.lang || "en").startsWith("es");
+          if (!validarLeadForm(form, es)) {
+            const primerInvalido = form.querySelector(".field input.invalid");
+            if (primerInvalido) primerInvalido.focus();
+            return;
+          }
+          const bot = form.elements["_gotcha"] && form.elements["_gotcha"].value;
+          const boton = form.querySelector("button[type=submit]");
+          const data = new URLSearchParams();
+          data.append(GOOGLE_FORM_ENTRY.nombre, form.elements["nombre"].value);
+          data.append(GOOGLE_FORM_ENTRY.email, form.elements["email"].value);
+          data.append(GOOGLE_FORM_ENTRY.telefono, form.elements["telefono"].value);
+          data.append(GOOGLE_FORM_ENTRY.nota, form.elements["nota"].value);
+          try {
+            if (!bot) {
+              await fetch(action, { method: "POST", mode: "no-cors", body: data });
+            }
+            form.hidden = true;
+            msg.hidden = false;
+            msg.textContent = es
+              ? "Listo, ya lo tengo. Te escribo pronto."
+              : "Got it. I will write to you soon.";
+            if (!bot && typeof window.trackEvento === "function") {
+              window.trackEvento("lead_form_submit", boton);
+            }
+          } catch (err) {
+            msg.hidden = false;
+            msg.textContent = es
+              ? "No se pudo enviar. Escríbeme directo a brenda@brendaflores.co"
+              : "Could not send. Email me directly at brenda@brendaflores.co";
+          }
+        });
+      })();
+
       // year
       document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -3085,12 +3336,26 @@
         document.querySelectorAll("[data-en]").forEach((el) => {
           el.innerHTML = el.dataset[lang] || el.dataset.en;
         });
+        document.querySelectorAll("[data-ph-en]").forEach((el) => {
+          el.placeholder =
+            (lang === "es" ? el.dataset.phEs : el.dataset.phEn) ||
+            el.dataset.phEn;
+        });
         // sincroniza todos los selectores, el del sidebar y el de movil
         document.querySelectorAll("[data-lang]").forEach((btn) => {
           btn.classList.toggle("active", btn.dataset.lang === lang);
         });
         document.documentElement.lang = lang;
         if (remember !== false) localStorage.setItem("lang", lang);
+        // El error del correo tiene dos textos posibles (vacio o mal
+        // escrito) y se decide en JS: si ya esta mostrado, se refresca.
+        const emailInput = document.querySelector('.lead-form [name="email"]');
+        if (emailInput) {
+          const span = emailInput.closest(".field").querySelector(".field-error");
+          if (span && span.classList.contains("show")) {
+            span.textContent = mensajeErrorEmail(emailInput, lang.startsWith("es"));
+          }
+        }
       }
 
       // Si ya eligio antes, se respeta. Si no, se usa el idioma del

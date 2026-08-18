@@ -105,6 +105,10 @@ const COOKIE_NOTICE = false;
     if (typeof window.clarity === "function") window.clarity("set", "cta", nombre);
   }
 
+  /* Para eventos que no son un clic en un link, como el envio de un
+     formulario: mismo patron de seccion/texto/pagina que los de arriba. */
+  window.trackEvento = evento;
+
   document.addEventListener(
     "click",
     (e) => {
