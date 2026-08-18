@@ -3,12 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      Diagnóstico de Operaciones para distribuidores | Brenda Flores
-    </title>
+    <title>Radiografía de Operación para PyMEs | Brenda Flores</title>
     <meta
       name="description"
-      content="Cinco días. Mapeo tu operación paso a paso y te entrego el plan de qué automatizar primero, con números. Para mayoristas y distribuidores que cotizan por WhatsApp y operan en Excel."
+      content="Cinco días. Reviso los cuatro pilares de tu negocio, mido dónde se te van las horas y te entrego el roadmap de qué arreglar primero, con tus números. No construyo nada hasta que el diagnóstico diga que hace falta. Desde $8,500 MXN. Para PyMEs en México que operan en Excel y WhatsApp."
     />
     <meta name="robots" content="index, follow" />
     <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js -->
@@ -252,34 +250,6 @@
         margin-bottom: 30px;
       }
 
-      /* ---------- pains ---------- */
-
-      .pains {
-        display: grid;
-        gap: 1px;
-        background: var(--border);
-        border: 1px solid var(--border);
-      }
-      @media (min-width: 640px) {
-        .pains {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      .pain {
-        background: var(--paper);
-        padding: 24px 22px;
-      }
-      .pain h3 {
-        font-size: 1.02rem;
-        font-weight: 700;
-        margin-bottom: 7px;
-      }
-      .pain p {
-        font-size: 0.93rem;
-        color: var(--ink-3);
-        margin: 0;
-      }
-
       /* ---------- offer ---------- */
 
       .offer {
@@ -357,6 +327,187 @@
         font-weight: 700;
       }
 
+      /* ---------- los cinco dias ----------
+         Es lo unico que esta pagina puede contar y el portafolio no. Va
+         como secuencia porque el orden importa: primero pregunto, luego
+         miro, y hasta el final saco numeros de lo que el sistema ya guarda. */
+
+      .days {
+        display: grid;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        margin-bottom: 20px;
+      }
+      .day {
+        background: var(--paper);
+        padding: 22px 22px 20px;
+        display: grid;
+        grid-template-columns: 5.5rem 1fr;
+        gap: 4px 18px;
+        align-items: start;
+      }
+      @media (max-width: 560px) {
+        .day {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+      }
+      .day .when {
+        font-family: var(--display);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        padding-top: 3px;
+      }
+      .day h3 {
+        font-size: 1.02rem;
+        font-weight: 700;
+        margin: 0;
+      }
+      .day p {
+        grid-column: 2;
+        font-size: 0.93rem;
+        color: var(--ink-3);
+        margin: 6px 0 0;
+      }
+      @media (max-width: 560px) {
+        .day p {
+          grid-column: 1;
+        }
+      }
+
+      .seam {
+        border-left: 3px solid var(--accent);
+        background: var(--paper-2);
+        padding: 18px 20px;
+        font-size: 0.94rem;
+      }
+      .seam p {
+        margin: 0;
+      }
+      .seam b {
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      /* ---------- tramos de precio ---------- */
+
+      .tiers {
+        display: grid;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        margin-bottom: 24px;
+      }
+      @media (min-width: 720px) {
+        .tiers {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .tier {
+        background: var(--paper);
+        padding: 24px 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .tier .size {
+        font-family: var(--display);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+      .tier .amount {
+        font-family: var(--display);
+        font-size: 2.1rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        min-height: 4.2rem;
+      }
+      .tier .amount small {
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0;
+        color: var(--ink-3);
+      }
+      .tier .was {
+        font-size: 0.85rem;
+        color: var(--ink-3);
+        /*  Junto con el min-height de .amount, deja el bloque de precio del
+            mismo alto en los tres tramos, para que la linea divisora de
+            arriba de .who caiga al mismo nivel. "Grande" trae el importe y
+            el plazo en un solo renglon y sin eso sube 66px.  */
+        min-height: 2.8rem;
+      }
+      .tier .was s {
+        text-decoration-thickness: 1px;
+      }
+      .tier .who {
+        font-size: 0.92rem;
+        color: var(--ink-2);
+        margin: 0;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+      }
+      .tier.quote .amount {
+        font-size: 1.45rem;
+        white-space: nowrap;
+      }
+
+      .tier-note {
+        font-size: 0.88rem;
+        color: var(--ink-3);
+        margin: -8px 0 24px;
+      }
+      .tier-note b {
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      /* ---------- calificacion ---------- */
+
+      .qualify {
+        display: grid;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+      @media (min-width: 640px) {
+        .qualify {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .qbox {
+        background: var(--paper);
+        padding: 24px 22px;
+      }
+      .qbox h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .qbox ul {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 0.93rem;
+        color: var(--ink-3);
+      }
+      .qbox li {
+        margin-bottom: 7px;
+      }
+      .qbox li:last-child {
+        margin-bottom: 0;
+      }
+      .qbox.no h3 {
+        color: var(--ink-2);
+      }
+
       /* ---------- proof ---------- */
 
       .cases {
@@ -392,20 +543,68 @@
         color: var(--ink-2);
         margin-bottom: 16px;
       }
-      .metrics {
+
+      /* ---------- los cuatro tiempos del caso ----------
+         Los tiempos son una secuencia real (asi trabajo, en ese orden),
+         no una decoracion: el rotulo marca el paso del metodo y el ultimo
+         se enciende porque es el unico que le importa al que lee. */
+      .beats {
         display: flex;
         flex-direction: column;
-        gap: 9px;
+        gap: 15px;
+        margin-bottom: 18px;
+      }
+      .beat {
+        border-left: 2px solid var(--border);
+        padding-left: 14px;
+      }
+      .beat b {
+        display: block;
+        font-family: var(--display);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 5px;
+      }
+      .case .beat p {
+        font-size: 0.9rem;
+        color: var(--ink-2);
+        margin: 0;
+      }
+      .metrics-label {
+        font-family: var(--display);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        color: var(--accent);
+        display: block;
+        /* Ocupa el renglon completo: si no, se mete en la columna de las
+           cifras y arrastra el ancho de toda la rejilla. */
+        grid-column: 1 / -1;
+        margin-bottom: 2px;
+      }
+      /* Rejilla de dos columnas para que las cifras y sus textos arranquen
+         al mismo punto. El ancho de la primera columna lo pone la cifra mas
+         larga de cada tarjeta, no un valor fijo: asi "2x" no arrastra un
+         hueco del tamanio de "1 de 7". */
+      .metrics {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        align-items: baseline;
+        gap: 9px 12px;
         border-top: 1px solid var(--border);
         padding-top: 15px;
         /* Empuja el bloque al pie de la tarjeta: asi el divisor cae a la
            misma altura en las dos, sin importar cuanto mida el parrafo. */
         margin-top: auto;
       }
+      /* El envoltorio desaparece del layout y sus dos hijos pasan a ser
+         celdas de la rejilla de arriba. */
       .metric {
-        display: flex;
-        align-items: baseline;
-        gap: 10px;
+        display: contents;
       }
       .metric b {
         font-family: var(--display);
@@ -592,26 +791,26 @@
       <div class="wrap">
         <p
           class="kicker"
-          data-es="Para mayoristas y distribuidores B2B"
-          data-en="For B2B wholesalers and distributors"
+          data-es="Radiografía de Operación"
+          data-en="Operations X-Ray"
         >
-          Para mayoristas y distribuidores B2B
+          Radiografía de Operación
         </p>
         <h1
-          data-es="Si tu gente todavía cotiza y captura pedidos a mano, sé exactamente cuánto te está costando."
-          data-en="If your team still quotes and keys in orders by hand, I know exactly what that is costing you."
+          data-es="Cinco días, dos sesiones, y un documento con el que puedes decidir."
+          data-en="Five days, two sessions, and a document you can decide with."
         >
-          Si tu gente todavía cotiza y captura pedidos a mano, sé exactamente
-          cuánto te está costando.
+          Cinco días, dos sesiones, y un documento con el que puedes
+          decidir.
         </h1>
         <p
           class="sub"
-          data-es="En cinco días recorro tu operación paso a paso y te entrego el plan de qué automatizar primero, con los números de tu negocio. Sin compromiso de contratar nada después."
-          data-en="In five days I walk your operation step by step and hand you the plan for what to automate first, using your own numbers. No obligation to hire anything afterward."
+          data-es="Aquí está lo que pasa cada día, qué te voy a pedir a ti y a tu gente, y qué te llevas al final. No hay que preparar nada, y no construyo nada hasta que el diagnóstico diga que hace falta."
+          data-en="Here is what happens on each day, what I will ask of you and your team, and what you walk away with. There is nothing to prepare, and I do not build anything until the diagnostic says it is needed."
         >
-          En cinco días recorro tu operación paso a paso y te entrego el plan de
-          qué automatizar primero, con los números de tu negocio. Sin compromiso
-          de contratar nada después.
+          Aquí está lo que pasa cada día, qué te voy a pedir a ti y a tu gente,
+          y qué te llevas al final. No hay que preparar nada, y no construyo
+          nada hasta que el diagnóstico diga que hace falta.
         </p>
         <div class="cta-row">
           <a href="#contacto" data-booking class="btn btn-primary">
@@ -639,86 +838,79 @@
       </div>
     </header>
 
-    <!-- ═══════════ DOLOR ═══════════ -->
+    <!-- ═══════════ LOS CINCO DÍAS ═══════════
+         Esta pagina se abre desde "Ver como funciona el diagnostico", asi
+         que quien llega ya vio los pilares, los dolores y el precio en el
+         portafolio. Repetirselos lo hace retroceder. Lo que no ha visto en
+         ningun lado es esto: que pasa cada dia y que le voy a pedir. -->
     <section class="block">
       <div class="wrap">
         <h2
-          data-es="¿Algo de esto pasa en tu bodega?"
-          data-en="Does any of this happen in your warehouse?"
+          data-es="Los cinco días, uno por uno"
+          data-en="The five days, one by one"
         >
-          ¿Algo de esto pasa en tu bodega?
+          Los cinco días, uno por uno
         </h2>
         <p
           class="lede"
-          data-es="Ninguno de estos problemas es falta de esfuerzo. Son falta de sistema, y por eso el esfuerzo se va en trabajo que debería hacer una computadora."
-          data-en="None of these problems come from a lack of effort. They come from a lack of systems, which is why the effort goes into work a computer should be doing."
+          data-es="Lo único que te pido son dos sesiones y un rato de pantalla compartida con tu gente. Nada de llenar formatos ni juntar información: el trabajo de medir es mío. Es remoto, trabajo en tu horario y me tienes en WhatsApp todo el tiempo."
+          data-en="All I ask of you is two sessions and some time on a screen share with your team. No forms to fill in, nothing to gather: the measuring is my job. It runs remotely, I work your hours, and you have me on WhatsApp the whole time."
         >
-          Ninguno de estos problemas es falta de esfuerzo. Son falta de sistema,
-          y por eso el esfuerzo se va en trabajo que debería hacer una
-          computadora.
+          Lo único que te pido son dos sesiones y un rato de pantalla
+          compartida con tu gente. Nada de llenar formatos ni juntar
+          información: el trabajo de medir es mío. Es remoto, trabajo en tu
+          horario y me tienes en WhatsApp todo el tiempo.
         </p>
-        <div class="pains">
-          <div class="pain">
-            <h3
-              data-es="El mostrador es el cuello de botella"
-              data-en="The counter is the bottleneck"
+
+        <div class="days">
+          <div class="day">
+            <span class="when" data-es="Día 1" data-en="Day 1"
+              >Día 1</span
             >
-              El mostrador es el cuello de botella
-            </h3>
-            <p
-              data-es="Una o dos personas contestan el mismo tipo de mensaje todo el día: precio, existencia, tiempo de entrega. Si esa persona falta, el negocio se frena."
-              data-en="One or two people answer the same kind of message all day: price, stock, delivery time. If that person is out, the business slows to a crawl."
-            >
-              Una o dos personas contestan el mismo tipo de mensaje todo el día:
-              precio, existencia, tiempo de entrega. Si esa persona falta, el
-              negocio se frena.
-            </p>
+            <h3 data-es="Nos sentamos hora y media" data-en="A ninety-minute session">Nos sentamos hora y media</h3>
+            <p data-es="Contigo o con quien lleve la operación. Recorremos los cuatro pilares, seguimos un pedido de principio a fin, y anoto dónde vive cada dato y quién es indispensable para qué. Al final te pido acceso de lectura, o un export, de lo que ya uses: facturación, WhatsApp, la hoja de cálculo." data-en="With you or whoever runs the operation. We walk the four pillars, follow one order from start to finish, and I write down where each piece of information lives and who is indispensable for what. At the end I ask for read access, or an export, of whatever you already use: invoicing, WhatsApp, the spreadsheet.">Contigo o con quien lleve la operación. Recorremos los cuatro pilares, seguimos un pedido de principio a fin, y anoto dónde vive cada dato y quién es indispensable para qué. Al final te pido acceso de lectura, o un export, de lo que ya uses: facturación, WhatsApp, la hoja de cálculo.</p>
           </div>
-          <div class="pain">
-            <h3
-              data-es="Cada cliente tiene su precio, y vive en la cabeza de alguien"
-              data-en="Every customer has their own price, and it lives in someone's head"
+          <div class="day">
+            <span class="when" data-es="Día 2" data-en="Day 2"
+              >Día 2</span
             >
-              Cada cliente tiene su precio, y vive en la cabeza de alguien
-            </h3>
-            <p
-              data-es="Las listas por cliente están en un Excel que solo una persona entiende, y cuando cotiza alguien más, se equivoca o pregunta."
-              data-en="Per-customer price lists sit in a spreadsheet only one person understands, so when anybody else quotes, they either guess wrong or have to ask."
-            >
-              Las listas por cliente están en un Excel que solo una persona
-              entiende, y cuando cotiza alguien más, se equivoca o pregunta.
-            </p>
+            <h3 data-es="Los veo trabajar" data-en="I watch the work happen">Los veo trabajar</h3>
+            <p data-es="Pantalla compartida con cada persona clave mientras hace su trabajo real, no una demostración. Yo cronometro. Nadie tiene que llenar nada ni prepararme nada: solo que trabajen normal mientras miro." data-en="A screen share with each key person while they do their real work, not a demo. I do the timing. Nobody has to fill anything in or prepare anything for me: they just work as usual while I watch.">Pantalla compartida con cada persona clave mientras hace su trabajo real, no una demostración. Yo cronometro. Nadie tiene que llenar nada ni prepararme nada: solo que trabajen normal mientras miro.</p>
           </div>
-          <div class="pain">
-            <h3
-              data-es="Los pedidos llegan por cinco lados distintos"
-              data-en="Orders arrive through five different channels"
+          <div class="day">
+            <span class="when" data-es="Día 3" data-en="Day 3"
+              >Día 3</span
             >
-              Los pedidos llegan por cinco lados distintos
-            </h3>
-            <p
-              data-es="WhatsApp, llamada, correo, el vendedor en ruta y el que llega en persona. Alguien los captura a mano y a veces se pierde uno."
-              data-en="WhatsApp, phone, email, the rep out on route, and whoever walks in. Someone keys them in by hand, and every so often one goes missing."
-            >
-              WhatsApp, llamada, correo, el vendedor en ruta y el que llega en
-              persona. Alguien los captura a mano y a veces se pierde uno.
-            </p>
+            <h3 data-es="Mido sobre lo que ya tienes" data-en="I measure on data you already have">Mido sobre lo que ya tienes</h3>
+            <p data-es="Tu operación ya lleva el registro, solo que nadie lo ha leído. Las horas de los mensajes, las fechas de las facturas, cuántos pedidos entran fuera de horario. De ahí salen los números, no de que alguien se acuerde." data-en="Your operation already keeps the record, it is just that nobody has read it. Message timestamps, invoice dates, how many orders come in after hours. That is where the numbers come from, not from somebody remembering.">Tu operación ya lleva el registro, solo que nadie lo ha leído. Las horas de los mensajes, las fechas de las facturas, cuántos pedidos entran fuera de horario. De ahí salen los números, no de que alguien se acuerde.</p>
           </div>
-          <div class="pain">
-            <h3
-              data-es="Crecer significa contratar a otro capturista"
-              data-en="Growing means hiring another data entry clerk"
+          <div class="day">
+            <span class="when" data-es="Día 4" data-en="Day 4"
+              >Día 4</span
             >
-              Crecer significa contratar a otro capturista
-            </h3>
-            <p
-              data-es="Cada cliente nuevo suma trabajo administrativo sobre el anterior, así que vender más te cuesta más de lo que debería."
-              data-en="Every new customer piles admin work on top of the last one, so selling more costs you more than it should."
-            >
-              Cada cliente nuevo suma trabajo administrativo sobre el anterior,
-              así que vender más te cuesta más de lo que debería.
-            </p>
+            <h3 data-es="Me toca a mí" data-en="My turn">Me toca a mí</h3>
+            <p data-es="Convierto las horas a pesos con tu nómina, califico los cuatro pilares del 1 al 5, marco qué se detiene si alguien no llega, y ordeno los arreglos por impacto contra esfuerzo. De ahí sale el roadmap por fases." data-en="I turn the hours into pesos using your payroll, score the four pillars from 1 to 5, flag what stops if someone does not show up, and rank the fixes by impact against effort. That is where the phased roadmap comes from.">Convierto las horas a pesos con tu nómina, califico los cuatro pilares del 1 al 5, marco qué se detiene si alguien no llega, y ordeno los arreglos por impacto contra esfuerzo. De ahí sale el roadmap por fases.</p>
           </div>
+          <div class="day">
+            <span class="when" data-es="Día 5" data-en="Day 5"
+              >Día 5</span
+            >
+            <h3 data-es="Te lo entrego en vivo" data-en="I hand it over live">Te lo entrego en vivo</h3>
+            <p data-es="Otra hora y media para presentarte el documento y contestar todo ahí mismo. Te lo llevas ese día, con roadmap y números, me contrates después o no." data-en="Another ninety minutes to walk you through the document and answer everything on the spot. You take it with you that day, roadmap and numbers included, whether you hire me afterward or not.">Otra hora y media para presentarte el documento y contestar todo ahí mismo. Te lo llevas ese día, con roadmap y números, me contrates después o no.</p>
+          </div>
+        </div>
+
+        <div class="seam">
+          <p
+            data-es="<b>Lo que casi nadie encuentra:</b> el desperdicio no suele estar dentro de un área, está en el momento en que el trabajo pasa de una a la siguiente y alguien vuelve a escribir lo que la anterior ya sabía. Como no le pertenece a nadie, nadie lo ve. Por eso el día 2 no pregunto, miro."
+            data-en="<b>What almost nobody finds:</b> the waste is rarely inside one area, it sits at the moment work passes from one to the next and somebody retypes what the previous one already knew. Because it belongs to no one, no one sees it. That is why on day 2 I watch instead of asking."
+          >
+            <b>Lo que casi nadie encuentra:</b> el desperdicio no suele estar
+            dentro de un área, está en el momento en que el trabajo pasa de una
+            a la siguiente y alguien vuelve a escribir lo que la anterior ya
+            sabía. Como no le pertenece a nadie, nadie lo ve. Por eso el día 2
+            no pregunto, miro.
+          </p>
         </div>
       </div>
     </section>
@@ -726,11 +918,8 @@
     <!-- ═══════════ OFERTA ═══════════ -->
     <section class="block">
       <div class="wrap">
-        <h2
-          data-es="Diagnóstico de Operaciones"
-          data-en="Operations Diagnostic"
-        >
-          Diagnóstico de Operaciones
+        <h2 data-es="Radiografía de Operación" data-en="Operations X-Ray">
+          Radiografía de Operación
         </h2>
         <p
           class="lede"
@@ -742,52 +931,145 @@
         </p>
 
         <div class="offer">
-          <div class="price-row">
-            <!-- El plazo ocupa el lugar que tenia el precio: sigue siendo un
-                 dato duro y comprobable, pero no cierra la puerta a operaciones
-                 de tamaños distintos ni a los dos mercados. -->
-            <span class="price" data-es="5 días" data-en="5 days">5 días</span>
-            <span
-              class="price-meta"
-              data-es="hábiles, de arranque a presentación · <b>El precio depende del tamaño de tu operación</b> y queda cerrado antes de empezar · Se acredita completo si contratas el proyecto dentro de 60 días"
-              data-en="business days, from kickoff to readout · <b>Pricing follows the size of your operation</b> and is agreed before we start · Credited in full if you hire the project within 60 days"
-            >
-              hábiles, de arranque a presentación ·
-              <b>El precio depende del tamaño de tu operación</b> y queda
-              cerrado antes de empezar · Se acredita completo si contratas el
-              proyecto dentro de 60 días
-            </span>
+          <!-- Precio visible a proposito. El numero filtra solo: quien no
+               puede, no agenda, y quien si puede llega a la llamada ya
+               vendido en el orden de magnitud. -->
+          <div class="tiers">
+            <div class="tier">
+              <span class="size" data-es="Pequeño" data-en="Small"
+                >Pequeño</span
+              >
+              <span class="amount"
+                >$8,500 <small data-es="MXN" data-en="MXN">MXN</small></span
+              >
+              <span
+                class="was"
+                data-es="Precio de arranque · lista <s>$12,000</s> · 5 días"
+                data-en="Founding price · list <s>$12,000</s> · 5 days"
+              >
+                Precio de arranque · lista <s>$12,000</s> · 5 días
+              </span>
+              <p
+                class="who"
+                data-es="Un solo domicilio, hasta unas 25 personas, y los clientes te compran de una sola forma."
+                data-en="One location, up to around 25 people, and customers buy from you in a single way."
+              >
+                Un solo domicilio, hasta unas 25 personas, y los clientes te
+                compran de una sola forma.
+              </p>
+            </div>
+            <div class="tier">
+              <span class="size" data-es="Mediano" data-en="Mid-sized"
+                >Mediano</span
+              >
+              <span class="amount"
+                >$18,000 <small data-es="MXN" data-en="MXN">MXN</small></span
+              >
+              <span
+                class="was"
+                data-es="Precio de arranque · lista <s>$26,000</s> · 10 días"
+                data-en="Founding price · list <s>$26,000</s> · 10 days"
+              >
+                Precio de arranque · lista <s>$26,000</s> · 10 días
+              </span>
+              <p
+                class="who"
+                data-es="Entre 25 y 80 personas, o varias sucursales, o te compran de dos o tres formas distintas."
+                data-en="Between 25 and 80 people, or several locations, or customers buy from you in two or three different ways."
+              >
+                Entre 25 y 80 personas, o varias sucursales, o te compran de dos
+                o tres formas distintas.
+              </p>
+            </div>
+            <div class="tier quote">
+              <span class="size" data-es="Grande" data-en="Large">Grande</span>
+              <span
+                class="amount"
+                data-es="Se cotiza"
+                data-en="Quoted case by case"
+                >Se cotiza</span
+              >
+              <span class="was" data-es="15 días" data-en="15 days"
+                >15 días</span
+              >
+              <p
+                class="who"
+                data-es="Más de 80 personas, varias unidades de negocio, o ya tienes alguien de sistemas. Hablamos y te paso una propuesta."
+                data-en="More than 80 people, several business units, or you already have someone running IT. We talk and I send you a proposal."
+              >
+                Más de 80 personas, varias unidades de negocio, o ya tienes
+                alguien de sistemas. Hablamos y te paso una propuesta.
+              </p>
+            </div>
           </div>
+
+          <p
+            class="tier-note"
+            data-es="El precio de arranque se acaba a los cinco casos entregados o cuando cierre la primera implementación, lo que pase primero. <b>Se acredita completo</b> si contratas el proyecto dentro de 60 días."
+            data-en="The founding price ends after five delivered cases or when the first implementation closes, whichever comes first. <b>Credited in full</b> if you hire the project within 60 days."
+          >
+            El precio de arranque se acaba a los cinco casos entregados o cuando
+            cierre la primera implementación, lo que pase primero.
+            <b>Se acredita completo</b> si contratas el proyecto dentro de 60
+            días.
+          </p>
 
           <ul class="deliverables">
             <li
-              data-es="El mapa real de un pedido, del primer mensaje hasta la factura pagada, con quién toca qué y cuánto tarda cada paso."
-              data-en="The real map of one order, from first message to paid invoice, showing who touches what and how long each step takes."
+              data-es="Los tres números de arriba: cuántas horas a la semana se van en trabajo manual, lo que cuestan al año en nómina, y cuántas de esas se pueden quitar. Con tus números, no con promedios de internet."
+              data-en="The three numbers up front: how many hours a week go into manual work, what they cost per year in payroll, and how many of those can be taken away. Your numbers, not industry averages."
             >
-              El mapa real de un pedido, del primer mensaje hasta la factura
-              pagada, con quién toca qué y cuánto tarda cada paso.
+              Los tres números de arriba: cuántas horas a la semana se van en
+              trabajo manual, lo que cuestan al año en nómina, y cuántas de esas
+              se pueden quitar. Con tus números, no con promedios de internet.
             </li>
             <li
-              data-es="Las horas que se van a la semana en trabajo manual, y lo que eso cuesta al año en nómina. Con tus números, no con promedios de internet."
-              data-en="The hours lost each week to manual work, and what that costs per year in payroll. Your numbers, not industry averages."
+              data-es="La calificación de tus cuatro pilares del 1 al 5, con el detalle por área, para que veas de un vistazo qué está crítico y qué puede esperar."
+              data-en="Your four pillars scored from 1 to 5, broken down by area, so you can see at a glance what is critical and what can wait."
             >
-              Las horas que se van a la semana en trabajo manual, y lo que eso
-              cuesta al año en nómina. Con tus números, no con promedios de
-              internet.
+              La calificación de tus cuatro pilares del 1 al 5, con el detalle
+              por área, para que veas de un vistazo qué está crítico y qué puede
+              esperar.
             </li>
             <li
-              data-es="Una calificación por área de tu operación, para que veas de un vistazo qué está crítico y qué puede esperar."
-              data-en="A score for every area of your operation, so you can see at a glance what is critical and what can wait."
+              data-es="El ciclo de tu dinero paso por paso, del primer mensaje hasta la factura pagada: quién toca qué, cuánto tarda cada paso, y cuántas veces se vuelve a escribir el mismo dato."
+              data-en="Your money cycle step by step, from the first message to the paid invoice: who touches what, how long each step takes, and how many times the same piece of data gets retyped."
             >
-              Una calificación por área de tu operación, para que veas de un
-              vistazo qué está crítico y qué puede esperar.
+              El ciclo de tu dinero paso por paso, del primer mensaje hasta la
+              factura pagada: quién toca qué, cuánto tarda cada paso, y cuántas
+              veces se vuelve a escribir el mismo dato.
             </li>
             <li
-              data-es="La lista de arreglos priorizada por impacto contra esfuerzo, para saber qué hacer primero."
-              data-en="Every fix ranked by impact against effort, so you know what to do first."
+              data-es="El inventario de dónde vive tu información: qué guardas, en qué archivo o cabeza, quién lo puede leer y cuántas veces se recaptura."
+              data-en="The inventory of where your information lives: what you keep, in which file or in whose head, who can read it, and how many times it gets re-entered."
             >
-              La lista de arreglos priorizada por impacto contra esfuerzo, para
-              saber qué hacer primero.
+              El inventario de dónde vive tu información: qué guardas, en qué
+              archivo o cabeza, quién lo puede leer y cuántas veces se
+              recaptura.
+            </li>
+            <li
+              data-es="Qué se detiene si alguien no llega el lunes: quién es indispensable, dónde vive la información que nadie más conoce y qué pasa si se pierde."
+              data-en="What stops if someone does not show up on Monday: who is indispensable, where the information nobody else knows lives, and what happens if it is lost."
+            >
+              Qué se detiene si alguien no llega el lunes: quién es
+              indispensable, dónde vive la información que nadie más conoce y
+              qué pasa si se pierde.
+            </li>
+            <li
+              data-es="Cada arreglo ordenado por impacto contra esfuerzo, con las horas que recupera y el pilar al que pertenece, para saber qué hacer primero."
+              data-en="Every fix ranked by impact against effort, with the hours it recovers and the pillar it belongs to, so you know what to do first."
+            >
+              Cada arreglo ordenado por impacto contra esfuerzo, con las horas
+              que recupera y el pilar al que pertenece, para saber qué hacer
+              primero.
+            </li>
+            <li
+              data-es="El roadmap en fases, cada una con lo que incluye, cuántas semanas toma, cuánto cuesta y en cuántos meses se paga sola. Cada fase sirve por sí sola: puedes parar donde quieras."
+              data-en="The roadmap in phases, each one with what it covers, how many weeks it takes, what it costs and how many months it takes to pay for itself. Every phase stands alone: you can stop wherever you want."
+            >
+              El roadmap en fases, cada una con lo que incluye, cuántas semanas
+              toma, cuánto cuesta y en cuántos meses se paga sola. Cada fase
+              sirve por sí sola: puedes parar donde quieras.
             </li>
             <li
               data-es="Lo que puedes cambiar esta misma semana sin contratar a nadie ni comprar software."
@@ -818,12 +1100,102 @@
           </div>
           <p
             class="cta-note"
-            data-es="La llamada es para ver si aplica. Si no te puedo ayudar, te lo digo ahí mismo."
-            data-en="The call is to see whether this applies to you. If I cannot help, I will tell you right there."
+            data-es="La llamada es para ver si aplica. Si no tienes suficiente trabajo manual como para que medirlo valga la pena, te lo digo ahí mismo."
+            data-en="The call is to see whether this applies to you. If you do not have enough manual work for measuring it to be worth anything, I tell you right there."
           >
-            La llamada es para ver si aplica. Si no te puedo ayudar, te lo digo
-            ahí mismo.
+            La llamada es para ver si aplica. Si no tienes suficiente trabajo
+            manual como para que medirlo valga la pena, te lo digo ahí mismo.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ A QUIÉN APLICA ═══════════
+         Decir en voz alta a quien NO le sirve filtra mejor que cualquier
+         formulario, y el que si califica se reconoce en la columna de la
+         izquierda antes de agendar. -->
+    <section class="block">
+      <div class="wrap">
+        <h2
+          data-es="A quién le sirve esto, y a quién no"
+          data-en="Who this is for, and who it is not for"
+        >
+          A quién le sirve esto, y a quién no
+        </h2>
+        <p
+          class="lede"
+          data-es="Prefiero decírtelo aquí que cobrarte cinco días para llegar a la misma conclusión."
+          data-en="I would rather tell you here than charge you for five days to reach the same conclusion."
+        >
+          Prefiero decírtelo aquí que cobrarte cinco días para llegar a la misma
+          conclusión.
+        </p>
+
+        <div class="qualify">
+          <div class="qbox">
+            <h3 data-es="Te sirve si" data-en="It works for you if">
+              Te sirve si
+            </h3>
+            <ul>
+              <li
+                data-es="Tienes al menos una persona de tiempo completo haciendo trabajo de oficina: capturar, cotizar, facturar o dar seguimiento."
+                data-en="You have at least one full-time person doing office work: keying in data, quoting, invoicing or following up."
+              >
+                Tienes al menos una persona de tiempo completo haciendo trabajo
+                de oficina: capturar, cotizar, facturar o dar seguimiento.
+              </li>
+              <li
+                data-es="Buena parte de tu operación vive en hojas de cálculo, WhatsApp o en la cabeza de alguien."
+                data-en="A good chunk of your operation lives in spreadsheets, WhatsApp or in someone's head."
+              >
+                Buena parte de tu operación vive en hojas de cálculo, WhatsApp o
+                en la cabeza de alguien.
+              </li>
+              <li
+                data-es="Quieres crecer sin que cada cliente nuevo signifique contratar a alguien más."
+                data-en="You want to grow without every new customer meaning another hire."
+              >
+                Quieres crecer sin que cada cliente nuevo signifique contratar a
+                alguien más.
+              </li>
+              <li
+                data-es="Puedes decidir tú, o con una sola persona más, si se hace o no."
+                data-en="You can decide on your own, or with one other person, whether this happens."
+              >
+                Puedes decidir tú, o con una sola persona más, si se hace o no.
+              </li>
+            </ul>
+          </div>
+          <div class="qbox no">
+            <h3 data-es="No te sirve si" data-en="It is not for you if">
+              No te sirve si
+            </h3>
+            <ul>
+              <li
+                data-es="Nadie está de tiempo completo en trabajo administrativo. Sin horas que recuperar no hay nada que medir, y te entregaría un documento que te dice justo eso."
+                data-en="Nobody is full-time on admin work. With no hours to recover there is nothing to measure, and I would hand you a document that says exactly that."
+              >
+                Nadie está de tiempo completo en trabajo administrativo. Sin
+                horas que recuperar no hay nada que medir, y te entregaría un
+                documento que te dice justo eso.
+              </li>
+              <li
+                data-es="Ya sabes exactamente qué quieres construir y solo buscas quién lo programe. Eso es otra conversación, y también la puedo tener contigo."
+                data-en="You already know exactly what you want built and just need someone to code it. That is a different conversation, and one I am happy to have."
+              >
+                Ya sabes exactamente qué quieres construir y solo buscas quién
+                lo programe. Eso es otra conversación, y también la puedo tener
+                contigo.
+              </li>
+              <li
+                data-es="Estás buscando el precio más bajo. Aquí no lo vas a encontrar, y está bien."
+                data-en="You are shopping for the lowest price. You will not find it here, and that is fine."
+              >
+                Estás buscando el precio más bajo. Aquí no lo vas a encontrar, y
+                está bien.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -836,47 +1208,103 @@
         </h2>
         <p
           class="lede"
-          data-es="Dos negocios que pasé de operación manual a software funcionando. No son maquetas ni pruebas de concepto: están en producción y su gente los usa todos los días."
-          data-en="Two businesses I took from manual operations to working software. Not mockups or proofs of concept: they are in production and their teams use them every day."
+          data-es="Dos negocios distintos, el mismo hallazgo: los dos sabían todo sobre sí mismos, y ninguno de los dos podía consultarse. Cada pregunta sobre el propio negocio mandaba a una persona a caminar. Están en producción y su gente los usa todos los días."
+          data-en="Two different businesses, the same finding: both knew everything about themselves, and neither one could look itself up. Every question about the business sent a person walking. Both are in production and their teams use them every day."
         >
-          Dos negocios que pasé de operación manual a software funcionando. No
-          son maquetas ni pruebas de concepto: están en producción y su gente
-          los usa todos los días.
+          Dos negocios distintos, el mismo hallazgo: los dos sabían todo sobre
+          sí mismos, y ninguno de los dos podía consultarse. Cada pregunta sobre
+          el propio negocio mandaba a una persona a caminar. Están en producción
+          y su gente los usa todos los días.
         </p>
 
         <div class="cases">
+          <!-- CTIASP primero: es el caso mas fuerte, porque el suyo no es un
+               argumento de eficiencia sino de capacidad. -->
           <div class="case">
             <span
               class="tag"
-              data-es="Distribuidor mayorista"
-              data-en="Wholesale distributor"
-              >Distribuidor mayorista</span
+              data-es="Taller mecánico"
+              data-en="Auto repair shop"
+              >Taller mecánico</span
             >
-            <p
-              data-es="Catálogo de más de 300 SKUs, sin canal de pedidos en línea y con precios e inventario fuera de cualquier sistema. Cada cotización pasaba por una persona. Le construí la tienda para sus clientes más el sistema interno: catálogo, precios, pedidos, cobro con Stripe y permisos por usuario."
-              data-en="A 300+ SKU catalog, no online ordering channel, and pricing and stock tracked outside any real system. Every quote went through a person. I built the customer storefront plus the internal system: catalog, pricing, orders, Stripe payments and per-user permissions."
-            >
-              Catálogo de más de 300 SKUs, sin canal de pedidos en línea y con
-              precios e inventario fuera de cualquier sistema. Cada cotización
-              pasaba por una persona. Le construí la tienda para sus clientes
-              más el sistema interno: catálogo, precios, pedidos, cobro con
-              Stripe y permisos por usuario.
-            </p>
+            <div class="beats">
+              <div class="beat">
+                <b data-es="Cómo estaba" data-en="Where they started">
+                  Cómo estaba
+                </b>
+                <p
+                  data-es="Con 100 autos al mes ya estaban al límite. Los expedientes vivían en cajas, en un cuarto del que nadie sabía con certeza qué contenía, y cada coche que entraba hacía más lenta la búsqueda de todos los anteriores."
+                  data-en="At 100 cars a month they were already at their limit. Customer files lived in boxes, in a room nobody could say for certain what it held, and every new car made searching for all the previous ones slower."
+                >
+                  Con 100 autos al mes ya estaban al límite. Los expedientes
+                  vivían en cajas, en un cuarto del que nadie sabía con certeza
+                  qué contenía, y cada coche que entraba hacía más lenta la
+                  búsqueda de todos los anteriores.
+                </p>
+              </div>
+              <div class="beat">
+                <b data-es="Qué encontré" data-en="What I found">
+                  Qué encontré
+                </b>
+                <p
+                  data-es="Me senté por separado con el valuador, con el asesor de servicio y con los dos dueños. Cada quien me describió un proceso distinto. El mapa acabó siendo papeles pegados en una pared, y ahí quedó claro que su techo de crecimiento no era el taller: era el archivero."
+                  data-en="I sat down separately with the appraiser, the service advisor and both owners. Each described a different process. The map ended up as sheets of paper taped to a wall, and that is where it became clear their growth ceiling was not the shop floor: it was the filing system."
+                >
+                  Me senté por separado con el valuador, con el asesor de
+                  servicio y con los dos dueños. Cada quien me describió un
+                  proceso distinto. El mapa acabó siendo papeles pegados en una
+                  pared, y ahí quedó claro que su techo de crecimiento no era el
+                  taller: era el archivero.
+                </p>
+              </div>
+              <div class="beat">
+                <b data-es="Qué entregué" data-en="What I handed over">
+                  Qué entregué
+                </b>
+                <p
+                  data-es="Un orden de ataque por fases, empezando por donde más dolía: primero los procesos internos, después la comunicación con el cliente, después posicionamiento. Hoy los avisos de estatus salen solos y el cliente consulta su auto con su número de orden."
+                  data-en="A phased order of attack, starting where it hurt most: internal processes first, then customer communication, then positioning. Today status updates go out on their own and customers look up their car with their work order number."
+                >
+                  Un orden de ataque por fases, empezando por donde más dolía:
+                  primero los procesos internos, después la comunicación con el
+                  cliente, después posicionamiento. Hoy los avisos de estatus
+                  salen solos y el cliente consulta su auto con su número de
+                  orden.
+                </p>
+              </div>
+            </div>
             <div class="metrics">
+              <span
+                class="metrics-label"
+                data-es="Qué cambió"
+                data-en="What changed"
+                >Qué cambió</span
+              >
               <div class="metric">
-                <b>300+</b
+                <b>2x</b
                 ><span
-                  data-es="productos vendiéndose en línea"
-                  data-en="products selling online"
-                  >productos vendiéndose en línea</span
+                  data-es="el volumen, con picos de 300+ autos al mes, con la misma gente en administración"
+                  data-en="the volume, peaking at 300+ cars a month, with the same back-office team"
+                  >el volumen, con picos de 300+ autos al mes, con la misma gente
+                  en administración</span
                 >
               </div>
               <div class="metric">
-                <b>24/7</b
+                <b>30 s</b
                 ><span
-                  data-es="pedidos y pagos sin intervención humana"
-                  data-en="orders and payments with no human in the loop"
-                  >pedidos y pagos sin intervención humana</span
+                  data-es="para encontrar un expediente. Antes podía tomar una semana"
+                  data-en="to find a customer file. It used to take up to a week"
+                  >para encontrar un expediente. Antes podía tomar una
+                  semana</span
+                >
+              </div>
+              <div class="metric">
+                <b>8 h</b
+                ><span
+                  data-es="menos por semana: la junta de estatus ya no se prepara, se abre"
+                  data-en="less per week: the status meeting is no longer prepared, it is opened"
+                  >menos por semana: la junta de estatus ya no se prepara, se
+                  abre</span
                 >
               </div>
             </div>
@@ -885,34 +1313,75 @@
           <div class="case">
             <span
               class="tag"
-              data-es="Operación de servicio"
-              data-en="Service operation"
-              >Operación de servicio</span
+              data-es="Distribuidor mayorista"
+              data-en="Wholesale distributor"
+              >Distribuidor mayorista</span
             >
-            <p
-              data-es="Todo en hojas de cálculo: estatus de cada trabajo, expedientes, valuaciones y papeleo con terceros. Los clientes llamaban a cada rato a preguntar cómo iba lo suyo. Automaticé los avisos por WhatsApp y los reportes, que ahora se generan solos."
-              data-en="Everything in spreadsheets: job status, customer files, valuations and third-party paperwork. Customers called constantly to ask where their order stood. I automated the WhatsApp status updates and the reports, which now generate themselves."
-            >
-              Todo en hojas de cálculo: estatus de cada trabajo, expedientes,
-              valuaciones y papeleo con terceros. Los clientes llamaban a cada
-              rato a preguntar cómo iba lo suyo. Automaticé los avisos por
-              WhatsApp y los reportes, que ahora se generan solos.
-            </p>
+            <div class="beats">
+              <div class="beat">
+                <b data-es="Cómo estaba" data-en="Where they started">
+                  Cómo estaba
+                </b>
+                <p
+                  data-es="Más de 300 productos, cotizaciones a mano y sin canal de pedidos en línea. Nunca pisé el lugar: todo el levantamiento fue por llamada y por pantalla compartida."
+                  data-en="More than 300 products, quotes done by hand, and no online ordering channel. I never set foot there: the whole assessment ran over calls and screen shares."
+                >
+                  Más de 300 productos, cotizaciones a mano y sin canal de
+                  pedidos en línea. Nunca pisé el lugar: todo el levantamiento
+                  fue por llamada y por pantalla compartida.
+                </p>
+              </div>
+              <div class="beat">
+                <b data-es="Qué encontré" data-en="What I found">
+                  Qué encontré
+                </b>
+                <p
+                  data-es="No tenían control de las piezas. Cada vez que un cliente preguntaba por una medida o por existencia, alguien tenía que ir a la bodega a medirla o a buscarla. La información existía, pero solo dentro del objeto."
+                  data-en="They had no control over their parts. Every time a customer asked about a measurement or whether something was in stock, someone had to walk to the warehouse to measure it or look for it. The information existed, but only inside the object itself."
+                >
+                  No tenían control de las piezas. Cada vez que un cliente
+                  preguntaba por una medida o por existencia, alguien tenía que
+                  ir a la bodega a medirla o a buscarla. La información existía,
+                  pero solo dentro del objeto.
+                </p>
+              </div>
+              <div class="beat">
+                <b data-es="Qué entregué" data-en="What I handed over">
+                  Qué entregué
+                </b>
+                <p
+                  data-es="Por partes. Primero la tienda para sus clientes, con precios y permisos por usuario. Después el sistema interno, con cobro en línea."
+                  data-en="In stages. First the storefront for their customers, with pricing and per-user permissions. Then the internal system, with online payments."
+                >
+                  Por partes. Primero la tienda para sus clientes, con precios y
+                  permisos por usuario. Después el sistema interno, con cobro en
+                  línea.
+                </p>
+              </div>
+            </div>
             <div class="metrics">
+              <span
+                class="metrics-label"
+                data-es="Qué cambió"
+                data-en="What changed"
+                >Qué cambió</span
+              >
               <div class="metric">
-                <b>40%</b
+                <b data-es="1 de 7" data-en="1 in 7">1 de 7</b
                 ><span
-                  data-es="menos trabajo administrativo manual"
-                  data-en="less manual admin work"
-                  >menos trabajo administrativo manual</span
+                  data-es="pedidos entra con la oficina cerrada, sin que nadie atienda"
+                  data-en="orders comes in with the office closed, with nobody attending"
+                  >pedidos entra con la oficina cerrada, sin que nadie
+                  atienda</span
                 >
               </div>
               <div class="metric">
-                <b>7+</b
+                <b>300+</b
                 ><span
-                  data-es="convenios con terceros habilitados"
-                  data-en="third-party partnerships enabled"
-                  >convenios con terceros habilitados</span
+                  data-es="productos que el cliente consulta y compra sin preguntarle a nadie"
+                  data-en="products customers look up and buy without asking anyone"
+                  >productos que el cliente consulta y compra sin preguntarle a
+                  nadie</span
                 >
               </div>
             </div>
@@ -931,6 +1400,26 @@
           Lo que me preguntan siempre
         </h2>
         <div class="faq">
+          <details>
+            <summary
+              data-es="Mi negocio no se parece a los ejemplos. ¿Igual aplica?"
+              data-en="My business looks nothing like your examples. Does this still apply?"
+            >
+              Mi negocio no se parece a los ejemplos. ¿Igual aplica?
+            </summary>
+            <div class="answer">
+              <p
+                data-es="Sí, porque no reviso tu industria, reviso los cuatro pilares, y esos son los mismos en una bodega, un taller, un consultorio o un despacho. Solo cambian de nombre: donde un distribuidor surte, un taller repara y un despacho elabora. La medición es idéntica."
+                data-en="Yes, because I do not review your industry, I review the four pillars, and those are the same in a warehouse, a workshop, a clinic or a professional firm. They only change names: where a distributor picks stock, a workshop repairs and a firm drafts. The measurement is identical."
+              >
+                Sí, porque no reviso tu industria, reviso los cuatro pilares, y
+                esos son los mismos en una bodega, un taller, un consultorio o
+                un despacho. Solo cambian de nombre: donde un distribuidor
+                surte, un taller repara y un despacho elabora. La medición es
+                idéntica.
+              </p>
+            </div>
+          </details>
           <details>
             <summary
               data-es="Ya tenemos un sistema. ¿Igual aplica?"
@@ -980,59 +1469,19 @@
             </summary>
             <div class="answer">
               <p
-                data-es="Depende de qué salga en el diagnóstico. Para que tengas referencia de tamaños: un módulo específico funcionando (catálogo con precios por cliente, pedidos y cobro) toma unas cuatro semanas. Una plataforma de operaciones completa es un proyecto de varios meses. El precio sale del alcance que definimos al cerrar el diagnóstico, y nunca te doy un número sin haber visto tu operación."
-                data-en="It depends on what the diagnostic turns up. To give you a sense of scale: one specific module in production (catalog with per-customer pricing, orders and payments) takes about four weeks. A full operations platform is a project of several months. The price comes out of the scope we agree on at the readout, and I never quote a number without having seen your operation."
+                data-es="Puede que no cueste nada. Buena parte de lo que sale en un diagnóstico se arregla cambiando cómo trabajan, o automatizando encima de las herramientas que ya pagas: tu hoja de cálculo, tu calendario, tu WhatsApp, tu sistema de facturación. Eso va de unos miles de pesos a nada, según quién lo haga. Cuando sí hay que construir algo, una fase suelta funcionando va de $40,000 a $90,000 pesos y toma tres o cuatro semanas, y una plataforma completa arranca en $250,000. Pero eso es lo último de la lista, no lo primero, y nunca te doy un número sin haber visto tu operación."
+                data-en="It may cost nothing at all. A good share of what a diagnostic turns up gets fixed by changing how people work, or by automating on top of the tools you already pay for: your spreadsheet, your calendar, your WhatsApp, your invoicing system. That ranges from a few thousand pesos to nothing, depending on who does it. When something does have to get built, one standalone phase in production runs $40,000 to $90,000 pesos over three or four weeks, and a full platform starts at $250,000. But that is the last item on the list, not the first, and I never quote a number without having seen your operation."
               >
-                Depende de qué salga en el diagnóstico. Para que tengas
-                referencia de tamaños: un módulo específico funcionando
-                (catálogo con precios por cliente, pedidos y cobro) toma unas
-                cuatro semanas. Una plataforma de operaciones completa es un
-                proyecto de varios meses. El precio sale del alcance que
-                definimos al cerrar el diagnóstico, y nunca te doy un número sin
-                haber visto tu operación.
-              </p>
-            </div>
-          </details>
-          <details>
-            <summary
-              data-es="¿Cómo mides mi operación sin estar aquí?"
-              data-en="How do you measure my operation without being here?"
-            >
-              ¿Cómo mides mi operación sin estar aquí?
-            </summary>
-            <div class="answer">
-              <p
-                data-es="El diagnóstico es remoto y lo que hay que medir lo mide tu gente. Durante tres días, quien más pedidos toma llena una hoja de papel: a qué hora entró cada uno, por dónde y a qué hora quedó. Eso es mejor muestra que yo parada media tarde viendo diez pedidos. El resto lo veo por pantalla compartida mientras levantan un pedido real, y con un video de cinco minutos del mostrador en hora pico. Trabajo en tu horario y me tienes en WhatsApp; si en algún punto conviene que vaya, lo hablamos."
-                data-en="The diagnostic runs remotely, and the measuring is done by your own people. For three days, whoever takes the most orders fills in a paper sheet: when each one came in, through which channel, and when it was done. That is a better sample than me standing there one afternoon watching ten orders. The rest I see over screen share while they enter a real order, plus a five-minute phone video of the counter at peak. I work your hours and you have me on WhatsApp; if at some point it makes sense for me to travel, we talk about it."
-              >
-                El diagnóstico es remoto y lo que hay que medir lo mide tu
-                gente. Durante tres días, quien más pedidos toma llena una hoja
-                de papel: a qué hora entró cada uno, por dónde y a qué hora
-                quedó. Eso es mejor muestra que yo parada media tarde viendo
-                diez pedidos. El resto lo veo por pantalla compartida mientras
-                levantan un pedido real, y con un video de cinco minutos del
-                mostrador en hora pico. Trabajo en tu horario y me tienes en
-                WhatsApp; si en algún punto conviene que vaya, lo hablamos.
-              </p>
-            </div>
-          </details>
-          <details>
-            <summary
-              data-es="¿Qué necesitas de nosotros durante esos cinco días?"
-              data-en="What do you need from us during those five days?"
-            >
-              ¿Qué necesitas de nosotros durante esos cinco días?
-            </summary>
-            <div class="answer">
-              <p
-                data-es="Dos sesiones de hora y media contigo o con quien lleve la operación, y un rato por pantalla compartida con la persona del mostrador para verla levantar un pedido real. Nada de preparar reportes ni juntar información: prefiero ver el trabajo tal como pasa."
-                data-en="Two ninety-minute sessions with you or whoever runs the operation, plus some time on a screen share with the person at the counter, watching them enter a real order. No reports to prepare, nothing to gather: I would rather see the work exactly as it happens."
-              >
-                Dos sesiones de hora y media contigo o con quien lleve la
-                operación, y un rato por pantalla compartida con la persona del
-                mostrador para verla levantar un pedido real. Nada de preparar
-                reportes ni juntar información: prefiero ver el trabajo tal como
-                pasa.
+                Puede que no cueste nada. Buena parte de lo que sale en un
+                diagnóstico se arregla cambiando cómo trabajan, o automatizando
+                encima de las herramientas que ya pagas: tu hoja de cálculo, tu
+                calendario, tu WhatsApp, tu sistema de facturación. Eso va de
+                unos miles de pesos a nada, según quién lo haga. Cuando sí hay
+                que construir algo, una fase suelta funcionando va de $40,000 a
+                $90,000 pesos y toma tres o cuatro semanas, y una plataforma
+                completa arranca en $250,000. Pero eso es lo último de la lista,
+                no lo primero, y nunca te doy un número sin haber visto tu
+                operación.
               </p>
             </div>
           </details>
@@ -1087,11 +1536,12 @@
           Veinte minutos y sabes si aplica
         </h2>
         <p
-          data-es="Cuéntame en qué está perdiendo tiempo tu equipo. Si te puedo ayudar, te digo cómo y qué implicaría. Si no, también te lo digo."
-          data-en="Tell me where your team is losing time. If I can help, I will tell you how and what it would take. If I cannot, I will tell you that too."
+          data-es="Cuéntame cómo entra el trabajo y quién lo toca. Con eso sabemos si tienes suficiente trabajo manual como para que medirlo valga la pena. Si no lo tienes, te lo digo ahí mismo y no seguimos."
+          data-en="Tell me how work comes in and who touches it. That is enough to know whether you have enough manual work for measuring it to be worth anything. If you do not, I tell you right there and we stop."
         >
-          Cuéntame en qué está perdiendo tiempo tu equipo. Si te puedo ayudar,
-          te digo cómo y qué implicaría. Si no, también te lo digo.
+          Cuéntame cómo entra el trabajo y quién lo toca. Con eso sabemos si
+          tienes suficiente trabajo manual como para que medirlo valga la pena.
+          Si no lo tienes, te lo digo ahí mismo y no seguimos.
         </p>
         <div class="cta-row">
           <a
@@ -1185,8 +1635,8 @@
       // Esta pagina nace en espanol porque es la que recibe el outbound,
       // pero muchos duenos hispanos en EE.UU. traen el equipo en ingles.
       const TITLES = {
-        es: "Diagnóstico de Operaciones para distribuidores | Brenda Flores",
-        en: "Operations Diagnostic for distributors | Brenda Flores",
+        es: "Radiografía de Operación para PyMEs | Brenda Flores",
+        en: "Operations X-Ray for small businesses | Brenda Flores",
       };
 
       function setLang(lang, remember) {

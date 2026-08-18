@@ -3,12 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Brenda Flores | Digitization &amp; Automation for B2B Businesses
-    </title>
+    <title>Brenda Flores | Diagnóstico y automatización para PyMEs</title>
     <meta
       name="description"
-      content="I help small and medium B2B service businesses get off spreadsheets, automate repetitive work, and build systems that scale. 7+ years of software engineering."
+      content="Antes de construirte nada, mido tu operación y te digo dónde se te va el día. Reviso los cuatro pilares de tu negocio y te entrego el roadmap de qué arreglar primero, con tus números. Diagnóstico desde $8,500 MXN."
     />
     <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js -->
     <script src="/analytics.js" defer></script>
@@ -40,37 +38,6 @@
       };
     </script>
     <style>
-      /*  cursor  */
-      * {
-        cursor: none !important;
-      }
-      #cursor-dot {
-        position: fixed;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #4f46e5;
-        pointer-events: none;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        transition: transform 0.1s;
-      }
-      #cursor-ring {
-        position: fixed;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        border: 2px solid #4f46e5;
-        pointer-events: none;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        transition:
-          left 0.12s ease,
-          top 0.12s ease,
-          transform 0.2s;
-        opacity: 0.6;
-      }
-
       /*  base  */
       html {
         background: #fff;
@@ -491,6 +458,14 @@
       }
 
       /*  service cards  */
+      /*  Todas las filas del mismo alto, no solo las tarjetas de una misma
+          fila: sin esto la segunda fila queda 20px mas baja y las lineas
+          divisoras no coinciden entre filas.  */
+      @media (min-width: 768px) {
+        .svc-grid {
+          grid-auto-rows: 1fr;
+        }
+      }
       .svc-card {
         background: #fff;
         border: 1px solid #e5e7eb;
@@ -523,7 +498,11 @@
         height: 22px;
       }
       .svc-proof {
+        /*  Anclado abajo y con alto minimo de dos renglones: asi la linea
+            divisora cae a la misma altura en las cuatro tarjetas, aunque el
+            texto de arriba mida distinto.  */
         margin-top: auto;
+        min-height: calc(1rem + 3.1em);
         padding-top: 1rem;
         border-top: 1px dashed #e5e7eb;
         font-size: 0.78rem;
@@ -565,6 +544,140 @@
         color: #4b5563;
         display: block;
         margin-top: 0.15rem;
+      }
+
+      /*  El resultado va arriba y a lo ancho: es lo unico que el duenio
+          necesita para decidir si sigue leyendo. Las capturas bajan al
+          final porque prueban que existe, no convencen de nada.  */
+      .case-outcome {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+        gap: 0.6rem;
+        margin-bottom: 1.4rem;
+      }
+      .case-outcome .result-stat {
+        margin-bottom: 0;
+        padding: 0.85rem 0.9rem;
+      }
+      .case-outcome .rs-num {
+        font-size: 1.45rem;
+      }
+      .case-outcome .rs-label {
+        font-size: 0.78rem;
+        line-height: 1.35;
+      }
+
+      /*  diagrama del recorrido: antes contra hoy  */
+      .case-flow {
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 1.1rem 1.15rem;
+        margin-top: 1.4rem;
+        background: #fff;
+      }
+      /*  El rotulo va a la izquierda, no encima: ahorra dos renglones y de
+          paso deja las dos filas alineadas para compararlas de un vistazo. */
+      .flow-row {
+        display: grid;
+        grid-template-columns: 3.1rem 1fr;
+        gap: 0.85rem;
+        align-items: start;
+      }
+      .flow-row + .flow-row {
+        margin-top: 0.8rem;
+        padding-top: 0.8rem;
+        border-top: 1px dashed #e5e7eb;
+      }
+      .flow-when {
+        font-family: "Syne", sans-serif;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #9ca3af;
+        padding-top: 0.6rem;
+      }
+      @media (max-width: 640px) {
+        .flow-row {
+          grid-template-columns: 1fr;
+          gap: 0.4rem;
+        }
+        .flow-when {
+          padding-top: 0;
+        }
+      }
+      .flow-row.after .flow-when {
+        color: #4f46e5;
+      }
+      .flow-steps {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.45rem 0;
+      }
+      .fstep {
+        position: relative;
+        font-size: 0.82rem;
+        line-height: 1.35;
+        color: #4b5563;
+        background: #f7f7fb;
+        border: 1px solid #e5e7eb;
+        border-radius: 9px;
+        padding: 0.45rem 0.7rem;
+        /*  la ligera inclinacion es lo que da el aire de dibujo a mano;
+            se alternan los signos para que no parezca un error  */
+        transform: rotate(-0.5deg);
+      }
+      .fstep:nth-child(even) {
+        transform: rotate(0.5deg);
+      }
+      /*  La flecha vive en el margen, fuera de la caja: como pseudo-elemento
+          del span se dibujaba encima de su propio fondo.  */
+      .fstep:not(:last-child) {
+        margin-right: 1.75rem;
+      }
+      .fstep:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        width: 1.75rem;
+        text-align: center;
+        transform: translateY(-50%);
+        color: #c7cad1;
+        pointer-events: none;
+      }
+      .fstep.end {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        color: #b45309;
+        background: #fffbeb;
+        border-color: #fde68a;
+      }
+      .flow-row.after .fstep {
+        color: #312e81;
+        background: #eef2ff;
+        border-color: #c7d2fe;
+      }
+      .flow-row.after .fstep.end {
+        color: #3730a3;
+        background: #e0e7ff;
+        border-color: #a5b4fc;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .fstep,
+        .fstep:nth-child(even) {
+          transform: none;
+        }
+      }
+
+      /*  la prueba de que se construyo: presente, pero al final  */
+      .case-evidence {
+        margin-top: 1.4rem;
+        padding-top: 1.1rem;
+        border-top: 1px solid #e5e7eb;
       }
       .tab-group-label {
         font-family: "Syne", sans-serif;
@@ -647,8 +760,26 @@
         display: flex;
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
+      /*  Las tres capturas tienen proporciones distintas (2.19, 1.56 y 1.54),
+          asi que al escalarlas al mismo ancho quedaban de alturas distintas y
+          el marco brincaba al pasar de una a otra. Caja de proporcion fija y
+          contain: se ven completas, sin recorte y sin zoom.  */
       .carousel-slide {
         min-width: 100%;
+        /*  2/1 queda entre las tres proporciones reales: a la ancha le deja
+            una franja minima arriba y abajo, y a las otras dos un margen
+            lateral que se lee como marco, no como hueco.  */
+        aspect-ratio: 2 / 1;
+        background: #f7f7fb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .carousel-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
       .carousel-btn {
         position: absolute;
@@ -769,12 +900,283 @@
           white-space: nowrap;
         }
       }
+      /* ---------- casos: tarjeta que se abre ----------
+         Los dos casos estan a la vista al mismo tiempo, no en pestanias:
+         lo que decide al cliente son las cifras, y esas caben en la tapa.
+         El detalle solo lo pide quien ya se intereso.  */
+
+      .case-list {
+        display: grid;
+        gap: 1rem;
+      }
+      @media (min-width: 900px) {
+        .case-list {
+          grid-template-columns: 1fr 1fr;
+        }
+        /*  Al abrirse ocupa el ancho completo: el detalle necesita las dos
+            columnas para el diagrama, y la otra tarjeta baja intacta.  */
+        .case-card[open] {
+          grid-column: 1 / -1;
+        }
+      }
+
+      .case-card {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        /*  Sin overflow:hidden a proposito. Un ancestro con overflow distinto
+            de visible anula el position:sticky de la tapa en movil, que es lo
+            unico que deja cerrar la tarjeta sin volver a subir. Las esquinas
+            se redondean en la tapa y en el cuerpo por separado.  */
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .case-card:hover {
+        border-color: #c7d2fe;
+        box-shadow: 0 6px 24px rgba(79, 70, 229, 0.07);
+      }
+      .case-card[open] {
+        border-color: #c7d2fe;
+      }
+
+      .case-card > summary {
+        cursor: pointer;
+        list-style: none;
+        padding: 1.5rem 1.5rem 1.35rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        background: #fff;
+        border-radius: 15px;
+      }
+      .case-card[open] > summary {
+        border-radius: 15px 15px 0 0;
+      }
+      /*  Cerrada, la tapa ocupa toda la tarjeta; con las cifras ancladas
+          abajo, el divisor cae parejo en las dos aunque el titular ocupe
+          dos renglones en una y tres en la otra.  */
+      .case-card:not([open]) > summary {
+        flex: 1;
+      }
+      .case-card > summary::-webkit-details-marker {
+        display: none;
+      }
+      .case-card > summary:focus-visible {
+        outline: 2px solid #4f46e5;
+        outline-offset: -2px;
+      }
+
+      /*  En movil, al abrir, la tapa se queda pegada arriba: es el unico
+          punto desde donde se cierra sin tener que volver a subir todo.  */
+      @media (max-width: 899px) {
+        .case-card[open] > summary {
+          position: sticky;
+          /*  Debajo del boton de menu y del de contacto, que van fijos a
+              1.2rem del borde y miden unos 40px. Si se pega a 0 la tapa
+              queda tapada justo donde se toca para cerrar.  */
+          top: 4.2rem;
+          z-index: 90;
+          border-bottom: 1px solid #e5e7eb;
+          box-shadow: 0 4px 14px rgba(15, 15, 26, 0.06);
+        }
+        /*  El cuerpo se sigue viendo entre el borde de la pantalla y la tapa
+            pegada, justo detras del boton de menu y del de idioma. Esta
+            franja del color de la seccion lo tapa.  */
+        .case-card[open] > summary::before {
+          content: "";
+          position: absolute;
+          left: -1px;
+          right: -1px;
+          bottom: 100%;
+          height: 4.3rem;
+          background: #f9fafb;
+        }
+        .case-card[open] > summary .cc-minis,
+        .case-card[open] > summary .cc-hero span {
+          display: none;
+        }
+        .case-card[open] > summary {
+          gap: 0.5rem;
+          padding: 0.9rem 1.1rem;
+        }
+      }
+
+      .cc-top {
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+      .cc-tag {
+        font-family: "Syne", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #4f46e5;
+      }
+      .cc-client {
+        font-size: 0.78rem;
+        color: #9ca3af;
+      }
+
+      .cc-hero {
+        margin: 0;
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        font-size: 0.95rem;
+        color: #3c3c4e;
+        line-height: 1.4;
+      }
+      .cc-hero b {
+        font-family: "Syne", sans-serif;
+        font-size: 2.6rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: #4f46e5;
+        line-height: 1;
+        flex: none;
+      }
+
+      .cc-minis {
+        margin-top: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.6rem;
+        padding-top: 0.85rem;
+        border-top: 1px solid #f0f1f5;
+      }
+      .cc-mini {
+        display: flex;
+        align-items: baseline;
+        gap: 0.4rem;
+        font-size: 0.8rem;
+        color: #6b7280;
+        line-height: 1.35;
+      }
+      .cc-mini b {
+        font-family: "Syne", sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+        color: #15181c;
+        flex: none;
+      }
+
+      .cc-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        align-self: flex-start;
+        font-family: "Syne", sans-serif;
+        font-size: 0.76rem;
+        font-weight: 700;
+        color: #4f46e5;
+      }
+      .cc-more::after {
+        content: "";
+        width: 0.62rem;
+        height: 0.62rem;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+        transition: transform 0.2s;
+      }
+      .case-card[open] .cc-more::after {
+        transform: translateY(2px) rotate(-135deg);
+      }
+      .cc-more-close,
+      .case-card[open] .cc-more-open {
+        display: none;
+      }
+      .case-card[open] .cc-more-close {
+        display: inline;
+      }
+
+      .cc-body {
+        padding: 2rem 1.5rem 1.6rem;
+        border-top: 1px solid #f0f1f5;
+      }
+      @media (max-width: 640px) {
+        .case-card > summary {
+          padding: 1.2rem 1.1rem 1.1rem;
+        }
+        .cc-body {
+          padding: 0 1.1rem 1.3rem;
+        }
+        .cc-hero b {
+          font-size: 2.2rem;
+        }
+      }
+
       .proj-panel {
         display: none;
       }
+      /*  Flex en columna solo para poder reordenar: el resultado primero y
+          las capturas hasta abajo, sin mover 60 lineas de markup del
+          carrusel. Lo demas se queda en order 0 y respeta el orden del
+          documento.  */
       .proj-panel.active {
-        display: block;
+        display: flex;
+        flex-direction: column;
         animation: projFade 0.35s ease;
+      }
+      .cc-body > .case-shots {
+        order: 5;
+      }
+      .cc-body > .case-evidence {
+        order: 4;
+      }
+      .cc-body {
+        display: flex;
+        flex-direction: column;
+      }
+      /*  Las capturas prueban que el sistema existe, no convencen a nadie.
+          Cerradas por defecto le devuelven media pantalla al caso y siguen
+          disponibles para el que si quiere verlas.  */
+      .case-shots > summary {
+        cursor: pointer;
+        list-style: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Syne", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #4f46e5;
+        padding: 0.5rem 0.9rem;
+        border: 1px solid #c7d2fe;
+        border-radius: 999px;
+        margin-top: 1.25rem;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .case-shots > summary::-webkit-details-marker {
+        display: none;
+      }
+      .case-shots > summary:hover {
+        background: #eef2ff;
+        border-color: #4f46e5;
+      }
+      .case-shots > summary:focus-visible {
+        outline: 2px solid #4f46e5;
+        outline-offset: 2px;
+      }
+      .case-shots > summary::after {
+        content: "+";
+        font-size: 1rem;
+        line-height: 1;
+      }
+      .case-shots[open] > summary::after {
+        content: "\2212";
+      }
+      .case-shots > .carousel {
+        margin: 1rem 0 0;
       }
       @keyframes projFade {
         from {
@@ -884,24 +1286,6 @@
         animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
-      /*  scroll-linked zoom  */
-      [data-zoom] {
-        will-change: transform;
-      }
-
-      /*  slow zoom on the screenshot in view  */
-      .proj-panel.active .carousel-slide img {
-        animation: kenBurns 14s ease-in-out infinite alternate;
-      }
-      @keyframes kenBurns {
-        from {
-          transform: scale(1);
-        }
-        to {
-          transform: scale(1.09);
-        }
-      }
-
       /*  number counters keep their box while ticking  */
       .rs-num,
       .stat-num {
@@ -935,8 +1319,6 @@
     <div id="scroll-progress"></div>
 
     <!-- custom cursor -->
-    <div id="cursor-dot"></div>
-    <div id="cursor-ring"></div>
 
     <!-- mobile hamburger -->
     <button id="hamburger" aria-label="Menu">
@@ -1200,10 +1582,10 @@
           <p
             class="hero-eyebrow mb-5 hero-anim"
             style="animation-delay: 0.15s"
-            data-en="Brenda Flores, software engineer for B2B operations"
-            data-es="Brenda Flores, ingeniera de software para operaciones B2B"
+            data-en="Brenda Flores, software engineer for small and mid-sized businesses"
+            data-es="Brenda Flores, ingeniera de software para PyMEs"
           >
-            Brenda Flores, software engineer for B2B operations
+            Brenda Flores, software engineer for small and mid-sized businesses
           </p>
 
           <div class="space-y-1">
@@ -1213,23 +1595,23 @@
             >
               <span class="bracket">&lt;</span
               ><span
-                data-en="I turn manual work"
-                data-es="Convierto el trabajo manual"
-                >I turn manual work</span
+                data-en="Manual work"
+                data-es="El trabajo manual"
+                >Manual work</span
               >
             </span>
             <span
               class="hero-line text-4xl lg:text-5xl xl:text-6xl text-accent hero-anim"
               style="animation-delay: 0.4s"
-              data-en="into systems"
-              data-es="en sistemas"
-              >into systems</span
+              data-en="never shows up in your numbers."
+              data-es="no aparece en tus números."
+              >never shows up in your numbers.</span
             >
             <span
               class="hero-line text-4xl lg:text-5xl xl:text-6xl text-ink hero-anim"
               style="animation-delay: 0.52s"
-              ><span data-en="that scale." data-es="que escalan."
-                >that scale.</span
+              ><span data-en="I make it visible." data-es="Yo lo hago visible."
+                >I make it visible.</span
               ><span class="bracket">&gt;</span></span
             >
           </div>
@@ -1237,14 +1619,16 @@
           <p
             class="mt-8 text-lg text-muted max-w-xl leading-relaxed hero-anim"
             style="animation-delay: 0.68s"
-            data-en="I help small and medium B2B service businesses get their operations off spreadsheets, automate the repetitive work that eats their team's day, and build systems that keep up as they grow. All backed by 7+ years building software, including platforms used by 100,000+ businesses."
-            data-es="Ayudo a peque&ntilde;as y medianas empresas B2B de servicios a sacar sus operaciones de las hojas de c&aacute;lculo, automatizar el trabajo repetitivo que consume el d&iacute;a de su equipo y construir sistemas que aguantan el crecimiento. Todo respaldado por m&aacute;s de 7 a&ntilde;os construyendo software, incluyendo plataformas usadas por m&aacute;s de 100,000 empresas."
+            data-en="I measure your operation using your own numbers before proposing anything. Then I tell you what to fix and in what order: sometimes it means changing how your team works, sometimes automating on top of the tools you already pay for. I do not build anything until the diagnostic says it is needed. I work with small businesses in Mexico. Behind that are seven years building software, including platforms used by 100,000+ businesses in nine countries."
+            data-es="Mido tu operaci&oacute;n con tus propios n&uacute;meros antes de proponerte nada. Con eso te digo qu&eacute; arreglar y en qu&eacute; orden: a veces es cambiar c&oacute;mo trabaja tu equipo, a veces es automatizar sobre las herramientas que ya pagas. No construyo nada hasta que el diagn&oacute;stico diga que hace falta. Trabajo con pymes en M&eacute;xico. Detr&aacute;s hay siete a&ntilde;os construyendo software, incluyendo plataformas que usan m&aacute;s de 100,000 empresas en nueve pa&iacute;ses."
           >
-            I help small and medium B2B service businesses get their operations
-            off spreadsheets, automate the repetitive work that eats their
-            team's day, and build systems that keep up as they grow. All backed
-            by 7+ years building software, including platforms used by 100,000+
-            businesses.
+            I measure your operation using your own numbers before proposing
+            anything. Then I tell you what to fix and in what order: sometimes
+            it means changing how your team works, sometimes automating on top
+            of the tools you already pay for. I do not build anything until the
+            diagnostic says it is needed. I work with small businesses in
+            Mexico. Behind that are seven years building software, including
+            platforms used by 100,000+ businesses in nine countries.
           </p>
 
           <div
@@ -1295,30 +1679,32 @@
           </h2>
           <p
             class="text-muted mb-10 reveal max-w-2xl"
-            data-en="Most businesses I work with aren't short on effort. They're short on systems, so the effort goes into work a computer should be doing."
-            data-es="A la mayor&iacute;a de los negocios con los que trabajo no les falta esfuerzo. Les faltan sistemas, y por eso el esfuerzo se va en trabajo que deber&iacute;a hacer una computadora."
+            data-en="Most businesses I work with are not short on effort. What they cannot do is look themselves up, so every question about the business sends a person walking. None of it shows up in the numbers, which is exactly why it never gets fixed."
+            data-es="A la mayor&iacute;a de los negocios con los que trabajo no les falta esfuerzo. Lo que no pueden es consultarse a s&iacute; mismos, as&iacute; que cada pregunta sobre el propio negocio manda a una persona a caminar. Nada de eso aparece en los n&uacute;meros, y por eso nunca se arregla."
           >
-            Most businesses I work with aren't short on effort. They're short on
-            systems, so the effort goes into work a computer should be doing.
+            Most businesses I work with are not short on effort. What they
+            cannot do is look themselves up, so every question about the
+            business sends a person walking. None of it shows up in the numbers,
+            which is exactly why it never gets fixed.
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div class="pain-card reveal-zoom">
               <h3
                 class="font-display font-bold text-ink mb-2"
-                data-en="Everything runs on spreadsheets"
-                data-es="Todo funciona con hojas de c&aacute;lculo"
+                data-en="It all lives in someone's head"
+                data-es="Todo vive en la cabeza de alguien"
               >
-                Everything runs on spreadsheets
+                It all lives in someone's head
               </h3>
               <p
                 class="text-sm text-muted leading-relaxed"
-                data-en="The information that keeps your business alive lives in files only one person really understands, and nothing connects to anything else."
-                data-es="La informaci&oacute;n que mantiene vivo tu negocio vive en archivos que solo una persona entiende de verdad, y nada se conecta con nada."
+                data-en="Prices, history, who owes what. It is in a spreadsheet only one person really understands, or in no file at all. If that person is out, the business slows to a crawl."
+                data-es="Los precios, el historial, qui&eacute;n debe qu&eacute;. Est&aacute; en un Excel que solo una persona entiende de verdad, o en ning&uacute;n archivo. Si esa persona falta, el negocio se frena."
               >
-                The information that keeps your business alive lives in files
-                only one person really understands, and nothing connects to
-                anything else.
+                Prices, history, who owes what. It is in a spreadsheet only one
+                person really understands, or in no file at all. If that person
+                is out, the business slows to a crawl.
               </p>
             </div>
 
@@ -1350,11 +1736,12 @@
               </h3>
               <p
                 class="text-sm text-muted leading-relaxed"
-                data-en='Answering "where is this order?" or "how did we do this month?" means digging through files and asking three different people.'
-                data-es='Responder "&iquest;d&oacute;nde va este pedido?" o "&iquest;c&oacute;mo nos fue este mes?" implica buscar entre archivos y preguntarle a tres personas distintas.'
+                data-en='Answering "where is this order?" or "how did we do this month?" means digging through files and waiting for someone to get back to you.'
+                data-es='Responder "&iquest;d&oacute;nde va este pedido?" o "&iquest;c&oacute;mo nos fue este mes?" implica buscar entre archivos y esperar a que alguien te conteste.'
               >
                 Answering "where is this order?" or "how did we do this month?"
-                means digging through files and asking three different people.
+                means digging through files and waiting for someone to get back
+                to you.
               </p>
             </div>
 
@@ -1375,6 +1762,48 @@
                 taking on more business costs you more than it should.
               </p>
             </div>
+
+            <!--  Los dos ultimos cierran el hueco entre los cuatro pilares y
+                  la lista de dolores: sin ellos, Marketing quedaba sin dolor
+                  y el hallazgo de CTIASP sin nombre.  -->
+            <div class="pain-card reveal-zoom">
+              <h3
+                class="font-display font-bold text-ink mb-2"
+                data-en="You sent the quote and that was the end of it"
+                data-es="Mandaste la cotizaci&oacute;n y ah&iacute; qued&oacute;"
+              >
+                You sent the quote and that was the end of it
+              </h3>
+              <p
+                class="text-sm text-muted leading-relaxed"
+                data-en="The customer never replied and nobody followed up, because following up is nobody's job. Those are sales you had already won, left to go cold."
+                data-es="El cliente no contest&oacute; y nadie volvi&oacute; a marcarle, porque nadie tiene ese trabajo. Son ventas que ya estaban ganadas y se enfriaron solas."
+              >
+                The customer never replied and nobody followed up, because
+                following up is nobody's job. Those are sales you had already
+                won, left to go cold.
+              </p>
+            </div>
+
+            <div class="pain-card reveal-zoom">
+              <h3
+                class="font-display font-bold text-ink mb-2"
+                data-en="Your best material never leaves the building"
+                data-es="Tu mejor material nunca sale de ah&iacute;"
+              >
+                Your best material never leaves the building
+              </h3>
+              <p
+                class="text-sm text-muted leading-relaxed"
+                data-en="Every job you deliver well is something you could be showing. It stays on somebody's phone, or the photo never gets taken, and nobody outside ever finds out what you actually do."
+                data-es="Cada trabajo que entregas bien es algo que podr&iacute;as estar mostrando. Se queda en el celular de alguien, o nadie toma la foto, y afuera nunca se enteran de lo que realmente haces."
+              >
+                Every job you deliver well is something you could be showing. It
+                stays on somebody's phone, or the photo never gets taken, and
+                nobody outside ever finds out what you actually do.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>
@@ -1385,19 +1814,22 @@
           <p class="sec-num reveal">03</p>
           <h2
             class="font-display text-4xl font-bold text-ink mb-3 reveal"
-            data-en="How I help"
-            data-es="C&oacute;mo ayudo"
+            data-en="The four pillars I look at"
+            data-es="Los cuatro pilares que reviso"
           >
-            How I help
+            The four pillars I look at
           </h2>
           <p
             class="text-muted mb-10 reveal max-w-2xl"
-            data-en="Most engagements start with a diagnostic. From there, four ways I take manual work off your team, every one of them something I've already built and put into production."
-            data-es="La mayor&iacute;a de los proyectos empiezan con un diagn&oacute;stico. De ah&iacute; en adelante, cuatro formas de quitarle trabajo manual a tu equipo, y cada una es algo que ya he construido y puesto en producci&oacute;n."
+            data-en="Every business rests on the same four, whatever it sells. I score all four before recommending anything, which is why what I propose is sometimes a change in how people work, sometimes an automation wired on top of the tools you already have, and only sometimes something built from scratch. Everything below is something I have already put into production."
+            data-es="Todo negocio se sostiene sobre los mismos cuatro, sin importar a qu&eacute; se dedique. Los califico antes de recomendar nada, y por eso lo que propongo a veces es un cambio en c&oacute;mo trabajan, a veces una automatizaci&oacute;n montada sobre las herramientas que ya tienes, y solo a veces algo construido desde cero. Todo lo de abajo es algo que ya he puesto en producci&oacute;n."
           >
-            Most engagements start with a diagnostic. From there, four ways I
-            take manual work off your team, every one of them something I've
-            already built and put into production.
+            Every business rests on the same four, whatever it sells. I score
+            all four before recommending anything, which is why what I propose
+            is sometimes a change in how people work, sometimes an automation
+            wired on top of the tools you already have, and only sometimes
+            something built from scratch. Everything below is something I have
+            already put into production.
           </p>
 
           <!-- entry offer: diagnostic -->
@@ -1412,20 +1844,30 @@
               <div>
                 <h3
                   class="font-display font-bold text-2xl mb-3"
-                  data-en="Operations diagnostic"
-                  data-es="Diagn&oacute;stico de operaci&oacute;n"
+                  data-en="Operations X-Ray"
+                  data-es="Radiograf&iacute;a de Operaci&oacute;n"
                 >
-                  Operations diagnostic
+                  Operations X-Ray
                 </h3>
                 <p
                   class="text-sm text-gray-400 leading-relaxed mb-4"
-                  data-en="Before anyone builds anything, I go through your operation step by step and write down exactly where you're losing money, customers or hours. You get a written report you can act on, whether you hire me for the build or not."
-                  data-es="Antes de que nadie construya nada, recorro tu operaci&oacute;n paso a paso y dejo por escrito exactamente d&oacute;nde est&aacute;s perdiendo dinero, clientes u horas. Recibes un informe accionable, me contrates despu&eacute;s para construirlo o no."
+                  data-en="Before anyone builds anything, I score the four pillars every business runs on: marketing, sales, fulfillment and back office. Then I follow one real order across all four, on the clock, and write down exactly where you're losing money, customers or hours. You get a report you can act on, whether you hire me for the build or not."
+                  data-es="Antes de que nadie construya nada, califico los cuatro pilares sobre los que corre cualquier negocio: marketing, ventas, entrega y administraci&oacute;n. Despu&eacute;s sigo un pedido real cruzando los cuatro, cronometrado, y dejo por escrito d&oacute;nde est&aacute;s perdiendo dinero, clientes u horas. Recibes un informe accionable, me contrates despu&eacute;s para construirlo o no."
                 >
-                  Before anyone builds anything, I go through your operation
-                  step by step and write down exactly where you're losing money,
-                  customers or hours. You get a written report you can act on,
-                  whether you hire me for the build or not.
+                  Before anyone builds anything, I score the four pillars every
+                  business runs on: marketing, sales, fulfillment and back
+                  office. Then I follow one real order across all four, on the
+                  clock, and write down exactly where you're losing money,
+                  customers or hours. You get a report you can act on, whether
+                  you hire me for the build or not.
+                </p>
+                <p
+                  class="font-display font-bold text-sm mb-4"
+                  data-en="From $8,500 MXN &middot; 5 business days &middot; credited in full if you hire the project"
+                  data-es="Desde $8,500 MXN &middot; 5 d&iacute;as h&aacute;biles &middot; se acredita completo si contratas el proyecto"
+                >
+                  From $8,500 MXN &middot; 5 business days &middot; credited in
+                  full if you hire the project
                 </p>
                 <p
                   class="text-xs text-gray-500 leading-relaxed"
@@ -1457,10 +1899,10 @@
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                     <span
-                      data-en="A score for every area of your operation, so you see what's critical and what can wait"
-                      data-es="Una calificaci&oacute;n por cada &aacute;rea de tu operaci&oacute;n, para ver qu&eacute; es cr&iacute;tico y qu&eacute; puede esperar"
-                      >A score for every area of your operation, so you see
-                      what's critical and what can wait</span
+                      data-en="Your four pillars scored 1 to 5, so you see what's critical and what can wait"
+                      data-es="Tus cuatro pilares calificados del 1 al 5, para ver qu&eacute; es cr&iacute;tico y qu&eacute; puede esperar"
+                      >Your four pillars scored 1 to 5, so you see what's
+                      critical and what can wait</span
                     >
                   </div>
                   <div class="deliverable-item">
@@ -1473,10 +1915,10 @@
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                     <span
-                      data-en="A step-by-step map of what your customer actually goes through, and where they drop off"
-                      data-es="Un mapa paso a paso de lo que vive tu cliente en realidad, y d&oacute;nde se cae"
-                      >A step-by-step map of what your customer actually goes
-                      through, and where they drop off</span
+                      data-en="The hours lost each week to manual work and what that costs a year, using your numbers"
+                      data-es="Las horas que se van a la semana en trabajo manual y lo que cuestan al a&ntilde;o, con tus n&uacute;meros"
+                      >The hours lost each week to manual work and what that
+                      costs a year, using your numbers</span
                     >
                   </div>
                   <div class="deliverable-item">
@@ -1489,10 +1931,10 @@
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                     <span
-                      data-en="Every fix ranked by impact and effort, so you know what to do first"
-                      data-es="Cada arreglo ordenado por impacto y esfuerzo, para saber qu&eacute; hacer primero"
-                      >Every fix ranked by impact and effort, so you know what
-                      to do first</span
+                      data-en="A roadmap in phases, each with weeks, cost and how long it takes to pay for itself"
+                      data-es="Un roadmap en fases, cada una con semanas, costo y en cu&aacute;nto se paga sola"
+                      >A roadmap in phases, each with weeks, cost and how long
+                      it takes to pay for itself</span
                     >
                   </div>
                   <div class="deliverable-item">
@@ -1536,7 +1978,7 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 svc-grid">
             <div class="svc-card reveal-zoom">
               <div class="svc-icon">
                 <svg
@@ -1554,27 +1996,29 @@
               </div>
               <h3
                 class="font-display font-bold text-ink text-lg mb-2"
-                data-en="Digitizing your operation"
-                data-es="Digitalizar tu operaci&oacute;n"
+                data-en="01 &middot; Marketing"
+                data-es="01 &middot; Marketing"
               >
-                Digitizing your operation
+                01 &middot; Marketing
               </h3>
               <p
                 class="text-sm text-muted leading-relaxed mb-4"
-                data-en="Move your day-to-day off spreadsheets and into one system your whole team works from, where the information is in a single place and always up to date."
-                data-es="Sacar tu d&iacute;a a d&iacute;a de las hojas de c&aacute;lculo y llevarlo a un solo sistema donde trabaja todo tu equipo, con la informaci&oacute;n en un solo lugar y siempre al d&iacute;a."
+                data-en="What happens to the quote nobody answered, and why the customer who already bought does not come back on their own. Automatic follow-up, lead capture and repeat business. Plus social posting that feeds off your own operation instead of someone inventing something every week."
+                data-es="Qu&eacute; pasa con la cotizaci&oacute;n que nadie contest&oacute; y por qu&eacute; el cliente que ya te compr&oacute; no vuelve solo. Seguimiento autom&aacute;tico, captura de interesados y recompra. Y publicaci&oacute;n en redes que se alimenta de tu propia operaci&oacute;n, en vez de inventar algo cada semana."
               >
-                Move your day-to-day off spreadsheets and into one system your
-                whole team works from, where the information is in a single
-                place and always up to date.
+                What happens to the quote nobody answered, and why the customer
+                who already bought does not come back on their own. Automatic
+                follow-up, lead capture and repeat business. Plus social posting
+                that feeds off your own operation instead of someone inventing
+                something every week.
               </p>
               <p
                 class="svc-proof"
-                data-en="Done for a distributor and a multi-branch service operation. See the case studies below."
-                data-es="Hecho para un distribuidor y para una operaci&oacute;n de servicio con varias sucursales. Ver los casos abajo."
+                data-en="This is the pillar that comes back lowest in almost every business I measure, and the cheapest one to fix."
+                data-es="Es el pilar que sale m&aacute;s bajo en casi todos los negocios que mido, y el m&aacute;s barato de arreglar."
               >
-                Done for a distributor and a multi-branch service operation. See
-                the case studies below.
+                This is the pillar that comes back lowest in almost every
+                business I measure, and the cheapest one to fix.
               </p>
             </div>
 
@@ -1594,27 +2038,27 @@
               </div>
               <h3
                 class="font-display font-bold text-ink text-lg mb-2"
-                data-en="Automating repetitive work"
-                data-es="Automatizar el trabajo repetitivo"
+                data-en="02 &middot; Sales"
+                data-es="02 &middot; Ventas"
               >
-                Automating repetitive work
+                02 &middot; Sales
               </h3>
               <p
                 class="text-sm text-muted leading-relaxed mb-4"
-                data-en="Status notifications, reports and follow-ups that send themselves, so nobody on your team spends the afternoon doing work a system can do in seconds."
-                data-es="Notificaciones de estatus, reportes y seguimientos que se env&iacute;an solos, para que nadie de tu equipo pase la tarde haciendo trabajo que un sistema resuelve en segundos."
+                data-en="From prospect to confirmed order. Who knows the prices, how long a quote takes, and where what the customer agreed to is actually recorded, so quoting stops depending on one person."
+                data-es="De interesado a pedido confirmado. Qui&eacute;n sabe los precios, cu&aacute;nto tarda una cotizaci&oacute;n y d&oacute;nde queda registrado lo que el cliente acept&oacute;, para que cotizar deje de depender de una sola persona."
               >
-                Status notifications, reports and follow-ups that send
-                themselves, so nobody on your team spends the afternoon doing
-                work a system can do in seconds.
+                From prospect to confirmed order. Who knows the prices, how long
+                a quote takes, and where what the customer agreed to is actually
+                recorded, so quoting stops depending on one person.
               </p>
               <p
                 class="svc-proof"
-                data-en="Cut manual admin workload by 40% at a multi-branch service operation."
-                data-es="Redujo la carga administrativa manual 40% en una operaci&oacute;n de servicio con varias sucursales."
+                data-en="At a wholesale distributor, 1 in 7 orders now comes in with the office closed."
+                data-es="En un distribuidor mayorista, 1 de cada 7 pedidos entra hoy con la oficina cerrada."
               >
-                Cut manual admin workload by 40% at a multi-branch service
-                operation.
+                At a wholesale distributor, 1 in 7 orders now comes in with the
+                office closed.
               </p>
             </div>
 
@@ -1638,27 +2082,27 @@
               </div>
               <h3
                 class="font-display font-bold text-ink text-lg mb-2"
-                data-en="Connecting your tools"
-                data-es="Conectar tus herramientas"
+                data-en="03 &middot; Fulfillment"
+                data-es="03 &middot; Entrega"
               >
-                Connecting your tools
+                03 &middot; Fulfillment
               </h3>
               <p
                 class="text-sm text-muted leading-relaxed mb-4"
-                data-en="Payments, messaging and the software you already pay for, wired together so data flows between them instead of being re-typed by hand."
-                data-es="Pagos, mensajer&iacute;a y el software que ya pagas, conectados entre s&iacute; para que los datos fluyan solos en vez de recapturarse a mano."
+                data-en="Delivering what was promised, and letting the customer see how it is going without calling to ask. Automatic status updates and a page where they look their own order up."
+                data-es="Cumplir lo prometido, y que el cliente pueda ver c&oacute;mo va sin llamar a preguntar. Avisos autom&aacute;ticos de estatus y una p&aacute;gina donde consulta su orden por su cuenta."
               >
-                Payments, messaging and the software you already pay for, wired
-                together so data flows between them instead of being re-typed by
-                hand.
+                Delivering what was promised, and letting the customer see how
+                it is going without calling to ask. Automatic status updates and
+                a page where they look their own order up.
               </p>
               <p
                 class="svc-proof"
-                data-en="WhatsApp Business API, Stripe, accounting and supplier APIs, credit bureau integrations."
-                data-es="WhatsApp Business API, Stripe, APIs de contabilidad y proveedores, integraciones con bur&oacute; de cr&eacute;dito."
+                data-en="724 status updates went out on their own in one month at an auto repair shop."
+                data-es="724 avisos de estatus salieron solos en un mes en un taller mec&aacute;nico."
               >
-                WhatsApp Business API, Stripe, accounting and supplier APIs,
-                credit bureau integrations.
+                724 status updates went out on their own in one month at a
+                auto repair shop.
               </p>
             </div>
 
@@ -1679,26 +2123,27 @@
               </div>
               <h3
                 class="font-display font-bold text-ink text-lg mb-2"
-                data-en="Platforms built to grow"
-                data-es="Plataformas que crecen contigo"
+                data-en="04 &middot; Back office"
+                data-es="04 &middot; Administraci&oacute;n"
               >
-                Platforms built to grow
+                04 &middot; Back office
               </h3>
               <p
                 class="text-sm text-muted leading-relaxed mb-4"
-                data-en="Customer portals, admin systems and online stores with proper roles and permissions, built to handle more volume without falling apart."
-                data-es="Portales de clientes, sistemas administrativos y tiendas en l&iacute;nea con roles y permisos bien hechos, construidos para aguantar m&aacute;s volumen sin romperse."
+                data-en="Invoicing, collections, purchasing, and knowing how the month is going without asking anyone. It is the pillar that hides the most manual work and the last one anyone looks at."
+                data-es="Facturar, cobrar, comprar a proveedores y saber c&oacute;mo va el mes sin preguntarle a nadie. Es el pilar que m&aacute;s trabajo manual esconde y el que nadie mira hasta que truena."
               >
-                Customer portals, admin systems and online stores with proper
-                roles and permissions, built to handle more volume without
-                falling apart.
+                Invoicing, collections, purchasing, and knowing how the month is
+                going without asking anyone. It is the pillar that hides the
+                most manual work and the last one anyone looks at.
               </p>
               <p
                 class="svc-proof"
-                data-en="A 300+ product store, and platforms serving 100,000+ businesses."
-                data-es="Una tienda de m&aacute;s de 300 productos, y plataformas que sirven a m&aacute;s de 100,000 empresas."
+                data-en="8 hours a week back: the weekly management meeting is no longer prepared, it is opened."
+                data-es="8 horas por semana de vuelta: la junta de estatus ya no se prepara, se abre."
               >
-                A 300+ product store, and platforms serving 100,000+ businesses.
+                8 hours a week back: the weekly management meeting is no longer
+                prepared, it is opened.
               </p>
             </div>
           </div>
@@ -1718,76 +2163,54 @@
           </h2>
           <p
             class="text-muted mb-10 reveal max-w-2xl"
-            data-en="Two businesses I took from manual operations to working software, plus the enterprise platforms behind the experience."
-            data-es="Dos negocios que llev&eacute; de la operaci&oacute;n manual a software funcionando, m&aacute;s las plataformas empresariales que respaldan la experiencia."
+            data-en="Two different businesses, the same finding: both knew everything about themselves, and neither one could look itself up. Every question about the business sent a person walking."
+            data-es="Dos negocios distintos, el mismo hallazgo: los dos sab&iacute;an todo sobre s&iacute; mismos, y ninguno de los dos pod&iacute;a consultarse. Cada pregunta sobre el propio negocio mandaba a una persona a caminar."
           >
-            Two businesses I took from manual operations to working software,
-            plus the enterprise platforms behind the experience.
+            Two different businesses, the same finding: both knew everything
+            about themselves, and neither one could look itself up. Every
+            question about the business sent a person walking.
           </p>
 
           <!-- El salto a barra lateral + dos columnas va en lg, no en md.
                A 768px la barra fija del sitio ya se comio 275px, y partir lo
                que queda en dos dejaba tarjetas de 87px de ancho: no cabia ni
                "300+". Hasta 1024px se apila todo a lo ancho. -->
-          <div class="reveal flex flex-col lg:flex-row gap-8">
-            <!-- left: tab list -->
-            <div
-              class="lg:w-56 flex-shrink-0 flex flex-row lg:flex-col gap-1 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0"
-            >
-              <p
-                class="tab-group-label"
-                data-en="Client work"
-                data-es="Trabajo con clientes"
-              >
-                Client work
-              </p>
-              <button class="proj-tab active" data-proj="fastener">
-                <span class="tab-num">01</span>
-                <span class="tab-text">
-                  <span
-                    class="tab-name"
-                    data-en="Wholesale distributor"
-                    data-es="Distribuidor mayorista"
-                    >Wholesale distributor</span
-                  >
-                  <span class="tab-client">Fastener Autopartes</span>
+          <div class="case-list reveal">
+            <details class="case-card" id="case-ctiasp">
+              <summary>
+                <div class="cc-top">
+                  <span class="cc-tag" data-en="Auto repair shop" data-es="Taller mec&aacute;nico">Auto repair shop</span>
+                  <span class="cc-client">CTIASP</span>
+                </div>
+                <p class="cc-hero">
+                  <b>2x</b>
+                  <span data-en="the volume, peaking at 300+ cars a month, with the same back-office team" data-es="el volumen, con picos de 300+ autos al mes, con la misma gente en administraci&oacute;n">the volume, peaking at 300+ cars a month, with the same back-office team</span>
+                </p>
+                <div class="cc-minis">
+                  <span class="cc-mini">
+                    <b>30 s</b>
+                    <span data-en="to pull a customer file. It used to take a week" data-es="para encontrar un expediente. Antes, una semana">to pull a customer file. It used to take a week</span>
+                  </span>
+                  <span class="cc-mini">
+                    <b>8 h</b>
+                    <span data-en="less per week: the status meeting is opened, not prepared" data-es="menos por semana: la junta de estatus se abre, no se prepara">less per week: the status meeting is opened, not prepared</span>
+                  </span>
+                </div>
+                <span class="cc-more">
+                  <span class="cc-more-open" data-en="See the detail" data-es="Ver detalle">See the detail</span>
+                  <span class="cc-more-close" data-en="Close" data-es="Cerrar">Close</span>
                 </span>
-              </button>
-              <button class="proj-tab" data-proj="ctiasp">
-                <span class="tab-num">02</span>
-                <span class="tab-text">
-                  <span
-                    class="tab-name"
-                    data-en="Service operation"
-                    data-es="Operaci&oacute;n de servicio"
-                    >Service operation</span
+              </summary>
+              <div class="cc-body">
+                <details class="case-shots">
+                  <summary
+                    data-en="See the system itself, 3 screenshots"
+                    data-es="Ver el sistema por dentro, 3 capturas"
                   >
-                  <span class="tab-client">CTIASP</span>
-                </span>
-              </button>
-              <p
-                class="tab-group-label"
-                data-en="Enterprise background"
-                data-es="Respaldo empresarial"
-              >
-                Enterprise background
-              </p>
-              <button class="proj-tab" data-proj="nextiva">
-                <span class="tab-num">03</span>
-                <span class="tab-name">NextivaOne</span>
-              </button>
-              <button class="proj-tab" data-proj="ncx">
-                <span class="tab-num">04</span>
-                <span class="tab-name">NCX</span>
-              </button>
-            </div>
-
-            <!-- right: project panels -->
-            <div class="flex-1 min-w-0">
-              <!-- CTIASP -->
-              <div class="proj-panel" id="proj-ctiasp">
-                <div class="carousel mb-6" data-carousel>
-                  <div class="browser-frame" data-zoom>
+                    See the system itself, 3 screenshots
+                  </summary>
+                <div class="carousel" data-carousel>
+                  <div class="browser-frame">
                     <div class="browser-bar">
                       <div class="browser-dot bg-red-400"></div>
                       <div class="browser-dot bg-yellow-400"></div>
@@ -1850,87 +2273,172 @@
                     <div class="carousel-dot"></div>
                   </div>
                 </div>
+                </details>
+
+                
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div>
                     <span
                       class="case-label"
-                      data-en="The situation"
-                      data-es="La situaci&oacute;n"
-                      >The situation</span
+                      data-en="Where they started"
+                      data-es="C&oacute;mo estaba"
+                      >Where they started</span
                     >
                     <p
                       class="text-ink leading-relaxed text-sm mb-5"
-                      data-en="A service operation running on spreadsheets and manual tracking. Job status, customer files, valuations and third-party paperwork were all handled by hand, and customers called in constantly to ask where their order stood."
-                      data-es="Una operaci&oacute;n de servicio funcionando con hojas de c&aacute;lculo y seguimiento manual. El estatus de cada trabajo, los expedientes de clientes, las valuaciones y el papeleo con terceros se llevaban a mano, y los clientes llamaban a cada rato para preguntar c&oacute;mo iba su orden."
+                      data-en="An auto repair shop already at its limit with 100 cars a month. Customer files lived in boxes in a back room, and every new car made searching for all the previous ones slower."
+                      data-es="Un taller mec&aacute;nico que con 100 autos al mes ya estaba al l&iacute;mite. Los expedientes viv&iacute;an en cajas en un cuarto, y cada coche que entraba hac&iacute;a m&aacute;s lenta la b&uacute;squeda de todos los anteriores."
                     >
-                      A service operation running on spreadsheets and manual
-                      tracking. Job status, customer files, valuations and
-                      third-party paperwork were all handled by hand, and
-                      customers called in constantly to ask where their order
-                      stood.
+                      An auto repair shop already at its limit with 100 cars
+                      a month. Customer files lived in boxes in a back room, and
+                      every new car made searching for all the previous ones
+                      slower.
                     </p>
 
                     <span
                       class="case-label"
-                      data-en="What I built"
-                      data-es="Qu&eacute; constru&iacute;"
-                      >What I built</span
+                      data-en="What I found"
+                      data-es="Qu&eacute; encontr&eacute;"
+                      >What I found</span
                     >
                     <p
                       class="text-ink leading-relaxed text-sm"
-                      data-en='A complete platform covering order tracking, customer files, valuations and third-party claim workflows. WhatsApp Business API sends status updates to customers automatically, so the "where is my order?" calls stopped, and PDF and Excel reports generate themselves instead of being assembled by hand.'
-                      data-es="Una plataforma completa que cubre seguimiento de &oacute;rdenes, expedientes de clientes, valuaciones y flujos de reclamaciones con terceros. WhatsApp Business API env&iacute;a las actualizaciones de estatus de forma autom&aacute;tica, con lo que se acabaron las llamadas de &laquo;&iquest;c&oacute;mo va lo m&iacute;o?&raquo;, y los reportes en PDF y Excel se generan solos en vez de armarse a mano."
+                      data-en="I sat down separately with the appraiser, the service advisor and both owners. Each described a different process. The map ended up as sheets of paper taped to a wall, and that is where it became clear their growth ceiling was not the shop floor: it was the filing system."
+                      data-es="Me sent&eacute; por separado con el valuador, con el asesor de servicio y con los dos due&ntilde;os. Cada quien describi&oacute; un proceso distinto. El mapa acab&oacute; siendo papeles pegados en una pared, y ah&iacute; qued&oacute; claro que su techo de crecimiento no era el taller: era el archivero."
                     >
-                      A complete platform covering order tracking, customer
-                      files, valuations and third-party claim workflows.
-                      WhatsApp Business API sends status updates to customers
-                      automatically, so the "where is my order?" calls stopped,
-                      and PDF and Excel reports generate themselves instead of
-                      being assembled by hand.
+                      I sat down separately with the appraiser, the service
+                      advisor and both owners. Each described a different
+                      process. The map ended up as sheets of paper taped to a
+                      wall, and that is where it became clear their growth
+                      ceiling was not the shop floor: it was the filing system.
                     </p>
                   </div>
 
                   <div>
                     <span
                       class="case-label"
-                      data-en="The result"
-                      data-es="El resultado"
-                      >The result</span
+                      data-en="What I handed over"
+                      data-es="Qu&eacute; entregu&eacute;"
+                      >What I handed over</span
                     >
-                    <div class="result-stat">
-                      <span class="rs-num">40%</span>
+                    <p
+                      class="text-ink leading-relaxed text-sm"
+                      data-en="Phased, starting where it hurt most: internal processes first, then customer communication, then positioning. Status updates now go out on their own, customers look their car up with their work order number, and the weekly meeting runs off live KPIs."
+                      data-es="Por fases, empezando por donde m&aacute;s dol&iacute;a: primero los procesos internos, despu&eacute;s la comunicaci&oacute;n con el cliente, despu&eacute;s posicionamiento. Hoy los avisos salen solos, el cliente consulta su auto con su n&uacute;mero de orden, y la junta semanal corre sobre KPIs en vivo."
+                    >
+                      Phased, starting where it hurt most: internal processes
+                      first, then customer communication, then positioning.
+                      Status updates now go out on their own, customers look
+                      their car up with their work order number, and the weekly
+                      meeting runs off live KPIs.
+                    </p>
+                    <p
+                      class="text-ink leading-relaxed text-sm mt-4"
+                      data-en="With the operation in order, they went on to secure 7+ insurance company partnerships, which is where the extra volume came from."
+                      data-es="Con la operaci&oacute;n en orden, siguieron firmando 7+ convenios con aseguradoras, que es de donde sali&oacute; el volumen extra."
+                    >
+                      With the operation in order, they went on to secure 7+
+                      insurance company partnerships, which is where the extra
+                      volume came from.
+                    </p>
+                  </div>
+                </div>
+
+                <!--  el diagrama es una muestra en vivo del entregable:
+                      es exactamente lo que produce una Radiografia  -->
+                <div class="case-flow">
+                  <div class="flow-row before">
+                    <span class="flow-when" data-en="Before" data-es="Antes"
+                      >Before</span
+                    >
+                    <div class="flow-steps">
                       <span
-                        class="rs-label"
-                        data-en="less manual administrative work"
-                        data-es="menos trabajo administrativo manual"
-                        >less manual administrative work</span
+                        class="fstep"
+                        data-en="Customer asks about their car"
+                        data-es="El cliente pregunta por su auto"
+                        >Customer asks about their car</span
+                      >
+                      <span
+                        class="fstep"
+                        data-en="Advisor walks to the file room"
+                        data-es="El asesor va al cuarto de expedientes"
+                        >Advisor walks to the file room</span
+                      >
+                      <span
+                        class="fstep"
+                        data-en="Digs through boxes"
+                        data-es="Busca entre las cajas"
+                        >Digs through boxes</span
+                      >
+                      <span
+                        class="fstep end"
+                        data-en="Up to a week"
+                        data-es="Hasta una semana"
+                        >Up to a week</span
                       >
                     </div>
-                    <div class="result-stat">
-                      <span class="rs-num">7+</span>
+                  </div>
+                  <div class="flow-row after">
+                    <span class="flow-when" data-en="Today" data-es="Hoy"
+                      >Today</span
+                    >
+                    <div class="flow-steps">
                       <span
-                        class="rs-label"
-                        data-en="insurance company partnerships secured"
-                        data-es="convenios firmados con aseguradoras"
-                        >insurance company partnerships secured</span
+                        class="fstep"
+                        data-en="Customer enters their work order number"
+                        data-es="El cliente entra con su n&uacute;mero de orden"
+                        >Customer enters their work order number</span
                       >
-                    </div>
-                    <div class="flex flex-wrap gap-2 mt-5">
-                      <span class="pill">Laravel</span
-                      ><span class="pill">PostgreSQL</span
-                      ><span class="pill">WhatsApp API</span
-                      ><span class="pill">REST API</span
-                      ><span class="pill">PDF/Excel</span>
+                      <span
+                        class="fstep end"
+                        data-en="30 seconds"
+                        data-es="30 segundos"
+                        >30 seconds</span
+                      >
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Fastener -->
-              <div class="proj-panel active" id="proj-fastener">
-                <div class="carousel mb-6" data-carousel>
-                  <div class="browser-frame" data-zoom>
+              
+              </div>
+            </details>
+
+            <details class="case-card" id="case-fastener">
+              <summary>
+                <div class="cc-top">
+                  <span class="cc-tag" data-en="Wholesale distributor" data-es="Distribuidor mayorista">Wholesale distributor</span>
+                  <span class="cc-client">Fastener Autopartes</span>
+                </div>
+                <p class="cc-hero">
+                  <b data-en="1 in 7" data-es="1 de 7">1 in 7</b>
+                  <span data-en="orders now comes in with the office closed, with nobody attending" data-es="pedidos entra hoy con la oficina cerrada, sin que nadie atienda">orders now comes in with the office closed, with nobody attending</span>
+                </p>
+                <div class="cc-minis">
+                  <span class="cc-mini">
+                    <b>300+</b>
+                    <span data-en="products customers look up and buy on their own" data-es="productos que el cliente consulta y compra solo">products customers look up and buy on their own</span>
+                  </span>
+                  <span class="cc-mini">
+                    <b>100%</b>
+                    <span data-en="remote: I never set foot in the place" data-es="remoto: nunca pis&eacute; el lugar">remote: I never set foot in the place</span>
+                  </span>
+                </div>
+                <span class="cc-more">
+                  <span class="cc-more-open" data-en="See the detail" data-es="Ver detalle">See the detail</span>
+                  <span class="cc-more-close" data-en="Close" data-es="Cerrar">Close</span>
+                </span>
+              </summary>
+              <div class="cc-body">
+                <details class="case-shots">
+                  <summary
+                    data-en="See the system itself, 3 screenshots"
+                    data-es="Ver el sistema por dentro, 3 capturas"
+                  >
+                    See the system itself, 3 screenshots
+                  </summary>
+                <div class="carousel" data-carousel>
+                  <div class="browser-frame">
                     <div class="browser-bar">
                       <div class="browser-dot bg-red-400"></div>
                       <div class="browser-dot bg-yellow-400"></div>
@@ -1993,364 +2501,128 @@
                     <div class="carousel-dot"></div>
                   </div>
                 </div>
+                </details>
+
+                
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div>
                     <span
                       class="case-label"
-                      data-en="The situation"
-                      data-es="La situaci&oacute;n"
-                      >The situation</span
+                      data-en="Where they started"
+                      data-es="C&oacute;mo estaba"
+                      >Where they started</span
                     >
                     <p
                       class="text-ink leading-relaxed text-sm mb-5"
-                      data-en="A wholesale distributor with a 300+ SKU catalog, no online ordering channel, and pricing and stock tracked outside of any real system. Every quote went through a person."
-                      data-es="Un distribuidor mayorista con un cat&aacute;logo de m&aacute;s de 300 SKUs, sin canal de pedidos en l&iacute;nea, y con precios e inventario controlados fuera de cualquier sistema real. Cada cotizaci&oacute;n pasaba por una persona."
+                      data-en="More than 300 products, no online ordering channel, and pricing and stock tracked outside any real system. Every quote went through one person. I never set foot there: the whole assessment ran over calls and screen shares."
+                      data-es="M&aacute;s de 300 productos, sin canal de pedidos en l&iacute;nea, y precios e inventario fuera de cualquier sistema. Cada cotizaci&oacute;n pasaba por una sola persona. Nunca pis&eacute; el lugar: todo el levantamiento fue por llamada y pantalla compartida."
                     >
-                      A wholesale distributor with a 300+ SKU catalog, no online
-                      ordering channel, and pricing and stock tracked outside of
-                      any real system. Every quote went through a person.
+                      More than 300 products, no online ordering channel, and
+                      pricing and stock tracked outside any real system. Every
+                      quote went through one person. I never set foot there: the
+                      whole assessment ran over calls and screen shares.
                     </p>
 
                     <span
                       class="case-label"
-                      data-en="What I built"
-                      data-es="Qu&eacute; constru&iacute;"
-                      >What I built</span
+                      data-en="What I found"
+                      data-es="Qu&eacute; encontr&eacute;"
+                      >What I found</span
                     >
                     <p
                       class="text-ink leading-relaxed text-sm"
-                      data-en="An end-to-end e-commerce platform: a customer-facing storefront plus an admin system with Stripe payments, product catalog management, order tracking, and role-based access so each staff member only sees what they should."
-                      data-es="Una plataforma de e-commerce de principio a fin: una tienda para clientes m&aacute;s un sistema administrativo con pagos v&iacute;a Stripe, gesti&oacute;n de cat&aacute;logo, seguimiento de pedidos y control de acceso por roles para que cada persona del equipo vea solo lo que le corresponde."
+                      data-en="They had no control over their parts. Every question about a measurement or stock sent someone walking to the warehouse. The information existed, but only inside the object itself."
+                      data-es="No ten&iacute;an control de las piezas. Cada pregunta por una medida o por existencia mandaba a alguien a la bodega. La informaci&oacute;n exist&iacute;a, pero solo dentro del objeto."
                     >
-                      An end-to-end e-commerce platform: a customer-facing
-                      storefront plus an admin system with Stripe payments,
-                      product catalog management, order tracking, and role-based
-                      access so each staff member only sees what they should.
+                      They had no control over their parts. Every question about
+                      a measurement or stock sent someone walking to the
+                      warehouse. The information existed, but only inside the
+                      object itself.
                     </p>
                   </div>
 
                   <div>
                     <span
                       class="case-label"
-                      data-en="What was delivered"
-                      data-es="Lo entregado"
-                      >What was delivered</span
-                    >
-                    <div class="result-stat">
-                      <span class="rs-num">300+</span>
-                      <span
-                        class="rs-label"
-                        data-en="products live in the online catalog"
-                        data-es="productos publicados en el cat&aacute;logo en l&iacute;nea"
-                        >products live in the online catalog</span
-                      >
-                    </div>
-                    <div class="result-stat">
-                      <span class="rs-num">2</span>
-                      <span
-                        class="rs-label"
-                        data-en="systems shipped: public storefront and internal admin"
-                        data-es="sistemas entregados: tienda p&uacute;blica y administrador interno"
-                        >systems shipped: public storefront and internal
-                        admin</span
-                      >
-                    </div>
-                    <div class="flex flex-wrap gap-2 mt-5">
-                      <span class="pill">React</span
-                      ><span class="pill">Stripe</span
-                      ><span class="pill">AWS Amplify</span
-                      ><span class="pill">DynamoDB</span
-                      ><span class="pill">REST API</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- NextivaOne -->
-              <div class="proj-panel" id="proj-nextiva">
-                <div class="carousel mb-6" data-carousel>
-                  <div class="browser-frame" data-zoom>
-                    <div class="browser-bar">
-                      <div class="browser-dot bg-red-400"></div>
-                      <div class="browser-dot bg-yellow-400"></div>
-                      <div class="browser-dot bg-green-400"></div>
-                      <div class="browser-url"></div>
-                    </div>
-                    <div class="carousel-track-wrap">
-                      <div class="carousel-track">
-                        <div class="carousel-slide">
-                          <img
-                            src="images/NextivaOne.1.png"
-                            alt="NextivaOne 1"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div class="carousel-slide">
-                          <img
-                            src="images/NextivaOne.2.png"
-                            alt="NextivaOne 2"
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="carousel-btn prev" aria-label="Previous">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                    >
-                      <polyline points="15 18 9 12 15 6" />
-                    </svg>
-                  </button>
-                  <button class="carousel-btn next" aria-label="Next">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                    >
-                      <polyline points="9 18 15 12 9 6" />
-                    </svg>
-                  </button>
-                  <div class="carousel-dots">
-                    <div class="carousel-dot active"></div>
-                    <div class="carousel-dot"></div>
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div>
-                    <span
-                      class="case-label"
-                      data-en="Context"
-                      data-es="Contexto"
-                      >Context</span
-                    >
-                    <p
-                      class="text-ink leading-relaxed text-sm mb-5"
-                      data-en="NextivaOne is a unified business communication platform for calls, SMS and voicemail in one place, used by 100,000+ businesses worldwide. This was employment, not client work, but it is where the scale experience comes from."
-                      data-es="NextivaOne es una plataforma unificada de comunicaci&oacute;n empresarial para llamadas, SMS y buz&oacute;n de voz en un solo lugar, usada por m&aacute;s de 100,000 empresas en el mundo. Fue trabajo de planta, no consultor&iacute;a, pero de ah&iacute; viene la experiencia en escala."
-                    >
-                      NextivaOne is a unified business communication platform
-                      for calls, SMS and voicemail in one place, used by
-                      100,000+ businesses worldwide. This was employment, not
-                      client work, but it is where the scale experience comes
-                      from.
-                    </p>
-
-                    <span class="case-label" data-en="My role" data-es="Mi rol"
-                      >My role</span
+                      data-en="What I handed over"
+                      data-es="Qu&eacute; entregu&eacute;"
+                      >What I handed over</span
                     >
                     <p
                       class="text-ink leading-relaxed text-sm"
-                      data-en="Built product features in React and TypeScript across Mini, Compact and Standard views, along with reusable component architecture and REST API integrations."
-                      data-es="Constru&iacute; funcionalidades de producto en React y TypeScript en las vistas Mini, Compact y Standard, junto con arquitectura de componentes reutilizables e integraciones con APIs REST."
+                      data-en="In stages. First the storefront for their customers, with per-user pricing and permissions. Then the internal system: catalog, orders and online payments."
+                      data-es="Por partes. Primero la tienda para sus clientes, con precios y permisos por usuario. Despu&eacute;s el sistema interno: cat&aacute;logo, pedidos y cobro en l&iacute;nea."
                     >
-                      Built product features in React and TypeScript across
-                      Mini, Compact and Standard views, along with reusable
-                      component architecture and REST API integrations.
+                      In stages. First the storefront for their customers, with
+                      per-user pricing and permissions. Then the internal
+                      system: catalog, orders and online payments.
                     </p>
                   </div>
+                </div>
 
-                  <div>
-                    <span class="case-label" data-en="Scale" data-es="Escala"
-                      >Scale</span
+                <div class="case-flow">
+                  <div class="flow-row before">
+                    <span class="flow-when" data-en="Before" data-es="Antes"
+                      >Before</span
                     >
-                    <div class="result-stat">
-                      <span class="rs-num">100K+</span>
+                    <div class="flow-steps">
                       <span
-                        class="rs-label"
-                        data-en="businesses using the platform"
-                        data-es="empresas usando la plataforma"
-                        >businesses using the platform</span
+                        class="fstep"
+                        data-en="Customer asks for a measurement"
+                        data-es="El cliente pregunta por una medida"
+                        >Customer asks for a measurement</span
                       >
-                    </div>
-                    <div class="result-stat">
-                      <span class="rs-num">1B+</span>
                       <span
-                        class="rs-label"
-                        data-en="interactions processed per year"
-                        data-es="interacciones procesadas al a&ntilde;o"
-                        >interactions processed per year</span
+                        class="fstep"
+                        data-en="Someone walks to the warehouse"
+                        data-es="Alguien va a la bodega"
+                        >Someone walks to the warehouse</span
+                      >
+                      <span
+                        class="fstep"
+                        data-en="Measures the part by hand"
+                        data-es="Mide la pieza a mano"
+                        >Measures the part by hand</span
+                      >
+                      <span
+                        class="fstep end"
+                        data-en="Comes back and answers"
+                        data-es="Regresa y contesta"
+                        >Comes back and answers</span
                       >
                     </div>
-                    <div class="flex flex-wrap gap-2 mt-5">
-                      <span class="pill">React</span
-                      ><span class="pill">TypeScript</span
-                      ><span class="pill">SPA</span
-                      ><span class="pill">REST APIs</span
-                      ><span class="pill">CI/CD</span>
-                    </div>
-                    <a
-                      href="https://www.nextiva.com"
-                      target="_blank"
-                      rel="noopener"
-                      class="inline-flex items-center gap-1.5 text-accent font-display font-bold text-sm hover:underline mt-4"
-                      >nextiva.com
-                      <svg
-                        class="w-3.5 h-3.5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
+                  </div>
+                  <div class="flow-row after">
+                    <span class="flow-when" data-en="Today" data-es="Hoy"
+                      >Today</span
+                    >
+                    <div class="flow-steps">
+                      <span
+                        class="fstep"
+                        data-en="Customer looks it up in the catalog"
+                        data-es="El cliente lo consulta en el cat&aacute;logo"
+                        >Customer looks it up in the catalog</span
                       >
-                        <path
-                          d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
-                        />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" /></svg
-                    ></a>
+                      <span
+                        class="fstep end"
+                        data-en="Buys on their own, any hour"
+                        data-es="Compra solo, a cualquier hora"
+                        >Buys on their own, any hour</span
+                      >
+                    </div>
                   </div>
                 </div>
+
+              
               </div>
-
-              <!-- NCX -->
-              <div class="proj-panel" id="proj-ncx">
-                <div class="carousel mb-6" data-carousel>
-                  <div class="browser-frame" data-zoom>
-                    <div class="browser-bar">
-                      <div class="browser-dot bg-red-400"></div>
-                      <div class="browser-dot bg-yellow-400"></div>
-                      <div class="browser-dot bg-green-400"></div>
-                      <div class="browser-url"></div>
-                    </div>
-                    <div class="carousel-track-wrap">
-                      <div class="carousel-track">
-                        <div class="carousel-slide">
-                          <img
-                            src="images/NCX.1.png"
-                            alt="NCX 1"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div class="carousel-slide">
-                          <img
-                            src="images/NCX.2.png"
-                            alt="NCX 2"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div class="carousel-slide">
-                          <img
-                            src="images/NCX.3.png"
-                            alt="NCX 3"
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="carousel-btn prev" aria-label="Previous">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                    >
-                      <polyline points="15 18 9 12 15 6" />
-                    </svg>
-                  </button>
-                  <button class="carousel-btn next" aria-label="Next">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                    >
-                      <polyline points="9 18 15 12 9 6" />
-                    </svg>
-                  </button>
-                  <div class="carousel-dots">
-                    <div class="carousel-dot active"></div>
-                    <div class="carousel-dot"></div>
-                    <div class="carousel-dot"></div>
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div>
-                    <span
-                      class="case-label"
-                      data-en="Context"
-                      data-es="Contexto"
-                      >Context</span
-                    >
-                    <p
-                      class="text-ink leading-relaxed text-sm mb-5"
-                      data-en="NCX is Nextiva's enterprise contact center platform, serving the same base of 100,000+ businesses. Agents and supervisors depend on it being available every minute of the working day."
-                      data-es="NCX es la plataforma de contact center empresarial de Nextiva, que sirve a la misma base de m&aacute;s de 100,000 empresas. Agentes y supervisores dependen de que est&eacute; disponible cada minuto de la jornada."
-                    >
-                      NCX is Nextiva's enterprise contact center platform,
-                      serving the same base of 100,000+ businesses. Agents and
-                      supervisors depend on it being available every minute of
-                      the working day.
-                    </p>
-
-                    <span class="case-label" data-en="My role" data-es="Mi rol"
-                      >My role</span
-                    >
-                    <p
-                      class="text-ink leading-relaxed text-sm"
-                      data-en="Feature development in React and TypeScript, a phased Angular to React migration, role-based access control, SSO integrations, and real-time service monitoring across the agent and supervisor interfaces."
-                      data-es="Desarrollo de funcionalidades en React y TypeScript, una migraci&oacute;n por fases de Angular a React, control de acceso por roles, integraciones SSO y monitoreo de servicios en tiempo real en las interfaces de agente y supervisor."
-                    >
-                      Feature development in React and TypeScript, a phased
-                      Angular to React migration, role-based access control, SSO
-                      integrations, and real-time service monitoring across the
-                      agent and supervisor interfaces.
-                    </p>
-                  </div>
-
-                  <div>
-                    <span class="case-label" data-en="Scale" data-es="Escala"
-                      >Scale</span
-                    >
-                    <div class="result-stat">
-                      <span class="rs-num">4</span>
-                      <span
-                        class="rs-label"
-                        data-en="years building enterprise-grade systems"
-                        data-es="a&ntilde;os construyendo sistemas de nivel empresarial"
-                        >years building enterprise-grade systems</span
-                      >
-                    </div>
-                    <div class="result-stat">
-                      <span class="rs-num">9+</span>
-                      <span
-                        class="rs-label"
-                        data-en="countries where this code runs"
-                        data-es="pa&iacute;ses donde corre este c&oacute;digo"
-                        >countries where this code runs</span
-                      >
-                    </div>
-                    <div class="flex flex-wrap gap-2 mt-5">
-                      <span class="pill">React</span
-                      ><span class="pill">TypeScript</span
-                      ><span class="pill">Angular</span
-                      ><span class="pill">RBAC</span
-                      ><span class="pill">SSO</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </details>
           </div>
+
         </div>
       </section>
 
-      <!--  PROCESS  -->
+            <!--  PROCESS  -->
       <section id="process">
         <div class="max-w-3xl mx-auto">
           <p class="sec-num reveal">05</p>
@@ -2363,10 +2635,11 @@
           </h2>
           <p
             class="text-muted mb-10 reveal"
-            data-en="No months-long discovery phase before you see anything real."
-            data-es="Sin fases de descubrimiento de meses antes de que veas algo real."
+            data-en="Five days to know what is worth doing. Until then there is nothing to build, and you can walk away at any of the first three steps."
+            data-es="Cinco d&iacute;as para saber qu&eacute; conviene hacer. Hasta entonces no hay nada que construir, y puedes bajarte en cualquiera de los tres primeros pasos."
           >
-            No months-long discovery phase before you see anything real.
+            Five days to know what is worth doing. Until then there is nothing
+            to build, and you can walk away at any of the first three steps.
           </p>
 
           <div class="space-y-6">
@@ -2375,85 +2648,74 @@
               <div>
                 <h3
                   class="font-display font-bold text-ink text-lg mb-1"
-                  data-en="We talk"
-                  data-es="Hablamos"
+                  data-en="We talk for 20 minutes"
+                  data-es="Hablamos 20 minutos"
                 >
-                  We talk
+                  We talk for 20 minutes
                 </h3>
                 <p
                   class="text-muted text-sm leading-relaxed"
-                  data-en="A call to understand how your operation actually runs day to day and where your team's time is going. If I'm not the right person for the job, I'll tell you."
-                  data-es="Una llamada para entender c&oacute;mo funciona tu operaci&oacute;n en el d&iacute;a a d&iacute;a y en qu&eacute; se va el tiempo de tu equipo. Si no soy la persona indicada para el trabajo, te lo digo."
+                  data-en="Enough to see how work comes in, who touches it, and how much of your day goes into holding it together. If it turns out you do not have enough manual work for measuring it to be worth anything, I tell you right there."
+                  data-es="Lo suficiente para ver c&oacute;mo entra el trabajo, qui&eacute;n lo toca y cu&aacute;nto de tu d&iacute;a se va en sostenerlo. Si resulta que no tienes suficiente trabajo manual como para que medirlo valga la pena, te lo digo ah&iacute; mismo."
                 >
-                  A call to understand how your operation actually runs day to
-                  day and where your team's time is going. If I'm not the right
-                  person for the job, I'll tell you.
+                  Enough to see how work comes in, who touches it, and how much of your day goes into holding it together. If it turns out you do not have enough manual work for measuring it to be worth anything, I tell you right there.
                 </p>
               </div>
             </div>
-
             <div class="reveal-left flex gap-5 items-start">
               <div class="step-num">2</div>
               <div>
                 <h3
                   class="font-display font-bold text-ink text-lg mb-1"
-                  data-en="You get a proposal"
-                  data-es="Recibes una propuesta"
+                  data-en="The Operations X-Ray"
+                  data-es="La Radiograf&iacute;a de Operaci&oacute;n"
                 >
-                  You get a proposal
+                  The Operations X-Ray
                 </h3>
                 <p
                   class="text-muted text-sm leading-relaxed"
-                  data-en="Clear scope, timeline and price in writing before any work starts, so you know exactly what you're getting and what it costs."
-                  data-es="Alcance, tiempos y precio claros por escrito antes de empezar, para que sepas exactamente qu&eacute; vas a recibir y cu&aacute;nto cuesta."
+                  data-en="Five or ten days, depending on the size. I measure your operation with your own numbers and hand you the document: your four pillars scored, where the hours go, what stops if someone does not show up, and the roadmap in phases."
+                  data-es="Cinco o diez d&iacute;as, seg&uacute;n el tama&ntilde;o. Mido tu operaci&oacute;n con tus propios n&uacute;meros y te entrego el documento: tus cuatro pilares calificados, d&oacute;nde se te van las horas, qu&eacute; se detiene si alguien falta, y el roadmap por fases."
                 >
-                  Clear scope, timeline and price in writing before any work
-                  starts, so you know exactly what you're getting and what it
-                  costs.
+                  Five or ten days, depending on the size. I measure your operation with your own numbers and hand you the document: your four pillars scored, where the hours go, what stops if someone does not show up, and the roadmap in phases.
                 </p>
               </div>
             </div>
-
             <div class="reveal-left flex gap-5 items-start">
               <div class="step-num">3</div>
               <div>
                 <h3
                   class="font-display font-bold text-ink text-lg mb-1"
-                  data-en="I build in phases"
-                  data-es="Construyo por fases"
+                  data-en="You decide what comes next"
+                  data-es="T&uacute; decides qu&eacute; sigue"
                 >
-                  I build in phases
+                  You decide what comes next
                 </h3>
                 <p
                   class="text-muted text-sm leading-relaxed"
-                  data-en="You see working software early and often instead of waiting months for a big reveal, so we can correct course while it's still cheap to do."
-                  data-es="Ves software funcionando pronto y de forma constante, en vez de esperar meses a una gran presentaci&oacute;n, para poder corregir el rumbo cuando todav&iacute;a es barato hacerlo."
+                  data-en="The document is yours whether you hire me or not, and you can take it to another vendor. Sometimes what comes next costs nothing, sometimes it is automating on top of what you already pay for, and sometimes something does have to get built. If you go ahead with me within 60 days, the diagnostic is credited in full."
+                  data-es="El documento es tuyo me contrates o no, y puedes llev&aacute;rtelo con otro proveedor. A veces lo que sigue no cuesta nada, a veces es automatizar sobre lo que ya pagas, y a veces s&iacute; hay que construir algo. Si sigues conmigo dentro de 60 d&iacute;as, el diagn&oacute;stico se te acredita completo."
                 >
-                  You see working software early and often instead of waiting
-                  months for a big reveal, so we can correct course while it's
-                  still cheap to do.
+                  The document is yours whether you hire me or not, and you can take it to another vendor. Sometimes what comes next costs nothing, sometimes it is automating on top of what you already pay for, and sometimes something does have to get built. If you go ahead with me within 60 days, the diagnostic is credited in full.
                 </p>
               </div>
             </div>
-
             <div class="reveal-left flex gap-5 items-start">
               <div class="step-num">4</div>
               <div>
                 <h3
                   class="font-display font-bold text-ink text-lg mb-1"
-                  data-en="Launch and support"
-                  data-es="Lanzamiento y soporte"
+                  data-en="If something has to get built, in phases"
+                  data-es="Si hay que construir, por fases"
                 >
-                  Launch and support
+                  If something has to get built, in phases
                 </h3>
                 <p
                   class="text-muted text-sm leading-relaxed"
-                  data-en="Your team gets trained on the system, and I stay available after launch. I've supported every client project I've delivered since 2018."
-                  data-es="Capacito a tu equipo en el sistema y sigo disponible despu&eacute;s del lanzamiento. He dado soporte a todos los proyectos de cliente que he entregado desde 2018."
+                  data-en="Every phase leaves something working and you can stop there. You see progress from the first week, your team gets trained on it, and I stay available afterward. I have supported every client project I have delivered since 2018."
+                  data-es="Cada fase deja algo funcionando y puedes parar ah&iacute;. Ves avance desde la primera semana, capacito a tu equipo y sigo disponible despu&eacute;s. He dado soporte a todos los proyectos de cliente que he entregado desde 2018."
                 >
-                  Your team gets trained on the system, and I stay available
-                  after launch. I've supported every client project I've
-                  delivered since 2018.
+                  Every phase leaves something working and you can stop there. You see progress from the first week, your team gets trained on it, and I stay available afterward. I have supported every client project I have delivered since 2018.
                 </p>
               </div>
             </div>
@@ -2461,7 +2723,7 @@
         </div>
       </section>
 
-      <!--  ABOUT  -->
+<!--  ABOUT  -->
       <section id="about" class="bg-gray-50">
         <div class="max-w-4xl mx-auto">
           <p class="sec-num reveal">06</p>
@@ -2476,31 +2738,39 @@
             <div class="reveal">
               <p
                 class="text-ink leading-relaxed mb-4"
-                data-en="I'm a software engineer with 7+ years building systems that businesses depend on. Since 2018 I've run an independent consulting practice, handling everything from scoping and proposals through delivery and post-launch support."
-                data-es="Soy ingeniera de software con m&aacute;s de 7 a&ntilde;os construyendo sistemas de los que dependen negocios reales. Desde 2018 llevo una pr&aacute;ctica independiente de consultor&iacute;a, encarg&aacute;ndome de todo: desde el alcance y la propuesta hasta la entrega y el soporte posterior al lanzamiento."
+                data-en="I'm a software engineer with 7+ years building software, part of it on enterprise platforms like NextivaOne and NCX, used today by more than 100,000 businesses across nine countries. Since 2018 I have worked on my own with smaller businesses, and there you get the same person the whole way through: the call, the measuring, the document, and if it comes to it, the build and the support afterward. There is nobody to hand you off to."
+                data-es="Soy ingeniera de software con m&aacute;s de 7 a&ntilde;os construyendo software, parte de ellos en plataformas empresariales como NextivaOne y NCX, que hoy usan m&aacute;s de 100,000 empresas en nueve pa&iacute;ses. Desde 2018 trabajo por mi cuenta con negocios m&aacute;s chicos, y ah&iacute; soy la misma persona de principio a fin: la llamada, la medici&oacute;n, el documento y, si se llega a eso, la construcci&oacute;n y el soporte. No hay a qui&eacute;n pasarte."
               >
-                I'm a software engineer with 7+ years building systems that
-                businesses depend on. Since 2018 I've run an independent
-                consulting practice, handling everything from scoping and
-                proposals through delivery and post-launch support.
+                I'm a software engineer with 7+ years building software, part
+                of it on enterprise platforms like NextivaOne and NCX, used
+                today by more than 100,000 businesses across nine countries.
+                Since 2018 I have worked on my own with smaller businesses, and
+                there you get the same person the whole way through: the call,
+                the measuring, the document, and if it comes to it, the build
+                and the support afterward. There is nobody to hand you off to.
               </p>
               <p
                 class="text-ink leading-relaxed mb-4"
-                data-en="I've also worked as a Product Owner, translating business and compliance requirements into working software. That's why I start from how your business actually operates, not from a list of features."
-                data-es="Tambi&eacute;n he trabajado como Product Owner, traduciendo requisitos de negocio y de cumplimiento en software funcionando. Por eso empiezo por c&oacute;mo opera tu negocio en realidad, no por una lista de funcionalidades."
+                data-en="I've also worked as a Product Owner, translating business and compliance requirements into working software. That is why I start by measuring how your business actually operates instead of with a list of features: most projects that go wrong do not go wrong because of the code, they go wrong because nobody understood the operation before starting."
+                data-es="Tambi&eacute;n he trabajado como Product Owner, traduciendo requisitos de negocio y de cumplimiento en software funcionando. Por eso empiezo midiendo c&oacute;mo opera tu negocio de verdad, no con una lista de funcionalidades: la mayor&iacute;a de los proyectos que salen mal, no salen mal por el c&oacute;digo, salen mal porque nadie entendi&oacute; la operaci&oacute;n antes de empezar."
               >
                 I've also worked as a Product Owner, translating business and
-                compliance requirements into working software. That's why I
-                start from how your business actually operates, not from a list
-                of features.
+                compliance requirements into working software. That is why I
+                start by measuring how your business actually operates instead
+                of with a list of features: most projects that go wrong do not
+                go wrong because of the code, they go wrong because nobody
+                understood the operation before starting.
               </p>
               <p
                 class="text-ink leading-relaxed mb-4"
-                data-en="I'm based in Mexico, I work with teams across North America in overlapping time zones, and I work in both English and Spanish."
-                data-es="Estoy en M&eacute;xico, trabajo con equipos de Norteam&eacute;rica en horarios que se traslapan, y trabajo tanto en ingl&eacute;s como en espa&ntilde;ol."
+                data-en="I'm based in Mexico and I work with businesses here. The assessment runs remotely and it works: I never set foot in Fastener, all of it happened over calls and screen shares. If at some point it makes sense to go in person, we talk about it. I work in Spanish and in English."
+                data-es="Estoy en M&eacute;xico y trabajo con negocios de aqu&iacute;. El levantamiento es remoto y funciona: a Fastener nunca lo pis&eacute;, todo sali&oacute; por llamada y pantalla compartida. Si en alg&uacute;n punto conviene ir en persona, lo hablamos. Trabajo en espa&ntilde;ol y en ingl&eacute;s."
               >
-                I'm based in Mexico, I work with teams across North America in
-                overlapping time zones, and I work in both English and Spanish.
+                I'm based in Mexico and I work with businesses here. The
+                assessment runs remotely and it works: I never set foot in
+                Fastener, all of it happened over calls and screen shares. If at
+                some point it makes sense to go in person, we talk about it. I
+                work in Spanish and in English.
               </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
@@ -2526,6 +2796,22 @@
                 <p
                   class="stat-num font-display font-extrabold text-3xl text-accent"
                 >
+                  100K+
+                </p>
+                <p
+                  class="text-sm text-muted mt-1"
+                  data-en="businesses using those platforms"
+                  data-es="empresas usando esas plataformas"
+                >
+                  businesses using those platforms
+                </p>
+              </div>
+              <div
+                class="reveal-zoom bg-white border border-border rounded-2xl p-5"
+              >
+                <p
+                  class="stat-num font-display font-extrabold text-3xl text-accent"
+                >
                   2018
                 </p>
                 <p
@@ -2542,30 +2828,14 @@
                 <p
                   class="stat-num font-display font-extrabold text-3xl text-accent"
                 >
-                  100K+
+                  100%
                 </p>
                 <p
                   class="text-sm text-muted mt-1"
-                  data-en="businesses served"
-                  data-es="empresas atendidas"
+                  data-en="of my projects with support after launch"
+                  data-es="de mis proyectos con soporte despu&eacute;s del lanzamiento"
                 >
-                  businesses served
-                </p>
-              </div>
-              <div
-                class="reveal-zoom bg-white border border-border rounded-2xl p-5"
-              >
-                <p
-                  class="stat-num font-display font-extrabold text-3xl text-accent"
-                >
-                  1B+
-                </p>
-                <p
-                  class="text-sm text-muted mt-1"
-                  data-en="annual interactions"
-                  data-es="interacciones anuales"
-                >
-                  annual interactions
+                  of my projects with support after launch
                 </p>
               </div>
             </div>
@@ -2586,11 +2856,13 @@
           </h2>
           <p
             class="text-gray-400 mb-10 reveal"
-            data-en="Tell me where your team is losing time. If I can help, I'll tell you how and what it would take. If I can't, I'll tell you that too."
-            data-es="Cu&eacute;ntame en qu&eacute; est&aacute; perdiendo tiempo tu equipo. Si puedo ayudarte, te digo c&oacute;mo y qu&eacute; implicar&iacute;a. Si no puedo, tambi&eacute;n te lo digo."
+            data-en="Tell me how work comes in and who touches it. Twenty minutes is enough to know whether you have enough manual work for measuring it to be worth anything. If you do not, I tell you right there and we stop."
+            data-es="Cu&eacute;ntame c&oacute;mo entra el trabajo y qui&eacute;n lo toca. Veinte minutos bastan para saber si tienes suficiente trabajo manual como para que medirlo valga la pena. Si no lo tienes, te lo digo ah&iacute; mismo y no seguimos."
           >
-            Tell me where your team is losing time. If I can help, I'll tell you
-            how and what it would take. If I can't, I'll tell you that too.
+            Tell me how work comes in and who touches it. Twenty minutes is
+            enough to know whether you have enough manual work for measuring it
+            to be worth anything. If you do not, I tell you right there and we
+            stop.
           </p>
           <a
             href="mailto:brenda@brendaflores.co"
@@ -2746,28 +3018,6 @@
       // year
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // custom cursor
-      const dot = document.getElementById("cursor-dot");
-      const ring = document.getElementById("cursor-ring");
-      document.addEventListener("mousemove", (e) => {
-        dot.style.left = e.clientX + "px";
-        dot.style.top = e.clientY + "px";
-        ring.style.left = e.clientX + "px";
-        ring.style.top = e.clientY + "px";
-      });
-      document.querySelectorAll("a,button,summary").forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          ring.style.transform = "translate(-50%,-50%) scale(1.6)";
-          ring.style.opacity = "1";
-          dot.style.transform = "translate(-50%,-50%) scale(0.4)";
-        });
-        el.addEventListener("mouseleave", () => {
-          ring.style.transform = "translate(-50%,-50%) scale(1)";
-          ring.style.opacity = ".6";
-          dot.style.transform = "translate(-50%,-50%) scale(1)";
-        });
-      });
-
       // language toggle
       function setLang(lang, remember) {
         document.querySelectorAll("[data-en]").forEach((el) => {
@@ -2843,6 +3093,21 @@
           document
             .getElementById("proj-" + tab.dataset.proj)
             .classList.add("active");
+        });
+      });
+
+      /*  Las capturas viven dentro de un <details> cerrado. Chrome no dispara
+          la carga diferida de una imagen que esta en un subarbol oculto, y al
+          abrir el desplegable tampoco la reintenta: se queda en blanco. Hay
+          que empujarla a mano la primera vez. La ventaja de dejarlas en lazy
+          se conserva: nadie descarga tres PNG que no va a ver.  */
+      document.querySelectorAll(".case-shots").forEach((det) => {
+        det.addEventListener("toggle", () => {
+          if (!det.open) return;
+          det.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+            img.removeAttribute("loading");
+            img.src = img.getAttribute("src");
+          });
         });
       });
 
@@ -2983,7 +3248,6 @@
       // scroll-driven effects: progress bar, blob parallax, content zoom
       const progressBar = document.getElementById("scroll-progress");
       const blobs = document.querySelectorAll(".blob");
-      const zoomEls = document.querySelectorAll("[data-zoom]");
       let ticking = false;
 
       function onScrollFrame() {
@@ -3003,14 +3267,6 @@
             "translateY(" + window.scrollY * (i % 2 ? -0.12 : 0.18) + "px)";
         });
 
-        // screenshots zoom to full size as they reach the middle of the screen
-        zoomEls.forEach((el) => {
-          const r = el.getBoundingClientRect();
-          if (r.bottom < -200 || r.top > vh + 200) return;
-          const center = r.top + r.height / 2;
-          const dist = Math.min(Math.abs(center - vh / 2) / (vh / 2), 1);
-          el.style.transform = "scale(" + (1 - dist * 0.11).toFixed(4) + ")";
-        });
       }
 
       function requestScrollFrame() {
