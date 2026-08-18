@@ -402,9 +402,9 @@
         border: 1px solid var(--border);
         margin-bottom: 24px;
       }
-      @media (min-width: 720px) {
+      @media (min-width: 620px) {
         .tiers {
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
         }
       }
       .tier {
@@ -440,7 +440,7 @@
         font-size: 0.85rem;
         color: var(--ink-3);
         /*  Junto con el min-height de .amount, deja el bloque de precio del
-            mismo alto en los tres tramos, para que la linea divisora de
+            mismo alto en los dos tramos, para que la linea divisora de
             arriba de .who caiga al mismo nivel. "Grande" trae el importe y
             el plazo en un solo renglon y sin eso sube 66px.  */
         min-height: 2.8rem;
@@ -454,10 +454,6 @@
         margin: 0;
         padding-top: 10px;
         border-top: 1px solid var(--border);
-      }
-      .tier.quote .amount {
-        font-size: 1.45rem;
-        white-space: nowrap;
       }
 
       .tier-note {
@@ -981,26 +977,6 @@
                 o tres formas distintas.
               </p>
             </div>
-            <div class="tier quote">
-              <span class="size" data-es="Grande" data-en="Large">Grande</span>
-              <span
-                class="amount"
-                data-es="Se cotiza"
-                data-en="Quoted case by case"
-                >Se cotiza</span
-              >
-              <span class="was" data-es="15 días" data-en="15 days"
-                >15 días</span
-              >
-              <p
-                class="who"
-                data-es="Más de 80 personas, varias unidades de negocio, o ya tienes alguien de sistemas. Hablamos y te paso una propuesta."
-                data-en="More than 80 people, several business units, or you already have someone running IT. We talk and I send you a proposal."
-              >
-                Más de 80 personas, varias unidades de negocio, o ya tienes
-                alguien de sistemas. Hablamos y te paso una propuesta.
-              </p>
-            </div>
           </div>
 
           <p
@@ -1193,6 +1169,14 @@
               >
                 Estás buscando el precio más bajo. Aquí no lo vas a encontrar, y
                 está bien.
+              </li>
+              <li
+                data-es="Eres una empresa de más de 80 personas con área de sistemas propia. Ahí el diagnóstico se hace de otra forma y no lo hago sola. Si aun así te interesa, escríbeme y lo vemos."
+                data-en="You are a company of more than 80 people with your own IT department. At that size the diagnostic works differently and I do not run it alone. If you are still interested, write to me and we will look at it."
+              >
+                Eres una empresa de más de 80 personas con área de sistemas
+                propia. Ahí el diagnóstico se hace de otra forma y no lo hago
+                sola. Si aun así te interesa, escríbeme y lo vemos.
               </li>
             </ul>
           </div>
