@@ -80,6 +80,12 @@
         outline-offset: 2px;
       }
 
+      /*  Sin esto el idioma no se oculta: [hidden] del navegador pierde
+          contra el display:flex de .sheet por especificidad, y se dibujan
+          los dos bloques uno debajo del otro.  */
+      .sheet[hidden] {
+        display: none;
+      }
       .sheet {
         max-width: 60rem;
         margin: 0 auto;
