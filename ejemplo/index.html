@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ejemplo de una Radiografía de Operación | Brenda Flores</title>
+    <meta
+      name="description"
+      content="El documento completo que recibes al quinto día del diagnóstico, llenado con un caso de ejemplo: los cuatro pilares calificados, dónde se van las horas, qué se detiene si alguien falta, y el roadmap por fases."
+    />
+    <meta name="robots" content="index, follow" />
+    <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js.
+         Aqui importa: quien abre el ejemplo y lo lee completo es el
+         prospecto mas caliente que vas a tener sin haber hablado. -->
+    <script src="/analytics.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /*  Es un documento, no una landing: por eso las tablas mandan y el
+          texto va angosto. Toma los colores y las tipografias del sitio para
+          que se sienta de la misma casa, porque se llega aqui desde ahi.  */
+
+      :root {
+        --ink: #0f0f1a;
+        --ink-2: #3c3c4e;
+        --ink-3: #6b7280;
+        --paper: #ffffff;
+        --paper-2: #f7f7fb;
+        --border: #e5e7eb;
+        --border-soft: #f0f1f5;
+        --accent: #4f46e5;
+        --accent-soft: #eef2ff;
+        --crit: #a83318;
+        --crit-soft: #f9ece7;
+        --warn: #8a6410;
+        --warn-soft: #fbf3e2;
+        --ok: #416f2b;
+        --ok-soft: #ecf3e6;
+        --display: "Syne", sans-serif;
+        --body: "DM Sans", sans-serif;
+        --mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 16.5px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--display);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+        margin: 0;
+      }
+      p {
+        margin: 0;
+        max-width: 65ch;
+      }
+      a {
+        color: var(--accent);
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .sheet {
+        max-width: 60rem;
+        margin: 0 auto;
+        padding: 3.5rem 1.5rem 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 3.25rem;
+      }
+      .eyebrow {
+        font-family: var(--display);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0;
+      }
+
+      /*  volver: nadie deberia quedarse encerrado en un documento  */
+      #back {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 50;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--display);
+        font-size: 0.76rem;
+        font-weight: 700;
+        color: var(--ink-2);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(6px);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 8px 15px;
+        text-decoration: none;
+      }
+      #back:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      @media (max-width: 640px) {
+        #back {
+          display: none;
+        }
+      }
+
+      header.cover {
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 2.4rem;
+      }
+      header.cover h1 {
+        font-size: clamp(2.3rem, 6vw, 3.6rem);
+        line-height: 1.03;
+      }
+      .cover .lede {
+        font-size: 1.05rem;
+        color: var(--ink-2);
+      }
+      .stamp {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+        gap: 1rem 2rem;
+        border-top: 1px solid var(--border);
+        padding-top: 1.2rem;
+        margin: 0;
+      }
+      .stamp div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .stamp dt {
+        font-family: var(--display);
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+      .stamp dd {
+        margin: 0;
+        font-size: 0.94rem;
+      }
+
+      section {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .sec-head {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.7rem;
+      }
+      .sec-head .num {
+        font-family: var(--mono);
+        font-size: 0.85rem;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+      .sec-head h2 {
+        font-size: clamp(1.35rem, 3vw, 1.8rem);
+      }
+
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+      .kpi {
+        background: var(--paper);
+        padding: 1.4rem 1.3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .kpi .n {
+        font-family: var(--display);
+        font-weight: 800;
+        /*  El importe anual es la cadena mas larga y define el tope: a
+            2.5rem se salia de su tarjeta.  */
+        font-size: clamp(1.6rem, 4.2vw, 2.1rem);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        font-variant-numeric: tabular-nums;
+      }
+      .kpi .n.hot {
+        color: var(--crit);
+      }
+      .kpi .n.cool {
+        color: var(--accent);
+      }
+      .kpi .lbl {
+        font-size: 0.87rem;
+        color: var(--ink-2);
+      }
+
+      .scroller {
+        overflow-x: auto;
+        border: 1px solid var(--border);
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 0.89rem;
+        min-width: 34rem;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 0.7rem 0.9rem;
+        border-bottom: 1px solid var(--border-soft);
+        vertical-align: top;
+      }
+      thead th {
+        font-family: var(--display);
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+      }
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+      td.num {
+        font-family: var(--mono);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      .step {
+        font-family: var(--mono);
+        color: var(--accent);
+        font-size: 0.85rem;
+      }
+
+      .chip {
+        display: inline-block;
+        font-family: var(--display);
+        font-size: 0.64rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+        white-space: nowrap;
+      }
+      .chip.c {
+        background: var(--crit-soft);
+        color: var(--crit);
+      }
+      .chip.w {
+        background: var(--warn-soft);
+        color: var(--warn);
+      }
+      .chip.o {
+        background: var(--ok-soft);
+        color: var(--ok);
+      }
+      .chip.a {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      .bar {
+        display: flex;
+        gap: 3px;
+      }
+      .bar i {
+        width: 15px;
+        height: 9px;
+        background: var(--border);
+        display: block;
+      }
+      .bar i.f {
+        background: var(--accent);
+      }
+      .bar.low i.f {
+        background: var(--crit);
+      }
+      .bar.mid i.f {
+        background: var(--warn);
+      }
+
+      .pillars {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+      .pillar {
+        background: var(--paper);
+        padding: 1.35rem 1.3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .pillar .top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .pillar h3 {
+        font-size: 1.1rem;
+      }
+      .pillar .score {
+        font-family: var(--mono);
+        font-size: 1.02rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .pillar.s-low .score {
+        color: var(--crit);
+      }
+      .pillar.s-mid .score {
+        color: var(--warn);
+      }
+      .pillar.s-ok .score {
+        color: var(--ok);
+      }
+      .pillar .verdict {
+        font-size: 0.89rem;
+        color: var(--ink-2);
+      }
+      .pillar .areas {
+        list-style: none;
+        margin: 0;
+        padding: 0.7rem 0 0;
+        border-top: 1px dashed var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        font-size: 0.84rem;
+      }
+      .pillar .areas li {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        color: var(--ink-2);
+      }
+      .pillar .areas span {
+        font-family: var(--mono);
+        font-size: 0.79rem;
+        color: var(--ink-3);
+        white-space: nowrap;
+      }
+
+      .seam {
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        background: var(--paper-2);
+        padding: 1.1rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .seam .hd {
+        font-family: var(--display);
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .seam p {
+        max-width: 62ch;
+        font-size: 0.93rem;
+      }
+
+      .phases {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+      .phase {
+        background: var(--paper);
+        padding: 1.35rem;
+        display: grid;
+        grid-template-columns: 4.5rem 1fr;
+        gap: 0.4rem 1.25rem;
+      }
+      .phase .tag {
+        font-family: var(--display);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        padding-top: 0.3rem;
+      }
+      .phase h3 {
+        font-size: 1.1rem;
+      }
+      .phase .body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .phase .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1.5rem;
+        font-family: var(--mono);
+        font-size: 0.77rem;
+        color: var(--ink-2);
+        font-variant-numeric: tabular-nums;
+        border-top: 1px dashed var(--border);
+        padding-top: 0.6rem;
+        margin-top: 0.2rem;
+      }
+      .phase .meta span b {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      @media (max-width: 40rem) {
+        .phase {
+          grid-template-columns: 1fr;
+        }
+        .phase .tag {
+          padding-top: 0;
+        }
+      }
+
+      ul.plain {
+        margin: 0;
+        padding-left: 1.15rem;
+        max-width: 65ch;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+      ul.plain li::marker {
+        color: var(--accent);
+      }
+
+      .free {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+      .free-item {
+        background: var(--paper);
+        padding: 1rem 1.2rem;
+        display: flex;
+        gap: 1rem;
+        align-items: baseline;
+      }
+      .free-item .mark {
+        font-family: var(--mono);
+        color: var(--accent);
+        font-size: 0.8rem;
+        flex-shrink: 0;
+      }
+
+      footer {
+        border-top: 2px solid var(--ink);
+        padding-top: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      footer .cierre {
+        font-size: 1.02rem;
+        color: var(--ink-2);
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 0.92rem;
+        padding: 13px 24px;
+        border-radius: 999px;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .btn-primary {
+        background: var(--ink);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--accent);
+      }
+      .btn-ghost {
+        border: 1px solid var(--border);
+        color: var(--ink);
+      }
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      footer .legal {
+        font-size: 0.82rem;
+        color: var(--ink-3);
+      }
+    </style>
+  </head>
+  <body>
+    <a id="back" href="/diagnostico.html">&larr; El diagn&oacute;stico</a>
+
+    <div class="sheet">
+
+  <header class="cover">
+    <p class="eyebrow">Ejemplo del entregable</p>
+    <h1>Radiografía de Operación</h1>
+    <p class="lede">
+      Esto es lo que recibes el quinto día. Está llenado con un caso completo para
+      que veas cómo queda terminado antes de contratar nada. El negocio del ejemplo
+      es ficticio; el formato y las cuentas son los mismos que uso con un cliente real.
+    </p>
+    <dl class="stamp">
+      <div><dt>Negocio</dt><dd>Distribuidora El Norte</dd></div>
+      <div><dt>Giro</dt><dd>Mayoreo de material eléctrico</dd></div>
+      <div><dt>Personas</dt><dd>11 (3 en oficina)</dd></div>
+      <div><dt>Levantamiento</dt><dd>5 días hábiles</dd></div>
+      <div><dt>Elaboró</dt><dd>Brenda Flores</dd></div>
+    </dl>
+  </header>
+
+  <!-- ============ RESUMEN ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="num">00</span>
+      <h2>Lo que encontré, en tres números</h2>
+    </div>
+
+    <p>
+      Tu operación funciona porque tu gente la sostiene a mano. Eso tiene un costo que
+      hoy no aparece en ningún estado de resultados, y es este:
+    </p>
+
+    <div class="kpis">
+      <div class="kpi">
+        <span class="n hot">37 h</span>
+        <span class="lbl">de trabajo manual a la semana, sumando a las tres personas de oficina</span>
+      </div>
+      <div class="kpi">
+        <span class="n hot">$412,000</span>
+        <span class="lbl">al año en sueldo cargado dedicado a ese trabajo manual</span>
+      </div>
+      <div class="kpi">
+        <span class="n cool">24 h</span>
+        <span class="lbl">de esas 37 se pueden quitar con lo que propongo en la sección 06</span>
+      </div>
+    </div>
+
+    <p>
+      Las 13 horas que quedan son juicio humano y deben seguir siendo humanas. No todo
+      lo manual es desperdicio, y este documento no propone automatizar por automatizar.
+    </p>
+
+    </section>
+
+  <!-- ============ 01 PILARES ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="num">01</span>
+      <h2>Tus cuatro pilares</h2>
+    </div>
+
+    <p>
+      Todo negocio se sostiene sobre los mismos cuatro pilares. Uno consigue interesados,
+      otro los convierte en pedidos, otro cumple lo prometido y otro cobra y sostiene la
+      estructura. Así están los tuyos hoy, del 1 al 5.
+    </p>
+
+    <div class="pillars">
+      <div class="pillar s-low">
+        <div class="top">
+          <h3>Marketing</h3>
+          <span class="score">1 / 5</span>
+        </div>
+        <span class="bar low"><i class="f"></i><i></i><i></i><i></i><i></i></span>
+        <p class="verdict">
+          No hay nada sistemático. Todo cliente nuevo llega por referido o porque ya te
+          conocía. Y 4 de cada 10 cotizaciones que mandaste el mes pasado nadie las
+          volvió a tocar.
+        </p>
+        <ul class="areas">
+          <li>Generación de interesados <span>1 / 5</span></li>
+          <li>Seguimiento a cotizaciones <span>1 / 5</span></li>
+          <li>Recompra y reactivación <span>1 / 5</span></li>
+        </ul>
+      </div>
+
+      <div class="pillar s-low">
+        <div class="top">
+          <h3>Ventas</h3>
+          <span class="score">2 / 5</span>
+        </div>
+        <span class="bar low"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span>
+        <p class="verdict">
+          Se vende bien, pero se vende por una sola puerta. Karina es el pilar completo,
+          y el conocimiento de precios y clientes vive en su memoria.
+        </p>
+        <ul class="areas">
+          <li>Toma de pedidos <span>1 / 5</span></li>
+          <li>Cotización y precios <span>2 / 5</span></li>
+          <li>Registro del pedido <span>2 / 5</span></li>
+        </ul>
+      </div>
+
+      <div class="pillar s-mid">
+        <div class="top">
+          <h3>Fulfillment</h3>
+          <span class="score">3 / 5</span>
+        </div>
+        <span class="bar mid"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span>
+        <p class="verdict">
+          Es tu pilar más sano. El proceso de bodega está claro, ordenado y otra persona
+          lo podría seguir. Lo que falta no es orden, es que el cliente pueda verlo sin
+          llamar.
+        </p>
+        <ul class="areas">
+          <li>Surtido en bodega <span>4 / 5</span></li>
+          <li>Ruta y entrega <span>3 / 5</span></li>
+          <li>Visibilidad al cliente <span>1 / 5</span></li>
+        </ul>
+      </div>
+
+      <div class="pillar s-low">
+        <div class="top">
+          <h3>Administrativas</h3>
+          <span class="score">2 / 5</span>
+        </div>
+        <span class="bar low"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span>
+        <p class="verdict">
+          CONTPAQi hace su trabajo, pero se alimenta a mano y nada regresa hacia el resto
+          del negocio. Para saber cómo va el mes hay que preguntarle a una persona.
+        </p>
+        <ul class="areas">
+          <li>Facturación <span>3 / 5</span></li>
+          <li>Cobranza <span>2 / 5</span></li>
+          <li>Compras a proveedores <span>2 / 5</span></li>
+          <li>Visibilidad del dueño <span>1 / 5</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="seam">
+      <span class="hd">Dónde está el desperdicio</span>
+      <p>
+        Fíjate en algo: ningún pilar está roto por dentro. Cada área hace bien lo suyo.
+        El problema aparece en las costuras, cuando el trabajo pasa de un pilar al
+        siguiente y alguien tiene que volver a escribir lo que el pilar anterior ya
+        sabía. Ahí es donde se te van las 37 horas, y por eso nadie las había visto:
+        no le pertenecen a ninguna área.
+      </p>
+    </div>
+
+    </section>
+
+  <!-- ============ 02 CICLO ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="num">02</span>
+      <h2>El ciclo de tu dinero, paso por paso</h2>
+    </div>
+
+    <p>
+      Los pilares dicen dónde. Esto dice cómo. Un pedido real cronometrado mientras cruza
+      los cuatro pilares, con los tiempos tomados sobre las marcas de hora que tu propia
+      operación ya guarda.
+    </p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th>Momento</th>
+            <th>Pilar</th>
+            <th>Cómo pasa hoy</th>
+            <th>Quién</th>
+            <th>Tiempo</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="step">0</span> Se genera el interés</td>
+            <td><span class="chip a">Marketing</span></td>
+            <td>No se genera. Llegan referidos y clientes de siempre. Las cotizaciones sin respuesta se quedan ahí</td>
+            <td>Nadie</td>
+            <td class="num">n/d</td>
+            <td><span class="chip c">Crítico</span></td>
+          </tr>
+          <tr>
+            <td><span class="step">1</span> Llega</td>
+            <td><span class="chip a">Ventas</span></td>
+            <td>WhatsApp del celular de Karina, llamada al fijo, o el vendedor manda foto de una libreta</td>
+            <td>Karina</td>
+            <td class="num">n/d</td>
+            <td><span class="chip c">Crítico</span></td>
+          </tr>
+          <tr>
+            <td><span class="step">2</span> Se cotiza</td>
+            <td><span class="chip a">Ventas</span></td>
+            <td>Busca precio en el Excel de listas, aplica descuento del cliente de memoria, escribe a mano</td>
+            <td>Karina</td>
+            <td class="num">14 min</td>
+            <td><span class="chip c">Crítico</span></td>
+          </tr>
+          <tr>
+            <td><span class="step">3</span> Se confirma</td>
+            <td><span class="chip a">Ventas</span></td>
+            <td>El cliente contesta "sale" por WhatsApp. No queda registro fuera del chat</td>
+            <td>Karina</td>
+            <td class="num">n/d</td>
+            <td><span class="chip w">Riesgo</span></td>
+          </tr>
+          <tr>
+            <td><span class="step">4</span> Se surte</td>
+            <td><span class="chip a">Fulfillment</span></td>
+            <td>Imprime el pedido, lo baja a bodega, Beto lo arma y anota faltantes en la misma hoja</td>
+            <td>Beto</td>
+            <td class="num">22 min</td>
+            <td><span class="chip o">Sano</span></td>
+          </tr>
+          <tr>
+            <td><span class="step">5</span> Se entrega</td>
+            <td><span class="chip a">Fulfillment</span></td>
+            <td>Sale la ruta. El cliente llama a preguntar dónde va; nadie sabe hasta que el chofer contesta</td>
+            <td>Chofer</td>
+            <td class="num">n/d</td>
+            <td><span class="chip w">Riesgo</span></td>
+          </tr>
+          <tr>
+            <td><span class="step">6</span> Se factura y cobra</td>
+            <td><span class="chip a">Administrativas</span></td>
+            <td>Recaptura el pedido completo en CONTPAQi. Timbra. Manda PDF por correo</td>
+            <td>Lupita</td>
+            <td class="num">11 min</td>
+            <td><span class="chip c">Crítico</span></td>
+          </tr>
+          <tr>
+            <td><span class="step">7</span> Se persigue lo vencido</td>
+            <td><span class="chip a">Administrativas</span></td>
+            <td>Revisa antigüedad de saldos el viernes y marca uno por uno</td>
+            <td>Lupita</td>
+            <td class="num">3 h / sem</td>
+            <td><span class="chip w">Riesgo</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <b>El hallazgo:</b> un mismo pedido se escribe cuatro veces. En WhatsApp, en la
+      cotización, en la hoja de bodega y en CONTPAQi. Y las cuatro veces ocurren
+      exactamente donde el pedido cambia de pilar. Cada recaptura es una oportunidad de
+      error, y son 47 minutos de persona por pedido, contra un promedio de 18 pedidos
+      diarios.
+    </p>
+
+    </section>
+
+  <!-- ============ 03 INFORMACION ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="num">03</span>
+      <h2>Dónde vive tu información</h2>
+    </div>
+
+    <p>
+      No tienes un sistema. Tienes siete lugares donde guardas cosas, y ninguno se habla
+      con otro. Este es el inventario completo.
+    </p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th>Qué</th>
+            <th>Dónde vive</th>
+            <th>Quién lo puede leer</th>
+            <th>Se recaptura</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Precios por cliente</td><td>Excel "LISTAS_2026_final_v3"</td><td>Solo Karina</td><td class="num">2 veces</td></tr>
+          <tr><td>Existencias</td><td>CONTPAQi, pero se ajusta a mano cada lunes</td><td>Lupita</td><td class="num">1 vez</td></tr>
+          <tr><td>Pedidos en curso</td><td>Chat de WhatsApp</td><td>Solo Karina</td><td class="num">4 veces</td></tr>
+          <tr><td>Datos fiscales de clientes</td><td>Carpeta de PDFs en el escritorio</td><td>Lupita</td><td class="num">1 vez</td></tr>
+          <tr><td>Historial de compra</td><td>No existe fuera de la memoria de Karina</td><td>Nadie</td><td class="num">n/d</td></tr>
+          <tr><td>Faltantes de bodega</td><td>Libreta física</td><td>Beto</td><td class="num">1 vez</td></tr>
+          <tr><td>Cuentas por cobrar</td><td>CONTPAQi</td><td>Lupita</td><td class="num">n/d</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    </section>
+
+  <!-- ============ 04 CONTINUIDAD ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="num">04</span>
+      <h2>Riesgo de continuidad</h2>
+    </div>
+
+    <p>
+      Esta sección no es de eficiencia, es de qué tan frágil es tu negocio. La pregunta
+      que contesta es una sola: qué pasa el lunes si alguien no llega.
+    </p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>Si esto pasa</th><th>Qué se detiene</th><th>Cuánto aguantas</th><th>Nivel</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Karina renuncia o se enferma</td>
+            <td>Nadie más sabe los descuentos por cliente ni tiene el historial de pedidos</td>
+            <td class="num">1 día</td>
+            <td><span class="chip c">Alto</span></td>
+          </tr>
+          <tr>
+            <td>Se pierde o se rompe el celular de Karina</td>
+            <td>Se van los pedidos en curso y el historial completo de conversaciones</td>
+            <td class="num">Inmediato</td>
+            <td><span class="chip c">Alto</span></td>
+          </tr>
+          <tr>
+            <td>Falla la laptop de Lupita</td>
+            <td>Datos fiscales de clientes. No hay respaldo automático de esa carpeta</td>
+            <td class="num">Inmediato</td>
+            <td><span class="chip c">Alto</span></td>
+          </tr>
+          <tr>
+            <td>Un empleado se va a la competencia</td>
+            <td>Se lleva copia del Excel de precios. Hoy cualquiera con acceso lo puede copiar</td>
+            <td class="num">n/d</td>
+            <td><span class="chip w">Medio</span></td>
+          </tr>
+          <tr>
+            <td>Beto falta</td>
+            <td>Bodega se hace más lento, pero el proceso está escrito y otro lo puede seguir</td>
+            <td class="num">1 semana</td>
+            <td><span class="chip o">Bajo</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    </section>
+
+  <!-- ============ 05 OPORTUNIDADES ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="num">05</span>
+      <h2>Oportunidades, ordenadas por lo que conviene primero</h2>
+    </div>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Oportunidad</th><th>Pilar</th><th>Recupera</th><th>Esfuerzo</th><th>Momento</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">1</td>
+            <td>Catálogo con precio por cliente, para que cualquiera cotice sin preguntar</td>
+            <td><span class="chip a">Ventas</span></td>
+            <td class="num">9 h / sem</td>
+            <td><span class="chip o">Bajo</span></td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>Seguimiento automático a la cotización que el cliente no contestó</td>
+            <td><span class="chip a">Marketing</span></td>
+            <td class="num">Recupera venta</td>
+            <td><span class="chip o">Bajo</span></td>
+            <td class="num">0, 3</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>Pedido que se captura una vez y baja solo a bodega y a facturación</td>
+            <td><span class="chip a">Costura</span></td>
+            <td class="num">8 h / sem</td>
+            <td><span class="chip w">Medio</span></td>
+            <td class="num">2, 4, 6</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>Aviso automático de estatus al cliente por WhatsApp</td>
+            <td><span class="chip a">Fulfillment</span></td>
+            <td class="num">4 h / sem</td>
+            <td><span class="chip o">Bajo</span></td>
+            <td class="num">5</td>
+          </tr>
+          <tr>
+            <td class="num">5</td>
+            <td>Recordatorio automático de saldo vencido</td>
+            <td><span class="chip a">Administrativas</span></td>
+            <td class="num">3 h / sem</td>
+            <td><span class="chip o">Bajo</span></td>
+            <td class="num">7</td>
+          </tr>
+          <tr>
+            <td class="num">6</td>
+            <td>Tablero de ventas del mes que el dueño abre desde su celular</td>
+            <td><span class="chip a">Administrativas</span></td>
+            <td class="num">n/d</td>
+            <td><span class="chip w">Medio</span></td>
+            <td class="num">n/d</td>
+          </tr>
+          <tr>
+            <td class="num">7</td>
+            <td>Asistente que contesta precio y existencia fuera de horario</td>
+            <td><span class="chip a">Ventas</span></td>
+            <td class="num">Por medir</td>
+            <td><span class="chip c">Alto</span></td>
+            <td class="num">1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    </section>
+
+  <!-- ============ 06 ROADMAP ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="num">06</span>
+      <h2>Roadmap de implementación</h2>
+    </div>
+
+    <p>
+      Tres fases. Cada una deja algo funcionando y se puede parar ahí sin haber tirado
+      dinero. No hay que hacer las tres, y no hay que hacerlas seguidas.
+    </p>
+
+    <div class="phases">
+      <div class="phase">
+        <span class="tag">Fase 1</span>
+        <div class="body">
+          <h3>Que cualquiera pueda cotizar, y que ninguna cotización se pierda</h3>
+          <p>
+            Catálogo en línea con precios y descuentos por cliente ya cargados, acceso
+            por usuario, y el Excel de listas deja de ser el original. Karina sigue
+            atendiendo, pero ya no es la única que puede. Encima va el seguimiento
+            automático: si una cotización lleva tres días sin respuesta, el sistema
+            escribe.
+          </p>
+          <div class="meta">
+            <span>Duración <b>3 semanas</b></span>
+            <span>Inversión <b>$68,000 a $85,000 MXN</b></span>
+            <span>Recupera <b>9 h / sem</b></span>
+            <span>Pilares <b>Ventas, Marketing</b></span>
+            <span>Se paga en <b>7 meses</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <span class="tag">Fase 2</span>
+        <div class="body">
+          <h3>Que el pedido se escriba una sola vez</h3>
+          <p>
+            El pedido nace en el catálogo y de ahí sale la hoja de bodega y la póliza
+            para CONTPAQi. Se acaban las cuatro recapturas. Se agregan los avisos
+            automáticos de estatus al cliente.
+          </p>
+          <div class="meta">
+            <span>Duración <b>4 semanas</b></span>
+            <span>Inversión <b>$95,000 a $130,000 MXN</b></span>
+            <span>Recupera <b>12 h / sem</b></span>
+            <span>Pilares <b>Costura Ventas a Fulfillment a Admin</b></span>
+            <span>Se paga en <b>8 meses</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <span class="tag">Fase 3</span>
+        <div class="body">
+          <h3>Que tú veas el negocio sin preguntar</h3>
+          <p>
+            Tablero de ventas, márgenes y cobranza al día. Recordatorios automáticos de
+            saldo vencido. Aquí se evalúa el asistente de fuera de horario, con datos
+            reales de cuántas consultas llegan y de qué tipo.
+          </p>
+          <div class="meta">
+            <span>Duración <b>3 semanas</b></span>
+            <span>Inversión <b>$55,000 a $75,000 MXN</b></span>
+            <span>Recupera <b>3 h / sem</b></span>
+            <span>Pilares <b>Administrativas</b></span>
+            <span>Se paga en <b>por definir</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </section>
+
+  <!-- ============ 07 GRATIS ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="num">07</span>
+      <h2>Lo que puedes hacer esta semana sin gastar un peso</h2>
+    </div>
+
+    <div class="free">
+      <div class="free-item">
+        <span class="mark">01</span>
+        <p>Pasa el WhatsApp de pedidos a un número de la empresa con WhatsApp Business. Hoy el historial de tus clientes es propiedad del celular de Karina.</p>
+      </div>
+      <div class="free-item">
+        <span class="mark">02</span>
+        <p>Mueve la carpeta de datos fiscales a Google Drive. Es gratis y quita el riesgo alto de la sección 04 en veinte minutos.</p>
+      </div>
+      <div class="free-item">
+        <span class="mark">03</span>
+        <p>Que Karina escriba los descuentos por cliente en una columna del Excel. Media hora de trabajo y deja de ser el único lugar donde no hay respaldo.</p>
+      </div>
+      <div class="free-item">
+        <span class="mark">04</span>
+        <p>Define una plantilla fija de cotización. Sin sistema, solo un formato igual siempre, para que otro pueda cotizar leyendo la plantilla.</p>
+      </div>
+    </div>
+
+    </section>
+
+  <!-- ============ ANEXO ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="num">08</span>
+      <h2>Cómo se midió</h2>
+    </div>
+
+    <ul class="plain">
+      <li><b>Día 1, sesión de 90 min</b> con el dueño y Lupita: los cuatro pilares, el recorrido completo del pedido, dónde vive cada dato, y las preguntas de continuidad.</li>
+      <li><b>Día 2, pantalla compartida</b> con Karina levantando pedidos reales y con Lupita facturando. Sin ensayo y sin preparar nada: trabajaron normal y yo cronometré.</li>
+      <li><b>Día 3, sus propios registros.</b> Historial del WhatsApp de pedidos, fechas de timbrado en CONTPAQi y el Excel de listas. 312 pedidos con hora de entrada y de salida, de los últimos tres meses.</li>
+      <li><b>Día 4</b> de análisis: horas a pesos con la nómina real, calificación de los cuatro pilares y armado del roadmap.</li>
+      <li><b>Día 5, sesión de 90 min</b> de presentación de este documento, con las preguntas contestadas en vivo.</li>
+    </ul>
+
+    </section>
+
+  <footer>
+    <p class="cierre">
+      Este es el formato. Lo que va adentro sale de tu operación, medido en cinco
+      días, y te lo entrego aunque no vuelvas a hablar conmigo.
+    </p>
+    <div class="cta-row">
+      <a href="https://brendaflores.co/agenda" class="btn btn-primary" target="_blank" rel="noopener">Agendar 20 minutos</a>
+      <a href="/diagnostico.html" class="btn btn-ghost">Ver cómo funciona</a>
+    </div>
+    <p class="legal">
+      Distribuidora El Norte es un negocio ficticio y sirve solo para mostrar el
+      documento terminado. © <span id="year"></span> Brenda Flores
+    </p>
+  </footer>
+</div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
