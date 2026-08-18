@@ -98,6 +98,38 @@
         margin: 0;
       }
 
+      /*  Mismo selector de idioma que el resto del sitio, para que la
+          eleccion viaje entre paginas por localStorage.  */
+      #lang {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 50;
+        display: flex;
+        gap: 2px;
+        background: var(--ink);
+        border-radius: 8px;
+        padding: 4px;
+        box-shadow: 0 2px 10px rgba(15, 15, 26, 0.18);
+      }
+      #lang button {
+        font-family: var(--display);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        color: rgba(255, 255, 255, 0.55);
+        background: transparent;
+        border: 0;
+        border-radius: 5px;
+        padding: 0.3rem 0.55rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      #lang button.active {
+        background: #fff;
+        color: var(--ink);
+      }
+
       /*  volver: nadie deberia quedarse encerrado en un documento  */
       #back {
         position: fixed;
@@ -315,12 +347,19 @@
         background: var(--warn);
       }
 
+      /*  Dos columnas fijas, no auto-fit: con cuatro pilares el auto-fit
+          hacia tres y dejaba el cuarto solo, con dos celdas vacias
+          ensenando el fondo gris de la rejilla.  */
       .pillars {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
         gap: 1px;
         background: var(--border);
         border: 1px solid var(--border);
+      }
+      @media (min-width: 640px) {
+        .pillars {
+          grid-template-columns: 1fr 1fr;
+        }
       }
       .pillar {
         background: var(--paper);
@@ -543,9 +582,14 @@
     </style>
   </head>
   <body>
-    <a id="back" href="/diagnostico.html">&larr; El diagn&oacute;stico</a>
+    <div id="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" onclick="setLang('es')">ES</button>
+      <button type="button" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
 
-    <div class="sheet">
+    <a id="back" href="/diagnostico.html" data-es="&larr; El diagn&oacute;stico" data-en="&larr; The diagnostic">&larr; El diagn&oacute;stico</a>
+
+    <div class="sheet" data-sheet="es">
 
   <header class="cover">
     <p class="eyebrow">Ejemplo del entregable</p>
@@ -649,7 +693,7 @@
 
       <div class="pillar s-mid">
         <div class="top">
-          <h3>Fulfillment</h3>
+          <h3>Entrega</h3>
           <span class="score">3 / 5</span>
         </div>
         <span class="bar mid"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span>
@@ -667,7 +711,7 @@
 
       <div class="pillar s-low">
         <div class="top">
-          <h3>Administrativas</h3>
+          <h3>Administración</h3>
           <span class="score">2 / 5</span>
         </div>
         <span class="bar low"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span>
@@ -757,7 +801,7 @@
           </tr>
           <tr>
             <td><span class="step">4</span> Se surte</td>
-            <td><span class="chip a">Fulfillment</span></td>
+            <td><span class="chip a">Entrega</span></td>
             <td>Imprime el pedido, lo baja a bodega, Beto lo arma y anota faltantes en la misma hoja</td>
             <td>Beto</td>
             <td class="num">22 min</td>
@@ -765,7 +809,7 @@
           </tr>
           <tr>
             <td><span class="step">5</span> Se entrega</td>
-            <td><span class="chip a">Fulfillment</span></td>
+            <td><span class="chip a">Entrega</span></td>
             <td>Sale la ruta. El cliente llama a preguntar dónde va; nadie sabe hasta que el chofer contesta</td>
             <td>Chofer</td>
             <td class="num">n/d</td>
@@ -773,7 +817,7 @@
           </tr>
           <tr>
             <td><span class="step">6</span> Se factura y cobra</td>
-            <td><span class="chip a">Administrativas</span></td>
+            <td><span class="chip a">Administración</span></td>
             <td>Recaptura el pedido completo en CONTPAQi. Timbra. Manda PDF por correo</td>
             <td>Lupita</td>
             <td class="num">11 min</td>
@@ -781,7 +825,7 @@
           </tr>
           <tr>
             <td><span class="step">7</span> Se persigue lo vencido</td>
-            <td><span class="chip a">Administrativas</span></td>
+            <td><span class="chip a">Administración</span></td>
             <td>Revisa antigüedad de saldos el viernes y marca uno por uno</td>
             <td>Lupita</td>
             <td class="num">3 h / sem</td>
@@ -931,7 +975,7 @@
           <tr>
             <td class="num">4</td>
             <td>Aviso automático de estatus al cliente por WhatsApp</td>
-            <td><span class="chip a">Fulfillment</span></td>
+            <td><span class="chip a">Entrega</span></td>
             <td class="num">4 h / sem</td>
             <td><span class="chip o">Bajo</span></td>
             <td class="num">5</td>
@@ -939,7 +983,7 @@
           <tr>
             <td class="num">5</td>
             <td>Recordatorio automático de saldo vencido</td>
-            <td><span class="chip a">Administrativas</span></td>
+            <td><span class="chip a">Administración</span></td>
             <td class="num">3 h / sem</td>
             <td><span class="chip o">Bajo</span></td>
             <td class="num">7</td>
@@ -947,7 +991,7 @@
           <tr>
             <td class="num">6</td>
             <td>Tablero de ventas del mes que el dueño abre desde su celular</td>
-            <td><span class="chip a">Administrativas</span></td>
+            <td><span class="chip a">Administración</span></td>
             <td class="num">n/d</td>
             <td><span class="chip w">Medio</span></td>
             <td class="num">n/d</td>
@@ -1013,7 +1057,7 @@
             <span>Duración <b>4 semanas</b></span>
             <span>Inversión <b>$95,000 a $130,000 MXN</b></span>
             <span>Recupera <b>12 h / sem</b></span>
-            <span>Pilares <b>Costura Ventas a Fulfillment a Admin</b></span>
+            <span>Pilares <b>Costura Ventas a Entrega a Admin</b></span>
             <span>Se paga en <b>8 meses</b></span>
           </div>
         </div>
@@ -1032,7 +1076,7 @@
             <span>Duración <b>3 semanas</b></span>
             <span>Inversión <b>$55,000 a $75,000 MXN</b></span>
             <span>Recupera <b>3 h / sem</b></span>
-            <span>Pilares <b>Administrativas</b></span>
+            <span>Pilares <b>Administración</b></span>
             <span>Se paga en <b>por definir</b></span>
           </div>
         </div>
@@ -1097,13 +1141,597 @@
     </div>
     <p class="legal">
       Distribuidora El Norte es un negocio ficticio y sirve solo para mostrar el
-      documento terminado. © <span id="year"></span> Brenda Flores
+      documento terminado. © <span class="year"></span> Brenda Flores
     </p>
   </footer>
 </div>
 
+    <div class="sheet" data-sheet="en" hidden>
+      <header class="cover">
+        <p class="eyebrow">Sample deliverable</p>
+        <h1>Operations X-Ray</h1>
+        <p class="lede">
+          This is what you get on day five. It is filled in with a complete case so you
+          can see how it looks finished before hiring anything. The business in the
+          example is fictional; the format and the arithmetic are the same ones I use
+          with a real client.
+        </p>
+        <dl class="stamp">
+          <div><dt>Business</dt><dd>Distribuidora El Norte</dd></div>
+          <div><dt>Industry</dt><dd>Electrical supply wholesale</dd></div>
+          <div><dt>People</dt><dd>11 (3 in the office)</dd></div>
+          <div><dt>Assessment</dt><dd>5 business days</dd></div>
+          <div><dt>Prepared by</dt><dd>Brenda Flores</dd></div>
+        </dl>
+      </header>
+
+      <section>
+        <div class="sec-head">
+          <span class="num">00</span>
+          <h2>What I found, in three numbers</h2>
+        </div>
+
+        <p>
+          Your operation works because your people hold it up by hand. That has a cost
+          that does not show up on any income statement today, and here it is:
+        </p>
+
+        <div class="kpis">
+          <div class="kpi">
+            <span class="n hot">37 h</span>
+            <span class="lbl">of manual work per week, across the three people in the office</span>
+          </div>
+          <div class="kpi">
+            <span class="n hot">$412,000</span>
+            <span class="lbl">a year in loaded payroll spent on that manual work</span>
+          </div>
+          <div class="kpi">
+            <span class="n cool">24 h</span>
+            <span class="lbl">of those 37 can be taken away with what I propose in section 06</span>
+          </div>
+        </div>
+
+        <p>
+          The 13 hours left are human judgment and should stay human. Not all manual work
+          is waste, and this document does not propose automating for the sake of it.
+        </p>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="num">01</span>
+          <h2>Your four pillars</h2>
+        </div>
+
+        <p>
+          Every business rests on the same four pillars. One brings in prospects, one
+          turns them into orders, one delivers what was promised, and one collects the
+          money and holds the structure up. Here is where yours stand today, from 1 to 5.
+        </p>
+
+        <div class="pillars">
+          <div class="pillar s-low">
+            <div class="top">
+              <h3>Marketing</h3>
+              <span class="score">1 / 5</span>
+            </div>
+            <span class="bar low"><i class="f"></i><i></i><i></i><i></i><i></i></span>
+            <p class="verdict">
+              There is nothing systematic. Every new customer arrives by referral or
+              because they already knew you. And 4 out of 10 quotes you sent last month
+              were never touched again.
+            </p>
+            <ul class="areas">
+              <li>Lead generation <span>1 / 5</span></li>
+              <li>Quote follow-up <span>1 / 5</span></li>
+              <li>Repeat business and reactivation <span>1 / 5</span></li>
+            </ul>
+          </div>
+
+          <div class="pillar s-low">
+            <div class="top">
+              <h3>Sales</h3>
+              <span class="score">2 / 5</span>
+            </div>
+            <span class="bar low"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span>
+            <p class="verdict">
+              You sell well, but you sell through a single door. Karina is the whole
+              pillar, and the knowledge of prices and customers lives in her memory.
+            </p>
+            <ul class="areas">
+              <li>Taking orders <span>1 / 5</span></li>
+              <li>Quoting and pricing <span>2 / 5</span></li>
+              <li>Recording the order <span>2 / 5</span></li>
+            </ul>
+          </div>
+
+          <div class="pillar s-mid">
+            <div class="top">
+              <h3>Fulfillment</h3>
+              <span class="score">3 / 5</span>
+            </div>
+            <span class="bar mid"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span>
+            <p class="verdict">
+              This is your healthiest pillar. The warehouse process is clear, orderly and
+              someone else could follow it. What is missing is not order, it is that the
+              customer can see it without calling.
+            </p>
+            <ul class="areas">
+              <li>Warehouse picking <span>4 / 5</span></li>
+              <li>Route and delivery <span>3 / 5</span></li>
+              <li>Visibility for the customer <span>1 / 5</span></li>
+            </ul>
+          </div>
+
+          <div class="pillar s-low">
+            <div class="top">
+              <h3>Back office</h3>
+              <span class="score">2 / 5</span>
+            </div>
+            <span class="bar low"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span>
+            <p class="verdict">
+              CONTPAQi does its job, but it is fed by hand and nothing flows back to the
+              rest of the business. To know how the month is going you have to ask a
+              person.
+            </p>
+            <ul class="areas">
+              <li>Invoicing <span>3 / 5</span></li>
+              <li>Collections <span>2 / 5</span></li>
+              <li>Purchasing <span>2 / 5</span></li>
+              <li>Visibility for the owner <span>1 / 5</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="seam">
+          <span class="hd">Where the waste is</span>
+          <p>
+            Notice something: no pillar is broken on the inside. Each area does its own
+            part well. The problem shows up at the seams, when work passes from one
+            pillar to the next and somebody has to rewrite what the previous one already
+            knew. That is where your 37 hours go, and that is why nobody had seen them:
+            they do not belong to any one area.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="num">02</span>
+          <h2>Your money cycle, step by step</h2>
+        </div>
+
+        <p>
+          The pillars say where. This says how. One real order timed as it crosses the
+          four pillars, with the times taken from the timestamps your own operation
+          already keeps.
+        </p>
+
+        <div class="scroller">
+          <table>
+            <thead>
+              <tr>
+                <th>Moment</th>
+                <th>Pillar</th>
+                <th>How it happens today</th>
+                <th>Who</th>
+                <th>Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="step">0</span> Interest is created</td>
+                <td><span class="chip a">Marketing</span></td>
+                <td>It is not. Referrals and long-time customers show up. Quotes with no reply just sit there</td>
+                <td>Nobody</td>
+                <td class="num">n/a</td>
+                <td><span class="chip c">Critical</span></td>
+              </tr>
+              <tr>
+                <td><span class="step">1</span> It arrives</td>
+                <td><span class="chip a">Sales</span></td>
+                <td>WhatsApp on Karina's phone, a call to the landline, or the rep sends a photo of a notebook</td>
+                <td>Karina</td>
+                <td class="num">n/a</td>
+                <td><span class="chip c">Critical</span></td>
+              </tr>
+              <tr>
+                <td><span class="step">2</span> It gets quoted</td>
+                <td><span class="chip a">Sales</span></td>
+                <td>She looks up the price in the list spreadsheet, applies the customer discount from memory, writes it by hand</td>
+                <td>Karina</td>
+                <td class="num">14 min</td>
+                <td><span class="chip c">Critical</span></td>
+              </tr>
+              <tr>
+                <td><span class="step">3</span> It gets confirmed</td>
+                <td><span class="chip a">Sales</span></td>
+                <td>The customer replies "go ahead" on WhatsApp. No record exists outside the chat</td>
+                <td>Karina</td>
+                <td class="num">n/a</td>
+                <td><span class="chip w">At risk</span></td>
+              </tr>
+              <tr>
+                <td><span class="step">4</span> It gets picked</td>
+                <td><span class="chip a">Fulfillment</span></td>
+                <td>She prints the order, takes it down to the warehouse, Beto puts it together and notes shortages on the same sheet</td>
+                <td>Beto</td>
+                <td class="num">22 min</td>
+                <td><span class="chip o">Healthy</span></td>
+              </tr>
+              <tr>
+                <td><span class="step">5</span> It gets delivered</td>
+                <td><span class="chip a">Fulfillment</span></td>
+                <td>The route goes out. The customer calls to ask where it is; nobody knows until the driver answers</td>
+                <td>Driver</td>
+                <td class="num">n/a</td>
+                <td><span class="chip w">At risk</span></td>
+              </tr>
+              <tr>
+                <td><span class="step">6</span> It gets invoiced and charged</td>
+                <td><span class="chip a">Back office</span></td>
+                <td>She re-enters the whole order in CONTPAQi. Stamps it. Emails the PDF</td>
+                <td>Lupita</td>
+                <td class="num">11 min</td>
+                <td><span class="chip c">Critical</span></td>
+              </tr>
+              <tr>
+                <td><span class="step">7</span> Overdue gets chased</td>
+                <td><span class="chip a">Back office</span></td>
+                <td>She reviews the aging report on Friday and calls one by one</td>
+                <td>Lupita</td>
+                <td class="num">3 h / wk</td>
+                <td><span class="chip w">At risk</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          <b>The finding:</b> the same order gets written four times. In WhatsApp, in the
+          quote, on the warehouse sheet and in CONTPAQi. And all four happen exactly
+          where the order changes pillar. Every re-entry is a chance to get it wrong, and
+          it adds up to 47 minutes of a person per order, against an average of 18 orders
+          a day.
+        </p>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="num">03</span>
+          <h2>Where your information lives</h2>
+        </div>
+
+        <p>
+          You do not have a system. You have seven places where you keep things, and none
+          of them talks to another. This is the complete inventory.
+        </p>
+
+        <div class="scroller">
+          <table>
+            <thead>
+              <tr>
+                <th>What</th>
+                <th>Where it lives</th>
+                <th>Who can read it</th>
+                <th>Re-entered</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Per-customer prices</td><td>Spreadsheet "LISTAS_2026_final_v3"</td><td>Only Karina</td><td class="num">2 times</td></tr>
+              <tr><td>Stock</td><td>CONTPAQi, but adjusted by hand every Monday</td><td>Lupita</td><td class="num">1 time</td></tr>
+              <tr><td>Orders in progress</td><td>WhatsApp chat</td><td>Only Karina</td><td class="num">4 times</td></tr>
+              <tr><td>Customer tax details</td><td>Folder of PDFs on the desktop</td><td>Lupita</td><td class="num">1 time</td></tr>
+              <tr><td>Purchase history</td><td>Does not exist outside Karina's memory</td><td>Nobody</td><td class="num">n/a</td></tr>
+              <tr><td>Warehouse shortages</td><td>Paper notebook</td><td>Beto</td><td class="num">1 time</td></tr>
+              <tr><td>Accounts receivable</td><td>CONTPAQi</td><td>Lupita</td><td class="num">n/a</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="num">04</span>
+          <h2>Continuity risk</h2>
+        </div>
+
+        <p>
+          This section is not about efficiency, it is about how fragile your business is.
+          It answers a single question: what happens on Monday if someone does not show
+          up.
+        </p>
+
+        <div class="scroller">
+          <table>
+            <thead>
+              <tr><th>If this happens</th><th>What stops</th><th>How long you hold</th><th>Level</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Karina quits or gets sick</td>
+                <td>Nobody else knows the per-customer discounts or has the order history</td>
+                <td class="num">1 day</td>
+                <td><span class="chip c">High</span></td>
+              </tr>
+              <tr>
+                <td>Karina's phone is lost or broken</td>
+                <td>Orders in progress and the entire conversation history go with it</td>
+                <td class="num">Immediate</td>
+                <td><span class="chip c">High</span></td>
+              </tr>
+              <tr>
+                <td>Lupita's laptop fails</td>
+                <td>Customer tax details. That folder has no automatic backup</td>
+                <td class="num">Immediate</td>
+                <td><span class="chip c">High</span></td>
+              </tr>
+              <tr>
+                <td>An employee leaves for a competitor</td>
+                <td>They take a copy of the price spreadsheet. Today anyone with access can copy it</td>
+                <td class="num">n/a</td>
+                <td><span class="chip w">Medium</span></td>
+              </tr>
+              <tr>
+                <td>Beto is out</td>
+                <td>The warehouse slows down, but the process is written and someone else can follow it</td>
+                <td class="num">1 week</td>
+                <td><span class="chip o">Low</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="num">05</span>
+          <h2>Opportunities, ranked by what pays off first</h2>
+        </div>
+
+        <div class="scroller">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Opportunity</th><th>Pillar</th><th>Recovers</th><th>Effort</th><th>Moment</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="num">1</td>
+                <td>Catalog with per-customer pricing, so anyone can quote without asking</td>
+                <td><span class="chip a">Sales</span></td>
+                <td class="num">9 h / wk</td>
+                <td><span class="chip o">Low</span></td>
+                <td class="num">2</td>
+              </tr>
+              <tr>
+                <td class="num">2</td>
+                <td>Automatic follow-up on the quote the customer never answered</td>
+                <td><span class="chip a">Marketing</span></td>
+                <td class="num">Recovers sales</td>
+                <td><span class="chip o">Low</span></td>
+                <td class="num">0, 3</td>
+              </tr>
+              <tr>
+                <td class="num">3</td>
+                <td>An order entered once that flows on its own to the warehouse and to invoicing</td>
+                <td><span class="chip a">Seam</span></td>
+                <td class="num">8 h / wk</td>
+                <td><span class="chip w">Medium</span></td>
+                <td class="num">2, 4, 6</td>
+              </tr>
+              <tr>
+                <td class="num">4</td>
+                <td>Automatic status updates to the customer over WhatsApp</td>
+                <td><span class="chip a">Fulfillment</span></td>
+                <td class="num">4 h / wk</td>
+                <td><span class="chip o">Low</span></td>
+                <td class="num">5</td>
+              </tr>
+              <tr>
+                <td class="num">5</td>
+                <td>Automatic reminder for overdue balances</td>
+                <td><span class="chip a">Back office</span></td>
+                <td class="num">3 h / wk</td>
+                <td><span class="chip o">Low</span></td>
+                <td class="num">7</td>
+              </tr>
+              <tr>
+                <td class="num">6</td>
+                <td>A sales dashboard the owner opens from their phone</td>
+                <td><span class="chip a">Back office</span></td>
+                <td class="num">n/a</td>
+                <td><span class="chip w">Medium</span></td>
+                <td class="num">n/a</td>
+              </tr>
+              <tr>
+                <td class="num">7</td>
+                <td>An assistant that answers price and stock questions after hours</td>
+                <td><span class="chip a">Sales</span></td>
+                <td class="num">To be measured</td>
+                <td><span class="chip c">High</span></td>
+                <td class="num">1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="num">06</span>
+          <h2>Implementation roadmap</h2>
+        </div>
+
+        <p>
+          Three phases. Each one leaves something working and you can stop there without
+          having thrown money away. You do not have to do all three, and you do not have
+          to do them back to back.
+        </p>
+
+        <div class="phases">
+          <div class="phase">
+            <span class="tag">Phase 1</span>
+            <div class="body">
+              <h3>So anyone can quote, and no quote gets lost</h3>
+              <p>
+                An online catalog with per-customer prices and discounts already loaded,
+                per-user access, and the list spreadsheet stops being the original.
+                Karina keeps serving customers, but she is no longer the only one who
+                can. On top of that goes the automatic follow-up: if a quote goes three
+                days without a reply, the system writes.
+              </p>
+              <div class="meta">
+                <span>Duration <b>3 weeks</b></span>
+                <span>Investment <b>$68,000 to $85,000 MXN</b></span>
+                <span>Recovers <b>9 h / wk</b></span>
+                <span>Pillars <b>Sales, Marketing</b></span>
+                <span>Pays for itself in <b>7 months</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase">
+            <span class="tag">Phase 2</span>
+            <div class="body">
+              <h3>So the order gets written once</h3>
+              <p>
+                The order is born in the catalog and from there come the warehouse sheet
+                and the entry for CONTPAQi. The four re-entries end. Automatic status
+                updates to the customer get added.
+              </p>
+              <div class="meta">
+                <span>Duration <b>4 weeks</b></span>
+                <span>Investment <b>$95,000 to $130,000 MXN</b></span>
+                <span>Recovers <b>12 h / wk</b></span>
+                <span>Pillars <b>Seam Sales to Fulfillment to Back office</b></span>
+                <span>Pays for itself in <b>8 months</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase">
+            <span class="tag">Phase 3</span>
+            <div class="body">
+              <h3>So you can see the business without asking</h3>
+              <p>
+                A dashboard for sales, margins and collections, up to date. Automatic
+                reminders for overdue balances. This is where the after-hours assistant
+                gets evaluated, with real data on how many questions come in and of what
+                kind.
+              </p>
+              <div class="meta">
+                <span>Duration <b>3 weeks</b></span>
+                <span>Investment <b>$55,000 to $75,000 MXN</b></span>
+                <span>Recovers <b>3 h / wk</b></span>
+                <span>Pillars <b>Back office</b></span>
+                <span>Pays for itself in <b>to be defined</b></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="num">07</span>
+          <h2>What you can do this week without spending a peso</h2>
+        </div>
+
+        <div class="free">
+          <div class="free-item">
+            <span class="mark">01</span>
+            <p>Move the orders WhatsApp to a company number with WhatsApp Business. Today your customer history is the property of Karina's phone.</p>
+          </div>
+          <div class="free-item">
+            <span class="mark">02</span>
+            <p>Move the tax details folder to Google Drive. It is free and it removes the high risk from section 04 in twenty minutes.</p>
+          </div>
+          <div class="free-item">
+            <span class="mark">03</span>
+            <p>Have Karina write the per-customer discounts into a column of the spreadsheet. Half an hour of work and it stops being the only place with no backup.</p>
+          </div>
+          <div class="free-item">
+            <span class="mark">04</span>
+            <p>Define a fixed quote template. No system, just the same format every time, so someone else can quote by reading the template.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="num">08</span>
+          <h2>How it was measured</h2>
+        </div>
+
+        <ul class="plain">
+          <li><b>Day 1, a 90-minute session</b> with the owner and Lupita: the four pillars, the full path of an order, where each piece of information lives, and the continuity questions.</li>
+          <li><b>Day 2, screen share</b> with Karina taking real orders and Lupita invoicing. No rehearsal and nothing prepared: they worked as usual and I did the timing.</li>
+          <li><b>Day 3, their own records.</b> The orders WhatsApp history, invoice stamping dates in CONTPAQi and the list spreadsheet. 312 orders with start and finish times, from the last three months.</li>
+          <li><b>Day 4</b> of analysis: hours into pesos using the real payroll, scoring the four pillars and building the roadmap.</li>
+          <li><b>Day 5, a 90-minute session</b> presenting this document, with the questions answered live.</li>
+        </ul>
+      </section>
+
+      <footer>
+        <p class="cierre">
+          This is the format. What goes inside comes out of your operation, measured over
+          five days, and I hand it to you whether or not we speak again.
+        </p>
+        <div class="cta-row">
+          <a href="https://brendaflores.co/agenda" class="btn btn-primary" target="_blank" rel="noopener">Book 20 minutes</a>
+          <a href="/diagnostico.html" class="btn btn-ghost">See how it works</a>
+        </div>
+        <p class="legal">
+          Distribuidora El Norte is a fictional business and exists only to show the
+          finished document. &copy; <span class="year"></span> Brenda Flores
+        </p>
+      </footer>
+    </div>
+
+
     <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
+      /*  Este documento es largo, asi que en vez de partir cada frase en
+          data-es y data-en va completo en los dos idiomas y se enseña uno.
+          De cara al visitante se comporta igual que el resto del sitio:
+          mismo boton, misma memoria, misma preferencia entre paginas.  */
+      const TITLES = {
+        es: "Ejemplo de una Radiografía de Operación | Brenda Flores",
+        en: "Sample Operations X-Ray | Brenda Flores",
+      };
+
+      function setLang(lang, remember) {
+        document.querySelectorAll("[data-sheet]").forEach((el) => {
+          el.hidden = el.dataset.sheet !== lang;
+        });
+        document.querySelectorAll("[data-es]").forEach((el) => {
+          el.innerHTML = el.dataset[lang] || el.dataset.es;
+        });
+        document.title = TITLES[lang] || TITLES.es;
+        document.querySelectorAll("[data-lang]").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === lang);
+        });
+        document.documentElement.lang = lang;
+        if (remember !== false) localStorage.setItem("lang", lang);
+      }
+
+      (function initLang() {
+        const saved = localStorage.getItem("lang");
+        if (saved === "en" || saved === "es") {
+          setLang(saved);
+          return;
+        }
+        const nav = (
+          navigator.languages && navigator.languages.length
+            ? navigator.languages[0]
+            : navigator.language || ""
+        ).toLowerCase();
+        setLang(nav.startsWith("es") ? "es" : "en", false);
+      })();
+
+      document.querySelectorAll(".year").forEach((el) => {
+        el.textContent = new Date().getFullYear();
+      });
     </script>
   </body>
 </html>
