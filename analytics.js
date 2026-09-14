@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════════════
-   ANALITICA DEL SITIO — brendaflores.co
-   Este archivo lo cargan index.html, diagnostico.html y agenda/.
+   ANALITICA DEL SITIO: brendaflores.co
+   Este archivo lo cargan index.html y privacidad/.
    Es el UNICO lugar donde se tocan los IDs. No los repitas en el HTML.
 
    COMO ACTIVARLO (dos pegadas y listo):
@@ -78,8 +78,8 @@ const COOKIE_NOTICE = false;
   function seccion(el) {
     const con = el.closest("section[id], section, header, footer");
     if (con && con.id) return con.id;
-    /* El boton del nav y el flotante de WhatsApp viven fuera de toda
-       seccion con id, pero tienen id propio: dice mas que "sin-seccion". */
+    /* Algunos botones viven fuera de toda seccion con id, pero tienen
+       id propio: dice mas que "sin-seccion". */
     if (el.id) return el.id;
     if (!con) return "sin-seccion";
     const h = con.querySelector("h1, h2, h3");
@@ -116,15 +116,7 @@ const COOKIE_NOTICE = false;
       if (!a) return;
       const href = a.getAttribute("href") || "";
 
-      if (a.hasAttribute("data-whatsapp") || href.includes("wa.me")) {
-        evento("click_whatsapp", a);
-      } else if (
-        a.hasAttribute("data-booking") ||
-        href.includes("/agenda") ||
-        href.includes("calendly.com")
-      ) {
-        evento("click_agenda", a);
-      } else if (href.startsWith("mailto:")) {
+      if (href.startsWith("mailto:")) {
         evento("click_email", a);
       } else if (href.includes("linkedin.com")) {
         evento("click_linkedin", a);
@@ -140,18 +132,12 @@ const COOKIE_NOTICE = false;
      cambiarlo por uno que pida permiso ANTES de cargar los scripts. */
   if (!COOKIE_NOTICE || !(ready(GA4_ID) || ready(CLARITY_ID))) return;
   if (localStorage.getItem("cookies-ok") === "1") return;
-  /* En /agenda la barra alcanzaria a parpadear antes del redirect. */
-  if (document.querySelector('meta[http-equiv="refresh"]')) return;
 
   const es = (document.documentElement.lang || "es").startsWith("es");
   const barra = document.createElement("div");
   barra.setAttribute("role", "note");
-  /* En el portafolio hay un boton flotante de WhatsApp abajo a la derecha.
-     En movil la barra ocupa todo el ancho y se lo taparia, justo el boton
-     que mas quieres que toquen. Cuando existe, la barra se sube encima. */
-  const alto = document.querySelector("#wa-float") ? "88px" : "16px";
   barra.style.cssText =
-    "position:fixed;left:16px;right:16px;bottom:" + alto + ";z-index:9999;max-width:34rem;" +
+    "position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:34rem;" +
     "margin:0 auto;display:flex;gap:14px;align-items:center;justify-content:space-between;" +
     "background:#0F0F1A;color:#fff;padding:14px 18px;border-radius:14px;" +
     "font:400 0.85rem/1.45 'DM Sans',system-ui,sans-serif;" +
