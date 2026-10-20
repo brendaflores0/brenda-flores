@@ -3,64 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brenda Flores | Ingeniera de Software</title>
+    <title>Brenda Flores | Senior Frontend Engineer</title>
+    <!--  En ingles a proposito: es lo que LinkedIn y los ATS muestran al
+          pegar el link, y la mayoria de las vacantes son remotas en ingles.  -->
     <meta
       name="description"
-      content="Portafolio y trayectoria de Brenda Flores, ingeniera de software: 7+ años, plataformas usadas por más de 100,000 negocios en nueve países, y CIMBRA, la empresa que fundó en 2026."
+      content="Brenda Flores, Senior Frontend Engineer: 7+ years building software, the last four on React and TypeScript products for enterprise SaaS used daily by thousands of agents, with a focus on performance, testing and AI-assisted development."
     />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://brendaflores.co/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Brenda Flores | Ingeniera de Software" />
+    <meta property="og:title" content="Brenda Flores | Senior Frontend Engineer" />
     <meta
       property="og:description"
-      content="Portafolio y trayectoria de Brenda Flores, ingeniera de software: 7+ años, plataformas usadas por más de 100,000 negocios en nueve países, y CIMBRA, la empresa que fundó en 2026."
+      content="7+ years building software, the last four on React and TypeScript products for enterprise SaaS used daily by thousands of agents. Performance, testing and AI-assisted development."
     />
     <meta property="og:url" content="https://brendaflores.co/" />
     <meta property="og:image" content="https://brendaflores.co/images/og-image.jpg" />
-    <meta property="og:locale" content="es_MX" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_MX" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Brenda Flores | Ingeniera de Software" />
+    <meta name="twitter:title" content="Brenda Flores | Senior Frontend Engineer" />
     <meta
       name="twitter:description"
-      content="Portafolio y trayectoria de Brenda Flores, ingeniera de software: 7+ años, plataformas usadas por más de 100,000 negocios en nueve países, y CIMBRA, la empresa que fundó en 2026."
+      content="7+ years building software, the last four on React and TypeScript products for enterprise SaaS used daily by thousands of agents. Performance, testing and AI-assisted development."
     />
     <meta name="twitter:image" content="https://brendaflores.co/images/og-image.jpg" />
 
     <!-- Analitica: los IDs de GA4 y Clarity se cambian en /analytics.js -->
     <script src="/analytics.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!--  Tailwind compilado (tailwind.config.js), no el CDN: si se agregan
+          clases nuevas al HTML hay que volver a generarlo, ver README.  -->
+    <link rel="stylesheet" href="/tailwind.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
       rel="stylesheet"
     />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              display: ["Syne", "sans-serif"],
-              body: ["DM Sans", "sans-serif"],
-            },
-            colors: {
-              ink: "#0F0F1A",
-              paper: "#FBFAF7",
-              accent: "#4F46E5",
-              "accent-light": "#EEF2FF",
-              "accent-mid": "#C7D2FE",
-              rust: "#C2703D",
-              "rust-light": "#FBEEE4",
-              muted: "#6B7280",
-              border: "#E7E3DA",
-            },
-          },
-        },
-      };
-    </script>
+    <meta name="theme-color" content="#FBFAF7" />
     <style>
       /*  base  */
       html {
@@ -174,7 +157,7 @@
         color: #fff;
       }
       .lang-btn:not(.active) {
-        color: #9691a4;
+        color: #6b6880;
       }
       .lang-btn:not(.active):hover {
         background: #eef2ff;
@@ -266,6 +249,39 @@
         }
       }
 
+      /*  saltar al contenido: invisible hasta que llega el foco del teclado  */
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: -4rem;
+        z-index: 400;
+        background: #0f0f1a;
+        color: #fff;
+        font-family: "Syne", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 0.6rem 1rem;
+        border-radius: 999px;
+        transition: top 0.2s;
+      }
+      .skip-link:focus {
+        top: 0.75rem;
+      }
+
+      /*  los puntos del carrusel son <button>: quitarles el estilo nativo  */
+      .carousel-dot {
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+      .carousel-dot:focus-visible,
+      .carousel-btn:focus-visible,
+      .lang-btn:focus-visible,
+      .nav-link:focus-visible {
+        outline: 2px solid #4f46e5;
+        outline-offset: 2px;
+      }
+
       /*  sections  */
       main {
         padding-top: 68px;
@@ -310,6 +326,16 @@
             palabra larga puede no caber y desbordar en vez de hacer wrap.
             Esto la deja partir como ultimo recurso, nunca cortarse.  */
         overflow-wrap: break-word;
+        /*  Syne es tan ancha que con los tamanos fijos de Tailwind cada
+            frase del titular partia en dos renglones. El tamano sigue al
+            ancho de la columna para que, de tablet para arriba, cada frase
+            quepa en uno; en celular parte en dos, que ahi se lee bien.  */
+        font-size: clamp(1.9rem, 5.5vw - 0.25rem, 3.1rem);
+      }
+      @media (min-width: 1024px) {
+        .hero-line {
+          font-size: clamp(2.3rem, 5.8vw - 1.45rem, 2.7rem);
+        }
       }
       .hero-eyebrow {
         font-family: "Syne", sans-serif;
@@ -362,7 +388,7 @@
       }
       @media (min-width: 1024px) {
         .hero-grid {
-          grid-template-columns: 1.35fr 0.65fr;
+          grid-template-columns: 1fr auto;
           gap: 3rem;
         }
       }
@@ -528,7 +554,7 @@
         font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 0.06em;
-        color: #9691a4;
+        color: #6b6880;
         text-transform: uppercase;
         margin-bottom: 0.35rem;
         display: flex;
@@ -693,7 +719,7 @@
       }
       .cc-client {
         font-size: 0.78rem;
-        color: #9ca3af;
+        color: #6b7280;
       }
       .cc-hero {
         margin: 0;
@@ -791,6 +817,12 @@
         .cc-hero b {
           font-size: 2rem;
         }
+        /*  En angosto, la cifra junto al texto lo deja en una columna de
+            tres palabras: mejor la cifra arriba y el texto debajo.  */
+        .cc-mini {
+          flex-direction: column;
+          gap: 0.1rem;
+        }
       }
       .proj-panel {
         display: none;
@@ -823,7 +855,7 @@
         font-weight: 700;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: #9ca3af;
+        color: #6b7280;
         margin-bottom: 0.4rem;
       }
 
@@ -852,7 +884,7 @@
         font-weight: 700;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #9ca3af;
+        color: #6b7280;
         padding-top: 0.6rem;
       }
       @media (max-width: 640px) {
@@ -1209,8 +1241,13 @@
       }
       .highlight-card .h-sub {
         font-size: 0.78rem;
-        color: #9691a4;
+        color: #6b6880;
         margin-top: 0.15rem;
+      }
+
+      /*  reconocimientos en la columna angosta: siempre apilados  */
+      .highlight-row.highlight-stack {
+        grid-template-columns: 1fr;
       }
 
       /*  social icons  */
@@ -1335,6 +1372,8 @@
     </style>
   </head>
   <body>
+    <a href="#experience" class="skip-link" data-en="Skip to content" data-es="Saltar al contenido">Skip to content</a>
+
     <!-- scroll progress -->
     <div id="scroll-progress"></div>
 
@@ -1393,46 +1432,43 @@
               <p
                 class="hero-eyebrow mb-5 hero-anim"
                 style="animation-delay: 0.15s"
-                data-en="Brenda Flores &middot; Software Engineer &middot; Founder, CIMBRA"
-                data-es="Brenda Flores &middot; Ingeniera de Software &middot; Fundadora, CIMBRA"
+                data-en="Brenda Flores &middot; Senior Frontend Engineer"
+                data-es="Brenda Flores &middot; Senior Frontend Engineer"
               >
-                Brenda Flores &middot; Software Engineer &middot; Founder, CIMBRA
+                Brenda Flores &middot; Senior Frontend Engineer
               </p>
 
-              <div class="space-y-1">
+              <h1 class="space-y-1">
                 <span
-                  class="hero-line text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-ink hero-anim"
+                  class="hero-line text-ink hero-anim"
                   style="animation-delay: 0.28s"
                 >
-                  <span class="bracket">&lt;</span
-                  ><span data-en="Seven years" data-es="Siete a&ntilde;os">Seven years</span>
+                  <span class="bracket" aria-hidden="true">&lt;</span
+                  ><span data-en="React and TypeScript" data-es="React y TypeScript">React and TypeScript</span>
                 </span>
                 <span
-                  class="hero-line text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-accent hero-anim"
+                  class="hero-line text-accent hero-anim"
                   style="animation-delay: 0.4s"
-                  data-en="building the software other businesses depend on."
-                  data-es="construyendo el software del que otros negocios dependen."
-                  >building the software other businesses depend on.</span
+                  data-en="at enterprise scale,"
+                  data-es="a escala empresarial,"
+                  >at enterprise scale,</span
                 >
                 <span
-                  class="hero-line text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-ink hero-anim"
+                  class="hero-line text-ink hero-anim"
                   style="animation-delay: 0.52s"
-                  ><span data-en="Now I'm building my own." data-es="Ahora construyo el m&iacute;o."
-                    >Now I'm building my own.</span
-                  ><span class="bracket">&gt;</span></span
+                  ><span data-en="tested and measured." data-es="probado y medido."
+                    >tested and measured.</span
+                  ><span class="bracket" aria-hidden="true">&gt;</span></span
                 >
-              </div>
+              </h1>
 
               <p
                 class="mt-8 text-lg text-muted max-w-xl leading-relaxed hero-anim"
                 style="animation-delay: 0.68s"
-                data-en="I'm a software engineer based in Quer&eacute;taro, Mexico, working in React, TypeScript and full-stack. Below: the roles that got me here, the products I've shipped, and CIMBRA, the company I'm building today."
-                data-es="Soy ingeniera de software en Quer&eacute;taro, M&eacute;xico, y trabajo en React, TypeScript y full-stack. Aqu&iacute; abajo: los roles que me trajeron hasta aqu&iacute;, los productos que he lanzado, y CIMBRA, la empresa que estoy construyendo hoy."
+                data-en="7+ years building software, the last four on enterprise SaaS at Nextiva. I own each feature end to end: I design it, test it, roll it out behind a feature flag, and watch how it behaves in production. I use Claude Code every day to move faster, without making the code harder to maintain."
+                data-es="7+ a&ntilde;os construyendo software, los &uacute;ltimos cuatro en SaaS empresarial en Nextiva. Me encargo de cada funcionalidad de principio a fin: la dise&ntilde;o, la pruebo, la lanzo con feature flags y reviso c&oacute;mo se comporta en producci&oacute;n. Uso Claude Code todos los d&iacute;as para avanzar m&aacute;s r&aacute;pido, sin que el c&oacute;digo se vuelva dif&iacute;cil de mantener."
               >
-                I'm a software engineer based in Querétaro, Mexico, working in
-                React, TypeScript and full-stack. Below: the roles that got me
-                here, the products I've shipped, and CIMBRA, the company I'm
-                building today.
+                7+ years building software, the last four on enterprise SaaS at Nextiva. I own each feature end to end: I design it, test it, roll it out behind a feature flag, and watch how it behaves in production. I use Claude Code every day to move faster, without making the code harder to maintain.
               </p>
 
               <div class="stat-strip hero-anim" style="animation-delay: 0.78s">
@@ -1442,11 +1478,11 @@
                 </div>
                 <div class="stat-chip">
                   <p class="num">100K+</p>
-                  <p class="lbl" data-en="businesses on platforms I built" data-es="negocios en plataformas que constru&iacute;">businesses on platforms I built</p>
+                  <p class="lbl" data-en="businesses on products I helped build" data-es="negocios en productos que ayud&eacute; a construir">businesses on products I helped build</p>
                 </div>
                 <div class="stat-chip">
-                  <p class="num">2026</p>
-                  <p class="lbl" data-en="founded CIMBRA" data-es="fund&eacute; CIMBRA">founded CIMBRA</p>
+                  <p class="num">2.2s</p>
+                  <p class="lbl" data-en="LCP, down from 3.4s" data-es="de LCP, antes 3.4s">LCP, down from 3.4s</p>
                 </div>
               </div>
 
@@ -1455,7 +1491,7 @@
                   href="#experience"
                   class="inline-flex items-center gap-2 bg-accent text-white font-display font-bold text-sm px-6 py-3 rounded-full hover:bg-indigo-700 transition-all hover:-translate-y-0.5"
                 >
-                  <span data-en="See my journey" data-es="Ver mi trayectoria">See my journey</span>
+                  <span data-en="See my experience" data-es="Ver mi experiencia">See my experience</span>
                   <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <line x1="5" y1="12" x2="19" y2="12" />
                     <polyline points="12 5 19 12 12 19" />
@@ -1472,7 +1508,7 @@
 
             <div class="hero-portrait hero-anim" style="animation-delay: 0.35s">
               <img src="images/avatar-brenda.jpg" alt="Brenda Flores" width="230" height="290" />
-              <span class="hp-tag" data-en="Quer&eacute;taro, M&eacute;xico" data-es="Quer&eacute;taro, M&eacute;xico">Querétaro, México</span>
+              <span class="hp-tag" data-en="Quer&eacute;taro, MX &middot; Remote" data-es="Quer&eacute;taro, MX &middot; Remoto">Querétaro, MX · Remote</span>
             </div>
           </div>
         </div>
@@ -1492,45 +1528,77 @@
           <p class="sec-num reveal">02</p>
           <h2
             class="font-display text-4xl font-bold text-ink mb-3 reveal"
-            data-en="My journey"
-            data-es="Mi trayectoria"
+            data-en="Experience"
+            data-es="Experiencia"
           >
-            My journey
+            Experience
           </h2>
           <p
             class="text-muted mb-2 reveal max-w-2xl"
-            data-en="From intern to founder, six roles and seven years. The freelance work ran in parallel with every full-time role below it."
-            data-es="De practicante a fundadora, seis roles y siete a&ntilde;os. El trabajo independiente corri&oacute; en paralelo a cada puesto de tiempo completo de abajo."
+            data-en="Seven years, from intern to senior frontend engineer. Alongside every full-time job, I've also taken on freelance projects for small businesses."
+            data-es="Siete a&ntilde;os, de practicante a senior frontend engineer. Adem&aacute;s, en paralelo a cada empleo, siempre he tenido proyectos freelance con negocios m&aacute;s chicos."
           >
-            From intern to founder, six roles and seven years. The freelance
-            work ran in parallel with every full-time role below it.
+            Seven years, from intern to senior frontend engineer. Alongside every full-time job, I've also taken on freelance projects for small businesses.
           </p>
 
           <div class="timeline" id="timeline">
             <div class="tl-track"></div>
             <div class="tl-fill" id="tl-fill"></div>
 
-            <!-- CIMBRA -->
+            <!-- Centrixa -->
             <div class="tl-item">
               <div class="tl-dot"></div>
               <div class="tl-when">
-                <span data-en="September 2026 - Present" data-es="Septiembre 2026 - Presente">September 2026 - Present</span>
+                <span data-en="June 2026 - Present" data-es="Junio 2026 - Presente">June 2026 - Present</span>
                 <span class="tl-badge now" data-en="Current" data-es="Actual">Current</span>
               </div>
               <h3 class="tl-role">
-                <span data-en="Founder" data-es="Fundadora">Founder</span>
-                &middot; <span class="co">CIMBRA Tech</span>
+                <span data-en="Full-Stack Engineer &amp; Co-Founder" data-es="Full-Stack Engineer y Cofundadora">Full-Stack Engineer &amp; Co-Founder</span>
+                &middot; <span class="co">Centrixa</span>
               </h3>
               <ul class="tl-bullets">
-                <li data-en="I design and build custom software, automations and AI solutions for small and mid-sized businesses in Mexico." data-es="Dise&ntilde;o e implemento software a la medida, automatizaciones y soluciones de IA para peque&ntilde;as y medianas empresas en M&eacute;xico.">I design and build custom software, automations and AI solutions for small and mid-sized businesses in Mexico.</li>
-                <li data-en="I build chatbots and AI agents for customer service, sales and operations, integrated with WhatsApp and the tools clients already use." data-es="Desarrollo chatbots y agentes de IA para atenci&oacute;n, ventas y operaciones, integrados con WhatsApp y las herramientas que el cliente ya usa.">I build chatbots and AI agents for customer service, sales and operations, integrated with WhatsApp and the tools clients already use.</li>
-                <li data-en="I lead the full process with every client: operations diagnosis, solution design, development, and measuring results after launch." data-es="Lidero el proceso completo con cada cliente: diagn&oacute;stico de la operaci&oacute;n, dise&ntilde;o de la soluci&oacute;n, desarrollo y medici&oacute;n de resultados.">I lead the full process with every client: operations diagnosis, solution design, development, and measuring results after launch.</li>
+                <li data-en="Designed and built the full stack of a multi-tenant SaaS for auto body shops: React and TypeScript frontend, NestJS API and PostgreSQL, in a Turborepo monorepo." data-es="Dise&ntilde;&eacute; y constru&iacute; todo el stack de un SaaS multi-tenant para talleres de hojalater&iacute;a y pintura: frontend en React y TypeScript, API en NestJS y PostgreSQL, en un monorepo con Turborepo.">Designed and built the full stack of a multi-tenant SaaS for auto body shops: React and TypeScript frontend, NestJS API and PostgreSQL, in a Turborepo monorepo.</li>
+                <li data-en="Kept each customer's data isolated with PostgreSQL Row-Level Security, and added RBAC, JWT authentication and a UI that only shows each user what their role allows." data-es="Separ&eacute; los datos de cada cliente con Row-Level Security de PostgreSQL, y agregu&eacute; roles y permisos (RBAC), login con JWT y una interfaz que le muestra a cada usuario solo lo que su rol le permite.">Kept each customer's data isolated with PostgreSQL Row-Level Security, and added RBAC, JWT authentication and a UI that only shows each user what their role allows.</li>
+                <li data-en="Built the development workflow around Claude Code (MCP servers, six agents, custom skills), with CI/CD on GitHub Actions." data-es="Organic&eacute; el desarrollo alrededor de Claude Code (servidores MCP, seis agentes y skills propias), con CI/CD en GitHub Actions.">Built the development workflow around Claude Code (MCP servers, six agents, custom skills), with CI/CD on GitHub Actions.</li>
               </ul>
               <div class="tl-tags">
-                <span class="tag-chip">IA &amp; agentes</span>
-                <span class="tag-chip">Automatizaci&oacute;n</span>
-                <span class="tag-chip">WhatsApp API</span>
-                <span class="tag-chip" data-en="Leadership" data-es="Liderazgo">Leadership</span>
+                <span class="tag-chip">React</span>
+                <span class="tag-chip">TypeScript</span>
+                <span class="tag-chip">NestJS</span>
+                <span class="tag-chip">PostgreSQL</span>
+                <span class="tag-chip">Turborepo</span>
+                <span class="tag-chip">Claude Code &amp; MCP</span>
+              </div>
+            </div>
+
+            <!-- Nextiva -->
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-when">
+                <span data-en="April 2022 - April 2026 (4 yrs 1 mo)" data-es="Abril 2022 - Abril 2026 (4 a&ntilde;os 1 mes)">April 2022 - April 2026 (4 yrs 1 mo)</span>
+              </div>
+              <h3 class="tl-role">
+                Frontend Engineer &middot; <span class="co">Nextiva</span>
+              </h3>
+              <ul class="tl-bullets">
+                <li data-en="When Nextiva moved to subscription packages, I led the architecture of the entitlements system that decides which features each customer sees based on their plan: a reusable React Query hook plus feature flags, used across nearly every module." data-es="Cuando Nextiva pas&oacute; a vender por paquetes de suscripci&oacute;n, lider&eacute; la arquitectura del sistema de entitlements, el que decide qu&eacute; funciones ve cada cliente seg&uacute;n su plan: un hook reutilizable con React Query y feature flags, usado en casi todos los m&oacute;dulos.">When Nextiva moved to subscription packages, I led the architecture of the entitlements system that decides which features each customer sees based on their plan: a reusable React Query hook plus feature flags, used across nearly every module.</li>
+                <li data-en="On list-heavy views, cut LCP from 3.4s to 2.2s and INP from 400ms to 180ms (measured with Lighthouse) using lazy loading, code splitting, virtualization and memoization." data-es="En las vistas con listas largas baj&eacute; el LCP de 3.4s a 2.2s y el INP de 400ms a 180ms (medido con Lighthouse), usando lazy loading, code splitting, virtualizaci&oacute;n y memoizaci&oacute;n.">On list-heavy views, cut LCP from 3.4s to 2.2s and INP from 400ms to 180ms (measured with Lighthouse) using lazy loading, code splitting, virtualization and memoization.</li>
+                <li data-en="Coordinated production releases with Statsig feature flags, rolling out gradually and rolling back fast when something broke. When critical incidents hit, I handled them and found the root cause with Datadog." data-es="Coordin&eacute; las salidas a producci&oacute;n con feature flags de Statsig: liberar poco a poco y regresar r&aacute;pido si algo fallaba. Cuando hubo incidentes cr&iacute;ticos, los atend&iacute; y encontr&eacute; la causa con Datadog.">Coordinated production releases with Statsig feature flags, rolling out gradually and rolling back fast when something broke. When critical incidents hit, I handled them and found the root cause with Datadog.</li>
+                <li data-en="Took over QA for my team: manual testing across browsers, plus automated tests with Jest and Playwright." data-es="Me hice cargo del QA de mi equipo: pruebas manuales en distintos navegadores y pruebas automatizadas con Jest y Playwright.">Took over QA for my team: manual testing across browsers, plus automated tests with Jest and Playwright.</li>
+                <li data-en="Used Claude and GitHub Copilot for PR reviews, test generation and scaffolding, and reviewed everything they generated before it went in." data-es="Us&eacute; Claude y GitHub Copilot para revisar PRs, generar pruebas y armar la estructura inicial del c&oacute;digo, y revis&eacute; todo lo que generaban antes de integrarlo.">Used Claude and GitHub Copilot for PR reviews, test generation and scaffolding, and reviewed everything they generated before it went in.</li>
+                <li data-en="When Nextiva acquired Simplify360 and its Angular codebase, I migrated 10+ modules into React packages in a pnpm monorepo, keeping both working together." data-es="Cuando Nextiva compr&oacute; Simplify360 lleg&oacute; con su c&oacute;digo en Angular; migr&eacute; 10+ m&oacute;dulos a paquetes de React en un monorepo con pnpm, sin romper la compatibilidad entre los dos.">When Nextiva acquired Simplify360 and its Angular codebase, I migrated 10+ modules into React packages in a pnpm monorepo, keeping both working together.</li>
+                <li data-en="Built accessible components (ARIA) from Figma designs for Sedona, Nextiva's component library. I also defined API contracts with backend engineers and mentored junior engineers through code reviews." data-es="Constru&iacute; componentes accesibles (ARIA) a partir de los dise&ntilde;os en Figma para Sedona, la librer&iacute;a de componentes de Nextiva. Tambi&eacute;n defin&iacute; contratos de API con backend y acompa&ntilde;&eacute; a ingenieros junior en sus code reviews.">Built accessible components (ARIA) from Figma designs for Sedona, Nextiva's component library. I also defined API contracts with backend engineers and mentored junior engineers through code reviews.</li>
+              </ul>
+              <div class="tl-tags">
+                <span class="tag-chip">React</span>
+                <span class="tag-chip">TypeScript</span>
+                <span class="tag-chip">React Query</span>
+                <span class="tag-chip">Redux</span>
+                <span class="tag-chip">Microfrontends</span>
+                <span class="tag-chip">Jest</span>
+                <span class="tag-chip">Playwright</span>
+                <span class="tag-chip">Statsig</span>
+                <span class="tag-chip">Datadog</span>
               </div>
             </div>
 
@@ -1546,38 +1614,17 @@
                 &middot; <span class="co" data-en="Freelance" data-es="Freelance">Freelance</span>
               </h3>
               <ul class="tl-bullets">
-                <li data-en="Built a full operations platform for an auto-service business, taking ~90% of its manual processes digital: the CTIASP case below." data-es="Constru&iacute; una plataforma completa de operaciones para un negocio de servicios automotrices, llevando ~90% de sus procesos manuales a digital: el caso CTIASP de abajo.">Built a full operations platform for an auto-service business, taking ~90% of its manual processes digital: the CTIASP case below.</li>
-                <li data-en="Integrated 7+ insurance companies and WhatsApp/SMS notifications, improving team productivity by 22%." data-es="Integr&eacute; m&aacute;s de 7 aseguradoras y notificaciones por WhatsApp/SMS, mejorando la productividad del equipo en un 22%.">Integrated 7+ insurance companies and WhatsApp/SMS notifications, improving team productivity by 22%.</li>
-                <li data-en="Built an e-commerce platform with 300+ products, payments and role-based permissions: the Fastener case below." data-es="Constru&iacute; una tienda en l&iacute;nea con 300+ productos, pagos y permisos por rol: el caso Fastener de abajo.">Built an e-commerce platform with 300+ products, payments and role-based permissions: the Fastener case below.</li>
-              </ul>
-              <div class="tl-tags">
-                <span class="tag-chip">React</span>
-                <span class="tag-chip">Node.js</span>
-                <span class="tag-chip">PostgreSQL</span>
-                <span class="tag-chip" data-en="Integrations" data-es="Integraciones">Integrations</span>
-              </div>
-            </div>
-
-            <!-- Nextiva -->
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-when">
-                <span data-en="April 2022 - April 2026 (4 yrs 1 mo)" data-es="Abril 2022 - Abril 2026 (4 a&ntilde;os 1 mes)">April 2022 - April 2026 (4 yrs 1 mo)</span>
-              </div>
-              <h3 class="tl-role">
-                Frontend Engineer &middot; <span class="co">Nextiva</span>
-              </h3>
-              <ul class="tl-bullets">
-                <li data-en="Led architecture and scalability of features built with React and TypeScript across NextivaONE and NCX, used daily by thousands of agents." data-es="Lider&eacute; la arquitectura y escalabilidad de funcionalidades en React y TypeScript en NextivaONE y NCX, usadas a diario por miles de agentes.">Led architecture and scalability of features built with React and TypeScript across NextivaONE and NCX, used daily by thousands of agents.</li>
-                <li data-en="Designed the entitlements system that gated features by subscription plan for a new packaged pricing model." data-es="Dise&ntilde;&eacute; el sistema de entitlements para el cambio a un modelo de suscripci&oacute;n por paquetes.">Designed the entitlements system that gated features by subscription plan for a new packaged pricing model.</li>
-                <li data-en="Migrated modules into a new React package structure inside a monorepo without breaking compatibility with an existing Angular codebase." data-es="Migr&eacute; m&oacute;dulos a una nueva estructura de paquetes de React dentro de un monorepo, sin romper compatibilidad con Angular.">Migrated modules into a new React package structure inside a monorepo without breaking compatibility with an existing Angular codebase.</li>
+                <li data-en="Built CTIASP, an operations platform for an auto repair shop: ~90% of manual processes went digital, and the shop now handles twice the volume with the same back-office team." data-es="Constru&iacute; CTIASP, una plataforma de operaciones para un taller mec&aacute;nico: ~90% de los procesos manuales pasaron a digital, y hoy el taller maneja el doble de volumen con la misma gente en administraci&oacute;n.">Built CTIASP, an operations platform for an auto repair shop: ~90% of manual processes went digital, and the shop now handles twice the volume with the same back-office team.</li>
+                <li data-en="Connected the system to 7+ insurance companies and added WhatsApp and SMS notifications; team productivity went up 22%." data-es="Conect&eacute; el sistema con m&aacute;s de 7 aseguradoras y agregu&eacute; avisos por WhatsApp y SMS; la productividad del equipo subi&oacute; 22%.">Connected the system to 7+ insurance companies and added WhatsApp and SMS notifications; team productivity went up 22%.</li>
+                <li data-en="Built Fastener, a B2B e-commerce platform with 300+ products on React, TypeScript and AWS (Amplify, AppSync/GraphQL, Cognito, Lambda), with Stripe payments and per-user pricing." data-es="Constru&iacute; Fastener, un e-commerce B2B con 300+ productos en React, TypeScript y AWS (Amplify, AppSync/GraphQL, Cognito, Lambda), con pagos en Stripe y precios por usuario.">Built Fastener, a B2B e-commerce platform with 300+ products on React, TypeScript and AWS (Amplify, AppSync/GraphQL, Cognito, Lambda), with Stripe payments and per-user pricing.</li>
               </ul>
               <div class="tl-tags">
                 <span class="tag-chip">React</span>
                 <span class="tag-chip">TypeScript</span>
-                <span class="tag-chip">Redux</span>
-                <span class="tag-chip">Monorepo</span>
-                <span class="tag-chip">SSO</span>
+                <span class="tag-chip">Node.js</span>
+                <span class="tag-chip">PostgreSQL</span>
+                <span class="tag-chip">AWS</span>
+                <span class="tag-chip">Stripe</span>
               </div>
             </div>
 
@@ -1592,7 +1639,7 @@
               </h3>
               <ul class="tl-bullets">
                 <li data-en="Built internal frontend systems with React and TypeScript inside distributed Agile teams." data-es="Desarroll&eacute; sistemas frontend internos con React y TypeScript en equipos &aacute;giles distribuidos.">Built internal frontend systems with React and TypeScript inside distributed Agile teams.</li>
-                <li data-en="Pushed a scalable component architecture with a focus on accessibility." data-es="Promov&iacute; una arquitectura de componentes escalable con foco en accesibilidad.">Pushed a scalable component architecture with a focus on accessibility.</li>
+                <li data-en="Promoted a scalable, accessible component architecture." data-es="Impuls&eacute; una arquitectura de componentes escalable y accesible.">Promoted a scalable, accessible component architecture.</li>
               </ul>
               <div class="tl-tags">
                 <span class="tag-chip">React</span>
@@ -1612,9 +1659,9 @@
                 &middot; <span class="co">Natgas M&eacute;xico</span>
               </h3>
               <ul class="tl-bullets">
-                <li data-en="Integrated the FICO API for real-time credit bureau checks, cutting manual validation time by 93%." data-es="Integr&eacute; la API de FICO para consultas en tiempo real al buro de cr&eacute;dito, reduciendo en un 93% el tiempo de validaci&oacute;n manual.">Integrated the FICO API for real-time credit bureau checks, cutting manual validation time by 93%.</li>
-                <li data-en="Designed PostgreSQL schemas, built migrations, and had direct access to the production database." data-es="Dise&ntilde;&eacute; esquemas de PostgreSQL, desarroll&eacute; migraciones y tuve acceso directo a la base de datos de producci&oacute;n.">Designed PostgreSQL schemas, built migrations, and had direct access to the production database.</li>
-                <li data-en="Acted as Product Owner on both products, translating business and compliance requirements into shippable features." data-es="Actu&eacute; como Product Owner en ambos productos, traduciendo requerimientos de negocio y cumplimiento normativo en funcionalidades.">Acted as Product Owner on both products, translating business and compliance requirements into shippable features.</li>
+                <li data-en="Integrated the FICO API for real-time credit bureau checks, cutting manual validation time by 93%." data-es="Integr&eacute; la API de FICO para consultar el bur&oacute; de cr&eacute;dito en tiempo real, y el tiempo de validaci&oacute;n manual baj&oacute; 93%.">Integrated the FICO API for real-time credit bureau checks, cutting manual validation time by 93%.</li>
+                <li data-en="Built Angular frontends and Node.js GraphQL resolvers for two fintech platforms, and designed their PostgreSQL schemas and migrations." data-es="Constru&iacute; frontends en Angular y resolvers de GraphQL en Node.js para dos plataformas fintech, y dise&ntilde;&eacute; sus esquemas y migraciones de PostgreSQL.">Built Angular frontends and Node.js GraphQL resolvers for two fintech platforms, and designed their PostgreSQL schemas and migrations.</li>
+                <li data-en="Also served as Product Owner for both products, turning business and compliance requirements into features ready to build." data-es="Tambi&eacute;n fui Product Owner de los dos productos: convert&iacute;a requerimientos de negocio y de cumplimiento normativo en funcionalidades listas para desarrollar.">Also served as Product Owner for both products, turning business and compliance requirements into features ready to build.</li>
               </ul>
               <div class="tl-tags">
                 <span class="tag-chip">Angular</span>
@@ -1659,202 +1706,15 @@
           </h2>
           <p
             class="text-muted mb-2 reveal max-w-2xl"
-            data-en="Two client platforms I built from the ground up as a freelancer, and two enterprise products I helped build at Nextiva. Every screenshot below is the real product."
-            data-es="Dos plataformas de cliente que constru&iacute; desde cero como freelance, y dos productos empresariales en los que trabaj&eacute; en Nextiva. Cada captura de abajo es del producto real."
+            data-en="Two enterprise products I helped build at Nextiva, and two client platforms I built from the ground up as a freelancer. Every screenshot below is the real product."
+            data-es="Dos productos empresariales en los que trabaj&eacute; en Nextiva, y dos plataformas de cliente que constru&iacute; desde cero como freelance. Cada captura de abajo es del producto real."
           >
-            Two client platforms I built from the ground up as a freelancer,
-            and two enterprise products I helped build at Nextiva. Every
+            Two enterprise products I helped build at Nextiva, and two client
+            platforms I built from the ground up as a freelancer. Every
             screenshot below is the real product.
           </p>
 
           <div class="case-list reveal">
-            <!-- ═══ CTIASP ═══ -->
-            <details class="case-card" id="case-ctiasp">
-              <summary>
-                <div class="cc-top">
-                  <span class="cc-tag" data-en="Auto repair shop &middot; Freelance" data-es="Taller mec&aacute;nico &middot; Freelance">Auto repair shop · Freelance</span>
-                  <span class="cc-client">CTIASP</span>
-                </div>
-                <p class="cc-hero">
-                  <b>2x</b>
-                  <span data-en="the volume, peaking at 300+ cars a month, with the same back-office team" data-es="el volumen, con picos de 300+ autos al mes, con la misma gente en administraci&oacute;n">the volume, peaking at 300+ cars a month, with the same back-office team</span>
-                </p>
-                <div class="cc-minis">
-                  <span class="cc-mini">
-                    <b>30 s</b>
-                    <span data-en="to pull a customer file. It used to take a week" data-es="para encontrar un expediente. Antes, una semana">to pull a customer file. It used to take a week</span>
-                  </span>
-                  <span class="cc-mini">
-                    <b>8 h</b>
-                    <span data-en="less per week: the status meeting is opened, not prepared" data-es="menos por semana: la junta de estatus se abre, no se prepara">less per week: the status meeting is opened, not prepared</span>
-                  </span>
-                </div>
-                <span class="cc-more">
-                  <span class="cc-more-open" data-en="See the detail" data-es="Ver detalle">See the detail</span>
-                  <span class="cc-more-close" data-en="Close" data-es="Cerrar">Close</span>
-                </span>
-              </summary>
-              <div class="cc-body">
-                <details class="case-shots">
-                  <summary data-en="See the system itself, 3 screenshots" data-es="Ver el sistema por dentro, 3 capturas">See the system itself, 3 screenshots</summary>
-                  <div class="carousel" data-carousel>
-                    <div class="browser-frame">
-                      <div class="browser-bar">
-                        <div class="browser-dot bg-red-400"></div>
-                        <div class="browser-dot bg-yellow-400"></div>
-                        <div class="browser-dot bg-green-400"></div>
-                        <div class="browser-url"></div>
-                      </div>
-                      <div class="carousel-track-wrap">
-                        <div class="carousel-track">
-                          <div class="carousel-slide"><img src="images/CTIASP.1.png" alt="CTIASP admin dashboard showing customer vehicle records" loading="lazy" /></div>
-                          <div class="carousel-slide"><img src="images/CTIASP.2.png" alt="CTIASP work order status view" loading="lazy" /></div>
-                          <div class="carousel-slide"><img src="images/CTIASP.3.png" alt="CTIASP customer lookup by work order number" loading="lazy" /></div>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="carousel-btn prev" aria-label="Previous">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6" /></svg>
-                    </button>
-                    <button class="carousel-btn next" aria-label="Next">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>
-                    </button>
-                    <div class="carousel-dots">
-                      <div class="carousel-dot active"></div>
-                      <div class="carousel-dot"></div>
-                      <div class="carousel-dot"></div>
-                    </div>
-                  </div>
-                </details>
-
-                <div class="role-blocks">
-                  <div>
-                    <span class="case-label" data-en="Where they started" data-es="C&oacute;mo estaba">Where they started</span>
-                    <p class="text-ink leading-relaxed text-sm mb-5" data-en="An auto repair shop already at its limit with 100 cars a month. Customer files lived in boxes in a back room, and every new car made searching for all the previous ones slower." data-es="Un taller mec&aacute;nico que con 100 autos al mes ya estaba al l&iacute;mite. Los expedientes viv&iacute;an en cajas en un cuarto, y cada coche que entraba hac&iacute;a m&aacute;s lenta la b&uacute;squeda de todos los anteriores.">An auto repair shop already at its limit with 100 cars a month. Customer files lived in boxes in a back room, and every new car made searching for all the previous ones slower.</p>
-                    <span class="case-label" data-en="What I found" data-es="Qu&eacute; encontr&eacute;">What I found</span>
-                    <p class="text-ink leading-relaxed text-sm" data-en="I sat down separately with the appraiser, the service advisor and both owners. Each described a different process. The map ended up as sheets of paper taped to a wall, and that is where it became clear their growth ceiling was not the shop floor: it was the filing system." data-es="Me sent&eacute; por separado con el valuador, con el asesor de servicio y con los dos due&ntilde;os. Cada quien describi&oacute; un proceso distinto. El mapa acab&oacute; siendo papeles pegados en una pared, y ah&iacute; qued&oacute; claro que su techo de crecimiento no era el taller: era el archivero.">I sat down separately with the appraiser, the service advisor and both owners. Each described a different process. The map ended up as sheets of paper taped to a wall, and that is where it became clear their growth ceiling was not the shop floor: it was the filing system.</p>
-                  </div>
-                  <div>
-                    <span class="case-label" data-en="What I built" data-es="Qu&eacute; constru&iacute;">What I built</span>
-                    <p class="text-ink leading-relaxed text-sm" data-en="Phased, starting where it hurt most: internal processes first, then customer communication, then positioning. Status updates now go out on their own, customers look their car up with their work order number, and the weekly meeting runs off live KPIs." data-es="Por fases, empezando por donde m&aacute;s dol&iacute;a: primero los procesos internos, despu&eacute;s la comunicaci&oacute;n con el cliente, despu&eacute;s posicionamiento. Hoy los avisos salen solos, el cliente consulta su auto con su n&uacute;mero de orden, y la junta semanal corre sobre KPIs en vivo.">Phased, starting where it hurt most: internal processes first, then customer communication, then positioning. Status updates now go out on their own, customers look their car up with their work order number, and the weekly meeting runs off live KPIs.</p>
-                    <p class="text-ink leading-relaxed text-sm mt-4" data-en="With the operation in order, they went on to secure 7+ insurance company partnerships, which is where the extra volume came from." data-es="Con la operaci&oacute;n en orden, siguieron firmando 7+ convenios con aseguradoras, que es de donde sali&oacute; el volumen extra.">With the operation in order, they went on to secure 7+ insurance company partnerships, which is where the extra volume came from.</p>
-                  </div>
-                </div>
-
-                <div class="case-flow">
-                  <div class="flow-row before">
-                    <span class="flow-when" data-en="Before" data-es="Antes">Before</span>
-                    <div class="flow-steps">
-                      <span class="fstep" data-en="Customer asks about their car" data-es="El cliente pregunta por su auto">Customer asks about their car</span>
-                      <span class="fstep" data-en="Advisor walks to the file room" data-es="El asesor va al cuarto de expedientes">Advisor walks to the file room</span>
-                      <span class="fstep" data-en="Digs through boxes" data-es="Busca entre las cajas">Digs through boxes</span>
-                      <span class="fstep end" data-en="Up to a week" data-es="Hasta una semana">Up to a week</span>
-                    </div>
-                  </div>
-                  <div class="flow-row after">
-                    <span class="flow-when" data-en="Today" data-es="Hoy">Today</span>
-                    <div class="flow-steps">
-                      <span class="fstep" data-en="Customer enters their work order number" data-es="El cliente entra con su n&uacute;mero de orden">Customer enters their work order number</span>
-                      <span class="fstep end" data-en="30 seconds" data-es="30 segundos">30 seconds</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </details>
-
-            <!-- ═══ FASTENER ═══ -->
-            <details class="case-card" id="case-fastener">
-              <summary>
-                <div class="cc-top">
-                  <span class="cc-tag" data-en="Wholesale distributor &middot; Freelance" data-es="Distribuidor mayorista &middot; Freelance">Wholesale distributor · Freelance</span>
-                  <span class="cc-client">Fastener Autopartes</span>
-                </div>
-                <p class="cc-hero">
-                  <b data-en="1 in 7" data-es="1 de 7">1 in 7</b>
-                  <span data-en="orders now comes in with the office closed, with nobody attending" data-es="pedidos entra hoy con la oficina cerrada, sin que nadie atienda">orders now comes in with the office closed, with nobody attending</span>
-                </p>
-                <div class="cc-minis">
-                  <span class="cc-mini">
-                    <b>300+</b>
-                    <span data-en="products customers look up and buy on their own" data-es="productos que el cliente consulta y compra solo">products customers look up and buy on their own</span>
-                  </span>
-                  <span class="cc-mini">
-                    <b>100%</b>
-                    <span data-en="remote: I never set foot in the place" data-es="remoto: nunca pis&eacute; el lugar">remote: I never set foot in the place</span>
-                  </span>
-                </div>
-                <span class="cc-more">
-                  <span class="cc-more-open" data-en="See the detail" data-es="Ver detalle">See the detail</span>
-                  <span class="cc-more-close" data-en="Close" data-es="Cerrar">Close</span>
-                </span>
-              </summary>
-              <div class="cc-body">
-                <details class="case-shots">
-                  <summary data-en="See the system itself, 3 screenshots" data-es="Ver el sistema por dentro, 3 capturas">See the system itself, 3 screenshots</summary>
-                  <div class="carousel" data-carousel>
-                    <div class="browser-frame">
-                      <div class="browser-bar">
-                        <div class="browser-dot bg-red-400"></div>
-                        <div class="browser-dot bg-yellow-400"></div>
-                        <div class="browser-dot bg-green-400"></div>
-                        <div class="browser-url"></div>
-                      </div>
-                      <div class="carousel-track-wrap">
-                        <div class="carousel-track">
-                          <div class="carousel-slide"><img src="images/Fastener.1.png" alt="Fastener Autopartes online catalog with 300+ products" loading="lazy" /></div>
-                          <div class="carousel-slide"><img src="images/Fastener.2.png" alt="Fastener Autopartes checkout and role-based pricing" loading="lazy" /></div>
-                          <div class="carousel-slide"><img src="images/Fastener.3.png" alt="Fastener Autopartes order tracking screen" loading="lazy" /></div>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="carousel-btn prev" aria-label="Previous">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6" /></svg>
-                    </button>
-                    <button class="carousel-btn next" aria-label="Next">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>
-                    </button>
-                    <div class="carousel-dots">
-                      <div class="carousel-dot active"></div>
-                      <div class="carousel-dot"></div>
-                      <div class="carousel-dot"></div>
-                    </div>
-                  </div>
-                </details>
-
-                <div class="role-blocks">
-                  <div>
-                    <span class="case-label" data-en="Where they started" data-es="C&oacute;mo estaba">Where they started</span>
-                    <p class="text-ink leading-relaxed text-sm mb-5" data-en="More than 300 products, no online ordering channel, and pricing and stock tracked outside any real system. Every quote went through one person. I never set foot there: the whole assessment ran over calls and screen shares." data-es="M&aacute;s de 300 productos, sin canal de pedidos en l&iacute;nea, y precios e inventario fuera de cualquier sistema. Cada cotizaci&oacute;n pasaba por una sola persona. Nunca pis&eacute; el lugar: todo el levantamiento fue por llamada y pantalla compartida.">More than 300 products, no online ordering channel, and pricing and stock tracked outside any real system. Every quote went through one person. I never set foot there: the whole assessment ran over calls and screen shares.</p>
-                    <span class="case-label" data-en="What I found" data-es="Qu&eacute; encontr&eacute;">What I found</span>
-                    <p class="text-ink leading-relaxed text-sm" data-en="They had no control over their parts. Every question about a measurement or stock sent someone walking to the warehouse. The information existed, but only inside the object itself." data-es="No ten&iacute;an control de las piezas. Cada pregunta por una medida o por existencia mandaba a alguien a la bodega. La informaci&oacute;n exist&iacute;a, pero solo dentro del objeto.">They had no control over their parts. Every question about a measurement or stock sent someone walking to the warehouse. The information existed, but only inside the object itself.</p>
-                  </div>
-                  <div>
-                    <span class="case-label" data-en="What I built" data-es="Qu&eacute; constru&iacute;">What I built</span>
-                    <p class="text-ink leading-relaxed text-sm" data-en="In stages. First the storefront for their customers, with per-user pricing and permissions. Then the internal system: catalog, orders and online payments." data-es="Por partes. Primero la tienda para sus clientes, con precios y permisos por usuario. Despu&eacute;s el sistema interno: cat&aacute;logo, pedidos y cobro en l&iacute;nea.">In stages. First the storefront for their customers, with per-user pricing and permissions. Then the internal system: catalog, orders and online payments.</p>
-                  </div>
-                </div>
-
-                <div class="case-flow">
-                  <div class="flow-row before">
-                    <span class="flow-when" data-en="Before" data-es="Antes">Before</span>
-                    <div class="flow-steps">
-                      <span class="fstep" data-en="Customer asks for a measurement" data-es="El cliente pregunta por una medida">Customer asks for a measurement</span>
-                      <span class="fstep" data-en="Someone walks to the warehouse" data-es="Alguien va a la bodega">Someone walks to the warehouse</span>
-                      <span class="fstep" data-en="Measures the part by hand" data-es="Mide la pieza a mano">Measures the part by hand</span>
-                      <span class="fstep end" data-en="Comes back and answers" data-es="Regresa y contesta">Comes back and answers</span>
-                    </div>
-                  </div>
-                  <div class="flow-row after">
-                    <span class="flow-when" data-en="Today" data-es="Hoy">Today</span>
-                    <div class="flow-steps">
-                      <span class="fstep" data-en="Customer looks it up in the catalog" data-es="El cliente lo consulta en el cat&aacute;logo">Customer looks it up in the catalog</span>
-                      <span class="fstep end" data-en="Buys on their own, any hour" data-es="Compra solo, a cualquier hora">Buys on their own, any hour</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </details>
-
             <!-- ═══ NCX ═══ -->
             <details class="case-card" id="case-ncx">
               <summary>
@@ -1863,8 +1723,8 @@
                   <span class="cc-client">NCX</span>
                 </div>
                 <p class="cc-hero">
-                  <b data-en="New" data-es="Nuevo">New</b>
-                  <span data-en="pricing model, unlocked by the entitlements system I architected" data-es="modelo de precios, posible gracias al sistema de entitlements que dise&ntilde;&eacute;">pricing model, unlocked by the entitlements system I architected</span>
+                  <b>1 hook</b>
+                  <span data-en="decides which features each customer sees by plan, across nearly every module" data-es="decide qu&eacute; funciones ve cada cliente seg&uacute;n su plan, en casi todos los m&oacute;dulos">decides which features each customer sees by plan, across nearly every module</span>
                 </p>
                 <div class="cc-minis">
                   <span class="cc-mini">
@@ -1872,8 +1732,8 @@
                     <span data-en="new passwords: enterprise teams sign in with the login they already have" data-es="contrase&ntilde;as nuevas: los equipos empresariales entran con el inicio de sesi&oacute;n que ya usan">new passwords: enterprise teams sign in with the login they already have</span>
                   </span>
                   <span class="cc-mini">
-                    <b data-en="Self-serve" data-es="Autoservicio">Self-serve</b>
-                    <span data-en="onboarding lets a new customer configure their own tenant" data-es="con onboarding guiado para que un cliente nuevo configure su propio tenant">onboarding lets a new customer configure their own tenant</span>
+                    <b>12 &rarr; 1</b>
+                    <span data-en="configuration pages replaced by one guided onboarding flow" data-es="p&aacute;ginas de configuraci&oacute;n reemplazadas por un solo onboarding guiado">configuration pages replaced by one guided onboarding flow</span>
                   </span>
                 </div>
                 <span class="cc-more">
@@ -1907,9 +1767,9 @@
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>
                     </button>
                     <div class="carousel-dots">
-                      <div class="carousel-dot active"></div>
-                      <div class="carousel-dot"></div>
-                      <div class="carousel-dot"></div>
+                      <button type="button" class="carousel-dot active" aria-label="Slide"></button>
+                      <button type="button" class="carousel-dot" aria-label="Slide"></button>
+                      <button type="button" class="carousel-dot" aria-label="Slide"></button>
                     </div>
                   </div>
                 </details>
@@ -1921,9 +1781,17 @@
                   </div>
                   <div>
                     <span class="case-label" data-en="My contribution" data-es="Mi contribuci&oacute;n">My contribution</span>
-                    <p class="text-ink leading-relaxed text-sm mb-4" data-en="The architecture I designed for the entitlements system is what let Nextiva move its whole pricing to packaged subscription plans: every feature a customer sees is gated by what they're paying for, not hardcoded." data-es="La arquitectura que dise&ntilde;&eacute; para el sistema de entitlements es lo que le permiti&oacute; a Nextiva mover todo su modelo de precios a planes de suscripci&oacute;n por paquetes: cada funcionalidad que ve un cliente est&aacute; controlada por lo que paga, no est&aacute; fija en el c&oacute;digo.">The architecture I designed for the entitlements system is what let Nextiva move its whole pricing to packaged subscription plans: every feature a customer sees is gated by what they're paying for, not hardcoded.</p>
-                    <p class="text-ink leading-relaxed text-sm" data-en="I also built the single sign-on integrations (Azure AD, Google, Okta) so enterprise teams sign in without creating a new password, new views for how agents work day to day, and the guided onboarding that lets a new customer configure their own tenant instead of waiting on someone else to set it up." data-es="Tambi&eacute;n constru&iacute; las integraciones de inicio de sesi&oacute;n &uacute;nico (Azure AD, Google, Okta) para que los equipos empresariales entraran sin crear una contrase&ntilde;a nueva, nuevas vistas para c&oacute;mo trabajan los agentes d&iacute;a a d&iacute;a, y el onboarding guiado que deja a un cliente nuevo configurar su propio tenant sin depender de otro equipo.">I also built the single sign-on integrations (Azure AD, Google, Okta) so enterprise teams sign in without creating a new password, new views for how agents work day to day, and the guided onboarding that lets a new customer configure their own tenant instead of waiting on someone else to set it up.</p>
+                    <p class="text-ink leading-relaxed text-sm mb-4" data-en="I designed the architecture of the entitlements system, which is what let Nextiva move its whole pricing to subscription packages. What each customer sees depends on what they pay for, not on hardcoded checks. Under the hood it's a reusable React Query hook plus feature flags, used across nearly every module." data-es="Dise&ntilde;&eacute; la arquitectura del sistema de entitlements, que fue lo que le permiti&oacute; a Nextiva cambiar todo su modelo de precios a paquetes de suscripci&oacute;n. Lo que ve cada cliente depende de lo que paga, no de reglas escritas a mano en el c&oacute;digo. Por dentro es un hook reutilizable con React Query y feature flags, que se usa en casi todos los m&oacute;dulos.">I designed the architecture of the entitlements system, which is what let Nextiva move its whole pricing to subscription packages. What each customer sees depends on what they pay for, not on hardcoded checks. Under the hood it's a reusable React Query hook plus feature flags, used across nearly every module.</p>
+                    <p class="text-ink leading-relaxed text-sm" data-en="I also built the single sign-on integrations (Azure AD, Google, Okta), so enterprise teams sign in without creating a new password. With product and design, I built the onboarding for new customers: one guided flow, made from reused components, that replaced 12 separate configuration pages." data-es="Tambi&eacute;n constru&iacute; las integraciones de inicio de sesi&oacute;n &uacute;nico (Azure AD, Google, Okta), para que los equipos empresariales entren sin crear una contrase&ntilde;a nueva. Con producto y dise&ntilde;o constru&iacute; el onboarding para clientes nuevos: un solo flujo guiado, hecho con componentes reutilizados, que reemplaz&oacute; 12 p&aacute;ginas de configuraci&oacute;n sueltas.">I also built the single sign-on integrations (Azure AD, Google, Okta), so enterprise teams sign in without creating a new password. With product and design, I built the onboarding for new customers: one guided flow, made from reused components, that replaced 12 separate configuration pages.</p>
                   </div>
+                </div>
+                <div class="tl-tags">
+                  <span class="tag-chip">React</span>
+                  <span class="tag-chip">TypeScript</span>
+                  <span class="tag-chip">React Query</span>
+                  <span class="tag-chip" data-en="Feature flags" data-es="Feature flags">Feature flags</span>
+                  <span class="tag-chip">SSO (Azure AD, Google, Okta)</span>
+                  <span class="tag-chip">pnpm monorepo</span>
                 </div>
               </div>
             </details>
@@ -1979,8 +1847,8 @@
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>
                     </button>
                     <div class="carousel-dots">
-                      <div class="carousel-dot active"></div>
-                      <div class="carousel-dot"></div>
+                      <button type="button" class="carousel-dot active" aria-label="Slide"></button>
+                      <button type="button" class="carousel-dot" aria-label="Slide"></button>
                     </div>
                   </div>
                 </details>
@@ -1992,8 +1860,213 @@
                   </div>
                   <div>
                     <span class="case-label" data-en="My contribution" data-es="Mi contribuci&oacute;n">My contribution</span>
-                    <p class="text-ink leading-relaxed text-sm mb-4" data-en="Real-time messaging is the core of NextivaONE, so when it broke, agents lost the thread of a live conversation with a customer. I found and fixed the reliability issues in that module, rebuilding state management with Redux across several product surfaces in the process." data-es="La mensajer&iacute;a en tiempo real es el coraz&oacute;n de NextivaONE, as&iacute; que cuando fallaba, los agentes perd&iacute;an el hilo de una conversaci&oacute;n en vivo con un cliente. Encontr&eacute; y resolv&iacute; los problemas de estabilidad de ese m&oacute;dulo, reconstruyendo el manejo de estado con Redux en varias superficies del producto.">Real-time messaging is the core of NextivaONE, so when it broke, agents lost the thread of a live conversation with a customer. I found and fixed the reliability issues in that module, rebuilding state management with Redux across several product surfaces in the process.</p>
-                    <p class="text-ink leading-relaxed text-sm" data-en="I also built the mini, compact and large view modes for the inbox, so an agent who needs to scan dozens of conversations and one who needs full context on a single one can each set up their workspace the way that works for them. On top of that, I instrumented Statsig events so the team could see where user behavior data was falling short." data-es="Tambi&eacute;n constru&iacute; las vistas mini, compacta y grande de la bandeja, para que un agente que necesita revisar docenas de conversaciones y otro que necesita todo el contexto de una sola puedan configurar su espacio de trabajo como mejor les funcione. Adem&aacute;s, instrument&eacute; eventos de Statsig para que el equipo pudiera ver d&oacute;nde fallaban los datos de comportamiento de usuario.">I also built the mini, compact and large view modes for the inbox, so an agent who needs to scan dozens of conversations and one who needs full context on a single one can each set up their workspace the way that works for them. On top of that, I instrumented Statsig events so the team could see where user behavior data was falling short.</p>
+                    <p class="text-ink leading-relaxed text-sm mb-4" data-en="Real-time messaging is the core of NextivaONE, so when it broke, agents lost the thread of a live conversation with a customer. I found and fixed the reliability issues in that module, and along the way rebuilt state management with Redux across several parts of the product." data-es="La mensajer&iacute;a en tiempo real es el coraz&oacute;n de NextivaONE, as&iacute; que cuando fallaba, los agentes perd&iacute;an el hilo de una conversaci&oacute;n en vivo con un cliente. Encontr&eacute; y resolv&iacute; los problemas de estabilidad de ese m&oacute;dulo, y en el camino rehice el manejo de estado con Redux en varias partes del producto.">Real-time messaging is the core of NextivaONE, so when it broke, agents lost the thread of a live conversation with a customer. I found and fixed the reliability issues in that module, and along the way rebuilt state management with Redux across several parts of the product.</p>
+                    <p class="text-ink leading-relaxed text-sm" data-en="I also built the mini, compact and large view modes for the inbox, so an agent who needs to scan dozens of conversations and one who needs full context on a single one can each set up their workspace the way that works for them. I also added Statsig events so the team could see where they were missing data on how people used the product." data-es="Tambi&eacute;n constru&iacute; las vistas mini, compacta y grande de la bandeja, para que un agente que necesita revisar docenas de conversaciones y otro que necesita todo el contexto de una sola puedan acomodar su espacio de trabajo como mejor les funcione. Adem&aacute;s, agregu&eacute; eventos de Statsig para que el equipo viera d&oacute;nde le faltaban datos sobre c&oacute;mo se usaba el producto.">I also built the mini, compact and large view modes for the inbox, so an agent who needs to scan dozens of conversations and one who needs full context on a single one can each set up their workspace the way that works for them. I also added Statsig events so the team could see where they were missing data on how people used the product.</p>
+                  </div>
+                </div>
+                <div class="tl-tags">
+                  <span class="tag-chip">React</span>
+                  <span class="tag-chip">TypeScript</span>
+                  <span class="tag-chip">Redux</span>
+                  <span class="tag-chip">Microfrontends</span>
+                  <span class="tag-chip" data-en="Real-time messaging" data-es="Mensajer&iacute;a en tiempo real">Real-time messaging</span>
+                  <span class="tag-chip">Statsig</span>
+                </div>
+              </div>
+            </details>
+
+            <!-- ═══ FASTENER ═══ -->
+            <details class="case-card" id="case-fastener">
+              <summary>
+                <div class="cc-top">
+                  <span class="cc-tag" data-en="Wholesale distributor &middot; Freelance" data-es="Distribuidor mayorista &middot; Freelance">Wholesale distributor · Freelance</span>
+                  <span class="cc-client">Fastener Autopartes</span>
+                </div>
+                <p class="cc-hero">
+                  <b data-en="1 in 7" data-es="1 de 7">1 in 7</b>
+                  <span data-en="orders now arrives after hours, with no one at the office" data-es="pedidos llega hoy fuera de horario, sin nadie en la oficina">orders now arrives after hours, with no one at the office</span>
+                </p>
+                <div class="cc-minis">
+                  <span class="cc-mini">
+                    <b>300+</b>
+                    <span data-en="products customers look up and buy on their own" data-es="productos que el cliente consulta y compra solo">products customers look up and buy on their own</span>
+                  </span>
+                  <span class="cc-mini">
+                    <b>100%</b>
+                    <span data-en="remote: I never set foot in the place" data-es="remoto: nunca pis&eacute; el lugar">remote: I never set foot in the place</span>
+                  </span>
+                </div>
+                <span class="cc-more">
+                  <span class="cc-more-open" data-en="See the detail" data-es="Ver detalle">See the detail</span>
+                  <span class="cc-more-close" data-en="Close" data-es="Cerrar">Close</span>
+                </span>
+              </summary>
+              <div class="cc-body">
+                <details class="case-shots">
+                  <summary data-en="See the system itself, 3 screenshots" data-es="Ver el sistema por dentro, 3 capturas">See the system itself, 3 screenshots</summary>
+                  <div class="carousel" data-carousel>
+                    <div class="browser-frame">
+                      <div class="browser-bar">
+                        <div class="browser-dot bg-red-400"></div>
+                        <div class="browser-dot bg-yellow-400"></div>
+                        <div class="browser-dot bg-green-400"></div>
+                        <div class="browser-url"></div>
+                      </div>
+                      <div class="carousel-track-wrap">
+                        <div class="carousel-track">
+                          <div class="carousel-slide"><img src="images/Fastener.1.png" alt="Fastener Autopartes online catalog with 300+ products" loading="lazy" /></div>
+                          <div class="carousel-slide"><img src="images/Fastener.2.png" alt="Fastener Autopartes checkout and role-based pricing" loading="lazy" /></div>
+                          <div class="carousel-slide"><img src="images/Fastener.3.png" alt="Fastener Autopartes order tracking screen" loading="lazy" /></div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="carousel-btn prev" aria-label="Previous">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6" /></svg>
+                    </button>
+                    <button class="carousel-btn next" aria-label="Next">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>
+                    </button>
+                    <div class="carousel-dots">
+                      <button type="button" class="carousel-dot active" aria-label="Slide"></button>
+                      <button type="button" class="carousel-dot" aria-label="Slide"></button>
+                      <button type="button" class="carousel-dot" aria-label="Slide"></button>
+                    </div>
+                  </div>
+                </details>
+
+                <div class="role-blocks">
+                  <div>
+                    <span class="case-label" data-en="Where they started" data-es="C&oacute;mo estaba">Where they started</span>
+                    <p class="text-ink leading-relaxed text-sm mb-5" data-en="More than 300 products, no online ordering channel, and pricing and stock tracked outside any real system. Every quote went through one person. I never set foot there: the whole assessment ran over calls and screen shares." data-es="M&aacute;s de 300 productos, sin canal de pedidos en l&iacute;nea, y precios e inventario fuera de cualquier sistema. Cada cotizaci&oacute;n pasaba por una sola persona. Nunca pis&eacute; el lugar: todo el levantamiento fue por llamada y pantalla compartida.">More than 300 products, no online ordering channel, and pricing and stock tracked outside any real system. Every quote went through one person. I never set foot there: the whole assessment ran over calls and screen shares.</p>
+                    <span class="case-label" data-en="What I found" data-es="Qu&eacute; encontr&eacute;">What I found</span>
+                    <p class="text-ink leading-relaxed text-sm" data-en="They had no control over their parts. Every question about a measurement or stock sent someone walking to the warehouse. The information existed, but only on the physical part." data-es="No ten&iacute;an control de las piezas. Cada pregunta por una medida o por existencia mandaba a alguien a la bodega. La informaci&oacute;n exist&iacute;a, pero solo en la pieza f&iacute;sica.">They had no control over their parts. Every question about a measurement or stock sent someone walking to the warehouse. The information existed, but only on the physical part.</p>
+                  </div>
+                  <div>
+                    <span class="case-label" data-en="What I built" data-es="Qu&eacute; constru&iacute;">What I built</span>
+                    <p class="text-ink leading-relaxed text-sm" data-en="In stages. First the storefront for their customers, with per-user pricing and permissions. Then the internal system: catalog, orders and online payments." data-es="Por partes. Primero la tienda para sus clientes, con precios y permisos por usuario. Despu&eacute;s el sistema interno: cat&aacute;logo, pedidos y cobro en l&iacute;nea.">In stages. First the storefront for their customers, with per-user pricing and permissions. Then the internal system: catalog, orders and online payments.</p>
+                  </div>
+                </div>
+                <div class="tl-tags">
+                  <span class="tag-chip">React</span>
+                  <span class="tag-chip">TypeScript</span>
+                  <span class="tag-chip">AWS Amplify</span>
+                  <span class="tag-chip">AppSync / GraphQL</span>
+                  <span class="tag-chip">Cognito</span>
+                  <span class="tag-chip">Lambda</span>
+                  <span class="tag-chip">Stripe</span>
+                  <span class="tag-chip">Lighthouse</span>
+                </div>
+
+                <div class="case-flow">
+                  <div class="flow-row before">
+                    <span class="flow-when" data-en="Before" data-es="Antes">Before</span>
+                    <div class="flow-steps">
+                      <span class="fstep" data-en="Customer asks for a measurement" data-es="El cliente pregunta por una medida">Customer asks for a measurement</span>
+                      <span class="fstep" data-en="Someone walks to the warehouse" data-es="Alguien va a la bodega">Someone walks to the warehouse</span>
+                      <span class="fstep" data-en="Measures the part by hand" data-es="Mide la pieza a mano">Measures the part by hand</span>
+                      <span class="fstep end" data-en="Comes back and answers" data-es="Regresa y contesta">Comes back and answers</span>
+                    </div>
+                  </div>
+                  <div class="flow-row after">
+                    <span class="flow-when" data-en="Today" data-es="Hoy">Today</span>
+                    <div class="flow-steps">
+                      <span class="fstep" data-en="Customer looks it up in the catalog" data-es="El cliente lo consulta en el cat&aacute;logo">Customer looks it up in the catalog</span>
+                      <span class="fstep end" data-en="Buys on their own, any hour" data-es="Compra solo, a cualquier hora">Buys on their own, any hour</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <!-- ═══ CTIASP ═══ -->
+            <details class="case-card" id="case-ctiasp">
+              <summary>
+                <div class="cc-top">
+                  <span class="cc-tag" data-en="Auto repair shop &middot; Freelance" data-es="Taller mec&aacute;nico &middot; Freelance">Auto repair shop · Freelance</span>
+                  <span class="cc-client">CTIASP</span>
+                </div>
+                <p class="cc-hero">
+                  <b>2x</b>
+                  <span data-en="the volume, peaking at 300+ cars a month, with the same back-office team" data-es="el volumen, con picos de 300+ autos al mes, con la misma gente en administraci&oacute;n">the volume, peaking at 300+ cars a month, with the same back-office team</span>
+                </p>
+                <div class="cc-minis">
+                  <span class="cc-mini">
+                    <b>30 s</b>
+                    <span data-en="to pull a customer file. It used to take a week" data-es="para encontrar un expediente. Antes, una semana">to pull a customer file. It used to take a week</span>
+                  </span>
+                  <span class="cc-mini">
+                    <b>8 h</b>
+                    <span data-en="less per week: the status meeting is opened, not prepared" data-es="menos por semana: la junta de estatus se abre, no se prepara">less per week: the status meeting is opened, not prepared</span>
+                  </span>
+                </div>
+                <span class="cc-more">
+                  <span class="cc-more-open" data-en="See the detail" data-es="Ver detalle">See the detail</span>
+                  <span class="cc-more-close" data-en="Close" data-es="Cerrar">Close</span>
+                </span>
+              </summary>
+              <div class="cc-body">
+                <details class="case-shots">
+                  <summary data-en="See the system itself, 3 screenshots" data-es="Ver el sistema por dentro, 3 capturas">See the system itself, 3 screenshots</summary>
+                  <div class="carousel" data-carousel>
+                    <div class="browser-frame">
+                      <div class="browser-bar">
+                        <div class="browser-dot bg-red-400"></div>
+                        <div class="browser-dot bg-yellow-400"></div>
+                        <div class="browser-dot bg-green-400"></div>
+                        <div class="browser-url"></div>
+                      </div>
+                      <div class="carousel-track-wrap">
+                        <div class="carousel-track">
+                          <div class="carousel-slide"><img src="images/CTIASP.1.png" alt="CTIASP admin dashboard showing customer vehicle records" loading="lazy" /></div>
+                          <div class="carousel-slide"><img src="images/CTIASP.2.png" alt="CTIASP work order status view" loading="lazy" /></div>
+                          <div class="carousel-slide"><img src="images/CTIASP.3.png" alt="CTIASP customer lookup by work order number" loading="lazy" /></div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="carousel-btn prev" aria-label="Previous">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6" /></svg>
+                    </button>
+                    <button class="carousel-btn next" aria-label="Next">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>
+                    </button>
+                    <div class="carousel-dots">
+                      <button type="button" class="carousel-dot active" aria-label="Slide"></button>
+                      <button type="button" class="carousel-dot" aria-label="Slide"></button>
+                      <button type="button" class="carousel-dot" aria-label="Slide"></button>
+                    </div>
+                  </div>
+                </details>
+
+                <div class="role-blocks">
+                  <div>
+                    <span class="case-label" data-en="Where they started" data-es="C&oacute;mo estaba">Where they started</span>
+                    <p class="text-ink leading-relaxed text-sm mb-5" data-en="An auto repair shop already at its limit with 100 cars a month. Customer files lived in boxes in a back room, and every new car made searching for all the previous ones slower." data-es="Un taller mec&aacute;nico que con 100 autos al mes ya estaba al l&iacute;mite. Los expedientes viv&iacute;an en cajas en un cuarto, y cada coche que entraba hac&iacute;a m&aacute;s lenta la b&uacute;squeda de todos los anteriores.">An auto repair shop already at its limit with 100 cars a month. Customer files lived in boxes in a back room, and every new car made searching for all the previous ones slower.</p>
+                    <span class="case-label" data-en="What I found" data-es="Qu&eacute; encontr&eacute;">What I found</span>
+                    <p class="text-ink leading-relaxed text-sm" data-en="I sat down separately with the appraiser, the service advisor and both owners. Each described a different process. The map ended up as sheets of paper taped to a wall, and that is where it became clear their growth ceiling was not the shop floor: it was the filing system." data-es="Me sent&eacute; por separado con el valuador, con el asesor de servicio y con los dos due&ntilde;os. Cada quien describi&oacute; un proceso distinto. El mapa acab&oacute; siendo papeles pegados en una pared, y ah&iacute; qued&oacute; claro que su techo de crecimiento no era el taller: era el archivero.">I sat down separately with the appraiser, the service advisor and both owners. Each described a different process. The map ended up as sheets of paper taped to a wall, and that is where it became clear their growth ceiling was not the shop floor: it was the filing system.</p>
+                  </div>
+                  <div>
+                    <span class="case-label" data-en="What I built" data-es="Qu&eacute; constru&iacute;">What I built</span>
+                    <p class="text-ink leading-relaxed text-sm" data-en="Phased, starting where it hurt most: internal processes first, then customer communication, then positioning. Status updates now go out on their own, customers look their car up with their work order number, and the weekly meeting runs off live KPIs." data-es="Por fases, empezando por donde m&aacute;s dol&iacute;a: primero los procesos internos, despu&eacute;s la comunicaci&oacute;n con el cliente, despu&eacute;s posicionamiento. Hoy los avisos salen solos, el cliente consulta su auto con su n&uacute;mero de orden, y la junta semanal se hace con indicadores en vivo.">Phased, starting where it hurt most: internal processes first, then customer communication, then positioning. Status updates now go out on their own, customers look their car up with their work order number, and the weekly meeting runs off live KPIs.</p>
+                    <p class="text-ink leading-relaxed text-sm mt-4" data-en="With the operation in order, they went on to secure 7+ insurance company partnerships, which is where the extra volume came from." data-es="Con la operaci&oacute;n en orden, firmaron m&aacute;s de 7 convenios con aseguradoras, y de ah&iacute; sali&oacute; el volumen extra.">With the operation in order, they went on to secure 7+ insurance company partnerships, which is where the extra volume came from.</p>
+                  </div>
+                </div>
+
+                <div class="case-flow">
+                  <div class="flow-row before">
+                    <span class="flow-when" data-en="Before" data-es="Antes">Before</span>
+                    <div class="flow-steps">
+                      <span class="fstep" data-en="Customer asks about their car" data-es="El cliente pregunta por su auto">Customer asks about their car</span>
+                      <span class="fstep" data-en="Advisor walks to the file room" data-es="El asesor va al cuarto de expedientes">Advisor walks to the file room</span>
+                      <span class="fstep" data-en="Digs through boxes" data-es="Busca entre las cajas">Digs through boxes</span>
+                      <span class="fstep end" data-en="Up to a week" data-es="Hasta una semana">Up to a week</span>
+                    </div>
+                  </div>
+                  <div class="flow-row after">
+                    <span class="flow-when" data-en="Today" data-es="Hoy">Today</span>
+                    <div class="flow-steps">
+                      <span class="fstep" data-en="Customer enters their work order number" data-es="El cliente entra con su n&uacute;mero de orden">Customer enters their work order number</span>
+                      <span class="fstep end" data-en="30 seconds" data-es="30 segundos">30 seconds</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2010,62 +2083,86 @@
 
           <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
             <div class="lg:col-span-3 reveal">
-              <p class="text-ink leading-relaxed mb-4" data-en="I'm Brenda Guadalupe Flores Parada, a software engineer with 7+ years building software, part of it on enterprise platforms like NextivaONE and NCX, used today by more than 100,000 businesses across nine countries. Since 2018 I've also worked independently with smaller businesses in Mexico, handling everything myself end to end: understanding the operation, building the software, and supporting it afterward." data-es="Soy Brenda Guadalupe Flores Parada, ingeniera de software con m&aacute;s de 7 a&ntilde;os construyendo software, parte de ellos en plataformas empresariales como NextivaONE y NCX, que hoy usan m&aacute;s de 100,000 empresas en nueve pa&iacute;ses. Desde 2018 tambi&eacute;n trabajo por mi cuenta con negocios m&aacute;s chicos en M&eacute;xico, encarg&aacute;ndome de todo de principio a fin: entender la operaci&oacute;n, construir el software y darle soporte despu&eacute;s.">I'm Brenda Guadalupe Flores Parada, a software engineer with 7+ years building software, part of it on enterprise platforms like NextivaONE and NCX, used today by more than 100,000 businesses across nine countries. Since 2018 I've also worked independently with smaller businesses in Mexico, handling everything myself end to end: understanding the operation, building the software, and supporting it afterward.</p>
+              <p class="text-ink leading-relaxed mb-4" data-en="I'm Brenda Guadalupe Flores Parada, a Senior Frontend Engineer with 7+ years building software, four of them at Nextiva on NextivaONE and NCX, products used by more than 100,000 businesses across nine countries. My best work is where frontend meets business decisions: what each customer sees on their plan, permissions, onboarding and performance." data-es="Soy Brenda Guadalupe Flores Parada, Senior Frontend Engineer con m&aacute;s de 7 a&ntilde;os construyendo software, cuatro de ellos en Nextiva sobre NextivaONE y NCX, productos que usan m&aacute;s de 100,000 empresas en nueve pa&iacute;ses. Lo que mejor hago est&aacute; donde el frontend toca decisiones de negocio: qu&eacute; ve cada cliente seg&uacute;n su plan, permisos, onboarding y rendimiento.">I'm Brenda Guadalupe Flores Parada, a Senior Frontend Engineer with 7+ years building software, four of them at Nextiva on NextivaONE and NCX, products used by more than 100,000 businesses across nine countries. My best work is where frontend meets business decisions: what each customer sees on their plan, permissions, onboarding and performance.</p>
 
-              <p class="text-ink leading-relaxed mb-4" data-en="In September 2026 I founded CIMBRA, where I help small businesses automate processes with custom software, AI and agents connected to the tools they already use. It's the same lens I've always worked with: understand the operation before writing a single line of code." data-es="En septiembre de 2026 fund&eacute; CIMBRA, donde ayudo a pymes a automatizar procesos con software a la medida, IA y agentes conectados a las herramientas que ya usan. Es la misma mirada con la que siempre he trabajado: entender la operaci&oacute;n antes de escribir una sola l&iacute;nea de c&oacute;digo." data-en-note="">In September 2026 I founded CIMBRA, where I help small businesses automate processes with custom software, AI and agents connected to the tools they already use. It's the same lens I've always worked with: understand the operation before writing a single line of code.</p>
+              <p class="text-ink leading-relaxed mb-4" data-en="For me the work doesn't end at merge. At Nextiva I took over QA for my team, and every feature I ship goes out behind a feature flag, with monitoring, so it can be rolled back if something breaks. I hold AI to the same standard: I work with Claude Code (MCP servers and custom agents) and Copilot, and review what they generate the way I'd review a teammate's PR." data-es="Para m&iacute; el trabajo no termina con el merge. En Nextiva me hice cargo del QA de mi equipo, y cada funcionalidad que saco a producci&oacute;n va con feature flags y monitoreo, para poder regresarla si algo falla. Con la IA aplico el mismo criterio: trabajo con Claude Code (servidores MCP y agentes propios) y Copilot, y reviso lo que generan como revisar&iacute;a el PR de un compa&ntilde;ero.">For me the work doesn't end at merge. At Nextiva I took over QA for my team, and every feature I ship goes out behind a feature flag, with monitoring, so it can be rolled back if something breaks. I hold AI to the same standard: I work with Claude Code (MCP servers and custom agents) and Copilot, and review what they generate the way I'd review a teammate's PR.</p>
 
-              <p class="text-ink leading-relaxed" data-en="I've also worked as a Product Owner, translating business and compliance requirements into working software. I'm based in Querétaro, Mexico, and I work in Spanish and in English." data-es="Tambi&eacute;n he trabajado como Product Owner, traduciendo requerimientos de negocio y cumplimiento normativo en software funcionando. Estoy en Quer&eacute;taro, M&eacute;xico, y trabajo en espa&ntilde;ol y en ingl&eacute;s.">I've also worked as a Product Owner, translating business and compliance requirements into working software. I'm based in Querétaro, Mexico, and I work in Spanish and in English.</p>
+              <p class="text-ink leading-relaxed" data-en="Since 2018 I've also built software on my own for small businesses in Mexico, end to end. And I've worked as a Product Owner, so I know how to turn business and compliance requirements into tickets with acceptance criteria. I'm based in Quer&eacute;taro, Mexico, and work remotely in English and Spanish." data-es="Desde 2018 tambi&eacute;n hago proyectos por mi cuenta para negocios m&aacute;s chicos en M&eacute;xico, de principio a fin. Y he sido Product Owner, as&iacute; que s&eacute; convertir requerimientos de negocio y de cumplimiento normativo en tickets con criterios de aceptaci&oacute;n. Vivo en Quer&eacute;taro, M&eacute;xico, y trabajo de forma remota en ingl&eacute;s y espa&ntilde;ol.">Since 2018 I've also built software on my own for small businesses in Mexico, end to end. And I've worked as a Product Owner, so I know how to turn business and compliance requirements into tickets with acceptance criteria. I'm based in Querétaro, Mexico, and work remotely in English and Spanish.</p>
 
-              <div class="highlight-row">
+              <span class="case-label mt-10 block" data-en="How I work" data-es="C&oacute;mo trabajo">How I work</span>
+              <div class="highlight-row" style="margin-top: 0.5rem">
                 <div class="highlight-card reveal-zoom">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a4 4 0 100-8 4 4 0 000 8z" /><path d="M8.5 13.5L6 22l6-3 6 3-2.5-8.5" /></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
                   <div>
-                    <p class="h-title" data-en="AWS Certified Cloud Practitioner" data-es="AWS Certified Cloud Practitioner">AWS Certified Cloud Practitioner</p>
-                    <p class="h-sub" data-en="Issued via Wizeline" data-es="Emitida v&iacute;a Wizeline">Issued via Wizeline</p>
+                    <p class="h-title" data-en="Frontend architecture" data-es="Arquitectura de frontend">Frontend architecture</p>
+                    <p class="h-sub" data-en="Microfrontends, monorepos, multi-tenant, RBAC" data-es="Microfrontends, monorepos, multi-tenant, RBAC">Microfrontends, monorepos, multi-tenant, RBAC</p>
                   </div>
                 </div>
                 <div class="highlight-card reveal-zoom">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z" /></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
                   <div>
-                    <p class="h-title" data-en="Top 5, Nextiva Global Hackathon" data-es="Top 5, Hackathon Global de Nextiva">Top 5, Nextiva Global Hackathon</p>
-                    <p class="h-sub" data-en="Company-wide competition" data-es="Competencia a nivel empresa">Company-wide competition</p>
+                    <p class="h-title" data-en="Quality in production" data-es="Calidad en producci&oacute;n">Quality in production</p>
+                    <p class="h-sub" data-en="Jest, Playwright, feature flags, Datadog" data-es="Jest, Playwright, feature flags, Datadog">Jest, Playwright, feature flags, Datadog</p>
                   </div>
                 </div>
                 <div class="highlight-card reveal-zoom">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5v14l11-7z" /></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" /><path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z" /></svg>
                   <div>
-                    <p class="h-title" data-en="Redux talk at DevDay4W" data-es="Charla de Redux en DevDay4W">Redux talk at DevDay4W</p>
-                    <p class="h-sub" data-en="Software Guru conference" data-es="Conferencia de Software Guru">Software Guru conference</p>
+                    <p class="h-title" data-en="AI-assisted development" data-es="Desarrollo asistido por IA">AI-assisted development</p>
+                    <p class="h-sub" data-en="Claude Code, MCP, custom agents, Copilot" data-es="Claude Code, MCP, agentes propios, Copilot">Claude Code, MCP, custom agents, Copilot</p>
                   </div>
                 </div>
               </div>
 
-              <span class="case-label mt-10 block" data-en="What I work with" data-es="Con qu&eacute; trabajo">What I work with</span>
-              <div class="skills-wrap reveal">
+              <span class="case-label mt-10 block" data-en="Frontend" data-es="Frontend">Frontend</span>
+              <div class="skills-wrap reveal" style="margin-top: 0.4rem">
                 <span class="skill-chip">React</span>
                 <span class="skill-chip">TypeScript</span>
+                <span class="skill-chip">JavaScript (ES6+)</span>
                 <span class="skill-chip">Redux</span>
+                <span class="skill-chip">React Query</span>
+                <span class="skill-chip">HTML5 &amp; CSS3</span>
+                <span class="skill-chip">Styled-components</span>
+                <span class="skill-chip">Vite</span>
+                <span class="skill-chip">i18n</span>
+                <span class="skill-chip" data-en="Accessibility (ARIA)" data-es="Accesibilidad (ARIA)">Accessibility (ARIA)</span>
                 <span class="skill-chip">Angular</span>
+              </div>
+              <span class="case-label mt-6 block" data-en="Testing &amp; performance" data-es="Pruebas y performance">Testing &amp; performance</span>
+              <div class="skills-wrap reveal" style="margin-top: 0.4rem">
+                <span class="skill-chip">Jest</span>
+                <span class="skill-chip">Vitest</span>
+                <span class="skill-chip">React Testing Library</span>
+                <span class="skill-chip">Playwright</span>
+                <span class="skill-chip">Lighthouse</span>
+                <span class="skill-chip">Core Web Vitals</span>
+              </div>
+              <span class="case-label mt-6 block" data-en="Production &amp; architecture" data-es="Producci&oacute;n y arquitectura">Production &amp; architecture</span>
+              <div class="skills-wrap reveal" style="margin-top: 0.4rem">
+                <span class="skill-chip">Feature flags (Statsig)</span>
+                <span class="skill-chip">Datadog</span>
+                <span class="skill-chip">CI/CD (GitHub Actions)</span>
+                <span class="skill-chip">Microfrontends</span>
+                <span class="skill-chip">Monorepos (pnpm, Turborepo)</span>
+                <span class="skill-chip">Multi-tenant</span>
+                <span class="skill-chip">RBAC</span>
+                <span class="skill-chip">SSO (Azure AD, Google, Okta)</span>
+              </div>
+              <span class="case-label mt-6 block" data-en="Full-stack &amp; AI" data-es="Full-stack e IA">Full-stack &amp; AI</span>
+              <div class="skills-wrap reveal" style="margin-top: 0.4rem">
                 <span class="skill-chip">Node.js</span>
+                <span class="skill-chip">NestJS</span>
                 <span class="skill-chip">GraphQL</span>
+                <span class="skill-chip">REST</span>
                 <span class="skill-chip">PostgreSQL</span>
-                <span class="skill-chip">Ruby on Rails</span>
                 <span class="skill-chip">AWS</span>
-                <span class="skill-chip" data-en="AI &amp; agents" data-es="IA &amp; agentes">AI &amp; agents</span>
-                <span class="skill-chip">WhatsApp API</span>
-                <span class="skill-chip">SSO (Azure, Google, Okta)</span>
-                <span class="skill-chip">Statsig</span>
+                <span class="skill-chip">Claude Code</span>
+                <span class="skill-chip">MCP</span>
+                <span class="skill-chip">GitHub Copilot</span>
               </div>
             </div>
 
             <div class="lg:col-span-2 space-y-8">
-              <div class="about-stats reveal">
-                <div class="about-stat"><p class="num">7+</p><p class="lbl" data-en="years of experience" data-es="a&ntilde;os de experiencia">years of experience</p></div>
-                <div class="about-stat"><p class="num">100K+</p><p class="lbl" data-en="businesses on platforms I built" data-es="negocios en plataformas que constru&iacute;">businesses on platforms I built</p></div>
-                <div class="about-stat"><p class="num">9</p><p class="lbl" data-en="countries reached" data-es="pa&iacute;ses alcanzados">countries reached</p></div>
-                <div class="about-stat"><p class="num">2026</p><p class="lbl" data-en="founded CIMBRA" data-es="fund&eacute; CIMBRA">founded CIMBRA</p></div>
-              </div>
-
               <div class="reveal">
                 <span class="case-label" data-en="Education" data-es="Educaci&oacute;n">Education</span>
                 <div class="edu-item">
@@ -2087,6 +2184,33 @@
                   </div>
                 </div>
               </div>
+
+              <div class="reveal">
+                <span class="case-label block" data-en="Recognition" data-es="Reconocimientos">Recognition</span>
+                <div class="highlight-row highlight-stack" style="margin-top: 0.5rem">
+                  <div class="highlight-card reveal-zoom">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a4 4 0 100-8 4 4 0 000 8z" /><path d="M8.5 13.5L6 22l6-3 6 3-2.5-8.5" /></svg>
+                    <div>
+                      <p class="h-title" data-en="AWS Certified Cloud Practitioner" data-es="AWS Certified Cloud Practitioner">AWS Certified Cloud Practitioner</p>
+                      <p class="h-sub">Amazon Web Services &middot; 2022</p>
+                    </div>
+                  </div>
+                  <div class="highlight-card reveal-zoom">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z" /></svg>
+                    <div>
+                      <p class="h-title" data-en="Top 5, Nextiva Global Hackathon" data-es="Top 5, Hackathon Global de Nextiva">Top 5, Nextiva Global Hackathon</p>
+                      <p class="h-sub" data-en="Company-wide competition" data-es="Competencia a nivel empresa">Company-wide competition</p>
+                    </div>
+                  </div>
+                  <div class="highlight-card reveal-zoom">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5v14l11-7z" /></svg>
+                    <div>
+                      <p class="h-title" data-en="Redux talk at DevDay4W" data-es="Charla de Redux en DevDay4W">Redux talk at DevDay4W</p>
+                      <p class="h-sub" data-en="Software Guru conference" data-es="Conferencia de Software Guru">Software Guru conference</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2097,7 +2221,7 @@
         <div class="max-w-2xl mx-auto text-center">
           <p class="sec-num reveal">05</p>
           <h2 class="font-display text-4xl font-bold text-white mb-4 reveal" data-en="Let's talk" data-es="Hablemos">Let's talk</h2>
-          <p class="text-gray-400 mb-10 reveal" data-en="Want to know more about a project, or just say hi? Email me, or find me on LinkedIn and GitHub." data-es="&iquest;Quieres saber m&aacute;s de alg&uacute;n proyecto, o solo saludar? Escr&iacute;beme por correo, o encu&eacute;ntrame en LinkedIn y GitHub.">Want to know more about a project, or just say hi? Email me, or find me on LinkedIn and GitHub.</p>
+          <p class="text-gray-400 mb-10 reveal" data-en="I'm looking for a remote Senior Frontend or Full-Stack role. If you're hiring, or want to know more about any project above, email me or find me on LinkedIn and GitHub." data-es="Estoy buscando un puesto remoto de Senior Frontend o Full-Stack. Si est&aacute;s contratando, o quieres saber m&aacute;s de alg&uacute;n proyecto, escr&iacute;beme por correo o encu&eacute;ntrame en LinkedIn y GitHub.">I'm looking for a remote Senior Frontend or Full-Stack role. If you're hiring, or want to know more about any project above, email me or find me on LinkedIn and GitHub.</p>
           <a
             href="mailto:brenda@brendaflores.co"
             class="reveal inline-flex items-center gap-3 bg-accent text-white font-display font-bold text-base px-8 py-4 rounded-full hover:bg-indigo-400 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/30"
@@ -2117,9 +2241,9 @@
               <svg viewBox="0 0 24 24" fill="#fff"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" /></svg>
             </a>
           </div>
-          <p class="text-gray-600 text-xs mt-12 font-display tracking-widest uppercase">
+          <p class="text-gray-400 text-xs mt-12 font-display tracking-widest uppercase">
             &copy; <span id="year"></span> Brenda Flores
-            <span class="mx-2 text-gray-700">&middot;</span>
+            <span class="mx-2 text-gray-500" aria-hidden="true">&middot;</span>
             <a href="/privacidad" class="hover:text-white transition-colors" data-en="Privacy" data-es="Privacidad">Privacy</a>
           </p>
         </div>
@@ -2137,6 +2261,7 @@
         });
         document.querySelectorAll("[data-lang]").forEach((btn) => {
           btn.classList.toggle("active", btn.dataset.lang === lang);
+          btn.setAttribute("aria-pressed", btn.dataset.lang === lang ? "true" : "false");
         });
         document.documentElement.lang = lang;
         if (remember !== false) localStorage.setItem("lang", lang);
@@ -2211,11 +2336,15 @@
         const prevBtn = carousel.querySelector(".carousel-btn.prev");
         const nextBtn = carousel.querySelector(".carousel-btn.next");
         let current = 0;
+        dots.forEach((d, i) => d.setAttribute("aria-label", (i + 1) + " / " + dots.length));
 
         function goTo(idx) {
           current = (idx + slides.length) % slides.length;
           track.style.transform = `translateX(-${current * 100}%)`;
-          dots.forEach((d, i) => d.classList.toggle("active", i === current));
+          dots.forEach((d, i) => {
+            d.classList.toggle("active", i === current);
+            d.setAttribute("aria-current", i === current ? "true" : "false");
+          });
         }
 
         const AUTO_MS = 7000;
