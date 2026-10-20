@@ -2264,14 +2264,27 @@
           btn.setAttribute("aria-pressed", btn.dataset.lang === lang ? "true" : "false");
         });
         document.documentElement.lang = lang;
-        if (remember !== false) localStorage.setItem("lang", lang);
+        if (remember !== false) {
+          localStorage.setItem("lang", lang);
+          // Al cambiar de idioma, la barra de direcciones queda con ?lang=
+          // para que el link copiado abra en ese mismo idioma.
+          const url = new URL(location.href);
+          url.searchParams.set("lang", lang);
+          history.replaceState(null, "", url);
+        }
       }
 
-      // Si ya eligio antes, se respeta. Si no, se usa el idioma del navegador.
+      // Orden: ?lang= en el link (brendaflores.co/es y /en llegan asi),
+      // luego lo que eligio antes, y si no, el idioma del navegador.
       (function initLang() {
+        const fromUrl = new URLSearchParams(location.search).get("lang");
+        if (fromUrl === "en" || fromUrl === "es") {
+          setLang(fromUrl, false);
+          return;
+        }
         const saved = localStorage.getItem("lang");
         if (saved === "en" || saved === "es") {
-          setLang(saved);
+          setLang(saved, false);
           return;
         }
         const nav = (

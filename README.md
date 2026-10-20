@@ -6,7 +6,7 @@ Live at: **[brendaflores.co](https://brendaflores.co)**
 ## Features
 - Dynamic CV: scroll-driven experience timeline with a progress-filled line
 - 4 project case studies with real product screenshots (carousels)
-- EN/ES language toggle
+- EN/ES language toggle, shareable per language: `brendaflores.co/es` and `brendaflores.co/en` (or `?lang=es` / `?lang=en` on any URL)
 - Smooth scroll navigation
 - Scroll-triggered animations
 - Fully responsive
